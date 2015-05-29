@@ -17,5 +17,16 @@ void FANode::addChild(FANode *child) {
 }
 
 std::vector<FANode *> FANode::getAllChildren() {
-	return std::vector<FANode *>();
+	std::vector<FANode *> v;
+	for (FANode *child : children) {
+		for (FANode *n : child->getAllChildren()) {
+			v.push_back(n);
+		}
+	}
+	v.push_back(this);
+	return v;
+}
+
+FANode::~FANode() {
+	
 }
