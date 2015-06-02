@@ -13,7 +13,7 @@ class FAMaterial {
 private:
 	// std::vector<FAMaterialComponent*> components;
 	FAShader *shader;
-	glm::mat4 *viewProjectionMatrix;
+	glm::mat4 viewProjectionMatrix;
 	glm::mat4 modelMatrix;
 
 	GLint MVPLocation;

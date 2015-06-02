@@ -22,6 +22,8 @@ private:
 	bool _hasNormal;
 	bool _hasColor;
 
+	void loadFAModel(std::string path);
+
 public:
 	FAMesh();
 	FAMesh(std::string path);

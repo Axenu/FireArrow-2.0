@@ -17,6 +17,8 @@ FAShader::FAShader(std::string file) {
 	glBindFragDataLocation(shaderProgram, 0, "Frag_Data");
 	
 	glLinkProgram(shaderProgram);
+    glDeleteShader(vertShader);
+    glDeleteShader(fragShader);
 	
 	GLint linkStatus;
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkStatus);
@@ -33,36 +35,38 @@ FAShader::FAShader(std::string file) {
 }
 
 FAShader::FAShader(std::string vert, std::string frag) {
-	GLint vertShader = createShader("../resources/shaders/" + vert, GL_VERTEX_SHADER);
-    GLint fragShader = createShader("../resources/shaders/" + frag, GL_FRAGMENT_SHADER);
+	// GLint vertShader = createShader("../resources/shaders/" + vert, GL_VERTEX_SHADER);
+ //    GLint fragShader = createShader("../resources/shaders/" + frag, GL_FRAGMENT_SHADER);
 	
-	std::string s = vert;
-	if (s.length() > 5) {
-		s.erase(s.end() - 5, s.end());
-		name = s;
-	}
+	// std::string s = vert;
+	// if (s.length() > 5) {
+	// 	s.erase(s.end() - 5, s.end());
+	// 	name = s;
+	// }
 	
-    shaderProgram = glCreateProgram();
+ //    shaderProgram = glCreateProgram();
     
-    glAttachShader(shaderProgram, vertShader);
-    glAttachShader(shaderProgram, fragShader);
+ //    glAttachShader(shaderProgram, vertShader);
+ //    glAttachShader(shaderProgram, fragShader);
     
-    glBindFragDataLocation(shaderProgram, 0, "Frag_Data");
+ //    glBindFragDataLocation(shaderProgram, 0, "Frag_Data");
     
-    glLinkProgram(shaderProgram);
+ //    glLinkProgram(shaderProgram);
+ //    glDeleteShader(vertShader);
+ //    glDeleteShader(fragShader);
     
-    GLint linkStatus;
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkStatus);
-    if (linkStatus != GL_TRUE) {
-        std::cout << "Shader program failed to link!" << std::endl;
+ //    GLint linkStatus;
+ //    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkStatus);
+ //    if (linkStatus != GL_TRUE) {
+ //        std::cout << "Shader program failed to link!" << std::endl;
         
-        GLint infoLogLength;
-        glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
-        GLchar *infoLog = new GLchar[infoLogLength + 1];
-        glGetProgramInfoLog(shaderProgram, infoLogLength, NULL, infoLog);
-        std::cout << infoLog << std::endl;
-        delete[] infoLog;
-    }
+ //        GLint infoLogLength;
+ //        glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
+ //        GLchar *infoLog = new GLchar[infoLogLength + 1];
+ //        glGetProgramInfoLog(shaderProgram, infoLogLength, NULL, infoLog);
+ //        std::cout << infoLog << std::endl;
+ //        delete[] infoLog;
+ //    }
 }
 
 GLint FAShader::createShader(std::string path, GLenum shaderType) const {
@@ -98,10 +102,10 @@ GLint FAShader::createShader(std::string path, GLenum shaderType) const {
         delete[] infoLog;
         return 0;
     }
-    
     return shaderID;
 }
 
 FAShader::~FAShader() {
-
+    glUseProgram(0);
+    glDeleteProgram(shaderProgram);
 }

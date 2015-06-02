@@ -35,8 +35,8 @@ const FAMesh &FAModel::getMesh() const {
 
 void FAModel::render(FACamera *camera) {
 	// material.setViewProjectionwMatrix(&camera->VPMatrix);
-	material.bind();
-	mesh.render();
+	// material.bind();
+	// mesh.render();
 }
 
 void FAModel::update(float dt) {
