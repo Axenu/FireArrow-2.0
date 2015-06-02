@@ -24,8 +24,7 @@ public:
 	FAMaterial &getMaterial();
 	const FAMesh &getMesh() const;
 
-	void render(FACamera *camera);
-	void update(float dt);
+	virtual void onUpdate(float dt);
 
 	~FAModel();
 	

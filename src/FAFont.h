@@ -28,7 +28,8 @@ public:
     void loadCharacters();
 	
 	float getFontSize();
-	float getFontHeight();
+
+	// float getFontHeight();
 };
 
 #endif

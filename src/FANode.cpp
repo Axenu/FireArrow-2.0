@@ -1,7 +1,10 @@
 #include "FANode.h"
+#include <iostream>
 
 FANode::FANode() {
 	scale = glm::vec3(1,1,1);
+    this->isActive = true;
+    this->modelMatrix = glm::mat4();
 }
 
 void FANode::addChild(FANode *child) {
@@ -17,6 +20,31 @@ std::vector<FANode *> FANode::getAllChildren() {
 	}
 	v.push_back(this);
 	return v;
+}
+
+void FANode::update(float dt) {
+    if (!isActive) return;
+    this->modelMatrix = glm::translate(glm::mat4(), this->position);
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(1,0,0));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,1,0));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,0,1));
+    this->modelMatrix = glm::scale(this->modelMatrix, this->scale);
+    onUpdate(dt);
+    for (FANode *node : children)
+        node->update(dt, this->modelMatrix);
+}
+
+void FANode::update(float dt, glm::mat4 &parentModelMatrix) {
+    if (!isActive) return;
+    this->modelMatrix = glm::translate(glm::mat4(), this->position);
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(1,0,0));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,1,0));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,0,1));
+    this->modelMatrix = glm::scale(this->modelMatrix, this->scale);
+    this->modelMatrix = parentModelMatrix * this->modelMatrix;
+    onUpdate(dt);
+    for (FANode *node : children)
+        node->update(dt, this->modelMatrix);
 }
 
 void FANode::setX(float x) {

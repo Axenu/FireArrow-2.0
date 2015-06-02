@@ -9,6 +9,7 @@ void FARenderPass::render() {
 	// std::vector<FAModel *> *mo = parent->getModels();
 	for (FAModel *m : *parent->getModels()) {
 		m->getMaterial().setViewProjectionwMatrix(&(parent->getCamera()->VPMatrix));
+		// m->getMaterial().setModelMatrix(m->modelMatrix);
 		m->getMaterial().bind();
 		m->getMesh().render();
 	}

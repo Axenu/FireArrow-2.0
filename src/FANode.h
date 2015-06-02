@@ -3,16 +3,21 @@
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
 class FANode {
 	std::vector<FANode *> children;
+    bool isActive;
 
 public:
 	FANode();
 
 	void addChild(FANode *child);
 	std::vector<FANode *> getAllChildren();
+
+    void update(float dt);
+    void update(float dt, glm::mat4 &parentModelMatrix);
 
 	void setX(float x);
     void setY(float y);
@@ -49,6 +54,9 @@ protected:
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
+    glm::mat4 modelMatrix;
+
+    virtual void onUpdate(float dt){}
 };
 
 

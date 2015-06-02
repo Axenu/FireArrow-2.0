@@ -29,7 +29,7 @@ void FAMaterial::bind() {
 	// }
 	//setup ALL attributes, depth test, uniforms etc.
 
-	glm::mat4 MVPMatrix = modelMatrix * viewProjectionMatrix;
+	glm::mat4 MVPMatrix = viewProjectionMatrix * modelMatrix;
 	// glm::mat4 MVPMatrix = glm::mat4();
 	// std::cout << "glm::mat4: " << std::endl;
 	// std::cout << MVPMatrix[0][0] << ", " << MVPMatrix[0][1] << ", " << MVPMatrix[0][2] << ", " << MVPMatrix[0][3] << std::endl;
@@ -42,6 +42,10 @@ void FAMaterial::bind() {
 
 void FAMaterial::setViewProjectionwMatrix(glm::mat4 *VPMatrix) {
 	this->viewProjectionMatrix = *VPMatrix;
+}
+
+void FAMaterial::setModelMatrix(glm::mat4 &modelMatrix) {
+	this->modelMatrix = modelMatrix;
 }
 
 FAMaterial::~FAMaterial() {

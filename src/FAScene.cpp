@@ -48,6 +48,7 @@ void FAScene::onUpdate(float dt) {
     if (!isActive) {
         return;
     }
+    rootNode.update(dt);
     // if (displayFps) {
     //     if (time > 1) {
     //         fpsText->setText("fps: " + std::to_string((frames/time)));

@@ -36,13 +36,21 @@ void testScene::init() {
 
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
     text = new FAText(font);
-    text->setText("abcdefghijklmnopqrstuvwxyz");
-    text->setPosition(0.5,0.5,0);
+    text->setText("fps: 0.0");
+    text->setPosition(0,0.95,0);
     
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
-    FAMesh *mesh = new FAMesh("barrel.fa");
+    FAMesh *mesh = new FAMesh("tree.fa");
     FAModel *m = new FAModel(*mesh);
+    m->setPosition(0,0,-5);
     addChild(m);
+    // m = new FAModel(*mesh);
+    // m->setPosition(10,1,1);
+    // addChild(m);
+    // m = new FAModel(*mesh);
+    // addChild(m);
+    // m = new FAModel(*mesh);
+    // addChild(m);
 
     // camera = new FACamera(40.0f, (float)windowWidth, windowHeigth, 0.001, 400);
     // camera->setZ(0);
@@ -74,6 +82,7 @@ void testScene::init() {
 //    albumArt->update(0);
 //    albumArt->setTexture(FATexture::createTexture("/Users/Axenu/Documents/Geektool/Spotify/DefaultArtwork/DefaultArtwork.tiff"));
 //    addHUDElement(albumArt);
+    glEnable(GL_CULL_FACE);
     setCursorState(GLFW_CURSOR_DISABLED);
 }
 
@@ -88,7 +97,9 @@ void testScene::update(float dt) {
     camera->moveX(cameraMovement.x * dt * cos(camera->getRY()));
     camera->moveZ(cameraMovement.x * dt * sin(camera->getRY()));
     camera->moveY(cameraMovement.y * dt);
-        // text->updateShader();
+    
+    text->setText(("fps: " + std::to_string(1/dt)));
+
 }
 
 void testScene::buttonPressed(int index) {

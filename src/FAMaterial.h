@@ -28,6 +28,7 @@ public:
 
 	void bind();
 	void setViewProjectionwMatrix(glm::mat4 *VPMatrix);
+	void setModelMatrix(glm::mat4 &modelMatrix);
 };
 
 #endif

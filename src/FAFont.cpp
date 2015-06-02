@@ -9,14 +9,14 @@ FAFont::FAFont(std::string path, const int _fontSize) {
     this->windowWidth = 1024;
     this->windowHeight = 720;
     this->fontHeight = fontSize/windowHeight;
-    
+
     FT_Library library;
     
     if(FT_Init_FreeType(&library)) {
         fprintf(stderr, "Could not init freetype library\n");
     }
     
-    if(FT_New_Face(library, ("/Users/Axenu/Developer/clang++/first/resources/fonts/" + path).c_str(), 0, &face)) {
+    if(FT_New_Face(library, ("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path).c_str(), 0, &face)) {
         fprintf(stderr, "Could not open font\n");
     }
     int error = FT_Set_Char_Size(face, 0, fontSize, windowWidth, windowHeight);
@@ -34,7 +34,7 @@ FAFont::FAFont(std::string path, const int _fontSize, uint _windowWidth, uint _w
     this->windowHeight = _windowHeight;
     this->fontHeight = fontSize/windowHeight;
     
-    std::ifstream ifile("/Users/Axenu/Developer/clang++/first/resources/fonts/" + path);
+    std::ifstream ifile("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path);
     if (!ifile) {
         std::cout << "File does not exists!" << std::endl;
     }
@@ -44,7 +44,8 @@ FAFont::FAFont(std::string path, const int _fontSize, uint _windowWidth, uint _w
     if(FT_Init_FreeType(&library)) {
         fprintf(stderr, "Could not init freetype library\n");
     }
-    int error = FT_New_Face(library, ("/Users/Axenu/Developer/clang++/first/resources/fonts/" + path).c_str(), 0, &face);
+
+    int error = FT_New_Face(library, ("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path).c_str(), 0, &face);
     if(error != 0) {
         std::cout << error << std::endl;
         fprintf(stderr, "Could not open font\n");
@@ -62,20 +63,21 @@ void FAFont::loadCharacters() {
     
     FT_GlyphSlot  slot = face->glyph;
 
-    glGenTextures(256, &texture[0]);
+    glGenTextures(128, &texture[0]);
     
     for (int i = 0; i < 128; i++) {
-        FT_UInt  glyph_index;
-        
-        glyph_index = FT_Get_Char_Index( face, i );
+
+        FT_UInt glyph_index;
+
+        glyph_index = FT_Get_Char_Index(face, i);
         
         int error = FT_Load_Glyph( face, glyph_index, FT_LOAD_DEFAULT );
         if ( error )
-            continue;
+            std::cout << "Error loading glyph!" << std::endl;
         
-        error = FT_Render_Glyph( slot, FT_RENDER_MODE_NORMAL );
+        error = FT_Render_Glyph(slot, FT_RENDER_MODE_NORMAL);
         if ( error )
-            continue;
+            std::cout << "Error rendering glyph!" << std::endl;
 
         glBindTexture(GL_TEXTURE_2D, texture[i]);
         
