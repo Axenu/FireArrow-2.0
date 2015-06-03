@@ -41,14 +41,15 @@ void testScene::init() {
     
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
-    FAModel *m = new FAModel(*mesh);
+    FAMaterial *material = new FAMaterial();
+    FAModel *m = new FAModel(*mesh, *material);
     m->setPosition(0,0,-5);
     addChild(m);
-    // m = new FAModel(*mesh);
-    // m->setPosition(10,1,1);
-    // addChild(m);
-    // m = new FAModel(*mesh);
-    // addChild(m);
+    m = new FAModel(*mesh, *material);
+    m->setPosition(10,1,1);
+    addChild(m);
+    m = new FAModel(*mesh, *material);
+    addChild(m);
     // m = new FAModel(*mesh);
     // addChild(m);
 

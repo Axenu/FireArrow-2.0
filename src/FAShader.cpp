@@ -4,10 +4,14 @@ FAShader::FAShader() {
 	shaderProgram = -1;
 }
 
-FAShader::FAShader(std::string file) {
-	GLint vertShader = createShader("/Users/Axenu/Developer/FireArrow 2.0/resources/shaders/" + file + ".vert", GL_VERTEX_SHADER);
-	GLint fragShader = createShader("/Users/Axenu/Developer/FireArrow 2.0/resources/shaders/" + file + ".frag", GL_FRAGMENT_SHADER);
-	name = file;
+FAShader::FAShader(std::string file) : FAShader(file, file) {
+	
+}
+
+FAShader::FAShader(std::string vert, std::string frag) {
+	GLint vertShader = createShader("/Users/Axenu/Developer/FireArrow 2.0/resources/shaders/" + vert + ".vert", GL_VERTEX_SHADER);
+	GLint fragShader = createShader("/Users/Axenu/Developer/FireArrow 2.0/resources/shaders/" + frag + ".frag", GL_FRAGMENT_SHADER);
+	name = vert;
 	
 	shaderProgram = glCreateProgram();
 
@@ -34,39 +38,34 @@ FAShader::FAShader(std::string file) {
 	}
 }
 
-FAShader::FAShader(std::string vert, std::string frag) {
-	// GLint vertShader = createShader("../resources/shaders/" + vert, GL_VERTEX_SHADER);
- //    GLint fragShader = createShader("../resources/shaders/" + frag, GL_FRAGMENT_SHADER);
+FAShader::FAShader(std::string *vertexShader, std::string *fragmentShader) {
+	GLint vertShader = createShaderFromString(vertexShader, GL_VERTEX_SHADER);
+	GLint fragShader = createShaderFromString(fragmentShader, GL_FRAGMENT_SHADER);
+	name = "Material shader";
 	
-	// std::string s = vert;
-	// if (s.length() > 5) {
-	// 	s.erase(s.end() - 5, s.end());
-	// 	name = s;
-	// }
+	shaderProgram = glCreateProgram();
+
+	glAttachShader(shaderProgram, vertShader);
+	glAttachShader(shaderProgram, fragShader);
 	
- //    shaderProgram = glCreateProgram();
-    
- //    glAttachShader(shaderProgram, vertShader);
- //    glAttachShader(shaderProgram, fragShader);
-    
- //    glBindFragDataLocation(shaderProgram, 0, "Frag_Data");
-    
- //    glLinkProgram(shaderProgram);
- //    glDeleteShader(vertShader);
- //    glDeleteShader(fragShader);
-    
- //    GLint linkStatus;
- //    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkStatus);
- //    if (linkStatus != GL_TRUE) {
- //        std::cout << "Shader program failed to link!" << std::endl;
-        
- //        GLint infoLogLength;
- //        glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
- //        GLchar *infoLog = new GLchar[infoLogLength + 1];
- //        glGetProgramInfoLog(shaderProgram, infoLogLength, NULL, infoLog);
- //        std::cout << infoLog << std::endl;
- //        delete[] infoLog;
- //    }
+	glBindFragDataLocation(shaderProgram, 0, "Frag_Data");
+	
+	glLinkProgram(shaderProgram);
+    glDeleteShader(vertShader);
+    glDeleteShader(fragShader);
+	
+	GLint linkStatus;
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkStatus);
+	if (linkStatus != GL_TRUE) {
+		std::cout << "Shader program failed to link!" << std::endl;
+		
+		GLint infoLogLength;
+		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
+		GLchar *infoLog = new GLchar[infoLogLength + 1];
+		glGetProgramInfoLog(shaderProgram, infoLogLength, NULL, infoLog);
+		std::cout << infoLog << std::endl;
+		delete[] infoLog;
+	}
 }
 
 GLint FAShader::createShader(std::string path, GLenum shaderType) const {
@@ -93,6 +92,30 @@ GLint FAShader::createShader(std::string path, GLenum shaderType) const {
     glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
     if (compileStatus != GL_TRUE) {
         std::cout << "Shader failed to compile: '" << path << "'" << std::endl;
+        
+        GLint infoLogLength;
+        glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
+        GLchar *infoLog = new GLchar[infoLogLength + 1];
+        glGetShaderInfoLog(shaderID, infoLogLength, NULL, infoLog);
+        std::cout << infoLog << std::endl;
+        delete[] infoLog;
+        return 0;
+    }
+    return shaderID;
+}
+
+GLint FAShader::createShaderFromString(std::string *shader, GLenum shaderType) const {
+	GLuint shaderID = glCreateShader(shaderType);
+    
+    const GLchar *shaderSource = shader->c_str();
+    glShaderSource(shaderID, 1, &shaderSource, NULL);
+    
+    glCompileShader(shaderID);
+    
+    GLint compileStatus;
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
+    if (compileStatus != GL_TRUE) {
+        std::cout << "Shader failed to compile: '" << shader << "'" << std::endl;
         
         GLint infoLogLength;
         glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);

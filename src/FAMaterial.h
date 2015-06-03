@@ -17,6 +17,16 @@ private:
 	glm::mat4 modelMatrix;
 
 	GLint MVPLocation;
+
+	//dynamic materials:
+	std::string vertexIO;
+	std::string vertexMain;
+	std::string fragmentIO;
+	std::string fragmentMain;
+	std::string fragmentOutput;
+
+	void buildShader();
+
 public:
 	FAMaterial();
 	~FAMaterial();

@@ -12,6 +12,7 @@ class FAShader {
 private:
 	std::string name;
 	GLint createShader(std::string path, GLenum shaderType) const;
+	GLint createShaderFromString(std::string *shader, GLenum shaderType) const;
 public:
 
 	GLint shaderProgram;
@@ -19,6 +20,7 @@ public:
 	FAShader();
 	FAShader(std::string file);
 	FAShader(std::string vert, std::string frag);
+	FAShader(std::string *vertexShader, std::string *fragmentShader);
 	~FAShader();
 };
 
