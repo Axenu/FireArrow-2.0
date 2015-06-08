@@ -5,6 +5,8 @@ FAMaterial::FAMaterial() {
 	// FAColorComponent *c = new FAColorComponent();
 
 	components.push_back(new FAVertexNormalComponent);
+	components.push_back(new FAVertexColorComponent);
+	components.push_back(new FADirectionalLightComponent);
 
 	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;"
 		"layout(location = 0) in vec3 in_Position;\n";
@@ -56,11 +58,16 @@ void FAMaterial::buildShader() {
   		output = cOut;
 	}
 
+	std::cout << fragmentShader << std::endl;
+
 	fragmentShader += "Frag_Data = ";
 	fragmentShader += output;
-	fragmentShader += ";\n}\n";
+	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
 	this->shader = new FAShader(&vertexShader, &fragmentShader);
+
+	for (FAMaterialComponent *c : components)
+		c->setUpLocations(this->shader->shaderProgram);
 
 }
 
@@ -91,6 +98,9 @@ void FAMaterial::bind() {
 	// std::cout << MVPMatrix[3][0] << ", " << MVPMatrix[3][1] << ", " << MVPMatrix[3][2] << ", " << MVPMatrix[3][3] << std::endl;
 	glUseProgram(shader->shaderProgram);
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &MVPMatrix[0][0]);
+	for (FAMaterialComponent *c : components)
+		c->bind();
+
 }
 
 void FAMaterial::setViewProjectionwMatrix(glm::mat4 *VPMatrix) {

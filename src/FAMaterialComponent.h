@@ -1,13 +1,17 @@
 #ifndef __First__FAMaterialComponent__
 #define __First__FAMaterialComponent__
 
+#define GLFW_INCLUDE_GLCOREARB
+
+#include <GLFW/glfw3.h>
 #include <string>
 #include <map>
+#include <glm/glm.hpp>
+#include "FAShader.h"
 
 class FAMaterialComponent {
 
 private:
-	std::map<std::string, FAMaterialComponent *> requirements;
 
 public:
 	FAMaterialComponent();
@@ -18,6 +22,10 @@ public:
 	std::string getFragmentMain();
 	std::string getFragmentMainOutput();
 
+	virtual void setAttribute(std::string name, float value) = 0;
+	virtual void bind() = 0;
+	virtual void setUpLocations(GLint shaderProgram) = 0;
+
 
 protected:
 
@@ -27,9 +35,7 @@ protected:
 	std::string fragmentIO;
 	std::string fragmentMain;
 	std::string fragmentOutput;
-
-	virtual void setAttribute(std::string name, float value) = 0;
-	virtual void bind() = 0;
+	std::map<std::string, FAMaterialComponent *> requirements;
 	
 };
 
@@ -38,6 +44,7 @@ public:
 	FAVertexColorComponent();
 	void setAttribute(std::string name, float value);
 	void bind();
+	void setUpLocations(GLint shaderProgram);
 };
 
 class FAVertexNormalComponent : public FAMaterialComponent {
@@ -45,6 +52,25 @@ public:
 	FAVertexNormalComponent();
 	void setAttribute(std::string name, float value);
 	void bind();
+	void setUpLocations(GLint shaderProgram);
+};
+
+class FADirectionalLightComponent : public FAMaterialComponent {
+private:
+	float ambient;
+	glm::vec3 direction;
+	glm::vec4 color;
+
+	GLint ambientLocation;
+	GLint directionLocation;
+	GLint colorLocation;
+
+
+public:
+	FADirectionalLightComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
 };
 
 #endif
