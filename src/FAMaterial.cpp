@@ -2,17 +2,15 @@
 
 FAMaterial::FAMaterial() {
 
-	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;"
-		"layout(location = 0) in vec3 in_Position;\n"
-		"layout(location = 1) in vec3 in_Normal;\n"
-		"layout(location = 2) in vec3 in_Color;\n"
-		"out vec4 pass_Normal;\n"
-		"out vec4 pass_Color;\n";
-	this->vertexMain = "pass_Normal = normalize(vec4(in_Normal, 1.0));\n"
-	    "pass_Color = vec4(in_Color, 1.0);\n"
-	    "gl_Position = MVPMatrix * vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);\n";
+	// FAColorComponent *c = new FAColorComponent();
 
-	this->fragmentIO = "#version 400 core \n in vec4 pass_Normal;\n in vec4 pass_Color;\n out vec4 Frag_Data;\n";
+	components.push_back(new FAVertexNormalComponent);
+
+	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;"
+		"layout(location = 0) in vec3 in_Position;\n";
+	this->vertexMain = "gl_Position = MVPMatrix * vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);\n";
+
+	this->fragmentIO = "#version 400 core \nout vec4 Frag_Data;\n";
 	this->fragmentMain = "";
 	this->fragmentOutput = "Frag_Data = pass_Color;\n";
 
@@ -32,15 +30,35 @@ void FAMaterial::buildShader() {
 	std::string vertexShader = "", fragmentShader = "";
 
 	vertexShader += this->vertexIO;
+	for (FAMaterialComponent *c : components)
+		vertexShader += c->getVertexIO(); 
 	vertexShader += "void main() {\n";
 	vertexShader += this->vertexMain;
+	for (FAMaterialComponent *c : components)
+		vertexShader += c->getVertexMain(); 
 	vertexShader += "}\n";
 
 	fragmentShader += this->fragmentIO;
+	for (FAMaterialComponent *c : components)
+		fragmentShader += c->getFragmentIO(); 
 	fragmentShader += "void main() {\n";
 	fragmentShader += this->fragmentMain;
-	fragmentShader += this->fragmentOutput;
-	fragmentShader += "}\n";
+	for (FAMaterialComponent *c : components)
+		fragmentShader += c->getFragmentMain();
+
+	std::string output = "vec4(1,1,1,1)";
+	for (FAMaterialComponent *c : components) {
+		std::string cOut = c->getFragmentMainOutput();
+		size_t start_pos = cOut.find("OTHER_OUT");
+		if(start_pos != std::string::npos)
+			cOut.replace(start_pos, 9, output);
+  		// std::replace( cOut.begin(), cOut.end(), "OTHER_OUT", output);
+  		output = cOut;
+	}
+
+	fragmentShader += "Frag_Data = ";
+	fragmentShader += output;
+	fragmentShader += ";\n}\n";
 
 	this->shader = new FAShader(&vertexShader, &fragmentShader);
 

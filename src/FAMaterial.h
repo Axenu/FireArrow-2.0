@@ -6,6 +6,7 @@
 #include <iostream>
 #include <glm/glm.hpp>
 #include <vector>
+#include <algorithm>
 #include "FAShader.h"
 #include "FAMaterialComponent.h"
 

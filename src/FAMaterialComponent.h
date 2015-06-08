@@ -7,12 +7,6 @@
 class FAMaterialComponent {
 
 private:
-	std::string name;
-	std::string vertexIO;
-	std::string vertexMain;
-	std::string fragmentIO;
-	std::string fragmentMain;
-	std::string fragmentOutput;
 	std::map<std::string, FAMaterialComponent *> requirements;
 
 public:
@@ -27,9 +21,30 @@ public:
 
 protected:
 
+	std::string name;
+	std::string vertexIO;
+	std::string vertexMain;
+	std::string fragmentIO;
+	std::string fragmentMain;
+	std::string fragmentOutput;
+
 	virtual void setAttribute(std::string name, float value) = 0;
 	virtual void bind() = 0;
 	
+};
+
+class FAVertexColorComponent : public FAMaterialComponent {
+public:
+	FAVertexColorComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+};
+
+class FAVertexNormalComponent : public FAMaterialComponent {
+public:
+	FAVertexNormalComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
 };
 
 #endif
