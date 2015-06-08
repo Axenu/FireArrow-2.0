@@ -5,8 +5,9 @@
 
 #include <iostream>
 #include <glm/glm.hpp>
+#include <vector>
 #include "FAShader.h"
-// #include "FAMaterialComponent.h"
+#include "FAMaterialComponent.h"
 
 class FAMaterial {
 
@@ -15,6 +16,7 @@ private:
 	FAShader *shader;
 	glm::mat4 viewProjectionMatrix;
 	glm::mat4 modelMatrix;
+	std::vector<FAMaterialComponent *> components;
 
 	GLint MVPLocation;
 
