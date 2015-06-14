@@ -2,8 +2,8 @@
 #define __First__testScene__
 
 #include <dirent.h>
-#include "FAScene.h"
-#include "FAText.h"
+#include <FA/FAScene.h>
+#include <FA/FAText.h>
 
 class testScene : public FAScene {
     

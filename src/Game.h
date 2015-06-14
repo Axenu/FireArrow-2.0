@@ -1,7 +1,8 @@
 #ifndef __First__FAGame__
 #define __First__FAGame__
 
-#include "FAEngine.h"
+#include "FA/FAEngine.h"
+#include "testScene.h"
 
 class Game : public FAEngine {
 

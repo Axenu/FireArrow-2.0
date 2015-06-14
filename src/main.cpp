@@ -1,8 +1,4 @@
 #include <iostream>
-#include "FANode.h"
-#include "FARenderPass.h"
-#include "FAModel.h"
-#include "FAScene.h"
 #include "Game.h"
 
 // GLFWwindow* window;
