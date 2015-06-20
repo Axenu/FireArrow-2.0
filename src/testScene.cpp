@@ -50,8 +50,9 @@ void testScene::init() {
     addChild(m);
     m = new FAModel(*mesh, *material);
     addChild(m);
-    // m = new FAModel(*mesh);
-    // addChild(m);
+    FAMesh *fenceMesh = new FAMesh("fence.fa");
+    m = new FAModel(*fenceMesh, *material);
+    addChild(m);
 
     // camera = new FACamera(40.0f, (float)windowWidth, windowHeigth, 0.001, 400);
     // camera->setZ(0);

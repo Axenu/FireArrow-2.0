@@ -126,7 +126,7 @@ void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
 
 	ambient = 0.5;
 	direction = glm::vec3(1,1,0);
-	color = glm::vec4(1,0,1,1);
+	color = glm::vec4(1,1,1,1);
 
 	if (ambientLocation == -1)
 		std::cout << "Error getting ambientLocation in " << name << " component!" << std::endl;
