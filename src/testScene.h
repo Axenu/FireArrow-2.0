@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <FA/FAScene.h>
 #include <FA/FAText.h>
+#include <FA/FATerrain.h>
 
 class testScene : public FAScene {
     

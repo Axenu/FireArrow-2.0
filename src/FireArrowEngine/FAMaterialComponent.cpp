@@ -124,10 +124,6 @@ void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
 	colorLocation = glGetUniformLocation(shaderProgram, "diffuseColor");
 	directionLocation = glGetUniformLocation(shaderProgram, "direction");
 
-	ambient = 0.5;
-	direction = glm::vec3(1,1,0);
-	color = glm::vec4(1,1,1,1);
-
 	if (ambientLocation == -1)
 		std::cout << "Error getting ambientLocation in " << name << " component!" << std::endl;
 	if (colorLocation == -1)
@@ -135,6 +131,47 @@ void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
 	if (directionLocation == -1)
 		std::cout << "Error getting directionLocation in " << name << " component!" << std::endl;
 
+}
+
+void FADirectionalLightComponent::setColor(glm::vec4 &color) {
+	this->color = color;
+}
+
+void FADirectionalLightComponent::setDirection(glm::vec3 direction) {
+	this->direction = direction;
+}
+
+void FADirectionalLightComponent::setAmbientComponent(float ambientComponent) {
+	this->ambient = ambientComponent;
+}
+
+//Color material
+
+FAColorComponent::FAColorComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "uniform vec4 color;\n";
+	fragmentMain = "";
+	fragmentOutput = "(OTHER_OUT) * color";
+	name = "color";
+}
+
+void FAColorComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FAColorComponent::bind() {
+	glUniform4fv(this->colorUniformLocation, 1, &color[0]);
+}
+
+void FAColorComponent::setUpLocations(GLint shaderProgram) {
+	this->colorUniformLocation = glGetUniformLocation(shaderProgram, "color");
+	if (colorUniformLocation == -1)
+		std::cout << "Error getting colorUniformLocation in " << name << " component!" << std::endl;
+}
+
+void FAColorComponent::setColor(glm::vec4 &color) {
+	this->color = color;
 }
 
 

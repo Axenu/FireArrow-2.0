@@ -72,6 +72,23 @@ public:
 	void setAttribute(std::string name, float value);
 	void bind();
 	void setUpLocations(GLint shaderProgram);
+
+	void setColor(glm::vec4 &color);
+	void setDirection(glm::vec3 direction);
+	void setAmbientComponent(float ambientComponent);
+};
+
+class FAColorComponent : public FAMaterialComponent {
+private:
+	GLint colorUniformLocation;
+	glm::vec4 color;
+public:
+	FAColorComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setColor(glm::vec4 &color);
 };
 
 #endif

@@ -26,8 +26,8 @@ void FANode::update(float dt) {
     if (!isActive) return;
     this->modelMatrix = glm::translate(glm::mat4(), this->position);
     this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(1,0,0));
-    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,1,0));
-    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,0,1));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.y, glm::vec3(0,1,0));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.z, glm::vec3(0,0,1));
     this->modelMatrix = glm::scale(this->modelMatrix, this->scale);
     onUpdate(dt);
     for (FANode *node : children)
@@ -38,8 +38,8 @@ void FANode::update(float dt, glm::mat4 &parentModelMatrix) {
     if (!isActive) return;
     this->modelMatrix = glm::translate(glm::mat4(), this->position);
     this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(1,0,0));
-    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,1,0));
-    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.x, glm::vec3(0,0,1));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.y, glm::vec3(0,1,0));
+    this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.z, glm::vec3(0,0,1));
     this->modelMatrix = glm::scale(this->modelMatrix, this->scale);
     this->modelMatrix = parentModelMatrix * this->modelMatrix;
     onUpdate(dt);

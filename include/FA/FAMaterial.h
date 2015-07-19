@@ -29,11 +29,24 @@ private:
 	std::string fragmentMain;
 	std::string fragmentOutput;
 
+	bool hasColor = false;
+	
+	bool isBuilt = false;
+
 	void buildShader();
+	FAMaterialComponent* getComponentByName(std::string name);
 
 public:
 	FAMaterial();
 	~FAMaterial();
+
+	void setColor(glm::vec4 &color);
+
+	void setDirectionalLight(glm::vec3 &direction, glm::vec4 &color, float ambientComponent);
+
+	void hasVertexColor(bool value);
+	void hasVertexNormal(bool value);
+
 	// void addMaterial();
 	void setAttribute(std::string name, float value);
 	//check requirements

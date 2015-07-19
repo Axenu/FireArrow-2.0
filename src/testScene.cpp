@@ -34,6 +34,10 @@ void testScene::init() {
     //     }
     // }
 
+    glm::vec3 direction = glm::vec3(1,1,0);
+    glm::vec4 color = glm::vec4(1,1,1,1);
+    float ambient = 0.5;
+
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
     text = new FAText(font);
     text->setText("fps: 0.0");
@@ -42,17 +46,26 @@ void testScene::init() {
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
     FAMaterial *material = new FAMaterial();
+    material->setDirectionalLight(direction, color, ambient);
     FAModel *m = new FAModel(*mesh, *material);
     m->setPosition(0,0,-5);
     addChild(m);
     m = new FAModel(*mesh, *material);
-    m->setPosition(10,1,1);
+    m->setPosition(10,0,1);
     addChild(m);
     m = new FAModel(*mesh, *material);
     addChild(m);
     FAMesh *fenceMesh = new FAMesh("fence.fa");
     m = new FAModel(*fenceMesh, *material);
+    m->setPosition(2,0,-5);
+    m->rotateY(glm::half_pi<float>());
     addChild(m);
+    FAMesh *barrelMesh = new FAMesh("barrel.fa");
+    m = new FAModel(*barrelMesh, *material);
+    m->setPosition(4,0,-4);
+    addChild(m);
+    FATerrain *t = new FATerrain();
+    addChild(t);
 
     // camera = new FACamera(40.0f, (float)windowWidth, windowHeigth, 0.001, 400);
     // camera->setZ(0);
