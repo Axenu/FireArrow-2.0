@@ -21,7 +21,7 @@ GAMEOBJECTS = $(addprefix $(ODIR)/, $(SOURCEFILESGAME:.cpp=.o))
 lIBDIR=lib/
 IDIR=include/
 
-LIB=-lglfw3 -lIL -ltiff -lpng16 -lz -ljasper -ljpeg -llzma -lfreetype -lbz2
+LIB=-lglfw3 -lIL -ltiff -lpng16 -lz -ljasper -ljpeg -llzma -lfreetype -lbz2 -lmng -llcms
 
 #OSX frameworks
 FRAMEWORKS=-framework IOKit -framework Cocoa -framework OpenGL -framework CoreVideo

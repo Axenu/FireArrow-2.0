@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <map>
+#include <vector>
 #include <glm/glm.hpp>
 #include "FAShader.h"
 
@@ -27,6 +28,8 @@ public:
 	virtual void bind() = 0;
 	virtual void setUpLocations(GLint shaderProgram) = 0;
 
+	std::vector<FAMaterialComponent *> *getRequirements();
+	bool requiresModelData();
 
 protected:
 
@@ -36,7 +39,9 @@ protected:
 	std::string fragmentIO;
 	std::string fragmentMain;
 	std::string fragmentOutput;
-	std::map<std::string, FAMaterialComponent *> requirements;
+	// std::map<std::string, FAMaterialComponent *> requirements;
+	std::vector<FAMaterialComponent *> requirements;
+	bool modelData;
 	
 };
 
@@ -51,6 +56,14 @@ public:
 class FAVertexNormalComponent : public FAMaterialComponent {
 public:
 	FAVertexNormalComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+};
+
+class FAVertexUVComponent : public FAMaterialComponent {
+public:
+	FAVertexUVComponent();
 	void setAttribute(std::string name, float value);
 	void bind();
 	void setUpLocations(GLint shaderProgram);
@@ -89,6 +102,19 @@ public:
 	void setUpLocations(GLint shaderProgram);
 
 	void setColor(glm::vec4 &color);
+};
+
+class FATextureComponent : public FAMaterialComponent {
+private:
+	GLint textureUniformLocation;
+	GLuint texture;
+public:
+	FATextureComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setTexture(GLuint texture);
 };
 
 #endif

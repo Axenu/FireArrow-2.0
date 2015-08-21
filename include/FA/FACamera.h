@@ -30,6 +30,11 @@ public:
 
 	void initProjection();
 	void useView();
+
+	glm::mat4 &getViewMatrix();
+	float getFieldOfView();
+	float getAspectRatio();
+	glm::vec3 &getPosition();
 	
 	~FACamera();
 

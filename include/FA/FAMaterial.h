@@ -19,6 +19,7 @@ private:
 	glm::mat4 viewProjectionMatrix;
 	glm::mat4 modelMatrix;
 	std::vector<FAMaterialComponent *> components;
+	std::vector<FAMaterialComponent *> pendingComponents;
 
 	GLint MVPLocation;
 
@@ -29,9 +30,10 @@ private:
 	std::string fragmentMain;
 	std::string fragmentOutput;
 
-	bool hasColor = false;
+	bool hasColor = false; //TODO remove
 	
 	bool isBuilt = false;
+	bool isCreated = false;
 
 	void buildShader();
 	FAMaterialComponent* getComponentByName(std::string name);
@@ -41,14 +43,16 @@ public:
 	~FAMaterial();
 
 	void setColor(glm::vec4 &color);
-
 	void setDirectionalLight(glm::vec3 &direction, glm::vec4 &color, float ambientComponent);
+	void setTexture(GLuint texture);
 
 	void hasVertexColor(bool value);
 	void hasVertexNormal(bool value);
+	void hasVertexUV(bool value);
 
-	// void addMaterial();
+	bool addMaterialComponent(FAMaterialComponent *component);
 	void setAttribute(std::string name, float value);
+	void create();
 	//check requirements
 	//add new requirements
 	//addThis

@@ -55,11 +55,18 @@ void testScene::init() {
     addChild(m);
     m = new FAModel(*mesh, *material);
     addChild(m);
-    FAMesh *fenceMesh = new FAMesh("fence.fa");
-    m = new FAModel(*fenceMesh, *material);
-    m->setPosition(2,0,-5);
-    m->rotateY(glm::half_pi<float>());
+
+    FAMaterial *textMaterial = new FAMaterial();
+    textMaterial->setTexture(FATexture::createTexture("/Users/Axenu/Developer/FireArrow 2.0/resources/textures/5k.jpg"));
+    glm::vec4 red = glm::vec4(1,0,0,1);
+    // textMaterial->setColor(red);
+
+    FAMesh *fenceMesh = new FAMesh("square");
+    m = new FAModel(*fenceMesh, *textMaterial);
+    m->setPosition(2,2,-5);
+    m->rotateY(glm::pi<float>());
     addChild(m);
+
     FAMesh *barrelMesh = new FAMesh("barrel.fa");
     m = new FAModel(*barrelMesh, *material);
     m->setPosition(4,0,-4);

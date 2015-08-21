@@ -39,6 +39,22 @@ void FACamera::useView() {
 void FACamera::initProjection() {
 	projectionMatrix = glm::perspectiveFov(degreesToRadians(fieldOfView), width, height, nearPlane, farPlane);
 }
+
+glm::mat4 &FACamera::getViewMatrix() {
+    return this->viewMatrix;
+}
+
+float FACamera::getFieldOfView() {
+    return this->fieldOfView;
+}
+
+float FACamera::getAspectRatio() {
+    return this->aspectRatio;
+}
+
+glm::vec3 &FACamera::getPosition() {
+    return this->position;
+}
 	
 FACamera::~FACamera() {
 

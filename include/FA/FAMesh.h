@@ -21,6 +21,7 @@ private:
 
 	bool _hasNormal;
 	bool _hasColor;
+	bool _hasUV;
 
 	void loadFAModel(std::string path);
 
@@ -33,6 +34,7 @@ public:
 	
 	bool hasVertexNormal();
 	bool hasVertexColor();
+	bool hasVertexUV();
 
 	~FAMesh();
 	

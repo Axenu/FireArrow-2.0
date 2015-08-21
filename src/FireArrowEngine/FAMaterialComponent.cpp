@@ -36,27 +36,12 @@ std::string FAMaterialComponent::getName() {
 	return this->name;
 }
 
-//Vertex Color material
-
-FAVertexColorComponent::FAVertexColorComponent() {
-	vertexIO = "layout(location = 2) in vec3 in_Color;\nout vec4 pass_Color;\n";
-	vertexMain = "pass_Color = vec4(in_Color, 1.0);\n";
-	fragmentIO = "in vec4 pass_Color;\n";
-	fragmentMain = "";
-	fragmentOutput = "(OTHER_OUT) * pass_Color";
-	name = "vertexColor";
+std::vector<FAMaterialComponent *> *FAMaterialComponent::getRequirements() {
+	return &this->requirements;
 }
 
-void FAVertexColorComponent::setAttribute(std::string name, float value) {
-
-}
-
-void FAVertexColorComponent::bind() {
-
-}
-
-void FAVertexColorComponent::setUpLocations(GLint shaderProgram) {
-
+bool FAMaterialComponent::requiresModelData() {
+	return this->modelData;
 }
 
 //Vertex normal material
@@ -68,6 +53,7 @@ FAVertexNormalComponent::FAVertexNormalComponent() {
 	fragmentMain = "";
 	fragmentOutput = "OTHER_OUT";
 	name = "vertexNormal";
+	modelData = true;
 }
 
 void FAVertexNormalComponent::setAttribute(std::string name, float value) {
@@ -82,6 +68,54 @@ void FAVertexNormalComponent::setUpLocations(GLint shaderProgram) {
 
 }
 
+//Vertex Color material
+
+FAVertexColorComponent::FAVertexColorComponent() {
+	vertexIO = "layout(location = 2) in vec3 in_Color;\nout vec4 pass_Color;\n";
+	vertexMain = "pass_Color = vec4(in_Color, 1.0);\n";
+	fragmentIO = "in vec4 pass_Color;\n";
+	fragmentMain = "";
+	fragmentOutput = "(OTHER_OUT) * pass_Color";
+	name = "vertexColor";
+	modelData = true;
+}
+
+void FAVertexColorComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FAVertexColorComponent::bind() {
+
+}
+
+void FAVertexColorComponent::setUpLocations(GLint shaderProgram) {
+
+}
+
+//Vertex UV material
+
+FAVertexUVComponent::FAVertexUVComponent() {
+	vertexIO = "layout(location = 3) in vec2 in_UV;\nout vec2 pass_UV;\n";
+	vertexMain = "pass_UV = in_UV;\n";
+	fragmentIO = "in vec2 pass_UV;\n";
+	fragmentMain = "";
+	fragmentOutput = "OTHER_OUT";
+	name = "vertexUV";
+	modelData = true;
+}
+
+void FAVertexUVComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FAVertexUVComponent::bind() {
+
+}
+
+void FAVertexUVComponent::setUpLocations(GLint shaderProgram) {
+
+}
+
 //Directional light material
 
 FADirectionalLightComponent::FADirectionalLightComponent() {
@@ -93,6 +127,8 @@ FADirectionalLightComponent::FADirectionalLightComponent() {
     "float lambertian = max(dot(lightDir,normal), 0.0);\n";
 	fragmentOutput = "(OTHER_OUT) * (ambient * vec4(1,1,1,1) + lambertian * diffuseColor)";
 	name = "Directional light";
+	requirements.push_back(new FAVertexNormalComponent);
+	modelData = false;
 }
 
 void FADirectionalLightComponent::setAttribute(std::string name, float value) {
@@ -154,6 +190,7 @@ FAColorComponent::FAColorComponent() {
 	fragmentMain = "";
 	fragmentOutput = "(OTHER_OUT) * color";
 	name = "color";
+	modelData = false;
 }
 
 void FAColorComponent::setAttribute(std::string name, float value) {
@@ -172,6 +209,38 @@ void FAColorComponent::setUpLocations(GLint shaderProgram) {
 
 void FAColorComponent::setColor(glm::vec4 &color) {
 	this->color = color;
+}
+
+//texture material
+
+FATextureComponent::FATextureComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "uniform sampler2D mytextureSampler;\n";
+	fragmentMain = "vec4 textureColor = texture(mytextureSampler, pass_UV);";
+	fragmentOutput = "(OTHER_OUT) * textureColor";
+	name = "texture";
+	requirements.push_back(new FAVertexUVComponent);
+	modelData = false;
+}
+
+void FATextureComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FATextureComponent::bind() {
+	glBindTexture(GL_TEXTURE_2D, this->texture);
+	glUniform1i(textureUniformLocation, 0);
+}
+
+void FATextureComponent::setUpLocations(GLint shaderProgram) {
+	this->textureUniformLocation = glGetUniformLocation(shaderProgram, "mytextureSampler");
+	if (textureUniformLocation == -1)
+		std::cout << "Error getting textureUniformLocation in " << name << " component!" << std::endl;
+}
+
+void FATextureComponent::setTexture(GLuint texture) {
+	this->texture = texture;
 }
 
 

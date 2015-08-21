@@ -5,15 +5,18 @@
 #include "FACamera.h"
 #include "FAModel.h"
 #include "FARenderPass.h"
+#include "FAMainRenderPass.h"
+#include "FACSMRenderPass.h"
 
-class FARenderPass;
+// class FARenderPass;
 class FAEngine;
 
-class FAScene {
+class FAScene : FARenderPasscallbackInterface {
 
 private:
 
 public:
+
 	FAScene();
 
 	void onInit();
@@ -33,6 +36,7 @@ public:
 
 	std::vector<FAModel *> *getModels();
 	FACamera *getCamera();
+	float getWindowWidths();
 
 	~FAScene();
 

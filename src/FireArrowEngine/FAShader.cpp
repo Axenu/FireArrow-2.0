@@ -5,7 +5,6 @@ FAShader::FAShader() {
 }
 
 FAShader::FAShader(std::string file) : FAShader(file, file) {
-	
 }
 
 FAShader::FAShader(std::string vert, std::string frag) {
@@ -92,6 +91,7 @@ GLint FAShader::createShader(std::string path, GLenum shaderType) const {
     glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
     if (compileStatus != GL_TRUE) {
         std::cout << "Shader failed to compile: '" << path << "'" << std::endl;
+        std::cout << source << std::endl;
         
         GLint infoLogLength;
         glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
@@ -116,6 +116,7 @@ GLint FAShader::createShaderFromString(std::string *shader, GLenum shaderType) c
     glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
     if (compileStatus != GL_TRUE) {
         std::cout << "Shader failed to compile: '" << shader << "'" << std::endl;
+        std::cout << *shader << std::endl;
         
         GLint infoLogLength;
         glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLength);

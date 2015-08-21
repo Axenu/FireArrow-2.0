@@ -2,31 +2,40 @@
 #define __First__FARenderPass__
 
 #define GLM_FORCE_RADIANS
+#define GLFW_INCLUDE_GLCOREARB
 
 #include <OpenGL/opengl.h>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "FAScene.h"
+#include "FARenderPasscallbackInterface.h"
+// #include "FAScene.h"
 
-class FAScene;
+// class FAScene;
 
 class FARenderPass {
 
 private:
-	FAScene *parent;
-	int priority;
 
 public:
 	FARenderPass();
 	~FARenderPass();
 
-	void render();
-
 	int getPriority();
+	// void setParent(FAScene *parent);
 
-	void setParent(FAScene *parent);
+	virtual void render() = 0;
+
+	//test callback
+	void setCB(FARenderPasscallbackInterface *cb);
+	FARenderPasscallbackInterface *parent = nullptr;
+
+protected:
 	
+	// FAScene *parent;
+	int priority;
+	int windowWidth;
+	int windowHeight;
 };
 
 #endif

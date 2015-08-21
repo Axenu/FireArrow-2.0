@@ -5,6 +5,7 @@
 #include <FA/FAScene.h>
 #include <FA/FAText.h>
 #include <FA/FATerrain.h>
+#include <FA/FATexture.h>
 
 class testScene : public FAScene {
     

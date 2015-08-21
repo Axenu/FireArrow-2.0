@@ -100,6 +100,12 @@ void FAMaterial::setDirectionalLight(glm::vec3 &direction, glm::vec4 &color, flo
 	isBuilt = false;
 }
 
+void FAMaterial::setTexture(GLuint texture) {
+	FATextureComponent *textureComponent = new FATextureComponent();
+	textureComponent->setTexture(texture);
+	addMaterialComponent(textureComponent);
+}
+
 void FAMaterial::hasVertexColor(bool value) {
 	if (value) {
 		components.push_back(new FAVertexColorComponent);
@@ -111,6 +117,14 @@ void FAMaterial::hasVertexNormal(bool value) {
 	if (value) {
 		components.push_back(new FAVertexNormalComponent);
 		isBuilt = false;
+	}
+}
+
+void FAMaterial::hasVertexUV(bool value) {
+	if (value) {
+		components.push_back(new FAVertexUVComponent);
+		isBuilt = false;
+		std::cout << "model has UV!" << std::endl;
 	}
 }
 
@@ -127,22 +141,44 @@ void FAMaterial::setAttribute(std::string name, float value) {
 	//if found send to the component with suffix
 }
 
+void FAMaterial::create() {
+	isCreated = true;
+	for (FAMaterialComponent *component : pendingComponents) {
+		addMaterialComponent(component);
+	}
+	buildShader();
+}
+
+bool FAMaterial::addMaterialComponent(FAMaterialComponent *component) {
+	if (isCreated) {
+		if (getComponentByName(component->getName()) == nullptr) {
+			if (component->requiresModelData()) {
+				std::cout << "The model is missing " << component->getName() << " data!" << std::endl;
+				return false;
+			}
+			for (FAMaterialComponent *requiredComponent : *component->getRequirements()) {
+				if (!addMaterialComponent(requiredComponent)) {
+					return false;
+				}
+			}
+			components.push_back(component);
+			std::cout << "added component " << component->getName() << std::endl;
+			isBuilt = false;
+			return true;
+		}
+		return true;
+	} else {
+		this->pendingComponents.push_back(component);
+		return true;
+	}
+}
+
 void FAMaterial::bind() {
 	if (!isBuilt) {
 		buildShader();
 	}
-	// for (FAMaterialComponent *c : components) {
-	// 	c->render();
-	// }
-	//setup ALL attributes, depth test, uniforms etc.
 
 	glm::mat4 MVPMatrix = viewProjectionMatrix * modelMatrix;
-	// glm::mat4 MVPMatrix = glm::mat4();
-	// std::cout << "glm::mat4: " << std::endl;
-	// std::cout << MVPMatrix[0][0] << ", " << MVPMatrix[0][1] << ", " << MVPMatrix[0][2] << ", " << MVPMatrix[0][3] << std::endl;
-	// std::cout << MVPMatrix[1][0] << ", " << MVPMatrix[1][1] << ", " << MVPMatrix[1][2] << ", " << MVPMatrix[1][3] << std::endl;
-	// std::cout << MVPMatrix[2][0] << ", " << MVPMatrix[2][1] << ", " << MVPMatrix[2][2] << ", " << MVPMatrix[2][3] << std::endl;
-	// std::cout << MVPMatrix[3][0] << ", " << MVPMatrix[3][1] << ", " << MVPMatrix[3][2] << ", " << MVPMatrix[3][3] << std::endl;
 	glUseProgram(shader->shaderProgram);
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &MVPMatrix[0][0]);
 	for (FAMaterialComponent *c : components)

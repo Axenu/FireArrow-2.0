@@ -3,11 +3,14 @@
 
 FAScene::FAScene() {
 	//Default stuff
-	FARenderPass *defaultPass = new FARenderPass();
-	renderPasses = new FARenderPass*[1];
-	renderPasses[0] = defaultPass;
-	defaultPass->setParent(this);
-	this->numberOfPasses = 1;
+	FARenderPass *defaultPass = new FAMainRenderPass();
+    FARenderPass *shadow = new FACSMRenderPass();
+	renderPasses = new FARenderPass*[2];
+	renderPasses[1] = defaultPass;
+    renderPasses[0] = shadow;
+    defaultPass->setCB(this);
+    shadow->setCB(this);
+	this->numberOfPasses = 2;
 	this->isActive = true;
 	// this->models = new std::vector<FAModel *>();
 	//User stuff
@@ -66,15 +69,17 @@ void FAScene::onUpdate(float dt) {
 void FAScene::onRender() {
 	if (!isActive) return;
     camera->useView();
-	for (int i = 0; i < numberOfPasses; i++)
+	for (int i = 0; i < numberOfPasses; i++) {
         renderPasses[i]->render();
+    }
 	this->render();
 }
 
 void FAScene::addChild(FANode *child) {
 	rootNode.addChild(child);
-	if (dynamic_cast<FAModel *>(child)) {
-		models.push_back(dynamic_cast<FAModel *>(child));
+	if (FAModel *model = dynamic_cast<FAModel *>(child)) {
+		models.push_back(model);
+        
 		// for (FANode *n : child->getAllChildren()) {
 		// 	children.push_back(n);
 		// }
@@ -83,7 +88,8 @@ void FAScene::addChild(FANode *child) {
 
 void FAScene::addRenderPass(FARenderPass *renderPass) {
 	this->numberOfPasses++;
-	renderPass->setParent(this);
+	// renderPass->setParent(this);
+    renderPass->setCB(this);
 	FARenderPass **temp = new FARenderPass*[this->numberOfPasses];
 	int place;
 	for (int i = 0; i < this->numberOfPasses-1; i++) {
@@ -148,6 +154,10 @@ std::vector<FAModel *> *FAScene::getModels() {
 
 FACamera *FAScene::getCamera() {
 	return (this->camera);
+}
+
+float FAScene::getWindowWidths() {
+    return this->windowWidth;
 }
 
 FAScene::~FAScene() {

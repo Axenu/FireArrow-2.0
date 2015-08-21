@@ -23,6 +23,7 @@ public:
 
 	FAMaterial &getMaterial();
 	const FAMesh &getMesh() const;
+	glm::mat4 &getModelMatrix();
 
 	virtual void onUpdate(float dt);
 
