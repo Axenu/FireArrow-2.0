@@ -21,6 +21,8 @@ public:
 	void setMesh(FAMesh &mesh);
 	void setMesh(std::string path);
 
+	void addMaterialComponent(FAMaterialComponent *component);
+
 	FAMaterial &getMaterial();
 	const FAMesh &getMesh() const;
 	glm::mat4 &getModelMatrix();

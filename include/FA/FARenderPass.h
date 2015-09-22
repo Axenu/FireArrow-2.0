@@ -22,6 +22,7 @@ public:
 	~FARenderPass();
 
 	int getPriority();
+	std::string &getName();
 	// void setParent(FAScene *parent);
 
 	virtual void render() = 0;
@@ -36,6 +37,7 @@ protected:
 	int priority;
 	int windowWidth;
 	int windowHeight;
+	std::string name;
 };
 
 #endif

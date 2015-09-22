@@ -4,23 +4,17 @@ FAMaterial::FAMaterial() {
 
 	// components.push_back(new FADirectionalLightComponent);
 
-	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;"
+	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;\n uniform mat4 MMatrix;"
 		"layout(location = 0) in vec3 in_Position;\n";
 	this->vertexMain = "gl_Position = MVPMatrix * vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);\n";
 
 	this->fragmentIO = "#version 400 core \nout vec4 Frag_Data;\n";
-	this->fragmentMain = "";
-	this->fragmentOutput = "Frag_Data = pass_Color;\n";
+	// this->fragmentMain = "";
+	// this->fragmentOutput = "Frag_Data = pass_Color;\n";
 
 	// this->modelMatrix = glm::mat4();
 	// this->shader = new FAShader("Basic");
-	buildShader();
-	glUseProgram(this->shader->shaderProgram);
-	MVPLocation = glGetUniformLocation(this->shader->shaderProgram, "MVPMatrix");
-	if (MVPLocation == -1) {
-		std::cout << "MVPLocation failed!" << std::endl;
-	}
-	glUseProgram(0);
+	// buildShader();
 }
 
 FAMaterialComponent* FAMaterial::getComponentByName(std::string name) {
@@ -51,12 +45,14 @@ void FAMaterial::buildShader() {
 	for (FAMaterialComponent *c : components)
 		fragmentShader += c->getFragmentIO(); 
 	fragmentShader += "void main() {\n";
-	fragmentShader += this->fragmentMain;
+	// fragmentShader += this->fragmentMain;
 	for (FAMaterialComponent *c : components)
 		fragmentShader += c->getFragmentMain();
 
 	std::string output = "vec4(1,1,1,1)";
+	std::cout << "Building shader: " << std::endl;
 	for (FAMaterialComponent *c : components) {
+		std::cout << c->getName() << std::endl;
 		std::string cOut = c->getFragmentMainOutput();
 		size_t start_pos = cOut.find("OTHER_OUT");
 		if(start_pos != std::string::npos)
@@ -72,6 +68,15 @@ void FAMaterial::buildShader() {
 	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
 	this->shader = new FAShader(&vertexShader, &fragmentShader);
+
+	MVPLocation = glGetUniformLocation(this->shader->shaderProgram, "MVPMatrix");
+	MLocation = glGetUniformLocation(this->shader->shaderProgram, "MMatrix");
+	if (MVPLocation == -1) {
+		std::cout << "MVPLocation failed!" << std::endl;
+	}
+	// if (MLocation == -1) {
+	// 	std::cout << "MLocation failed!" << std::endl;
+	// }
 
 	for (FAMaterialComponent *c : components)
 		c->setUpLocations(this->shader->shaderProgram);
@@ -92,18 +97,38 @@ void FAMaterial::setColor(glm::vec4 &color) {
 }
 
 void FAMaterial::setDirectionalLight(glm::vec3 &direction, glm::vec4 &color, float ambientComponent) {
-	FADirectionalLightComponent *component = new FADirectionalLightComponent;
-	component->setDirection(direction);
-	component->setColor(color);
-	component->setAmbientComponent(ambientComponent);
-	components.push_back(component);
-	isBuilt = false;
+	// FADirectionalLightComponent *component = new FADirectionalLightComponent;
+	// component->setDirection(direction);
+	// component->setColor(color);
+	// component->setAmbientComponent(ambientComponent);
+	// components.push_back(component);
+	// isBuilt = false;
 }
 
 void FAMaterial::setTexture(GLuint texture) {
 	FATextureComponent *textureComponent = new FATextureComponent();
 	textureComponent->setTexture(texture);
 	addMaterialComponent(textureComponent);
+}
+
+void FAMaterial::setTexture(GLuint *texture) {
+	FATextureComponent *textureComponent = new FATextureComponent();
+	textureComponent->setTexture(texture);
+	addMaterialComponent(textureComponent);
+}
+
+void FAMaterial::setTextureArray(GLuint *texture, int layer) {
+	FATextureArrayComponent *textureComponent = new FATextureArrayComponent();
+	textureComponent->setTexture(texture);
+	textureComponent->setLayer(layer);
+	addMaterialComponent(textureComponent);
+}
+
+void FAMaterial::hasVertexPosition(bool value) {
+	if (value) {
+		components.push_back(new FAVertexPositionComponent);
+		isBuilt = false;
+	}
 }
 
 void FAMaterial::hasVertexColor(bool value) {
@@ -181,6 +206,7 @@ void FAMaterial::bind() {
 	glm::mat4 MVPMatrix = viewProjectionMatrix * modelMatrix;
 	glUseProgram(shader->shaderProgram);
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &MVPMatrix[0][0]);
+	glUniformMatrix4fv(MLocation, 1, GL_FALSE, &modelMatrix[0][0]);
 	for (FAMaterialComponent *c : components)
 		c->bind();
 

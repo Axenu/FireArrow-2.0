@@ -3,6 +3,8 @@
 FACSMRenderPass::FACSMRenderPass() {
 	int shadowMapWidth = 1024;
     int shadowMapHeight = 720;
+    this->priority = -3;
+    this->name = "CSM";
     
     glGenTextures(1, &shadowMap);
     glBindTexture(GL_TEXTURE_2D_ARRAY, shadowMap);
@@ -64,12 +66,20 @@ FACSMRenderPass::FACSMRenderPass() {
     
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
-    std::string vert = "#version 400 core\nuniform mat4 viewProjectionMatrix;uniform mat4 modelMatrix;layout(location = 0) in vec3 in_Position;void main() {gl_Position = viewProjectionMatrix * modelMatrix * vec4(in_Position, 1.0);}";
-    std::string frag = "#version 400 core\nvoid main() {}";
-    shader = FAShader(&vert, &frag);
+    shader = new FAShader("shadow");
 
-    modelMatrixLocation = glGetUniformLocation(shader.shaderProgram, "modelMatrix");
-    viewProjectionMatrixLocation = glGetUniformLocation(shader.shaderProgram, "viewProjectionMatrix");
+    glUseProgram(shader->shaderProgram);
+
+    modelMatrixLocation = glGetUniformLocation(shader->shaderProgram, "modelMatrix");
+    viewProjectionMatrixLocation = glGetUniformLocation(shader->shaderProgram, "viewProjectionMatrix");
+    glUseProgram(0);
+
+    if (modelMatrixLocation == -1) 
+        std::cout << "Error getting uniform modelMatrixLocation" << std::endl;
+    if (viewProjectionMatrixLocation == -1) 
+        std::cout << "Error getting uniform viewProjectionMatrixLocation" << std::endl;
+
+    inverseShadowMatrix = new glm::mat4[frustums];
 
 }
 
@@ -79,33 +89,33 @@ void FACSMRenderPass::render() {
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
     // glEnable(GL_CULL_FACE);
     // glViewport(0,0,this->windowWidth,this->windowHeight);
-    std::vector<glm::mat4> shadowMatrix;
-    shadowMatrix.push_back(calculateShadowCamera(0, 4));
-    shadowMatrix.push_back(calculateShadowCamera(4, 12));
-    shadowMatrix.push_back(calculateShadowCamera(12, 30));
-    shadowMatrix.push_back(calculateShadowCamera(30, 100));
-    inverseShadowMatrix = new glm::mat4[frustums];
-    glm::mat4 m;
+    glm::mat4 *shadowMatrix = new glm::mat4[frustums];
+    shadowMatrix[0] = calculateShadowCamera(0, 4);
+    shadowMatrix[1] = calculateShadowCamera(4, 12);
+    shadowMatrix[2] = calculateShadowCamera(12, 30);
+    shadowMatrix[3] = calculateShadowCamera(30, 100);
     for (int i = 0; i < frustums; i++) {
+        // std::cout << shadowMap << std::endl;
         //        shadowMatrix.push_back(calculateShadowCamera(0,100));
-        m = glm::translate(glm::mat4(), glm::vec3(0.5,0.5,0.5));
-        m = glm::scale(m, glm::vec3(0.5,0.5,0.5));
-        m = m * shadowMatrix[i];
-        inverseShadowMatrix[i] = m;
+        // inverseShadowMatrix[i] = glm::mat4();
+        inverseShadowMatrix[i] = glm::translate(glm::mat4(), glm::vec3(0.5,0.5,0.5));
+        inverseShadowMatrix[i] = glm::scale(inverseShadowMatrix[i], glm::vec3(0.5,0.5,0.5));
+        inverseShadowMatrix[i] = inverseShadowMatrix[i] * shadowMatrix[i];
         glBindFramebuffer(GL_FRAMEBUFFER, shadowFbo);
         glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadowMap, 0, GLint(i));
         
         glClear(GL_DEPTH_BUFFER_BIT);
         
-        glCullFace(GL_FRONT);
+        // glCullFace(GL_FRONT);
 
-        glUseProgram(shader.shaderProgram);
-		glUniformMatrix4fv(viewProjectionMatrixLocation, 1, GL_FALSE, &shadowMatrix[i][0][0]);
+        glUseProgram(shader->shaderProgram);
+		
 
         for (FAModel *m : *parent->getModels()) {
 			// m->getMaterial().setViewProjectionwMatrix(&(parent->getCamera()->VPMatrix));
 			// m->getMaterial().setModelMatrix(m->modelMatrix);
 			// m->getMaterial().bind();
+            glUniformMatrix4fv(viewProjectionMatrixLocation, 1, GL_FALSE, &shadowMatrix[i][0][0]);
 			glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &m->getModelMatrix()[0][0]);
 			m->getMesh().render();
 		}
@@ -122,7 +132,19 @@ void FACSMRenderPass::render() {
     //    glEnable(GL_POLYGON_OFFSET_FILL);
     //    glPolygonOffset(factor,units);
     
-    glCullFace(GL_BACK);
+    // glCullFace(GL_BACK);
+}
+
+GLuint *FACSMRenderPass::getShadowMap() {
+    return &this->shadowMap;
+}
+
+glm::mat4 *FACSMRenderPass::getInverseShadowMatrix() {
+    return this->inverseShadowMatrix;
+}
+
+int *FACSMRenderPass::getFrustums() {
+    return &this->frustums;
 }
 
 // -----------------(( private ))---------------------

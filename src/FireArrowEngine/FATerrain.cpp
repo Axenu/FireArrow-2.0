@@ -20,7 +20,7 @@ FATerrain::FATerrain() {
 		}
 	}
 
-	// map[25][24] = 1;
+	map[25][24] = 1;
 	map[25][23] = 2;
 	map[25][22] = -3;
 	map[25][21] = 4;
@@ -155,12 +155,12 @@ FATerrain::FATerrain() {
 	FAMesh *mesh = new FAMesh(vertices, indices, true, true);
 	this->setMesh(*mesh);
 	FAMaterial *material = new FAMaterial();
-	glm::vec4 color = glm::vec4(1,1,2,1);
+	// glm::vec4 color = glm::vec4(1,1,2,1);
 	// material->setColor(color);
-	glm::vec3 direction = glm::vec3(1,1,0);
-    glm::vec4 color_light = glm::vec4(1,1,1,1);
-    float ambient = 0.5;
-	material->setDirectionalLight(direction, color_light, ambient);
+	// glm::vec3 direction = glm::vec3(1,1,0);
+    // glm::vec4 color_light = glm::vec4(1,1,1,1);
+    // float ambient = 0.5;
+	// material->setDirectionalLight(direction, color_light, ambient);
 	this->setMaterial(*material);
 
 	for (int i = 0; i < 50; ++i) {

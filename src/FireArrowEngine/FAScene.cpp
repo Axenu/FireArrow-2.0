@@ -4,13 +4,13 @@
 FAScene::FAScene() {
 	//Default stuff
 	FARenderPass *defaultPass = new FAMainRenderPass();
-    FARenderPass *shadow = new FACSMRenderPass();
-	renderPasses = new FARenderPass*[2];
-	renderPasses[1] = defaultPass;
-    renderPasses[0] = shadow;
+    // FARenderPass *shadow = new FACSMRenderPass();
+	renderPasses = new FARenderPass*[1];
+	renderPasses[0] = defaultPass;
+    // renderPasses[0] = shadow;
     defaultPass->setCB(this);
-    shadow->setCB(this);
-	this->numberOfPasses = 2;
+    // shadow->setCB(this);
+	this->numberOfPasses = 1;
 	this->isActive = true;
 	// this->models = new std::vector<FAModel *>();
 	//User stuff
@@ -78,32 +78,38 @@ void FAScene::onRender() {
 void FAScene::addChild(FANode *child) {
 	rootNode.addChild(child);
 	if (FAModel *model = dynamic_cast<FAModel *>(child)) {
+        for (FAMaterialComponent *component : requiredComponents) {
+            model->addMaterialComponent(component);
+        }
 		models.push_back(model);
-        
-		// for (FANode *n : child->getAllChildren()) {
-		// 	children.push_back(n);
-		// }
-	}
+	} else if (FALight *light = dynamic_cast<FALight *>(child)) {
+        lights.push_back(light);
+        for (FARenderPass *pass : *light->getRequirements()) {
+            addRenderPass(pass);
+        }
+        for (FAModel *model : models) {
+            for (FAMaterialComponent *component : *light->getMaterialRequirements()) {
+                model->addMaterialComponent(component);
+                requiredComponents.push_back(component);
+            }
+        }
+    }
 }
 
 void FAScene::addRenderPass(FARenderPass *renderPass) {
+    std::cout << "adding renderPass!" << std::endl;
 	this->numberOfPasses++;
-	// renderPass->setParent(this);
     renderPass->setCB(this);
 	FARenderPass **temp = new FARenderPass*[this->numberOfPasses];
-	int place;
 	for (int i = 0; i < this->numberOfPasses-1; i++) {
-		if (temp[i]->getPriority() < renderPass->getPriority()) {
-			temp[i] = this->renderPasses[i];
-		} else {
-			i = this->numberOfPasses;
-			place = i;
-		}
+		if (renderPass->getPriority() < renderPasses[i]->getPriority()) {
+            temp[i] = renderPass;
+            renderPass = renderPasses[i];
+        } else {
+            temp[i] = renderPasses[i];
+        }
 	}
-	temp[place] = renderPass;
-	for (int i = place+1; i < this->numberOfPasses; i++){
-		temp[i] = this->renderPasses[i-1];
-	}
+	temp[this->numberOfPasses-1] = renderPass;
 	delete[] renderPasses;
 	renderPasses = temp;
 }

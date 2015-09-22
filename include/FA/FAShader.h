@@ -22,6 +22,8 @@ public:
 	FAShader(std::string vert, std::string frag);
 	FAShader(std::string *vertexShader, std::string *fragmentShader);
 	~FAShader();
+
+	void printListOfUniforms();
 };
 
 #endif

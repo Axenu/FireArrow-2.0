@@ -45,9 +45,9 @@ protected:
 	
 };
 
-class FAVertexColorComponent : public FAMaterialComponent {
+class FAVertexPositionComponent : public FAMaterialComponent {
 public:
-	FAVertexColorComponent();
+	FAVertexPositionComponent();
 	void setAttribute(std::string name, float value);
 	void bind();
 	void setUpLocations(GLint shaderProgram);
@@ -56,6 +56,14 @@ public:
 class FAVertexNormalComponent : public FAMaterialComponent {
 public:
 	FAVertexNormalComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+};
+
+class FAVertexColorComponent : public FAMaterialComponent {
+public:
+	FAVertexColorComponent();
 	void setAttribute(std::string name, float value);
 	void bind();
 	void setUpLocations(GLint shaderProgram);
@@ -71,9 +79,9 @@ public:
 
 class FADirectionalLightComponent : public FAMaterialComponent {
 private:
-	float ambient;
-	glm::vec3 direction;
-	glm::vec4 color;
+	float *ambient;
+	glm::vec3 *direction;
+	glm::vec4 *color;
 
 	GLint ambientLocation;
 	GLint directionLocation;
@@ -86,9 +94,9 @@ public:
 	void bind();
 	void setUpLocations(GLint shaderProgram);
 
-	void setColor(glm::vec4 &color);
-	void setDirection(glm::vec3 direction);
-	void setAmbientComponent(float ambientComponent);
+	void setColor(glm::vec4 *color);
+	void setDirection(glm::vec3 *direction);
+	void setAmbientComponent(float *ambientComponent);
 };
 
 class FAColorComponent : public FAMaterialComponent {
@@ -107,7 +115,7 @@ public:
 class FATextureComponent : public FAMaterialComponent {
 private:
 	GLint textureUniformLocation;
-	GLuint texture;
+	GLuint *texture;
 public:
 	FATextureComponent();
 	void setAttribute(std::string name, float value);
@@ -115,6 +123,41 @@ public:
 	void setUpLocations(GLint shaderProgram);
 
 	void setTexture(GLuint texture);
+	void setTexture(GLuint *texture);
+};
+
+class FATextureArrayComponent : public FAMaterialComponent {
+private:
+	GLint textureUniformLocation;
+	GLuint *texture;
+	int layer;
+public:
+	FATextureArrayComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setTexture(GLuint texture);
+	void setTexture(GLuint *texture);
+	void setLayer(int layer);
+};
+
+class FACSMComponent : public FAMaterialComponent {
+private:
+	GLuint *texture;
+	GLint textureUniformLocation;
+	GLint inverseShadowMatrixUniformLocation;
+	int *frustums;
+	glm::mat4 *inverseShadowMatrix;
+public:
+	FACSMComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setTexture(GLuint *texture);
+	void setFrustums(int *frustums);
+	void setInverseShadowMatrix(glm::mat4 *inverseTextureMatrix);
 };
 
 #endif

@@ -67,6 +67,22 @@ FAShader::FAShader(std::string *vertexShader, std::string *fragmentShader) {
 	}
 }
 
+void FAShader::printListOfUniforms() {
+    std::cout << "Printing program uniforms: " << std::endl;
+    int total = -1;
+    glGetProgramiv( shaderProgram, GL_ACTIVE_UNIFORMS, &total ); 
+    for(int i=0; i<total; ++i)  {
+        int name_len=-1, num=-1;
+        GLenum type = GL_ZERO;
+        char name[100];
+        glGetActiveUniform( shaderProgram, GLuint(i), sizeof(name)-1,
+            &name_len, &num, &type, name );
+        name[name_len] = 0;
+        std::cout << name << std::endl;
+        GLuint location = glGetUniformLocation( shaderProgram, name );
+    }
+}
+
 GLint FAShader::createShader(std::string path, GLenum shaderType) const {
     std::fstream fin;
     GLuint shaderID = glCreateShader(shaderType);

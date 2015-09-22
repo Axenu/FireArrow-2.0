@@ -19,6 +19,10 @@ int FARenderPass::getPriority() {
 	return this->priority;
 }
 
+std::string &FARenderPass::getName() {
+	return this->name;
+}
+
 void FARenderPass::setCB(FARenderPasscallbackInterface *cb) {
 	this->parent = cb;
 }

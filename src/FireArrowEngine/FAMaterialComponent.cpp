@@ -44,6 +44,30 @@ bool FAMaterialComponent::requiresModelData() {
 	return this->modelData;
 }
 
+//Vertex position material
+
+FAVertexPositionComponent::FAVertexPositionComponent() {
+	vertexIO = "out vec4 pass_Position;\n";
+	vertexMain = "pass_Position = MMatrix * vec4(in_Position.xyz, 1.0);\n";
+	fragmentIO = "in vec4 pass_Position;\n";
+	fragmentMain = "";
+	fragmentOutput = "OTHER_OUT";
+	name = "vertexPosition";
+	modelData = true;
+}
+
+void FAVertexPositionComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FAVertexPositionComponent::bind() {
+
+}
+
+void FAVertexPositionComponent::setUpLocations(GLint shaderProgram) {
+
+}
+
 //Vertex normal material
 
 FAVertexNormalComponent::FAVertexNormalComponent() {
@@ -132,27 +156,27 @@ FADirectionalLightComponent::FADirectionalLightComponent() {
 }
 
 void FADirectionalLightComponent::setAttribute(std::string name, float value) {
-	if (name == "ambient") {
-		this->ambient = value;
-	} else if (name == "diffuseColor.r") {
-		this->color.x = value;
-	} else if (name == "diffuseColor.g") {
-		this->color.y = value;
-	} else if (name == "diffuseColor.b") {
-		this->color.z = value;
-	} else if (name == "direction.x") {
-		this->direction.x = value;
-	} else if (name == "direction.y") {
-		this->direction.y = value;
-	} else if (name == "direction.z") {
-		this->direction.z = value;
-	} 
+	// if (name == "ambient") {
+	// 	this->ambient = value;
+	// } else if (name == "diffuseColor.r") {
+	// 	this->color.x = value;
+	// } else if (name == "diffuseColor.g") {
+	// 	this->color.y = value;
+	// } else if (name == "diffuseColor.b") {
+	// 	this->color.z = value;
+	// } else if (name == "direction.x") {
+	// 	this->direction.x = value;
+	// } else if (name == "direction.y") {
+	// 	this->direction.y = value;
+	// } else if (name == "direction.z") {
+	// 	this->direction.z = value;
+	// } 
 }
 
 void FADirectionalLightComponent::bind() {
-	glUniform1f(ambientLocation, ambient);
-	glUniform4fv(colorLocation, 1, &color[0]);
-	glUniform3fv(directionLocation, 1, &direction[0]);
+	glUniform1f(ambientLocation, *ambient);
+	glUniform4fv(colorLocation, 1, &(*color)[0]);
+	glUniform3fv(directionLocation, 1, &(*direction)[0]);
 }
 
 void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
@@ -169,15 +193,15 @@ void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
 
 }
 
-void FADirectionalLightComponent::setColor(glm::vec4 &color) {
+void FADirectionalLightComponent::setColor(glm::vec4 *color) {
 	this->color = color;
 }
 
-void FADirectionalLightComponent::setDirection(glm::vec3 direction) {
+void FADirectionalLightComponent::setDirection(glm::vec3 *direction) {
 	this->direction = direction;
 }
 
-void FADirectionalLightComponent::setAmbientComponent(float ambientComponent) {
+void FADirectionalLightComponent::setAmbientComponent(float *ambientComponent) {
 	this->ambient = ambientComponent;
 }
 
@@ -229,7 +253,9 @@ void FATextureComponent::setAttribute(std::string name, float value) {
 }
 
 void FATextureComponent::bind() {
-	glBindTexture(GL_TEXTURE_2D, this->texture);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, *this->texture);
+	// std::cout << *this->texture << std::endl;
 	glUniform1i(textureUniformLocation, 0);
 }
 
@@ -240,7 +266,131 @@ void FATextureComponent::setUpLocations(GLint shaderProgram) {
 }
 
 void FATextureComponent::setTexture(GLuint texture) {
+	this->texture = &texture;
+}
+
+void FATextureComponent::setTexture(GLuint *texture) {
 	this->texture = texture;
+}
+
+//textureArray material
+
+FATextureArrayComponent::FATextureArrayComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "uniform sampler2DArray mytextureSampler;\n";
+	fragmentMain = "vec4 textureColor = vec4(1,1,1,1); textureColor.x = texture(mytextureSampler, vec3(pass_UV, 0)).r;textureColor.y = texture(mytextureSampler, vec3(pass_UV, 1)).r;textureColor.z = texture(mytextureSampler, vec3(pass_UV, 2)).r;";
+	fragmentOutput = "(OTHER_OUT) * textureColor";
+	name = "texture";
+	requirements.push_back(new FAVertexUVComponent);
+	modelData = false;
+}
+
+void FATextureArrayComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FATextureArrayComponent::bind() {
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D_ARRAY, *this->texture);
+	glUniform1i(textureUniformLocation, 0);
+}
+
+void FATextureArrayComponent::setUpLocations(GLint shaderProgram) {
+	this->textureUniformLocation = glGetUniformLocation(shaderProgram, "mytextureSampler");
+	if (textureUniformLocation == -1)
+		std::cout << "Error getting textureUniformLocation in " << name << " component!" << std::endl;
+}
+
+void FATextureArrayComponent::setTexture(GLuint texture) {
+	this->texture = &texture;
+}
+
+void FATextureArrayComponent::setTexture(GLuint *texture) {
+	this->texture = texture;
+}
+
+void FATextureArrayComponent::setLayer(int layer) {
+	this->layer = layer;
+}
+
+//CSM material
+
+FACSMComponent::FACSMComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "uniform sampler2DArray shadowMap;\nuniform mat4 inverseShadowMatrix[4];";
+	fragmentMain = "int index = 0; "
+		"if (gl_FragCoord.z/gl_FragCoord.w < 4) {\n"
+	    "index = 0;\n"
+	    "} else if (gl_FragCoord.z/gl_FragCoord.w < 12) {\n"
+	    "    index = 1;\n"
+	    "} else if (gl_FragCoord.z/gl_FragCoord.w < 30) {\n"
+	    "    index = 2;\n"
+	    "} else if (gl_FragCoord.z/gl_FragCoord.w < 100) {\n"
+	    "    index = 3;\n"
+	    "} else {\n"
+	    "    index = -1;\n"
+	    "}\n"
+	    "float shadow = 1.0;\n"
+	    "vec4 shadowCoordinateWdivide;"
+	    "float dist;"
+	    "if (index != -1) {\n"
+	    "	vec4 shadowCoordinateWdivide = (inverseShadowMatrix[index] * pass_Position) / pass_Position.w;\n"
+	    "	if (pass_Position.w > 0.0) {\n"
+	    "    	dist = texture(shadowMap,vec3(shadowCoordinateWdivide.st, index)).r;\n"
+	    // "       if (dist > 0) {\n"
+	    "		shadow = dist;"
+	    // "       	if (dist - 0.00001 < shadowCoordinateWdivide.z)\n"
+	    // "           	shadow =  0.5;\n"
+	    // "        }\n"
+	    "	}\n"
+	    "}";
+	fragmentOutput = "(OTHER_OUT) * dist";
+	name = "CSM";
+	requirements.push_back(new FAVertexPositionComponent);
+	modelData = false;
+}
+
+void FACSMComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FACSMComponent::bind() {
+	// std::cout << *frustums << std::endl;
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D_ARRAY, *this->texture);
+	glUniform1i(textureUniformLocation, 1);
+	glUniformMatrix4fv(inverseShadowMatrixUniformLocation, (GLsizei) 4, GL_FALSE, inverseShadowMatrix);
+	// std::cout << *frustums << std::endl;
+	// std::cout << inverseShadowMatrix[0][0][0] << ", " << inverseShadowMatrix[0][0][1] << ", " << inverseShadowMatrix[0][0][2] << ", " << inverseShadowMatrix[0][0][3] << std::endl;
+	// std::cout << inverseShadowMatrix[0][1][0] << ", " << inverseShadowMatrix[0][1][1] << ", " << inverseShadowMatrix[0][1][2] << ", " << inverseShadowMatrix[0][1][3] << std::endl;
+	// std::cout << inverseShadowMatrix[0][2][0] << ", " << inverseShadowMatrix[0][2][1] << ", " << inverseShadowMatrix[0][2][2] << ", " << inverseShadowMatrix[0][2][3] << std::endl;
+	// std::cout << inverseShadowMatrix[0][3][0] << ", " << inverseShadowMatrix[0][3][1] << ", " << inverseShadowMatrix[0][3][2] << ", " << inverseShadowMatrix[0][3][3] << std::endl;
+}
+
+void FACSMComponent::setUpLocations(GLint shaderProgram) {
+	this->textureUniformLocation = glGetUniformLocation(shaderProgram, "shadowMap");
+	if (textureUniformLocation == -1)
+		std::cout << "Error getting textureUniformLocation in " << name << " component!" << std::endl;
+	this->inverseShadowMatrixUniformLocation = glGetUniformLocation(shaderProgram, "inverseShadowMatrix");
+	if (inverseShadowMatrixUniformLocation == -1)
+		std::cout << "Error getting inverseShadowMatrixUniformLocation in " << name << " component!" << std::endl;
+
+}
+
+void FACSMComponent::setTexture(GLuint *texture) {
+	this->texture = texture;
+}
+
+void FACSMComponent::setFrustums(int *frustums) {
+	this->frustums = frustums;
+	fragmentIO = "uniform sampler2DArray shadowMap;\nuniform mat4 inverseShadowMatrix[" + std::to_string(*frustums) + "];";
+}
+
+void FACSMComponent::setInverseShadowMatrix(glm::mat4 *inverseShadowMatrix) {
+	this->inverseShadowMatrix = inverseShadowMatrix;
+	std::cout << "setting inverse matrix!" << std::endl;
 }
 
 

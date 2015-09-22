@@ -1,6 +1,7 @@
 #include <FA/FAMesh.h>
 
 FAMesh::FAMesh() {
+    this->_hasPosition = true;
     this->_hasNormal = false;
     this->_hasColor = false;
     this->_hasUV = false;
@@ -263,6 +264,10 @@ void FAMesh::render() const {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
 	glDrawElements(GL_TRIANGLES, numberOfVertices, GL_UNSIGNED_INT, NULL);
+}
+
+bool FAMesh::hasVertexPosition() {
+    return this->_hasPosition;
 }
 
 bool FAMesh::hasVertexNormal() {

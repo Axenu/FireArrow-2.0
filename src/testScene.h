@@ -6,6 +6,8 @@
 #include <FA/FAText.h>
 #include <FA/FATerrain.h>
 #include <FA/FATexture.h>
+#include <FA/FADirectionalLight.h>
+#include <FA/FAShadowMapRenderPass.h>
 
 class testScene : public FAScene {
     
@@ -21,6 +23,8 @@ private:
     glm::vec3 cameraMovement;
     FAText *text;
     FAFont *font;
+    FADirectionalLight *light;
+    GLuint texture;
     
 public:
     void init();

@@ -8,7 +8,7 @@ class FACSMRenderPass : public FARenderPass {
 private:
 	GLuint shadowMap;
     GLuint shadowFbo;
-    FAShader shader;
+    FAShader *shader;
     GLint modelMatrixLocation;
     GLint viewProjectionMatrixLocation;
 
@@ -22,6 +22,9 @@ public:
 	~FACSMRenderPass();
 
 	void render();
+	GLuint *getShadowMap();
+	glm::mat4 *getInverseShadowMatrix();
+	int *getFrustums();
 
 };
 

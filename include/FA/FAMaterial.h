@@ -22,6 +22,7 @@ private:
 	std::vector<FAMaterialComponent *> pendingComponents;
 
 	GLint MVPLocation;
+	GLint MLocation;
 
 	//dynamic materials:
 	std::string vertexIO;
@@ -45,7 +46,10 @@ public:
 	void setColor(glm::vec4 &color);
 	void setDirectionalLight(glm::vec3 &direction, glm::vec4 &color, float ambientComponent);
 	void setTexture(GLuint texture);
+	void setTexture(GLuint *texture);
+	void setTextureArray(GLuint *texture, int layer);
 
+	void hasVertexPosition(bool value);
 	void hasVertexColor(bool value);
 	void hasVertexNormal(bool value);
 	void hasVertexUV(bool value);

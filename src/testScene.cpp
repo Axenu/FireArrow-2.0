@@ -46,7 +46,7 @@ void testScene::init() {
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
     FAMaterial *material = new FAMaterial();
-    material->setDirectionalLight(direction, color, ambient);
+    // material->setDirectionalLight(direction, color, ambient);
     FAModel *m = new FAModel(*mesh, *material);
     m->setPosition(0,0,-5);
     addChild(m);
@@ -56,10 +56,22 @@ void testScene::init() {
     m = new FAModel(*mesh, *material);
     addChild(m);
 
+    light = new FADirectionalLight();
+    light->setColor(color);
+    light->setDirection(direction);
+    light->setAmbientComponent(ambient);
+    addChild(light);
+
+    // FAShadowMapRenderPass *pass = new FAShadowMapRenderPass();
+    // addRenderPass(pass);
     FAMaterial *textMaterial = new FAMaterial();
-    textMaterial->setTexture(FATexture::createTexture("/Users/Axenu/Developer/FireArrow 2.0/resources/textures/5k.jpg"));
+    // FATextureArrayComponent *comp = new FATextureArrayComponent();
+    // comp->setTexture(light->getShadowMap());
+    // texture = *pass->getShadowMap();
+    textMaterial->setTextureArray(light->getShadowMap(), 0);
+    // // textMaterial->addMaterialComponent(comp);
     glm::vec4 red = glm::vec4(1,0,0,1);
-    // textMaterial->setColor(red);
+    textMaterial->setColor(red);
 
     FAMesh *fenceMesh = new FAMesh("square");
     m = new FAModel(*fenceMesh, *textMaterial);
@@ -67,12 +79,13 @@ void testScene::init() {
     m->rotateY(glm::pi<float>());
     addChild(m);
 
-    FAMesh *barrelMesh = new FAMesh("barrel.fa");
-    m = new FAModel(*barrelMesh, *material);
-    m->setPosition(4,0,-4);
-    addChild(m);
-    FATerrain *t = new FATerrain();
-    addChild(t);
+    // FAMesh *barrelMesh = new FAMesh("barrel.fa");
+    // m = new FAModel(*barrelMesh, *material);
+    // m->setPosition(4,0,-4);
+    // addChild(m);
+    // FATerrain *t = new FATerrain();
+    // addChild(t);
+    // texture = FATexture::createTexture("/Users/Axenu/Developer/FireArrow 2.0/resources/textures/5k.jpg");
 
     // camera = new FACamera(40.0f, (float)windowWidth, windowHeigth, 0.001, 400);
     // camera->setZ(0);

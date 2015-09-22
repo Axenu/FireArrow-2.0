@@ -11,6 +11,7 @@ FAModel::FAModel(FAMesh &mesh) {
 FAModel::FAModel(FAMesh &mesh, FAMaterial &material) {
 	this->mesh = mesh;
 	this->material = material;
+	this->material.hasVertexPosition(this->mesh.hasVertexPosition());
 	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
 	this->material.hasVertexColor(this->mesh.hasVertexColor());
 	this->material.hasVertexUV(this->mesh.hasVertexUV());
@@ -19,6 +20,7 @@ FAModel::FAModel(FAMesh &mesh, FAMaterial &material) {
 
 void FAModel::setMaterial(FAMaterial &material) {
 	this->material = material;
+	this->material.hasVertexPosition(this->mesh.hasVertexPosition());
 	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
 	this->material.hasVertexColor(this->mesh.hasVertexColor());
 	this->material.hasVertexUV(this->mesh.hasVertexUV());
@@ -27,6 +29,7 @@ void FAModel::setMaterial(FAMaterial &material) {
 
 void FAModel::setMesh(FAMesh &mesh) {
 	this->mesh = mesh;
+	this->material.hasVertexPosition(this->mesh.hasVertexPosition());
 	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
 	this->material.hasVertexColor(this->mesh.hasVertexColor());
 	this->material.hasVertexUV(this->mesh.hasVertexUV());
@@ -35,10 +38,15 @@ void FAModel::setMesh(FAMesh &mesh) {
 
 void FAModel::setMesh(std::string path) {
 	this->mesh = FAMesh(path);
+	this->material.hasVertexPosition(this->mesh.hasVertexPosition());
 	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
 	this->material.hasVertexColor(this->mesh.hasVertexColor());
 	this->material.hasVertexUV(this->mesh.hasVertexUV());
 	this->material.create();
+}
+
+void FAModel::addMaterialComponent(FAMaterialComponent *component) {
+	this->material.addMaterialComponent(component);
 }
 
 FAMaterial &FAModel::getMaterial() {

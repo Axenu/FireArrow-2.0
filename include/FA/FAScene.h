@@ -7,6 +7,7 @@
 #include "FARenderPass.h"
 #include "FAMainRenderPass.h"
 #include "FACSMRenderPass.h"
+#include "FALight.h"
 
 // class FARenderPass;
 class FAEngine;
@@ -53,6 +54,8 @@ protected:
 	int numberOfPasses;
 	FARenderPass **renderPasses;
 	std::vector<FAModel *> models;
+	std::vector<FALight *> lights;
+	std::vector<FAMaterialComponent *> requiredComponents;
 	bool isActive;
 	FAEngine* callback;
     int windowWidth;

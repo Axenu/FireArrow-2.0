@@ -22,6 +22,7 @@ private:
 	bool _hasNormal;
 	bool _hasColor;
 	bool _hasUV;
+	bool _hasPosition;
 
 	void loadFAModel(std::string path);
 
@@ -32,6 +33,7 @@ public:
 
 	void render() const;
 	
+	bool hasVertexPosition();
 	bool hasVertexNormal();
 	bool hasVertexColor();
 	bool hasVertexUV();
