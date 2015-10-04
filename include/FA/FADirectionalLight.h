@@ -12,6 +12,7 @@ private:
 	glm::vec3 direction;
 	glm::vec4 color;
 	GLuint *shadowMap;
+	FACSMRenderPass *renderPass;
 
 public:
 	FADirectionalLight();

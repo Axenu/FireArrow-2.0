@@ -50,9 +50,9 @@ void FAMaterial::buildShader() {
 		fragmentShader += c->getFragmentMain();
 
 	std::string output = "vec4(1,1,1,1)";
-	std::cout << "Building shader: " << std::endl;
+	// std::cout << "Building shader: " << std::endl;
 	for (FAMaterialComponent *c : components) {
-		std::cout << c->getName() << std::endl;
+		// std::cout << c->getName() << std::endl;
 		std::string cOut = c->getFragmentMainOutput();
 		size_t start_pos = cOut.find("OTHER_OUT");
 		if(start_pos != std::string::npos)
@@ -126,30 +126,29 @@ void FAMaterial::setTextureArray(GLuint *texture, int layer) {
 
 void FAMaterial::hasVertexPosition(bool value) {
 	if (value) {
-		components.push_back(new FAVertexPositionComponent);
-		isBuilt = false;
+		avaliableVertexComponents.push_back(new FAVertexPositionComponent());
+		// isBuilt = false;
 	}
 }
 
 void FAMaterial::hasVertexColor(bool value) {
 	if (value) {
-		components.push_back(new FAVertexColorComponent);
-		isBuilt = false;
+		avaliableVertexComponents.push_back(new FAVertexColorComponent());
+		// isBuilt = false;
 	}
 }
 
 void FAMaterial::hasVertexNormal(bool value) {
 	if (value) {
-		components.push_back(new FAVertexNormalComponent);
-		isBuilt = false;
+		avaliableVertexComponents.push_back(new FAVertexNormalComponent());
+		// isBuilt = false;
 	}
 }
 
 void FAMaterial::hasVertexUV(bool value) {
 	if (value) {
-		components.push_back(new FAVertexUVComponent);
-		isBuilt = false;
-		std::cout << "model has UV!" << std::endl;
+		avaliableVertexComponents.push_back(new FAVertexUVComponent());
+		// isBuilt = false;
 	}
 }
 
@@ -178,7 +177,17 @@ bool FAMaterial::addMaterialComponent(FAMaterialComponent *component) {
 	if (isCreated) {
 		if (getComponentByName(component->getName()) == nullptr) {
 			if (component->requiresModelData()) {
+				for (FAMaterialComponent *requiredComponent : avaliableVertexComponents) {
+					if (requiredComponent->getName() == component->getName()) {
+						components.push_back(requiredComponent);
+						isBuilt = false;
+						return true;
+					}
+				}
 				std::cout << "The model is missing " << component->getName() << " data!" << std::endl;
+				// for (FAMaterialComponent *requiredComponent : avaliableVertexComponents) {
+				// 	std::cout << requiredComponent->getName() << std::endl;
+				// }
 				return false;
 			}
 			for (FAMaterialComponent *requiredComponent : *component->getRequirements()) {
@@ -187,7 +196,7 @@ bool FAMaterial::addMaterialComponent(FAMaterialComponent *component) {
 				}
 			}
 			components.push_back(component);
-			std::cout << "added component " << component->getName() << std::endl;
+			// std::cout << "added component " << component->getName() << std::endl;
 			isBuilt = false;
 			return true;
 		}

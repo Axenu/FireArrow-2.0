@@ -20,12 +20,12 @@ FATerrain::FATerrain() {
 		}
 	}
 
-	map[25][24] = 1;
-	map[25][23] = 2;
-	map[25][22] = -3;
-	map[25][21] = 4;
+	// map[25][24] = 1;
+	// map[25][23] = 2;
+	// map[25][22] = -3;
+	// map[25][21] = 4;
 
-	map[22][21] = 10;
+	// map[22][21] = 10;
 
 	std::vector<GLfloat> vertices;
 	std::vector<glm::vec3> verticesTemp;
@@ -155,6 +155,7 @@ FATerrain::FATerrain() {
 	FAMesh *mesh = new FAMesh(vertices, indices, true, true);
 	this->setMesh(*mesh);
 	FAMaterial *material = new FAMaterial();
+	material->addMaterialComponent(new FAVertexColorComponent());
 	// glm::vec4 color = glm::vec4(1,1,2,1);
 	// material->setColor(color);
 	// glm::vec3 direction = glm::vec3(1,1,0);

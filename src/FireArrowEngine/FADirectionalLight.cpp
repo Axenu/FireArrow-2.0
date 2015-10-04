@@ -1,7 +1,7 @@
 #include <FA/FADirectionalLight.h>
 
 FADirectionalLight::FADirectionalLight() {
-	FACSMRenderPass *renderPass = new FACSMRenderPass();
+	renderPass = new FACSMRenderPass();
 	FADirectionalLightComponent *lightComponent = new FADirectionalLightComponent();
 	lightComponent->setDirection(&this->direction);
 	lightComponent->setColor(&this->color);
@@ -26,6 +26,7 @@ void FADirectionalLight::setColor(glm::vec4 &color) {
 
 void FADirectionalLight::setDirection(glm::vec3 direction) {
 	this->direction = direction;
+	renderPass->setDirection(direction);
 }
 
 void FADirectionalLight::setAmbientComponent(float ambientComponent) {

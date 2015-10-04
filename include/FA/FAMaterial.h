@@ -20,6 +20,7 @@ private:
 	glm::mat4 modelMatrix;
 	std::vector<FAMaterialComponent *> components;
 	std::vector<FAMaterialComponent *> pendingComponents;
+	std::vector<FAMaterialComponent *> avaliableVertexComponents;
 
 	GLint MVPLocation;
 	GLint MLocation;

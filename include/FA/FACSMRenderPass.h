@@ -11,6 +11,7 @@ private:
     FAShader *shader;
     GLint modelMatrixLocation;
     GLint viewProjectionMatrixLocation;
+    glm::vec3 direction;
 
 	int frustums = 4; //remove static definition
 	glm::mat4 *inverseShadowMatrix;
@@ -25,6 +26,7 @@ public:
 	GLuint *getShadowMap();
 	glm::mat4 *getInverseShadowMatrix();
 	int *getFrustums();
+	void setDirection(glm::vec3 &direction);
 
 };
 

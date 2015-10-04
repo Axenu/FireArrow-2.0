@@ -45,6 +45,14 @@ int FAHUDElement::getID() {
 	return this->identity;
 }
 
+void FAHUDElement::onUpdate(float dt) {
+	this->update(dt);
+}
+
+void FAHUDElement::onRender() {
+	this->render();
+}
+
 FAHUDElement::~FAHUDElement() {
 
 }

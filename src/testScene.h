@@ -8,6 +8,7 @@
 #include <FA/FATexture.h>
 #include <FA/FADirectionalLight.h>
 #include <FA/FAShadowMapRenderPass.h>
+#include <FA/FAHUDTexturedPlane.h>
 
 class testScene : public FAScene {
     
@@ -25,6 +26,8 @@ private:
     FAFont *font;
     FADirectionalLight *light;
     GLuint texture;
+    glm::vec3 direction = glm::vec3(1,1,0);
+    float counter = 0;
     
 public:
     void init();

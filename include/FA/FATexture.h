@@ -9,7 +9,7 @@
 
 class FATexture {
 private:
-	GLint textureID;
+	// GLint textureID;
 
 public:
 	FATexture();

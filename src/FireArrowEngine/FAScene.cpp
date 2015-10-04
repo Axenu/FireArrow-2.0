@@ -64,6 +64,9 @@ void FAScene::onUpdate(float dt) {
     //     vertexCountText->setText("vertices: " + std::to_string(children->getVertexCount()));
     // }
     update(dt);
+    for (FAHUDElement *element : HUDElements) {
+        element->onUpdate(dt);
+    }
 }
 
 void FAScene::onRender() {
@@ -73,6 +76,10 @@ void FAScene::onRender() {
         renderPasses[i]->render();
     }
 	this->render();
+    glClear(GL_DEPTH_BUFFER_BIT);
+    for (FAHUDElement *element : HUDElements) {
+        element->onRender();
+    }
 }
 
 void FAScene::addChild(FANode *child) {
@@ -93,6 +100,10 @@ void FAScene::addChild(FANode *child) {
                 requiredComponents.push_back(component);
             }
         }
+    } else if (FAHUDElement *element = dynamic_cast<FAHUDElement *>(child)) {
+        HUDElements.push_back(element);
+    } else {
+        std::cout << "Added unknow type as child of FAScene" << std::endl;
     }
 }
 

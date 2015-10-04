@@ -34,18 +34,25 @@ void testScene::init() {
     //     }
     // }
 
-    glm::vec3 direction = glm::vec3(1,1,0);
     glm::vec4 color = glm::vec4(1,1,1,1);
     float ambient = 0.5;
+
+    // texture = FATexture::createTexture("/Users/Axenu/Developer/FireArrow 2.0/resources/textures/5k.jpg");
+    // FAHUDTexturedPlane *plane = new FAHUDTexturedPlane(texture);
+    // plane->setPosition(0,0,0);
+    // plane->setScale(0.5);
+    // addChild(plane);
 
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
     text = new FAText(font);
     text->setText("fps: 0.0");
-    text->setPosition(0,0.95,0);
+    text->setPosition(-0.99,0.90,0);
+    addChild(text);
     
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
     FAMaterial *material = new FAMaterial();
+    material->addMaterialComponent(new FAVertexColorComponent());
     // material->setDirectionalLight(direction, color, ambient);
     FAModel *m = new FAModel(*mesh, *material);
     m->setPosition(0,0,-5);
@@ -55,6 +62,9 @@ void testScene::init() {
     addChild(m);
     m = new FAModel(*mesh, *material);
     addChild(m);
+    FATerrain *t = new FATerrain();
+    // t->setMaterial(material);
+    addChild(t);
 
     light = new FADirectionalLight();
     light->setColor(color);
@@ -65,26 +75,24 @@ void testScene::init() {
     // FAShadowMapRenderPass *pass = new FAShadowMapRenderPass();
     // addRenderPass(pass);
     FAMaterial *textMaterial = new FAMaterial();
-    // FATextureArrayComponent *comp = new FATextureArrayComponent();
-    // comp->setTexture(light->getShadowMap());
+    FATextureComponent *comp = new FATextureComponent();
+    comp->setTexture(texture);
     // texture = *pass->getShadowMap();
-    textMaterial->setTextureArray(light->getShadowMap(), 0);
-    // // textMaterial->addMaterialComponent(comp);
-    glm::vec4 red = glm::vec4(1,0,0,1);
-    textMaterial->setColor(red);
+    // textMaterial->setTextureArray(light->getShadowMap(), 0);
+    textMaterial->addMaterialComponent(comp);
+    // glm::vec4 red = glm::vec4(1,0,0,1);
+    // textMaterial->setColor(red);
 
-    FAMesh *fenceMesh = new FAMesh("square");
-    m = new FAModel(*fenceMesh, *textMaterial);
-    m->setPosition(2,2,-5);
-    m->rotateY(glm::pi<float>());
-    addChild(m);
+    // FAMesh *fenceMesh = new FAMesh("square");
+    // m = new FAModel(*fenceMesh, *textMaterial);
+    // m->setPosition(2,2,-5);
+    // m->rotateY(glm::pi<float>());
+    // addChild(m);
 
     // FAMesh *barrelMesh = new FAMesh("barrel.fa");
     // m = new FAModel(*barrelMesh, *material);
     // m->setPosition(4,0,-4);
     // addChild(m);
-    // FATerrain *t = new FATerrain();
-    // addChild(t);
     // texture = FATexture::createTexture("/Users/Axenu/Developer/FireArrow 2.0/resources/textures/5k.jpg");
 
     // camera = new FACamera(40.0f, (float)windowWidth, windowHeigth, 0.001, 400);
@@ -122,7 +130,7 @@ void testScene::init() {
 }
 
 void testScene::render() {
-    text->render();
+
 }
 
 void testScene::update(float dt) {
@@ -134,6 +142,9 @@ void testScene::update(float dt) {
     camera->moveY(cameraMovement.y * dt);
     
     text->setText(("fps: " + std::to_string(1/dt)));
+    counter += dt;
+    direction.x  = glm::sin(counter);
+    light->setDirection(direction);
 
 }
 

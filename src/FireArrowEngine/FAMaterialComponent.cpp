@@ -336,17 +336,17 @@ FACSMComponent::FACSMComponent() {
 	    "vec4 shadowCoordinateWdivide;"
 	    "float dist;"
 	    "if (index != -1) {\n"
-	    "	vec4 shadowCoordinateWdivide = (inverseShadowMatrix[index] * pass_Position) / pass_Position.w;\n"
 	    "	if (pass_Position.w > 0.0) {\n"
+	    "	shadowCoordinateWdivide = (inverseShadowMatrix[index] * pass_Position) / pass_Position.w;\n"
 	    "    	dist = texture(shadowMap,vec3(shadowCoordinateWdivide.st, index)).r;\n"
-	    // "       if (dist > 0) {\n"
-	    "		shadow = dist;"
-	    // "       	if (dist - 0.00001 < shadowCoordinateWdivide.z)\n"
-	    // "           	shadow =  0.5;\n"
-	    // "        }\n"
+	    "       if (dist > 0) {\n"
+	    // "		shadow = dist;"
+	    "       	if (dist < shadowCoordinateWdivide.z - 0.005)\n"
+	    "           	shadow =  0.5;\n"
+	    "        }\n"
 	    "	}\n"
 	    "}";
-	fragmentOutput = "(OTHER_OUT) * dist";
+	fragmentOutput = "(OTHER_OUT) * shadow";
 	name = "CSM";
 	requirements.push_back(new FAVertexPositionComponent);
 	modelData = false;
@@ -358,10 +358,10 @@ void FACSMComponent::setAttribute(std::string name, float value) {
 
 void FACSMComponent::bind() {
 	// std::cout << *frustums << std::endl;
-	glActiveTexture(GL_TEXTURE1);
+	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D_ARRAY, *this->texture);
-	glUniform1i(textureUniformLocation, 1);
-	glUniformMatrix4fv(inverseShadowMatrixUniformLocation, (GLsizei) 4, GL_FALSE, inverseShadowMatrix);
+	glUniform1i(textureUniformLocation, 3);
+	glUniformMatrix4fv(inverseShadowMatrixUniformLocation, (GLsizei) 4, GL_FALSE, &inverseShadowMatrix[0][0][0]);
 	// std::cout << *frustums << std::endl;
 	// std::cout << inverseShadowMatrix[0][0][0] << ", " << inverseShadowMatrix[0][0][1] << ", " << inverseShadowMatrix[0][0][2] << ", " << inverseShadowMatrix[0][0][3] << std::endl;
 	// std::cout << inverseShadowMatrix[0][1][0] << ", " << inverseShadowMatrix[0][1][1] << ", " << inverseShadowMatrix[0][1][2] << ", " << inverseShadowMatrix[0][1][3] << std::endl;
@@ -390,7 +390,7 @@ void FACSMComponent::setFrustums(int *frustums) {
 
 void FACSMComponent::setInverseShadowMatrix(glm::mat4 *inverseShadowMatrix) {
 	this->inverseShadowMatrix = inverseShadowMatrix;
-	std::cout << "setting inverse matrix!" << std::endl;
+	// std::cout << "setting inverse matrix!" << std::endl;
 }
 
 

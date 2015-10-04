@@ -23,6 +23,7 @@ FAMesh::FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool 
 
     this->_hasColor = hasColor;
     this->_hasNormal = hasNormal;
+    this->_hasPosition = true;
 
     // load model to graphicscard
     this->numberOfVertices = indices.size();
@@ -201,7 +202,7 @@ void FAMesh::loadFAModel(std::string path) {
                     }
                 }
             } else {
-                std::cout << "Unknown character! asuming it's a comment: \"" << f << "\"" << std::endl;
+                // std::cout << "Unknown character! asuming it's a comment: \"" << f << "\"" << std::endl;
             }
         }
 

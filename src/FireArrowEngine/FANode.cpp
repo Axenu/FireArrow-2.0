@@ -3,6 +3,8 @@
 
 FANode::FANode() {
 	scale = glm::vec3(1,1,1);
+    position = glm::vec3(0,0,0);
+    rotation = glm::vec3(0,0,0);
     this->isActive = true;
     this->modelMatrix = glm::mat4();
 }

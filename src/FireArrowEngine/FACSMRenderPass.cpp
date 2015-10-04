@@ -1,8 +1,8 @@
 #include <FA/FACSMRenderPass.h>
 
 FACSMRenderPass::FACSMRenderPass() {
-	int shadowMapWidth = 1024;
-    int shadowMapHeight = 720;
+    int shadowMapWidth = 2560;
+    int shadowMapHeight = 1440;
     this->priority = -3;
     this->name = "CSM";
     
@@ -85,16 +85,25 @@ FACSMRenderPass::FACSMRenderPass() {
 
 
 void FACSMRenderPass::render() {
+    int shadowMapWidth = 2560;
+    int shadowMapHeight = 1440;
 	// std::cout << "renderCSM" << std::endl;
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-    // glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
     // glViewport(0,0,this->windowWidth,this->windowHeight);
+    glViewport(0,0,shadowMapWidth,shadowMapHeight);
+    glm::vec3 lightInvDir = -direction;
     glm::mat4 *shadowMatrix = new glm::mat4[frustums];
+    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
+    glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
+    glm::mat4 depthModelMatrix = glm::mat4(1.0);
+    glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
     shadowMatrix[0] = calculateShadowCamera(0, 4);
     shadowMatrix[1] = calculateShadowCamera(4, 12);
     shadowMatrix[2] = calculateShadowCamera(12, 30);
     shadowMatrix[3] = calculateShadowCamera(30, 100);
     for (int i = 0; i < frustums; i++) {
+        // shadowMatrix[i] = depthMVP;
         // std::cout << shadowMap << std::endl;
         //        shadowMatrix.push_back(calculateShadowCamera(0,100));
         // inverseShadowMatrix[i] = glm::mat4();
@@ -127,12 +136,13 @@ void FACSMRenderPass::render() {
     
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 //    glViewport(0, 0, windowWidth*2, windowHeigth*2);
+    glViewport(0,0,1280 * 2,720 * 2);
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        
+       glEnable(GL_POLYGON_OFFSET_FILL);
+       glPolygonOffset(1,1);
     
-    //    glEnable(GL_POLYGON_OFFSET_FILL);
-    //    glPolygonOffset(factor,units);
-    
-    // glCullFace(GL_BACK);
+    glCullFace(GL_BACK);
 }
 
 GLuint *FACSMRenderPass::getShadowMap() {
@@ -147,6 +157,10 @@ int *FACSMRenderPass::getFrustums() {
     return &this->frustums;
 }
 
+void FACSMRenderPass::setDirection(glm::vec3 &direction) {
+    this->direction = direction;
+}
+
 // -----------------(( private ))---------------------
 
 // void FACSMRenderPass::
@@ -158,7 +172,7 @@ glm::mat4 FACSMRenderPass::calculateShadowCamera(float near, float far) {
 	float aspectRatio = parent->getCamera()->getAspectRatio();
 	glm::vec3 camPosition = parent->getCamera()->getPosition();
 
-	glm::vec3 globalLightDirection = glm::vec3(1,-1,0);
+	glm::vec3 globalLightDirection = -direction;
 
     glm::vec3 cameraPoints[8];
     glm::vec3 cameraDirection = glm::normalize(glm::vec3(-camViewMatrix[0][2],-camViewMatrix[1][2],-camViewMatrix[2][2]));

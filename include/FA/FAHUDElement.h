@@ -3,11 +3,13 @@
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#include "iostream"
+#include "FANode.h"
 
 // #define FAPOSITION_MODE_ABSOLUT 0
 // #define FAPOSITION_MODE_RELATIVE 1
 
-class FAHUDElement {
+class FAHUDElement : public FANode {
     
 private:
 
@@ -26,8 +28,9 @@ public:
     void setHeight(float height);
     
     int getID();
-    void onUpdate();
-    void onRender();
+
+    virtual void onUpdate(float dt);
+    virtual void onRender();
 
     ~FAHUDElement();
 
@@ -38,9 +41,10 @@ protected:
 	float height;
 	glm::vec3 position;
 	bool isClickable;
+    
+    virtual void update(float dt){}
+    virtual void render(){}
 
-	virtual void update(float dt) = 0;
-	virtual void render() = 0;
 };
 
 #endif

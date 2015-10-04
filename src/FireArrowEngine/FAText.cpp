@@ -46,7 +46,7 @@ void FAText::renderCharacter(int character, float x, float y, float charWidth, f
     
     glUseProgram(shader->shaderProgram);
 
-    glUniform3f(positionLocation, x + this->position.x * 2, y - this->position.y * 2, this->position.z);
+    glUniform3f(positionLocation, x + this->position.x, -y + this->position.y, this->position.z);
     glUniform2f(sizeLocation, charWidth, charHeigth);
 
     this->mesh->render();
@@ -56,6 +56,7 @@ void FAText::renderCharacter(int character, float x, float y, float charWidth, f
 void FAText::render() {
 	glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glDisable(GL_CULL_FACE);
     int pen_x = 0, pen_y = 0;
     FT_GlyphSlot slot = font->face->glyph;
     for (int i = 0; i < text.length(); i++ ) {
@@ -67,8 +68,7 @@ void FAText::render() {
         error = FT_Render_Glyph( slot, FT_RENDER_MODE_NORMAL );
         if ( error )
             continue;
-        
-        renderCharacter(text[i], (pen_x + slot->bitmap_left)/(float)this->font->windowWidth, (pen_y - slot->bitmap_top)/(float)this->font->windowHeight, (slot->bitmap.width)/(float)this->font->windowWidth, slot->bitmap.rows/(float)this->font->windowHeight);
+        renderCharacter(text[i], (pen_x + slot->bitmap_left)/(float)this->font->windowWidth, (slot->bitmap.rows - slot->bitmap_top)/(float)this->font->windowHeight, (slot->bitmap.width)/(float)this->font->windowWidth, slot->bitmap.rows/(float)this->font->windowHeight);
         pen_x += slot->advance.x >> 6;
         pen_y += slot->advance.y >> 6;
     }

@@ -57,6 +57,7 @@ protected:
     glm::mat4 modelMatrix;
 
     virtual void onUpdate(float dt){}
+    virtual void onRender(){}
 };
 
 

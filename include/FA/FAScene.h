@@ -8,6 +8,8 @@
 #include "FAMainRenderPass.h"
 #include "FACSMRenderPass.h"
 #include "FALight.h"
+#include "FAHUDElement.h"
+#include "FAText.h"
 
 // class FARenderPass;
 class FAEngine;
@@ -55,6 +57,7 @@ protected:
 	FARenderPass **renderPasses;
 	std::vector<FAModel *> models;
 	std::vector<FALight *> lights;
+	std::vector<FAHUDElement *> HUDElements;
 	std::vector<FAMaterialComponent *> requiredComponents;
 	bool isActive;
 	FAEngine* callback;

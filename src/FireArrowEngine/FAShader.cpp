@@ -79,7 +79,7 @@ void FAShader::printListOfUniforms() {
             &name_len, &num, &type, name );
         name[name_len] = 0;
         std::cout << name << std::endl;
-        GLuint location = glGetUniformLocation( shaderProgram, name );
+        // GLuint location = glGetUniformLocation( shaderProgram, name );
     }
 }
 
