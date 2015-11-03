@@ -49,6 +49,12 @@ void FANode::update(float dt, glm::mat4 &parentModelMatrix) {
         node->update(dt, this->modelMatrix);
 }
 
+// void FANode::render() {
+//     onRender();
+//     for (FANode *node : children)
+//         node->render();
+// }
+
 void FANode::setX(float x) {
     position.x = x;
 }

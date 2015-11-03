@@ -7,7 +7,6 @@
 #include <vector>
 
 class FANode {
-	std::vector<FANode *> children;
     bool isActive;
 
 public:
@@ -18,6 +17,7 @@ public:
 
     void update(float dt);
     void update(float dt, glm::mat4 &parentModelMatrix);
+    virtual void render(){}
 
 	void setX(float x);
     void setY(float y);
@@ -55,6 +55,7 @@ protected:
 	glm::vec3 rotation;
 	glm::vec3 scale;
     glm::mat4 modelMatrix;
+    std::vector<FANode *> children;
 
     virtual void onUpdate(float dt){}
     virtual void onRender(){}

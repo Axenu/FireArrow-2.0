@@ -1,5 +1,4 @@
 # Object files to either reference or create
-# SOURCES=main.cpp FANode.cpp FARenderPass.cpp FAEngine.cpp FAScene.cpp FAModel.cpp FAMaterial.cpp FAMaterialComponent.cpp FAMesh.cpp FACamera.cpp FAShader.cpp Game.cpp testScene.cpp FAFont.cpp FAText.cpp FAHUDElement.cpp
 SOURCESENGINE=$(wildcard src/FireArrowEngine/*.cpp)
 SOURCEFILESENGINE = $(SOURCESENGINE:src/FireArrowEngine/%=%)
 

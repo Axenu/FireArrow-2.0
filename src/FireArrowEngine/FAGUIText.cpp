@@ -1,6 +1,6 @@
-#include <FA/FAText.h>
+#include <FA/FAGUIText.h>
 
-FAText::FAText() {
+FAGUIText::FAGUIText() {
 	mesh = new FAMesh("square");
 	this->shader = new FAShader("FAText");
 	glUseProgram(this->shader->shaderProgram);
@@ -12,7 +12,7 @@ FAText::FAText() {
 	glUseProgram(0);
 }
 
-FAText::FAText(FAFont *font) {
+FAGUIText::FAGUIText(FAFont *font) {
 	mesh = new FAMesh("square");
 
 	this->shader = new FAShader("FAText");
@@ -27,33 +27,33 @@ FAText::FAText(FAFont *font) {
 	this->font = font;
 }
 
-void FAText::setText(std::string text) {
+void FAGUIText::setText(std::string text) {
 	this->text = text;
 }
 
-std::string FAText::getText() {
+std::string FAGUIText::getText() {
 	return this->text;
 }
 
-void FAText::update(float dt) {
+void FAGUIText::onUpdate(float dt) {
 
 }
 
-void FAText::renderCharacter(int character, float x, float y, float charWidth, float charHeigth) {
+void FAGUIText::renderCharacter(int character, float x, float y, float charWidth, float charHeigth) {
     
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, font->texture[character]);
     
     glUseProgram(shader->shaderProgram);
 
-    glUniform3f(positionLocation, x + this->position.x, -y + this->position.y, this->position.z);
+    glUniform3f(positionLocation, x + this->globalTransformation.x*2-1, -y + this->globalTransformation.y*2-1, 0);
     glUniform2f(sizeLocation, charWidth, charHeigth);
 
     this->mesh->render();
 	
 }
 
-void FAText::render() {
+void FAGUIText::onRender() {
 	glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // glDisable(GL_CULL_FACE);
@@ -74,11 +74,11 @@ void FAText::render() {
     }
 }
 
-FAText::~FAText() {
+FAGUIText::~FAGUIText() {
 
 }
 
-void FAText::updateShader() {
+void FAGUIText::updateShader() {
 	delete shader;
 	this->shader = new FAShader("FAText");
 	glUseProgram(this->shader->shaderProgram);

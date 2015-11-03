@@ -44,6 +44,8 @@ void FAScene::onInit() {
     // vertexCountText->setColor(FAColorWhite);
     // addHUDElement(vertexCountText);
     
+    camera = new FACamera(40.0f, 640, 480, 0.1, 400);
+    
     this->init();
 }
 
@@ -64,8 +66,8 @@ void FAScene::onUpdate(float dt) {
     //     vertexCountText->setText("vertices: " + std::to_string(children->getVertexCount()));
     // }
     update(dt);
-    for (FAHUDElement *element : HUDElements) {
-        element->onUpdate(dt);
+    for (FAGUIElement *element : GUIElements) {
+        element->update(dt);
     }
 }
 
@@ -75,11 +77,15 @@ void FAScene::onRender() {
 	for (int i = 0; i < numberOfPasses; i++) {
         renderPasses[i]->render();
     }
-	this->render();
+	// this->render();
     glClear(GL_DEPTH_BUFFER_BIT);
-    for (FAHUDElement *element : HUDElements) {
-        element->onRender();
+    for (FAGUIElement *element : GUIElements) {
+        element->render();
     }
+}
+
+void FAScene::addChild(FAGUIElement *child) {
+    GUIElements.push_back(child);
 }
 
 void FAScene::addChild(FANode *child) {
@@ -100,8 +106,6 @@ void FAScene::addChild(FANode *child) {
                 requiredComponents.push_back(component);
             }
         }
-    } else if (FAHUDElement *element = dynamic_cast<FAHUDElement *>(child)) {
-        HUDElements.push_back(element);
     } else {
         std::cout << "Added unknow type as child of FAScene" << std::endl;
     }

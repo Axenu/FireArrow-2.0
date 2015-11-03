@@ -1,11 +1,11 @@
-#ifndef __First__FAHUDTexturedPlane__
-#define __First__FAHUDTexturedPlane__
+#ifndef __First__FAGUITexturedPlane__
+#define __First__FAGUITexturedPlane__
 
-#include "FAHUDElement.h"
+#include "FAGUIElement.h"
 #include "FAMesh.h"
 #include "FAShader.h"
 
-class FAHUDTexturedPlane : public FAHUDElement {
+class FAGUITexturedPlane : public FAGUIElement {
     
 private:
 
@@ -19,13 +19,13 @@ private:
 	
 public:
     
-    FAHUDTexturedPlane();
-    FAHUDTexturedPlane(GLuint texture);
+    FAGUITexturedPlane();
+    FAGUITexturedPlane(GLuint texture);
 
     void update(float dt);
     void render();
 
-    ~FAHUDTexturedPlane();
+    ~FAGUITexturedPlane();
 
 };
 

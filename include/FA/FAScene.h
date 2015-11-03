@@ -4,12 +4,10 @@
 #include <vector>
 #include "FACamera.h"
 #include "FAModel.h"
-#include "FARenderPass.h"
 #include "FAMainRenderPass.h"
 #include "FACSMRenderPass.h"
 #include "FALight.h"
-#include "FAHUDElement.h"
-#include "FAText.h"
+#include "FAGUIText.h"
 
 // class FARenderPass;
 class FAEngine;
@@ -26,6 +24,7 @@ public:
     void onUpdate(float dt);
     void onRender();
 
+    void addChild(FAGUIElement *child);
 	void addChild(FANode *child);
 	void addRenderPass(FARenderPass *renderPass);
 
@@ -57,7 +56,7 @@ protected:
 	FARenderPass **renderPasses;
 	std::vector<FAModel *> models;
 	std::vector<FALight *> lights;
-	std::vector<FAHUDElement *> HUDElements;
+	std::vector<FAGUIElement *> GUIElements;
 	std::vector<FAMaterialComponent *> requiredComponents;
 	bool isActive;
 	FAEngine* callback;

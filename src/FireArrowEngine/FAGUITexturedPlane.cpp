@@ -1,8 +1,8 @@
-#include <FA/FAHUDTexturedPlane.h>
+#include <FA/FAGUITexturedPlane.h>
 
-FAHUDTexturedPlane::FAHUDTexturedPlane() {
-	this->position = glm::vec3(0.25,0.25,1);
-	this->scale = glm::vec3(0.5,0.5,0.5);
+FAGUITexturedPlane::FAGUITexturedPlane() {
+	this->position = glm::vec2(0.25,0.25);
+	this->size = glm::vec2(0.5,0.5);
 	this->mesh = new FAMesh("square");
 	this->shader = new FAShader("FATexture");
 	glUseProgram(this->shader->shaderProgram);
@@ -20,17 +20,17 @@ FAHUDTexturedPlane::FAHUDTexturedPlane() {
 	glUseProgram(0);
 }
 
-FAHUDTexturedPlane::FAHUDTexturedPlane(GLuint texture) : FAHUDTexturedPlane() {
+FAGUITexturedPlane::FAGUITexturedPlane(GLuint texture) : FAGUITexturedPlane() {
 	this->texture = texture;
 }
 
-void FAHUDTexturedPlane::update(float dt) {
+void FAGUITexturedPlane::update(float dt) {
 
 }
 
-void FAHUDTexturedPlane::render() {
-	glm::vec2 pos = glm::vec2((this->position.x*2-1),this->position.y*2-1);
-	glm::vec2 size = glm::vec2(this->scale.x*2,this->scale.y*2);
+void FAGUITexturedPlane::render() {
+	glm::vec2 pos = glm::vec2((this->globalTransformation.x*2-1),this->globalTransformation.y*2-1);
+	glm::vec2 size = glm::vec2(this->size.x*2,this->size.y*2);
     glUseProgram(shader->shaderProgram);
 	glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -41,6 +41,6 @@ void FAHUDTexturedPlane::render() {
     this->mesh->render();
 }
 
-FAHUDTexturedPlane::~FAHUDTexturedPlane() {
+FAGUITexturedPlane::~FAGUITexturedPlane() {
 
 }
