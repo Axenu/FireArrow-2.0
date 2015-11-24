@@ -51,21 +51,39 @@ void FAMaterial::buildShader() {
 
 	std::string output = "vec4(1,1,1,1)";
 	// std::cout << "Building shader: " << std::endl;
+	// for (FAMaterialComponent *c : components) {
+	// 	// std::cout << c->getName() << std::endl;
+	// 	std::string cOut = c->getFragmentMainOutput();
+	// 	size_t start_pos = cOut.find("OTHER_OUT");
+	// 	if(start_pos != std::string::npos) {
+	// 		cOut.replace(start_pos, 9, output);
+	//   		// std::replace( cOut.begin(), cOut.end(), "OTHER_OUT", output);
+	//   		output = cOut;
+	//   	}
+	// }
+
+	//calculate material color
 	for (FAMaterialComponent *c : components) {
-		// std::cout << c->getName() << std::endl;
-		std::string cOut = c->getFragmentMainOutput();
-		size_t start_pos = cOut.find("OTHER_OUT");
-		if(start_pos != std::string::npos)
-			cOut.replace(start_pos, 9, output);
-  		// std::replace( cOut.begin(), cOut.end(), "OTHER_OUT", output);
-  		output = cOut;
+		output += c->getMaterialOutput();
 	}
+	fragmentShader += "vec4 materialOutput = " + output + ";\n";
+	std::string frag = "";
+	for (FAMaterialComponent *c : components) {
+		if (c->getLightOutput() != "") {
+			if (frag != "") {
+				frag += " + ";
+			}
+			frag += "materialOutput * " + c->getLightOutput();
+		}
+	}
+	if (frag == "") {
+		frag = output;
+	}
+	fragmentShader += "Frag_Data = ";
+	fragmentShader += frag;
+	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
 	// std::cout << fragmentShader << std::endl;
-
-	fragmentShader += "Frag_Data = ";
-	fragmentShader += output;
-	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
 	this->shader = new FAShader(&vertexShader, &fragmentShader);
 

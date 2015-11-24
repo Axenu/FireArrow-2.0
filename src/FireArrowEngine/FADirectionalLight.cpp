@@ -5,7 +5,8 @@ FADirectionalLight::FADirectionalLight() {
 	FADirectionalLightComponent *lightComponent = new FADirectionalLightComponent();
 	lightComponent->setDirection(&this->direction);
 	lightComponent->setColor(&this->color);
-	lightComponent->setAmbientComponent(&this->ambient);
+	lightComponent->setShadow(true);
+	// lightComponent->setAmbientComponent(&this->ambient);
 	FACSMComponent *csmComponent = new FACSMComponent();
 	csmComponent->setTexture(renderPass->getShadowMap());
 	csmComponent->setFrustums(renderPass->getFrustums());
@@ -27,10 +28,6 @@ void FADirectionalLight::setColor(glm::vec4 &color) {
 void FADirectionalLight::setDirection(glm::vec3 direction) {
 	this->direction = direction;
 	renderPass->setDirection(direction);
-}
-
-void FADirectionalLight::setAmbientComponent(float ambientComponent) {
-	this->ambient = ambientComponent;
 }
 
 GLuint *FADirectionalLight::getShadowMap() {

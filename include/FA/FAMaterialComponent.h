@@ -22,6 +22,8 @@ public:
 	std::string getFragmentIO();
 	std::string getFragmentMain();
 	std::string getFragmentMainOutput();
+	std::string getMaterialOutput();
+	std::string getLightOutput();
 	std::string getName();
 
 	virtual void setAttribute(std::string name, float value) = 0;
@@ -38,6 +40,8 @@ protected:
 	std::string vertexMain;
 	std::string fragmentIO;
 	std::string fragmentMain;
+	std::string materialOutput;
+	std::string lightOutput;
 	std::string fragmentOutput;
 	// std::map<std::string, FAMaterialComponent *> requirements;
 	std::vector<FAMaterialComponent *> requirements;
@@ -83,10 +87,11 @@ private:
 	glm::vec3 *direction;
 	glm::vec4 *color;
 
-	GLint ambientLocation;
+	// GLint ambientLocation;
 	GLint directionLocation;
 	GLint colorLocation;
 
+	bool hasShadow;
 
 public:
 	FADirectionalLightComponent();
@@ -96,7 +101,25 @@ public:
 
 	void setColor(glm::vec4 *color);
 	void setDirection(glm::vec3 *direction);
-	void setAmbientComponent(float *ambientComponent);
+	// void setAmbientComponent(float *ambientComponent);
+	void setShadow(bool shadow);
+};
+
+class FAAmbientLightComponent : public FAMaterialComponent {
+private:
+	float *ambient;
+	glm::vec4 *color;
+	glm::vec4 finalColor;
+
+	GLint colorLocation;
+
+public:
+	FAAmbientLightComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setColor(glm::vec4 *color);
 };
 
 class FAColorComponent : public FAMaterialComponent {

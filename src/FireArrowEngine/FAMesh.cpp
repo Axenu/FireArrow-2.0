@@ -70,6 +70,7 @@ FAMesh::FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool 
 }
 
 void FAMesh::loadFAModel(std::string path) {
+    srand (time(NULL));
     std::ifstream file (path);
     std::vector<glm::vec3> vertexArray;
     std::vector<glm::vec3> normalArray;
@@ -147,6 +148,11 @@ void FAMesh::loadFAModel(std::string path) {
                         file >> uv1 >> uv2 >> uv3;
                     }
                     
+                    glm::vec3 color;
+                    if (_hasColor) {
+                        color = materialArray[face];
+                    }
+
                     vertices.push_back(vertexArray[v1].x);
                     vertices.push_back(vertexArray[v1].y);
                     vertices.push_back(vertexArray[v1].z);
@@ -156,9 +162,9 @@ void FAMesh::loadFAModel(std::string path) {
                         vertices.push_back(normalArray[n].z);
                     }
                     if (_hasColor) {
-                        vertices.push_back(materialArray[face].x);
-                        vertices.push_back(materialArray[face].y);
-                        vertices.push_back(materialArray[face].z);
+                        vertices.push_back(color.x);
+                        vertices.push_back(color.y);
+                        vertices.push_back(color.z);
                     }
                     if (_hasUV) {
                         vertices.push_back(UVArray[uv1].x);
@@ -174,9 +180,9 @@ void FAMesh::loadFAModel(std::string path) {
                         vertices.push_back(normalArray[n].z);
                     }
                     if (_hasColor) {
-                        vertices.push_back(materialArray[face].x);
-                        vertices.push_back(materialArray[face].y);
-                        vertices.push_back(materialArray[face].z);
+                        vertices.push_back(color.x);
+                        vertices.push_back(color.y);
+                        vertices.push_back(color.z);
                     }
                     if (_hasUV) {
                         vertices.push_back(UVArray[uv2].x);
@@ -192,9 +198,9 @@ void FAMesh::loadFAModel(std::string path) {
                         vertices.push_back(normalArray[n].z);
                     }
                     if (_hasColor) {
-                        vertices.push_back(materialArray[face].x);
-                        vertices.push_back(materialArray[face].y);
-                        vertices.push_back(materialArray[face].z);
+                        vertices.push_back(color.x);
+                        vertices.push_back(color.y);
+                        vertices.push_back(color.z);
                     }
                     if (_hasUV) {
                         vertices.push_back(UVArray[uv3].x);

@@ -32,6 +32,14 @@ std::string FAMaterialComponent::getFragmentMainOutput() {
 	return this->fragmentOutput;
 }
 
+std::string FAMaterialComponent::getMaterialOutput() {
+	return this->materialOutput;
+}
+
+std::string FAMaterialComponent::getLightOutput() {
+	return this->lightOutput;
+}
+
 std::string FAMaterialComponent::getName() {
 	return this->name;
 }
@@ -51,7 +59,6 @@ FAVertexPositionComponent::FAVertexPositionComponent() {
 	vertexMain = "pass_Position = MMatrix * vec4(in_Position.xyz, 1.0);\n";
 	fragmentIO = "in vec4 pass_Position;\n";
 	fragmentMain = "";
-	fragmentOutput = "OTHER_OUT";
 	name = "vertexPosition";
 	modelData = true;
 }
@@ -75,7 +82,6 @@ FAVertexNormalComponent::FAVertexNormalComponent() {
 	vertexMain = "pass_Normal = vec4(in_Normal, 1.0);\n";
 	fragmentIO = "in vec4 pass_Normal;\n";
 	fragmentMain = "";
-	fragmentOutput = "OTHER_OUT";
 	name = "vertexNormal";
 	modelData = true;
 }
@@ -99,7 +105,8 @@ FAVertexColorComponent::FAVertexColorComponent() {
 	vertexMain = "pass_Color = vec4(in_Color, 1.0);\n";
 	fragmentIO = "in vec4 pass_Color;\n";
 	fragmentMain = "";
-	fragmentOutput = "(OTHER_OUT) * pass_Color";
+	// fragmentOutput = "(OTHER_OUT) * pass_Color";
+	materialOutput = " * pass_Color";
 	name = "vertexColor";
 	modelData = true;
 }
@@ -123,7 +130,7 @@ FAVertexUVComponent::FAVertexUVComponent() {
 	vertexMain = "pass_UV = in_UV;\n";
 	fragmentIO = "in vec2 pass_UV;\n";
 	fragmentMain = "";
-	fragmentOutput = "OTHER_OUT";
+	// fragmentOutput = "OTHER_OUT";
 	name = "vertexUV";
 	modelData = true;
 }
@@ -145,11 +152,12 @@ void FAVertexUVComponent::setUpLocations(GLint shaderProgram) {
 FADirectionalLightComponent::FADirectionalLightComponent() {
 	vertexIO = "";
 	vertexMain = "";
-	fragmentIO = "uniform float ambient;\nuniform vec4 diffuseColor;\nuniform vec3 direction;\n";
+	fragmentIO = "uniform vec4 diffuseColor;\nuniform vec3 direction;\n";
 	fragmentMain = "vec3 normal = normalize(pass_Normal.xyz);\n"
     "vec3 lightDir = normalize(direction);\n"
-    "float lambertian = max(dot(lightDir,normal), 0.0);\n";
-	fragmentOutput = "(OTHER_OUT) * (ambient * vec4(1,1,1,1) + lambertian * diffuseColor)";
+    "float light1 = max(dot(lightDir,normal), 0.0);\n";
+	// fragmentOutput = "(OTHER_OUT)";
+	lightOutput = "light1";
 	name = "Directional light";
 	requirements.push_back(new FAVertexNormalComponent);
 	modelData = false;
@@ -174,18 +182,18 @@ void FADirectionalLightComponent::setAttribute(std::string name, float value) {
 }
 
 void FADirectionalLightComponent::bind() {
-	glUniform1f(ambientLocation, *ambient);
+	// glUniform1f(ambientLocation, *ambient);
 	glUniform4fv(colorLocation, 1, &(*color)[0]);
 	glUniform3fv(directionLocation, 1, &(*direction)[0]);
 }
 
 void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
-	ambientLocation = glGetUniformLocation(shaderProgram, "ambient");
+	// ambientLocation = glGetUniformLocation(shaderProgram, "ambient");
 	colorLocation = glGetUniformLocation(shaderProgram, "diffuseColor");
 	directionLocation = glGetUniformLocation(shaderProgram, "direction");
 
-	if (ambientLocation == -1)
-		std::cout << "Error getting ambientLocation in " << name << " component!" << std::endl;
+	// if (ambientLocation == -1)
+	// 	std::cout << "Error getting ambientLocation in " << name << " component!" << std::endl;
 	if (colorLocation == -1)
 		std::cout << "Error getting colorLocation in " << name << " component!" << std::endl;
 	if (directionLocation == -1)
@@ -201,8 +209,49 @@ void FADirectionalLightComponent::setDirection(glm::vec3 *direction) {
 	this->direction = direction;
 }
 
-void FADirectionalLightComponent::setAmbientComponent(float *ambientComponent) {
-	this->ambient = ambientComponent;
+// void FADirectionalLightComponent::setAmbientComponent(float *ambientComponent) {
+// 	this->ambient = ambientComponent;
+// }
+
+void FADirectionalLightComponent::setShadow(bool shadow) {
+	this->hasShadow = shadow;
+	if (hasShadow) {
+		lightOutput = "";
+	} else {
+		lightOutput = "light1";
+	}
+}
+
+//Ambient light material
+
+FAAmbientLightComponent::FAAmbientLightComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "uniform vec4 ambientColor;\n";
+	fragmentMain = "";
+	lightOutput = "ambientColor";
+	name = "Ambient light";
+	modelData = false;
+}
+
+void FAAmbientLightComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FAAmbientLightComponent::bind() {
+	glUniform4fv(colorLocation, 1, &(*color)[0]);
+}
+
+void FAAmbientLightComponent::setUpLocations(GLint shaderProgram) {
+	colorLocation = glGetUniformLocation(shaderProgram, "ambientColor");
+
+	if (colorLocation == -1)
+		std::cout << "Error getting colorLocation in " << name << " component!" << std::endl;
+
+}
+
+void FAAmbientLightComponent::setColor(glm::vec4 *color) {
+	this->color = color;
 }
 
 //Color material
@@ -212,7 +261,8 @@ FAColorComponent::FAColorComponent() {
 	vertexMain = "";
 	fragmentIO = "uniform vec4 color;\n";
 	fragmentMain = "";
-	fragmentOutput = "(OTHER_OUT) * color";
+	// fragmentOutput = "(OTHER_OUT) * color";
+	materialOutput = " * color";
 	name = "color";
 	modelData = false;
 }
@@ -242,7 +292,8 @@ FATextureComponent::FATextureComponent() {
 	vertexMain = "";
 	fragmentIO = "uniform sampler2D mytextureSampler;\n";
 	fragmentMain = "vec4 textureColor = texture(mytextureSampler, pass_UV);";
-	fragmentOutput = "(OTHER_OUT) * textureColor";
+	// fragmentOutput = "(OTHER_OUT) * textureColor";
+	materialOutput = " * textureColor";
 	name = "texture";
 	requirements.push_back(new FAVertexUVComponent);
 	modelData = false;
@@ -280,7 +331,8 @@ FATextureArrayComponent::FATextureArrayComponent() {
 	vertexMain = "";
 	fragmentIO = "uniform sampler2DArray mytextureSampler;\n";
 	fragmentMain = "vec4 textureColor = vec4(1,1,1,1); textureColor.x = texture(mytextureSampler, vec3(pass_UV, 0)).r;textureColor.y = texture(mytextureSampler, vec3(pass_UV, 1)).r;textureColor.z = texture(mytextureSampler, vec3(pass_UV, 2)).r;";
-	fragmentOutput = "(OTHER_OUT) * textureColor";
+	// fragmentOutput = "(OTHER_OUT) * textureColor";
+	materialOutput = " * textureColor";
 	name = "texture";
 	requirements.push_back(new FAVertexUVComponent);
 	modelData = false;
@@ -342,11 +394,12 @@ FACSMComponent::FACSMComponent() {
 	    "       if (dist > 0) {\n"
 	    // "		shadow = dist;"
 	    "       	if (dist < shadowCoordinateWdivide.z - 0.005)\n"
-	    "           	shadow =  0.5;\n"
+	    "           	shadow =  0.0;\n"
 	    "        }\n"
 	    "	}\n"
 	    "}";
-	fragmentOutput = "(OTHER_OUT) * shadow";
+	// fragmentOutput = "(OTHER_OUT) + shadow * lambertian";
+	    lightOutput = "(light1 * shadow)";
 	name = "CSM";
 	requirements.push_back(new FAVertexPositionComponent);
 	modelData = false;

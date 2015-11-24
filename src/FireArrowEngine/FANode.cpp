@@ -31,6 +31,12 @@ void FANode::update(float dt) {
     this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.y, glm::vec3(0,1,0));
     this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.z, glm::vec3(0,0,1));
     this->modelMatrix = glm::scale(this->modelMatrix, this->scale);
+    if (this->action != nullptr) {
+        if (!this->action->update(dt)) {
+            delete this->action;
+            this->action = nullptr;
+        }
+    }
     onUpdate(dt);
     for (FANode *node : children)
         node->update(dt, this->modelMatrix);
@@ -44,6 +50,12 @@ void FANode::update(float dt, glm::mat4 &parentModelMatrix) {
     this->modelMatrix = glm::rotate(this->modelMatrix, this->rotation.z, glm::vec3(0,0,1));
     this->modelMatrix = glm::scale(this->modelMatrix, this->scale);
     this->modelMatrix = parentModelMatrix * this->modelMatrix;
+    if (this->action != nullptr) {
+        if (!this->action->update(dt)) {
+            delete this->action;
+            this->action = nullptr;
+        }
+    }
     onUpdate(dt);
     for (FANode *node : children)
         node->update(dt, this->modelMatrix);
@@ -162,6 +174,11 @@ glm::vec3 FANode::getPosition()  {
 
 glm::vec3 FANode::getRotation()  {
     return rotation;
+}
+
+void FANode::runAction(FAAction *action) {
+    this->action = action;
+    this->action->setNode(this);
 }
 
 FANode::~FANode() {

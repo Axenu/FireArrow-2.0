@@ -5,6 +5,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include "FAAction.h"
+
+class FAAction;
 
 class FANode {
     bool isActive;
@@ -48,6 +51,8 @@ public:
     glm::vec3 getPosition();
     glm::vec3 getRotation();
 
+    void runAction(FAAction *action);
+
 	virtual ~FANode();
 
 protected:
@@ -56,6 +61,7 @@ protected:
 	glm::vec3 scale;
     glm::mat4 modelMatrix;
     std::vector<FANode *> children;
+    FAAction *action = nullptr;
 
     virtual void onUpdate(float dt){}
     virtual void onRender(){}

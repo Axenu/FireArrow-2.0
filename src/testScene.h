@@ -7,6 +7,7 @@
 #include <FA/FATerrain.h>
 #include <FA/FATexture.h>
 #include <FA/FADirectionalLight.h>
+#include <FA/FAAmbientLight.h>
 #include <FA/FAShadowMapRenderPass.h>
 #include <FA/FAGUITexturedPlane.h>
 #include <FA/FAGUIMaterialComponent.h>
@@ -14,6 +15,10 @@
 class testScene : public FAScene {
     
 private:
+    const float speed = 5;
+    bool cursorHasMoved = false;
+    glm::vec2 previousCursorPosition;
+    glm::vec3 cameraMovement;
     FAFont *font;
     FAGUIText *text;
     
