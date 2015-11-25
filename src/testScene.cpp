@@ -29,7 +29,13 @@ void testScene::init() {
     // material->setDirectionalLight(direction, color, ambient);
     FAModel *m = new FAModel(*mesh, *material);
     m->setPosition(0,0,-5);
-    m->runAction(new FAActionMoveTo(glm::vec3(10,0,-5), 3.0f));
+
+    //testing actions
+    FAActionSequence *group = new FAActionSequence();
+    group->addAction(new FAActionMoveTo(glm::vec3(10,0,-5), 3.0f));
+    group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
+
+    m->runAction(group);
     addChild(m);
     m = new FAModel(*mesh, *material);
     m->setPosition(10,0,1);

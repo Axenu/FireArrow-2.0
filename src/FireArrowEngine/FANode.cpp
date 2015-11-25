@@ -140,6 +140,16 @@ void FANode::rotateZ(float f) {
     rotation.z += f;
 }
 
+void FANode::rotate(glm::vec3 r) {
+    rotation.x += r.x;
+    rotation.y += r.y;
+    rotation.z += r.z;
+
+    while (rotation.x > M_2PI) rotation.x -= M_2PI;
+    while (rotation.y > M_2PI) rotation.y -= M_2PI;
+    while (rotation.z > M_2PI) rotation.z -= M_2PI;
+}
+
 float FANode::getX()  {
     return position.x;
 }

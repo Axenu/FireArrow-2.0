@@ -7,6 +7,9 @@
 #include <vector>
 #include "FAAction.h"
 
+#define M_PI 3.1415926536
+#define M_2PI 6.2831853072
+
 class FAAction;
 
 class FANode {
@@ -40,6 +43,7 @@ public:
     void rotateX(float f);
     void rotateY(float f);
     void rotateZ(float f);
+    void rotate(glm::vec3 r);
     
 	float getX();
 	float getY();

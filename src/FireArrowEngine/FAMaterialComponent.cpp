@@ -79,7 +79,7 @@ void FAVertexPositionComponent::setUpLocations(GLint shaderProgram) {
 
 FAVertexNormalComponent::FAVertexNormalComponent() {
 	vertexIO = "layout(location = 1) in vec3 in_Normal;\nout vec4 pass_Normal;\n";
-	vertexMain = "pass_Normal = vec4(in_Normal, 1.0);\n";
+	vertexMain = "pass_Normal = transpose(inverse(MMatrix)) * vec4(in_Normal, 0.0);\n";
 	fragmentIO = "in vec4 pass_Normal;\n";
 	fragmentMain = "";
 	name = "vertexNormal";
@@ -393,7 +393,7 @@ FACSMComponent::FACSMComponent() {
 	    "    	dist = texture(shadowMap,vec3(shadowCoordinateWdivide.st, index)).r;\n"
 	    "       if (dist > 0) {\n"
 	    // "		shadow = dist;"
-	    "       	if (dist < shadowCoordinateWdivide.z - 0.005)\n"
+	    "       	if (dist < shadowCoordinateWdivide.z - 0.002)\n"
 	    "           	shadow =  0.0;\n"
 	    "        }\n"
 	    "	}\n"
