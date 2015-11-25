@@ -105,4 +105,16 @@ public:
 	~FAActionSequence();
 };
 
+class FAActionRemoveFromParent : public FAAction {
+
+	std::vector<FAAction *> actions;
+
+public:
+	FAActionRemoveFromParent();
+
+	bool update(float dt);
+
+	~FAActionRemoveFromParent();
+};
+
 #endif

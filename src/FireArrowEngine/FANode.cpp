@@ -29,6 +29,24 @@ void FANode::setParent(FANode *parent) {
     this->parent = parent;
 }
 
+void FANode::removeFromParent() {
+    if (this->parent != nullptr) {
+        this->parent->removeChild(this);
+    }
+}
+
+void FANode::removeChild(FANode *node) {
+    FANode *n = nullptr;
+    for (int i = 0; i < children.size(); i++) {
+        n = children[i];
+        if (n == node) {
+            delete n;
+            children.erase(children.begin()+i);
+            return;
+        }
+    }
+}
+
 void FANode::update(float dt) {
     if (!isActive) return;
     this->modelMatrix = glm::translate(glm::mat4(), this->position);
@@ -131,6 +149,10 @@ void FANode::rotate(glm::vec3 r) {
     while (rotation.x > M_2PI) rotation.x -= M_2PI;
     while (rotation.y > M_2PI) rotation.y -= M_2PI;
     while (rotation.z > M_2PI) rotation.z -= M_2PI;
+
+    while (rotation.x < 0) rotation.x += M_2PI;
+    while (rotation.y < 0) rotation.y += M_2PI;
+    while (rotation.z < 0) rotation.z += M_2PI;
 }
 
 float FANode::getX()  {

@@ -25,6 +25,8 @@ public:
 	void addChild(FANode *child);
 	std::vector<FANode *> getAllChildren();
     void setParent(FANode *parent);
+    void removeFromParent();
+    void removeChild(FANode *node);
 
     void update(float dt);
     virtual void render(){}

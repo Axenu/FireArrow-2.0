@@ -216,4 +216,19 @@ FAActionSequence::~FAActionSequence() {
 	actions.clear();
 }
 
+FAActionRemoveFromParent::FAActionRemoveFromParent() {
+
+}
+
+bool FAActionRemoveFromParent::update(float dt) {
+	this->node->removeFromParent();
+	return false;
+}
+
+FAActionRemoveFromParent::~FAActionRemoveFromParent() {
+
+}
+
+
+
 
