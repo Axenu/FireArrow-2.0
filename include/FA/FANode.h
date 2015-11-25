@@ -7,8 +7,12 @@
 #include <vector>
 #include "FAAction.h"
 
+#ifndef M_PI
 #define M_PI 3.1415926536
+#endif
+#ifndef M_2PI
 #define M_2PI 6.2831853072
+#endif
 
 class FAAction;
 
@@ -20,9 +24,9 @@ public:
 
 	void addChild(FANode *child);
 	std::vector<FANode *> getAllChildren();
+    void setParent(FANode *parent);
 
     void update(float dt);
-    void update(float dt, glm::mat4 &parentModelMatrix);
     virtual void render(){}
 
 	void setX(float x);
@@ -65,6 +69,7 @@ protected:
 	glm::vec3 scale;
     glm::mat4 modelMatrix;
     std::vector<FANode *> children;
+    FANode *parent = nullptr;
     FAAction *action = nullptr;
 
     virtual void onUpdate(float dt){}
