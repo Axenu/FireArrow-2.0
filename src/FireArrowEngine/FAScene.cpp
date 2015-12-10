@@ -107,7 +107,7 @@ void FAScene::addChild(FANode *child) {
             }
         }
     } else {
-        std::cout << "Added unknow type as child of FAScene" << std::endl;
+        std::cout << "Added unknown type as child of FAScene" << std::endl;
     }
 }
 

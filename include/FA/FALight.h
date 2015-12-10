@@ -12,6 +12,7 @@ public:
 	FALight();
 
 	virtual void onUpdate(float dt);
+	void setColor(glm::vec4 &color);
 
 	bool hasShadow();
 
@@ -23,6 +24,7 @@ public:
 protected:
 	std::vector<FARenderPass *> requirements;
 	std::vector<FAMaterialComponent *> materialRequirements;
+	glm::vec4 color;
 	
 };
 

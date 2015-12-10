@@ -26,10 +26,6 @@ void FAAmbientLight::setColor(glm::vec4 &color) {
 	this->color = color;
 }
 
-void FAAmbientLight::setAmbientComponent(float ambientComponent) {
-	this->strength = strength;
-}
-
 FAAmbientLight::~FAAmbientLight() {
 
 }

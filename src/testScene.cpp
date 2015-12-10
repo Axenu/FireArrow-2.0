@@ -17,10 +17,10 @@ void testScene::init() {
     // this->addChild(model);
 
 
-     glm::vec4 color = glm::vec4(1,1,1,1);
+    glm::vec4 color = glm::vec4(1,1,1,1);
     // float ambient = 0.5;
     FADirectionalLight *light;
-    glm::vec3 direction = glm::vec3(1,0.5,0);
+    glm::vec3 direction = glm::vec3(-1,0.5,0);
 
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
@@ -32,10 +32,10 @@ void testScene::init() {
 
     //testing actions
     FAActionSequence *group = new FAActionSequence();
-    group->addAction(new FAActionMoveTo(glm::vec3(10,0,-5), 3.0f));
+    group->addAction(new FAActionMoveTo(glm::vec3(10,1,-5), 3.0f));
     group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
-
-    m->runAction(group);
+//    m->runAction(group);
+	
     addChild(m);
     m = new FAModel(*mesh, *material);
     m->setPosition(10,0,1);
@@ -52,8 +52,15 @@ void testScene::init() {
     // light->setAmbientComponent(ambient);
     addChild(light);
 
-    FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
-    addChild(alight);
+//    FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
+//    addChild(alight);
+
+    FAPointLight *pLight = new FAPointLight();
+	glm::vec4 redColor = glm::vec4(1,0,0,1);
+    pLight->setColor(redColor);
+    pLight->setPosition(0,1,0);
+    addChild(pLight);
+	pLight->runAction(group);
 
     // FAShadowMapRenderPass *pass = new FAShadowMapRenderPass();
     // addRenderPass(pass);
@@ -63,6 +70,9 @@ void testScene::init() {
     // texture = *pass->getShadowMap();
     // textMaterial->setTextureArray(light->getShadowMap(), 0);
     // textMaterial->addMaterialComponent(comp);
+
+
+	
 
 }
 

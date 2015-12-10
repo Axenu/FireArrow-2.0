@@ -1,0 +1,689 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		358DF6561C199086006070D4 /* FAAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6371C199086006070D4 /* FAAction.cpp */; };
+		358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6381C199086006070D4 /* FAAmbientLight.cpp */; };
+		358DF6581C199086006070D4 /* FACamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6391C199086006070D4 /* FACamera.cpp */; };
+		358DF6591C199086006070D4 /* FACSMRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF63A1C199086006070D4 /* FACSMRenderPass.cpp */; };
+		358DF65A1C199086006070D4 /* FADirectionalLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF63B1C199086006070D4 /* FADirectionalLight.cpp */; };
+		358DF65B1C199086006070D4 /* FAEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF63C1C199086006070D4 /* FAEngine.cpp */; };
+		358DF65C1C199086006070D4 /* FAFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF63D1C199086006070D4 /* FAFont.cpp */; };
+		358DF65D1C199086006070D4 /* FAGUIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF63E1C199086006070D4 /* FAGUIElement.cpp */; };
+		358DF65E1C199086006070D4 /* FAGUIMaterialComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF63F1C199086006070D4 /* FAGUIMaterialComponent.cpp */; };
+		358DF65F1C199086006070D4 /* FAGUIPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6401C199086006070D4 /* FAGUIPlane.cpp */; };
+		358DF6601C199086006070D4 /* FAGUIText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6411C199086006070D4 /* FAGUIText.cpp */; };
+		358DF6611C199086006070D4 /* FAGUITexturedPlane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6421C199086006070D4 /* FAGUITexturedPlane.cpp */; };
+		358DF6621C199086006070D4 /* FALight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6431C199086006070D4 /* FALight.cpp */; };
+		358DF6631C199086006070D4 /* FAMainRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6441C199086006070D4 /* FAMainRenderPass.cpp */; };
+		358DF6641C199086006070D4 /* FAMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6451C199086006070D4 /* FAMaterial.cpp */; };
+		358DF6651C199086006070D4 /* FAMaterialComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6461C199086006070D4 /* FAMaterialComponent.cpp */; };
+		358DF6661C199086006070D4 /* FAMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6471C199086006070D4 /* FAMesh.cpp */; };
+		358DF6671C199086006070D4 /* FAModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6481C199086006070D4 /* FAModel.cpp */; };
+		358DF6681C199086006070D4 /* FANode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6491C199086006070D4 /* FANode.cpp */; };
+		358DF6691C199086006070D4 /* FAPointLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF64A1C199086006070D4 /* FAPointLight.cpp */; };
+		358DF66A1C199086006070D4 /* FARenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF64B1C199086006070D4 /* FARenderPass.cpp */; };
+		358DF66B1C199086006070D4 /* FAScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF64C1C199086006070D4 /* FAScene.cpp */; };
+		358DF66C1C199086006070D4 /* FAShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF64D1C199086006070D4 /* FAShader.cpp */; };
+		358DF66D1C199086006070D4 /* FAShadowMapRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF64E1C199086006070D4 /* FAShadowMapRenderPass.cpp */; };
+		358DF66E1C199086006070D4 /* FATerrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF64F1C199086006070D4 /* FATerrain.cpp */; };
+		358DF66F1C199086006070D4 /* FATexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6501C199086006070D4 /* FATexture.cpp */; };
+		358DF6701C199086006070D4 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6511C199086006070D4 /* Game.cpp */; };
+		358DF6711C199086006070D4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6531C199086006070D4 /* main.cpp */; };
+		358DF6721C199086006070D4 /* testScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6541C199086006070D4 /* testScene.cpp */; };
+		358DF7D41C199095006070D4 /* glm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6DF1C199095006070D4 /* glm.cpp */; };
+		358DF7E21C1990A4006070D4 /* libbz2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7D61C1990A4006070D4 /* libbz2.a */; };
+		358DF7E31C1990A4006070D4 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7D71C1990A4006070D4 /* libfreetype.a */; };
+		358DF7E41C1990A4006070D4 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7D81C1990A4006070D4 /* libglfw3.a */; };
+		358DF7E51C1990A4006070D4 /* libIL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7D91C1990A4006070D4 /* libIL.a */; };
+		358DF7E61C1990A4006070D4 /* libjasper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7DA1C1990A4006070D4 /* libjasper.a */; };
+		358DF7E71C1990A4006070D4 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7DB1C1990A4006070D4 /* libjpeg.a */; };
+		358DF7E81C1990A4006070D4 /* liblcms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7DC1C1990A4006070D4 /* liblcms.a */; };
+		358DF7E91C1990A4006070D4 /* liblzma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7DD1C1990A4006070D4 /* liblzma.a */; };
+		358DF7EA1C1990A4006070D4 /* libmng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7DE1C1990A4006070D4 /* libmng.a */; };
+		358DF7EB1C1990A4006070D4 /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7DF1C1990A4006070D4 /* libpng16.a */; };
+		358DF7EC1C1990A4006070D4 /* libtiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7E01C1990A4006070D4 /* libtiff.a */; };
+		358DF7ED1C1990A4006070D4 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 358DF7E11C1990A4006070D4 /* libz.a */; };
+		358DF9681C199288006070D4 /* FAAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF67B1C199095006070D4 /* FAAction.h */; };
+		358DF9691C199288006070D4 /* FAAmbientLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF67C1C199095006070D4 /* FAAmbientLight.h */; };
+		358DF96A1C199288006070D4 /* FACamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF67D1C199095006070D4 /* FACamera.h */; };
+		358DF96B1C199288006070D4 /* FACSMRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF67E1C199095006070D4 /* FACSMRenderPass.h */; };
+		358DF96C1C199288006070D4 /* FADirectionalLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF67F1C199095006070D4 /* FADirectionalLight.h */; };
+		358DF96D1C199288006070D4 /* FAEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6801C199095006070D4 /* FAEngine.h */; };
+		358DF96E1C199288006070D4 /* FAFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6811C199095006070D4 /* FAFont.h */; };
+		358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6821C199095006070D4 /* FAGUIElement.h */; };
+		358DF9701C199288006070D4 /* FAGUIMaterialComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6831C199095006070D4 /* FAGUIMaterialComponent.h */; };
+		358DF9711C199288006070D4 /* FAGUIPlane.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6841C199095006070D4 /* FAGUIPlane.h */; };
+		358DF9721C199288006070D4 /* FAGUIText.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6851C199095006070D4 /* FAGUIText.h */; };
+		358DF9731C199288006070D4 /* FAGUITexturedPlane.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6861C199095006070D4 /* FAGUITexturedPlane.h */; };
+		358DF9741C199288006070D4 /* FALight.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6871C199095006070D4 /* FALight.h */; };
+		358DF9751C199288006070D4 /* FAMainRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6881C199095006070D4 /* FAMainRenderPass.h */; };
+		358DF9761C199288006070D4 /* FAMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6891C199095006070D4 /* FAMaterial.h */; };
+		358DF9771C199288006070D4 /* FAMaterialComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF68A1C199095006070D4 /* FAMaterialComponent.h */; };
+		358DF9781C199288006070D4 /* FAMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF68B1C199095006070D4 /* FAMesh.h */; };
+		358DF9791C199288006070D4 /* FAModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF68C1C199095006070D4 /* FAModel.h */; };
+		358DF97A1C199288006070D4 /* FANode.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF68D1C199095006070D4 /* FANode.h */; };
+		358DF97B1C199288006070D4 /* FAPointLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF68E1C199095006070D4 /* FAPointLight.h */; };
+		358DF97C1C199288006070D4 /* FARenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF68F1C199095006070D4 /* FARenderPass.h */; };
+		358DF97D1C199288006070D4 /* FARenderPasscallbackInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6901C199095006070D4 /* FARenderPasscallbackInterface.h */; };
+		358DF97E1C199288006070D4 /* FAScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6911C199095006070D4 /* FAScene.h */; };
+		358DF97F1C199288006070D4 /* FAShader.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6921C199095006070D4 /* FAShader.h */; };
+		358DF9801C199288006070D4 /* FAShadowMapRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6931C199095006070D4 /* FAShadowMapRenderPass.h */; };
+		358DF9811C199288006070D4 /* FATerrain.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6941C199095006070D4 /* FATerrain.h */; };
+		358DF9821C199288006070D4 /* FATexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6951C199095006070D4 /* FATexture.h */; };
+		35B755661C199A7F00F09A1F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755651C199A7F00F09A1F /* CoreFoundation.framework */; };
+		35B755681C199AA200F09A1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755671C199AA200F09A1F /* CoreGraphics.framework */; };
+		35B7556A1C199ABA00F09A1F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755691C199ABA00F09A1F /* OpenGL.framework */; };
+		35B7556C1C199AD900F09A1F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7556B1C199AD800F09A1F /* CoreVideo.framework */; };
+		35B7556E1C199AE700F09A1F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7556D1C199AE700F09A1F /* IOKit.framework */; };
+		35B755701C199AF100F09A1F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B7556F1C199AF100F09A1F /* Cocoa.framework */; };
+		35B755761C19CC2F00F09A1F /* GUIScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35B755741C19CC2F00F09A1F /* GUIScene.cpp */; };
+		35B755771C19CC2F00F09A1F /* GUIScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B755751C19CC2F00F09A1F /* GUIScene.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		358DF5C01C198E56006070D4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		358DF5C21C198E56006070D4 /* FA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FA; sourceTree = BUILT_PRODUCTS_DIR; };
+		358DF6371C199086006070D4 /* FAAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAction.cpp; sourceTree = "<group>"; };
+		358DF6381C199086006070D4 /* FAAmbientLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAmbientLight.cpp; sourceTree = "<group>"; };
+		358DF6391C199086006070D4 /* FACamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FACamera.cpp; sourceTree = "<group>"; };
+		358DF63A1C199086006070D4 /* FACSMRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FACSMRenderPass.cpp; sourceTree = "<group>"; };
+		358DF63B1C199086006070D4 /* FADirectionalLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FADirectionalLight.cpp; sourceTree = "<group>"; };
+		358DF63C1C199086006070D4 /* FAEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAEngine.cpp; sourceTree = "<group>"; };
+		358DF63D1C199086006070D4 /* FAFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAFont.cpp; sourceTree = "<group>"; };
+		358DF63E1C199086006070D4 /* FAGUIElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIElement.cpp; sourceTree = "<group>"; };
+		358DF63F1C199086006070D4 /* FAGUIMaterialComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIMaterialComponent.cpp; sourceTree = "<group>"; };
+		358DF6401C199086006070D4 /* FAGUIPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIPlane.cpp; sourceTree = "<group>"; };
+		358DF6411C199086006070D4 /* FAGUIText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIText.cpp; sourceTree = "<group>"; };
+		358DF6421C199086006070D4 /* FAGUITexturedPlane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUITexturedPlane.cpp; sourceTree = "<group>"; };
+		358DF6431C199086006070D4 /* FALight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FALight.cpp; sourceTree = "<group>"; };
+		358DF6441C199086006070D4 /* FAMainRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAMainRenderPass.cpp; sourceTree = "<group>"; };
+		358DF6451C199086006070D4 /* FAMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAMaterial.cpp; sourceTree = "<group>"; };
+		358DF6461C199086006070D4 /* FAMaterialComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAMaterialComponent.cpp; sourceTree = "<group>"; };
+		358DF6471C199086006070D4 /* FAMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAMesh.cpp; sourceTree = "<group>"; };
+		358DF6481C199086006070D4 /* FAModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAModel.cpp; sourceTree = "<group>"; };
+		358DF6491C199086006070D4 /* FANode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FANode.cpp; sourceTree = "<group>"; };
+		358DF64A1C199086006070D4 /* FAPointLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAPointLight.cpp; sourceTree = "<group>"; };
+		358DF64B1C199086006070D4 /* FARenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FARenderPass.cpp; sourceTree = "<group>"; };
+		358DF64C1C199086006070D4 /* FAScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAScene.cpp; sourceTree = "<group>"; };
+		358DF64D1C199086006070D4 /* FAShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAShader.cpp; sourceTree = "<group>"; };
+		358DF64E1C199086006070D4 /* FAShadowMapRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAShadowMapRenderPass.cpp; sourceTree = "<group>"; };
+		358DF64F1C199086006070D4 /* FATerrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FATerrain.cpp; sourceTree = "<group>"; };
+		358DF6501C199086006070D4 /* FATexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FATexture.cpp; sourceTree = "<group>"; };
+		358DF6511C199086006070D4 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		358DF6521C199086006070D4 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		358DF6531C199086006070D4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		358DF6541C199086006070D4 /* testScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testScene.cpp; sourceTree = "<group>"; };
+		358DF6551C199086006070D4 /* testScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testScene.h; sourceTree = "<group>"; };
+		358DF67B1C199095006070D4 /* FAAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAAction.h; sourceTree = "<group>"; };
+		358DF67C1C199095006070D4 /* FAAmbientLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAAmbientLight.h; sourceTree = "<group>"; };
+		358DF67D1C199095006070D4 /* FACamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FACamera.h; sourceTree = "<group>"; };
+		358DF67E1C199095006070D4 /* FACSMRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FACSMRenderPass.h; sourceTree = "<group>"; };
+		358DF67F1C199095006070D4 /* FADirectionalLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FADirectionalLight.h; sourceTree = "<group>"; };
+		358DF6801C199095006070D4 /* FAEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAEngine.h; sourceTree = "<group>"; };
+		358DF6811C199095006070D4 /* FAFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAFont.h; sourceTree = "<group>"; };
+		358DF6821C199095006070D4 /* FAGUIElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUIElement.h; sourceTree = "<group>"; };
+		358DF6831C199095006070D4 /* FAGUIMaterialComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUIMaterialComponent.h; sourceTree = "<group>"; };
+		358DF6841C199095006070D4 /* FAGUIPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUIPlane.h; sourceTree = "<group>"; };
+		358DF6851C199095006070D4 /* FAGUIText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUIText.h; sourceTree = "<group>"; };
+		358DF6861C199095006070D4 /* FAGUITexturedPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUITexturedPlane.h; sourceTree = "<group>"; };
+		358DF6871C199095006070D4 /* FALight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FALight.h; sourceTree = "<group>"; };
+		358DF6881C199095006070D4 /* FAMainRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAMainRenderPass.h; sourceTree = "<group>"; };
+		358DF6891C199095006070D4 /* FAMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAMaterial.h; sourceTree = "<group>"; };
+		358DF68A1C199095006070D4 /* FAMaterialComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAMaterialComponent.h; sourceTree = "<group>"; };
+		358DF68B1C199095006070D4 /* FAMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAMesh.h; sourceTree = "<group>"; };
+		358DF68C1C199095006070D4 /* FAModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAModel.h; sourceTree = "<group>"; };
+		358DF68D1C199095006070D4 /* FANode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FANode.h; sourceTree = "<group>"; };
+		358DF68E1C199095006070D4 /* FAPointLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAPointLight.h; sourceTree = "<group>"; };
+		358DF68F1C199095006070D4 /* FARenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FARenderPass.h; sourceTree = "<group>"; };
+		358DF6901C199095006070D4 /* FARenderPasscallbackInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FARenderPasscallbackInterface.h; sourceTree = "<group>"; };
+		358DF6911C199095006070D4 /* FAScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAScene.h; sourceTree = "<group>"; };
+		358DF6921C199095006070D4 /* FAShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAShader.h; sourceTree = "<group>"; };
+		358DF6931C199095006070D4 /* FAShadowMapRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAShadowMapRenderPass.h; sourceTree = "<group>"; };
+		358DF6941C199095006070D4 /* FATerrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATerrain.h; sourceTree = "<group>"; };
+		358DF6951C199095006070D4 /* FATexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATexture.h; sourceTree = "<group>"; };
+		358DF6DF1C199095006070D4 /* glm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glm.cpp; path = "/Users/Axenu/Developer/FireArrow 2.0/include/glm/detail/glm.cpp"; sourceTree = "<absolute>"; };
+		358DF7D61C1990A4006070D4 /* libbz2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbz2.a; sourceTree = "<group>"; };
+		358DF7D71C1990A4006070D4 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreetype.a; sourceTree = "<group>"; };
+		358DF7D81C1990A4006070D4 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglfw3.a; sourceTree = "<group>"; };
+		358DF7D91C1990A4006070D4 /* libIL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIL.a; sourceTree = "<group>"; };
+		358DF7DA1C1990A4006070D4 /* libjasper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjasper.a; sourceTree = "<group>"; };
+		358DF7DB1C1990A4006070D4 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjpeg.a; sourceTree = "<group>"; };
+		358DF7DC1C1990A4006070D4 /* liblcms.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblcms.a; sourceTree = "<group>"; };
+		358DF7DD1C1990A4006070D4 /* liblzma.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblzma.a; sourceTree = "<group>"; };
+		358DF7DE1C1990A4006070D4 /* libmng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmng.a; sourceTree = "<group>"; };
+		358DF7DF1C1990A4006070D4 /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpng16.a; sourceTree = "<group>"; };
+		358DF7E01C1990A4006070D4 /* libtiff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtiff.a; sourceTree = "<group>"; };
+		358DF7E11C1990A4006070D4 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libz.a; sourceTree = "<group>"; };
+		35B755651C199A7F00F09A1F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		35B755671C199AA200F09A1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		35B755691C199ABA00F09A1F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		35B7556B1C199AD800F09A1F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		35B7556D1C199AE700F09A1F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		35B7556F1C199AF100F09A1F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		35B755741C19CC2F00F09A1F /* GUIScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIScene.cpp; sourceTree = "<group>"; };
+		35B755751C19CC2F00F09A1F /* GUIScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIScene.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		358DF5BF1C198E56006070D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				35B755701C199AF100F09A1F /* Cocoa.framework in Frameworks */,
+				35B7556E1C199AE700F09A1F /* IOKit.framework in Frameworks */,
+				35B7556C1C199AD900F09A1F /* CoreVideo.framework in Frameworks */,
+				35B7556A1C199ABA00F09A1F /* OpenGL.framework in Frameworks */,
+				35B755681C199AA200F09A1F /* CoreGraphics.framework in Frameworks */,
+				35B755661C199A7F00F09A1F /* CoreFoundation.framework in Frameworks */,
+				358DF7E21C1990A4006070D4 /* libbz2.a in Frameworks */,
+				358DF7E31C1990A4006070D4 /* libfreetype.a in Frameworks */,
+				358DF7E51C1990A4006070D4 /* libIL.a in Frameworks */,
+				358DF7E91C1990A4006070D4 /* liblzma.a in Frameworks */,
+				358DF7E41C1990A4006070D4 /* libglfw3.a in Frameworks */,
+				358DF7EA1C1990A4006070D4 /* libmng.a in Frameworks */,
+				358DF7ED1C1990A4006070D4 /* libz.a in Frameworks */,
+				358DF7EB1C1990A4006070D4 /* libpng16.a in Frameworks */,
+				358DF7E81C1990A4006070D4 /* liblcms.a in Frameworks */,
+				358DF7E61C1990A4006070D4 /* libjasper.a in Frameworks */,
+				358DF7E71C1990A4006070D4 /* libjpeg.a in Frameworks */,
+				358DF7EC1C1990A4006070D4 /* libtiff.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		358DF5B91C198E56006070D4 = {
+			isa = PBXGroup;
+			children = (
+				35B7556F1C199AF100F09A1F /* Cocoa.framework */,
+				35B7556D1C199AE700F09A1F /* IOKit.framework */,
+				35B7556B1C199AD800F09A1F /* CoreVideo.framework */,
+				35B755691C199ABA00F09A1F /* OpenGL.framework */,
+				35B755671C199AA200F09A1F /* CoreGraphics.framework */,
+				35B755651C199A7F00F09A1F /* CoreFoundation.framework */,
+				358DF5C41C198E56006070D4 /* FA */,
+				358DF5C31C198E56006070D4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		358DF5C31C198E56006070D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				358DF5C21C198E56006070D4 /* FA */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		358DF5C41C198E56006070D4 /* FA */ = {
+			isa = PBXGroup;
+			children = (
+				358DF7D51C1990A4006070D4 /* lib */,
+				358DF6731C199095006070D4 /* include */,
+				358DF6351C199086006070D4 /* src */,
+			);
+			path = FA;
+			sourceTree = "<group>";
+		};
+		358DF6351C199086006070D4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				358DF6361C199086006070D4 /* FireArrowEngine */,
+				358DF6511C199086006070D4 /* Game.cpp */,
+				358DF6521C199086006070D4 /* Game.h */,
+				358DF6531C199086006070D4 /* main.cpp */,
+				358DF6541C199086006070D4 /* testScene.cpp */,
+				358DF6551C199086006070D4 /* testScene.h */,
+				35B755741C19CC2F00F09A1F /* GUIScene.cpp */,
+				35B755751C19CC2F00F09A1F /* GUIScene.h */,
+			);
+			path = src;
+			sourceTree = SOURCE_ROOT;
+		};
+		358DF6361C199086006070D4 /* FireArrowEngine */ = {
+			isa = PBXGroup;
+			children = (
+				358DF6371C199086006070D4 /* FAAction.cpp */,
+				35B755711C199BC200F09A1F /* FALight */,
+				358DF6391C199086006070D4 /* FACamera.cpp */,
+				35B755731C199BD700F09A1F /* FARenderPass */,
+				358DF63C1C199086006070D4 /* FAEngine.cpp */,
+				358DF63D1C199086006070D4 /* FAFont.cpp */,
+				35B755721C199BCB00F09A1F /* GUI */,
+				358DF6451C199086006070D4 /* FAMaterial.cpp */,
+				358DF6461C199086006070D4 /* FAMaterialComponent.cpp */,
+				358DF6471C199086006070D4 /* FAMesh.cpp */,
+				358DF6481C199086006070D4 /* FAModel.cpp */,
+				358DF6491C199086006070D4 /* FANode.cpp */,
+				358DF64C1C199086006070D4 /* FAScene.cpp */,
+				358DF64D1C199086006070D4 /* FAShader.cpp */,
+				358DF64F1C199086006070D4 /* FATerrain.cpp */,
+				358DF6501C199086006070D4 /* FATexture.cpp */,
+			);
+			path = FireArrowEngine;
+			sourceTree = "<group>";
+		};
+		358DF6731C199095006070D4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				358DF67A1C199095006070D4 /* FA */,
+			);
+			path = include;
+			sourceTree = SOURCE_ROOT;
+		};
+		358DF67A1C199095006070D4 /* FA */ = {
+			isa = PBXGroup;
+			children = (
+				358DF67B1C199095006070D4 /* FAAction.h */,
+				358DF67C1C199095006070D4 /* FAAmbientLight.h */,
+				358DF67D1C199095006070D4 /* FACamera.h */,
+				358DF67E1C199095006070D4 /* FACSMRenderPass.h */,
+				358DF67F1C199095006070D4 /* FADirectionalLight.h */,
+				358DF6801C199095006070D4 /* FAEngine.h */,
+				358DF6811C199095006070D4 /* FAFont.h */,
+				358DF6821C199095006070D4 /* FAGUIElement.h */,
+				358DF6831C199095006070D4 /* FAGUIMaterialComponent.h */,
+				358DF6841C199095006070D4 /* FAGUIPlane.h */,
+				358DF6851C199095006070D4 /* FAGUIText.h */,
+				358DF6861C199095006070D4 /* FAGUITexturedPlane.h */,
+				358DF6871C199095006070D4 /* FALight.h */,
+				358DF6881C199095006070D4 /* FAMainRenderPass.h */,
+				358DF6891C199095006070D4 /* FAMaterial.h */,
+				358DF68A1C199095006070D4 /* FAMaterialComponent.h */,
+				358DF68B1C199095006070D4 /* FAMesh.h */,
+				358DF68C1C199095006070D4 /* FAModel.h */,
+				358DF68D1C199095006070D4 /* FANode.h */,
+				358DF68E1C199095006070D4 /* FAPointLight.h */,
+				358DF68F1C199095006070D4 /* FARenderPass.h */,
+				358DF6901C199095006070D4 /* FARenderPasscallbackInterface.h */,
+				358DF6911C199095006070D4 /* FAScene.h */,
+				358DF6921C199095006070D4 /* FAShader.h */,
+				358DF6931C199095006070D4 /* FAShadowMapRenderPass.h */,
+				358DF6941C199095006070D4 /* FATerrain.h */,
+				358DF6951C199095006070D4 /* FATexture.h */,
+			);
+			path = FA;
+			sourceTree = "<group>";
+		};
+		358DF7D51C1990A4006070D4 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				358DF7D61C1990A4006070D4 /* libbz2.a */,
+				358DF7D71C1990A4006070D4 /* libfreetype.a */,
+				358DF7D81C1990A4006070D4 /* libglfw3.a */,
+				358DF7D91C1990A4006070D4 /* libIL.a */,
+				358DF7DA1C1990A4006070D4 /* libjasper.a */,
+				358DF7DB1C1990A4006070D4 /* libjpeg.a */,
+				358DF7DC1C1990A4006070D4 /* liblcms.a */,
+				358DF7DD1C1990A4006070D4 /* liblzma.a */,
+				358DF7DE1C1990A4006070D4 /* libmng.a */,
+				358DF7DF1C1990A4006070D4 /* libpng16.a */,
+				358DF7E01C1990A4006070D4 /* libtiff.a */,
+				358DF7E11C1990A4006070D4 /* libz.a */,
+			);
+			path = lib;
+			sourceTree = SOURCE_ROOT;
+		};
+		35B755711C199BC200F09A1F /* FALight */ = {
+			isa = PBXGroup;
+			children = (
+				358DF6381C199086006070D4 /* FAAmbientLight.cpp */,
+				358DF63B1C199086006070D4 /* FADirectionalLight.cpp */,
+				358DF6431C199086006070D4 /* FALight.cpp */,
+				358DF64A1C199086006070D4 /* FAPointLight.cpp */,
+			);
+			name = FALight;
+			sourceTree = "<group>";
+		};
+		35B755721C199BCB00F09A1F /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				358DF63E1C199086006070D4 /* FAGUIElement.cpp */,
+				358DF63F1C199086006070D4 /* FAGUIMaterialComponent.cpp */,
+				358DF6401C199086006070D4 /* FAGUIPlane.cpp */,
+				358DF6411C199086006070D4 /* FAGUIText.cpp */,
+				358DF6421C199086006070D4 /* FAGUITexturedPlane.cpp */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
+		35B755731C199BD700F09A1F /* FARenderPass */ = {
+			isa = PBXGroup;
+			children = (
+				358DF63A1C199086006070D4 /* FACSMRenderPass.cpp */,
+				358DF6441C199086006070D4 /* FAMainRenderPass.cpp */,
+				358DF64B1C199086006070D4 /* FARenderPass.cpp */,
+				358DF64E1C199086006070D4 /* FAShadowMapRenderPass.cpp */,
+			);
+			name = FARenderPass;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		358DF7EE1C199223006070D4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				358DF9681C199288006070D4 /* FAAction.h in Headers */,
+				358DF9691C199288006070D4 /* FAAmbientLight.h in Headers */,
+				358DF96A1C199288006070D4 /* FACamera.h in Headers */,
+				358DF96B1C199288006070D4 /* FACSMRenderPass.h in Headers */,
+				358DF96C1C199288006070D4 /* FADirectionalLight.h in Headers */,
+				358DF96D1C199288006070D4 /* FAEngine.h in Headers */,
+				358DF96E1C199288006070D4 /* FAFont.h in Headers */,
+				358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */,
+				358DF9701C199288006070D4 /* FAGUIMaterialComponent.h in Headers */,
+				358DF9711C199288006070D4 /* FAGUIPlane.h in Headers */,
+				358DF9721C199288006070D4 /* FAGUIText.h in Headers */,
+				358DF9731C199288006070D4 /* FAGUITexturedPlane.h in Headers */,
+				358DF9741C199288006070D4 /* FALight.h in Headers */,
+				35B755771C19CC2F00F09A1F /* GUIScene.h in Headers */,
+				358DF9751C199288006070D4 /* FAMainRenderPass.h in Headers */,
+				358DF9761C199288006070D4 /* FAMaterial.h in Headers */,
+				358DF9771C199288006070D4 /* FAMaterialComponent.h in Headers */,
+				358DF9781C199288006070D4 /* FAMesh.h in Headers */,
+				358DF9791C199288006070D4 /* FAModel.h in Headers */,
+				358DF97A1C199288006070D4 /* FANode.h in Headers */,
+				358DF97B1C199288006070D4 /* FAPointLight.h in Headers */,
+				358DF97C1C199288006070D4 /* FARenderPass.h in Headers */,
+				358DF97D1C199288006070D4 /* FARenderPasscallbackInterface.h in Headers */,
+				358DF97E1C199288006070D4 /* FAScene.h in Headers */,
+				358DF97F1C199288006070D4 /* FAShader.h in Headers */,
+				358DF9801C199288006070D4 /* FAShadowMapRenderPass.h in Headers */,
+				358DF9811C199288006070D4 /* FATerrain.h in Headers */,
+				358DF9821C199288006070D4 /* FATexture.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXLegacyTarget section */
+		358DF5D51C198EA8006070D4 /* make */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 358DF5D61C198EA8006070D4 /* Build configuration list for PBXLegacyTarget "make" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			dependencies = (
+			);
+			name = make;
+			passBuildSettingsInEnvironment = 1;
+			productName = make;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		358DF5C11C198E56006070D4 /* FA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 358DF5C91C198E56006070D4 /* Build configuration list for PBXNativeTarget "FA" */;
+			buildPhases = (
+				358DF5BE1C198E56006070D4 /* Sources */,
+				358DF5BF1C198E56006070D4 /* Frameworks */,
+				358DF5C01C198E56006070D4 /* CopyFiles */,
+				358DF7EE1C199223006070D4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FA;
+			productName = FA;
+			productReference = 358DF5C21C198E56006070D4 /* FA */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		358DF5BA1C198E56006070D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Axenu;
+				TargetAttributes = {
+					358DF5C11C198E56006070D4 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					358DF5D51C198EA8006070D4 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 358DF5BD1C198E56006070D4 /* Build configuration list for PBXProject "FA" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 358DF5B91C198E56006070D4;
+			productRefGroup = 358DF5C31C198E56006070D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				358DF5C11C198E56006070D4 /* FA */,
+				358DF5D51C198EA8006070D4 /* make */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		358DF5BE1C198E56006070D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				358DF6701C199086006070D4 /* Game.cpp in Sources */,
+				358DF6611C199086006070D4 /* FAGUITexturedPlane.cpp in Sources */,
+				358DF6651C199086006070D4 /* FAMaterialComponent.cpp in Sources */,
+				358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */,
+				358DF6661C199086006070D4 /* FAMesh.cpp in Sources */,
+				358DF6591C199086006070D4 /* FACSMRenderPass.cpp in Sources */,
+				358DF66B1C199086006070D4 /* FAScene.cpp in Sources */,
+				358DF6681C199086006070D4 /* FANode.cpp in Sources */,
+				358DF6581C199086006070D4 /* FACamera.cpp in Sources */,
+				358DF6631C199086006070D4 /* FAMainRenderPass.cpp in Sources */,
+				358DF6561C199086006070D4 /* FAAction.cpp in Sources */,
+				358DF6721C199086006070D4 /* testScene.cpp in Sources */,
+				358DF66A1C199086006070D4 /* FARenderPass.cpp in Sources */,
+				358DF65C1C199086006070D4 /* FAFont.cpp in Sources */,
+				358DF66D1C199086006070D4 /* FAShadowMapRenderPass.cpp in Sources */,
+				35B755761C19CC2F00F09A1F /* GUIScene.cpp in Sources */,
+				358DF6601C199086006070D4 /* FAGUIText.cpp in Sources */,
+				358DF65F1C199086006070D4 /* FAGUIPlane.cpp in Sources */,
+				358DF65B1C199086006070D4 /* FAEngine.cpp in Sources */,
+				358DF6671C199086006070D4 /* FAModel.cpp in Sources */,
+				358DF6711C199086006070D4 /* main.cpp in Sources */,
+				358DF65A1C199086006070D4 /* FADirectionalLight.cpp in Sources */,
+				358DF66F1C199086006070D4 /* FATexture.cpp in Sources */,
+				358DF66C1C199086006070D4 /* FAShader.cpp in Sources */,
+				358DF65D1C199086006070D4 /* FAGUIElement.cpp in Sources */,
+				358DF7D41C199095006070D4 /* glm.cpp in Sources */,
+				358DF65E1C199086006070D4 /* FAGUIMaterialComponent.cpp in Sources */,
+				358DF6621C199086006070D4 /* FALight.cpp in Sources */,
+				358DF6691C199086006070D4 /* FAPointLight.cpp in Sources */,
+				358DF66E1C199086006070D4 /* FATerrain.cpp in Sources */,
+				358DF6641C199086006070D4 /* FAMaterial.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		358DF5C71C198E56006070D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		358DF5C81C198E56006070D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		358DF5CA1C198E56006070D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "/Users/Axenu/Developer/FireArrow\\ 2.0/include/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		358DF5CB1C198E56006070D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = "/Users/Axenu/Developer/FireArrow\\ 2.0/include/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		358DF5D71C198EA8006070D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		358DF5D81C198EA8006070D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		358DF5BD1C198E56006070D4 /* Build configuration list for PBXProject "FA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				358DF5C71C198E56006070D4 /* Debug */,
+				358DF5C81C198E56006070D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		358DF5C91C198E56006070D4 /* Build configuration list for PBXNativeTarget "FA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				358DF5CA1C198E56006070D4 /* Debug */,
+				358DF5CB1C198E56006070D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		358DF5D61C198EA8006070D4 /* Build configuration list for PBXLegacyTarget "make" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				358DF5D71C198EA8006070D4 /* Debug */,
+				358DF5D81C198EA8006070D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 358DF5BA1C198E56006070D4 /* Project object */;
+}

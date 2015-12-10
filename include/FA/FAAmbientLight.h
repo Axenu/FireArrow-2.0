@@ -18,7 +18,6 @@ public:
 	virtual void onUpdate(float dt);
 
 	void setColor(glm::vec4 &color);
-	void setAmbientComponent(float ambientComponent);
 
 
 	~FAAmbientLight();

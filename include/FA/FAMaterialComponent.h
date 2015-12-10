@@ -83,7 +83,6 @@ public:
 
 class FADirectionalLightComponent : public FAMaterialComponent {
 private:
-	float *ambient;
 	glm::vec3 *direction;
 	glm::vec4 *color;
 
@@ -103,6 +102,27 @@ public:
 	void setDirection(glm::vec3 *direction);
 	// void setAmbientComponent(float *ambientComponent);
 	void setShadow(bool shadow);
+};
+
+class FADiffuseLightComponent : public FAMaterialComponent {
+private:
+	glm::vec3 *position;
+	glm::vec4 *color;
+	float *radius;
+
+	GLint positionLocation;
+	GLint colorLocation;
+	GLint radiusLocation;
+
+public:
+	FADiffuseLightComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setColor(glm::vec4 *color);
+	void setPosition(glm::vec3 *position);
+	void setRadius(float *radius);
 };
 
 class FAAmbientLightComponent : public FAMaterialComponent {

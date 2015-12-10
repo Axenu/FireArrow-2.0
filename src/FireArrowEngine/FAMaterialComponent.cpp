@@ -153,10 +153,7 @@ FADirectionalLightComponent::FADirectionalLightComponent() {
 	vertexIO = "";
 	vertexMain = "";
 	fragmentIO = "uniform vec4 diffuseColor;\nuniform vec3 direction;\n";
-	fragmentMain = "vec3 normal = normalize(pass_Normal.xyz);\n"
-    "vec3 lightDir = normalize(direction);\n"
-    "float light1 = max(dot(lightDir,normal), 0.0);\n";
-	// fragmentOutput = "(OTHER_OUT)";
+	fragmentMain = "vec4 light1 = max(dot(direction,pass_Normal.xyz), 0.0) * diffuseColor;\n";
 	lightOutput = "light1";
 	name = "Directional light";
 	requirements.push_back(new FAVertexNormalComponent);
@@ -220,6 +217,63 @@ void FADirectionalLightComponent::setShadow(bool shadow) {
 	} else {
 		lightOutput = "light1";
 	}
+}
+
+// Diffuse light material
+
+FADiffuseLightComponent::FADiffuseLightComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "uniform vec4 diffuseColor1;\nuniform vec3 lightPosition;\nuniform float radius;\n";
+	fragmentMain = "vec3 lightDir = normalize(lightPosition-pass_Position.xyz);\n"
+	"vec4 light2 = max(dot(lightDir,pass_Normal.xyz), 0.0) * diffuseColor1;\n"
+	//falloff
+	"float falloff = length(lightPosition-pass_Position.xyz)/radius + 1;\n"
+	"falloff = 1/(falloff*falloff);\n"
+	"light2 = falloff * light2;\n";
+	// fragmentOutput = "(OTHER_OUT)";
+	lightOutput = "light2";
+	name = "Diffuse light";
+	requirements.push_back(new FAVertexNormalComponent);
+	requirements.push_back(new FAVertexPositionComponent);
+	modelData = false;
+}
+
+void FADiffuseLightComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FADiffuseLightComponent::bind() {
+	glUniform4fv(colorLocation, 1, &(*color)[0]);
+	glUniform3fv(positionLocation, 1, &(*position)[0]);
+	glUniform1fv(radiusLocation, 1, &(*radius));
+}
+
+void FADiffuseLightComponent::setUpLocations(GLint shaderProgram) {
+	colorLocation = glGetUniformLocation(shaderProgram, "diffuseColor1");
+	positionLocation = glGetUniformLocation(shaderProgram, "lightPosition");
+	radiusLocation = glGetUniformLocation(shaderProgram, "radius");
+	
+	// if (ambientLocation == -1)
+	// 	std::cout << "Error getting ambientLocation in " << name << " component!" << std::endl;
+	if (colorLocation == -1)
+		std::cout << "Error getting colorLocation in " << name << " component!" << std::endl;
+	if (positionLocation == -1)
+		std::cout << "Error getting positionLocation in " << name << " component!" << std::endl;
+	if (radiusLocation == -1)
+		std::cout << "Error getting radiusLocation in " << name << " component!" << std::endl;
+}
+
+void FADiffuseLightComponent::setColor(glm::vec4 *color) {
+	this->color = color;
+}
+
+void FADiffuseLightComponent::setPosition(glm::vec3 *position) {
+	this->position = position;
+}
+
+void FADiffuseLightComponent::setRadius(float *radius) {
+	this->radius = radius;
 }
 
 //Ambient light material

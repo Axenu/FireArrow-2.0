@@ -9,7 +9,7 @@ FATerrain::FATerrain() {
 	//defualt
 	int size = 100;
 	int tileSize = 1;
-	float heightMapSize = 50;
+	float heightMapSize = 10;
 
 	//heightmap
 	float **map = new float*[50];
@@ -19,6 +19,8 @@ FATerrain::FATerrain() {
 			map[i][x] = 0;
 		}
 	}
+
+	map[1][1] = 10;
 
 	// map[25][24] = 1;
 	// map[25][23] = 2;

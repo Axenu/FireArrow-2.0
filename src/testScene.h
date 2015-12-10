@@ -8,6 +8,7 @@
 #include <FA/FATexture.h>
 #include <FA/FADirectionalLight.h>
 #include <FA/FAAmbientLight.h>
+#include <FA/FAPointLight.h>
 #include <FA/FAShadowMapRenderPass.h>
 #include <FA/FAGUITexturedPlane.h>
 #include <FA/FAGUIMaterialComponent.h>

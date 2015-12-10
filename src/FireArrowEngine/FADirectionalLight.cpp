@@ -21,10 +21,6 @@ void FADirectionalLight::onUpdate(float dt) {
 
 }
 
-void FADirectionalLight::setColor(glm::vec4 &color) {
-	this->color = color;
-}
-
 void FADirectionalLight::setDirection(glm::vec3 direction) {
 	this->direction = direction;
 	renderPass->setDirection(direction);

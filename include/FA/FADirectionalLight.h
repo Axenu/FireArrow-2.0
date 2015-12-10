@@ -9,7 +9,6 @@ class FADirectionalLight : public FALight {
 
 private:
 	glm::vec3 direction;
-	glm::vec4 color;
 	GLuint *shadowMap;
 	FACSMRenderPass *renderPass;
 
@@ -18,7 +17,6 @@ public:
 
 	virtual void onUpdate(float dt);
 
-	void setColor(glm::vec4 &color);
 	void setDirection(glm::vec3 direction);
 
 	GLuint *getShadowMap();
