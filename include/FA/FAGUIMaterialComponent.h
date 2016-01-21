@@ -2,15 +2,14 @@
 #define __First__FAGUIMaterialComponent__
 
 #include "FAGUIPlane.h"
-#include "FAGUIText.h"
 
 class FAGUIMaterialComponent : public FAGUIElement {
     
 private:
     std::string name;
 
-    FAFont *font;
-	FAGUIPlane *background;
+//    FAFont *font;
+//	FAGUIPlane *background;
 
 
 public:

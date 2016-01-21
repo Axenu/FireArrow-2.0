@@ -1,5 +1,5 @@
-#ifndef __First__FAGUIText__
-#define __First__FAGUIText__
+#ifndef __First__FAGUILabel__
+#define __First__FAGUILabel__
 
 #define GLFW_INCLUDE_GLCOREARB
 
@@ -9,7 +9,7 @@
 #include "FAMesh.h"
 #include "FAShader.h"
 
-class FAGUIText : public FAGUIElement {
+class FAGUILabel : public FAGUIElement {
     
 private:
 
@@ -20,12 +20,12 @@ private:
     GLint positionLocation;
     GLint sizeLocation;
 
-    std::string text;
+    std::string text = "Label";
 	
 public:
     
-    FAGUIText();
-    FAGUIText(FAFont *font);
+    FAGUILabel();
+    FAGUILabel(FAFont *font);
 
     void setText(std::string text);
 
@@ -36,7 +36,7 @@ public:
     void renderCharacter(int character, float x, float y, float charWidth, float charHeigth);
     virtual void onRender();
 
-    ~FAGUIText();
+    ~FAGUILabel();
 
     //debug
     void updateShader();

@@ -3,7 +3,7 @@
 
 #include <dirent.h>
 #include <FA/FAScene.h>
-#include <FA/FAGUIText.h>
+#include <FA/FAGUILabel.h>
 #include <FA/FATerrain.h>
 #include <FA/FATexture.h>
 #include <FA/FADirectionalLight.h>
@@ -12,6 +12,7 @@
 #include <FA/FAShadowMapRenderPass.h>
 #include <FA/FAGUITexturedPlane.h>
 #include <FA/FAGUIMaterialComponent.h>
+#include <FA/FAGUIButton.h>
 
 class testScene : public FAScene {
     
@@ -21,7 +22,7 @@ private:
     glm::vec2 previousCursorPosition;
     glm::vec3 cameraMovement;
     FAFont *font;
-    FAGUIText *text;
+    FAGUILabel *text;
     
 public:
     void init();

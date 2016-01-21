@@ -4,6 +4,82 @@ FAFont::FAFont() {
     
 }
 
+FAFont::FAFont(std::string path) {
+	std::ifstream Stream(("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path + ".fnt").c_str());
+	std::string Line;
+	std::string Read, Key, Value;
+	std::size_t i;
+	
+	while( !Stream.eof() )
+	{
+		std::stringstream LineStream;
+		std::getline( Stream, Line );
+		LineStream << Line;
+		
+		//read the line's type
+		LineStream >> Read;
+		if( Read == "common" ) {
+//			std::cout << Line << std::endl;
+			while( !LineStream.eof() )
+			{
+				std::stringstream Converter;
+				LineStream >> Read;
+				i = Read.find( '=' );
+				Key = Read.substr( 0, i );
+				Value = Read.substr( i + 1 );
+				
+				//assign the correct value
+				Converter << Value;
+//				if( Key == "lineHeight" )
+//				{Converter >> LineHeight;}
+//				else if( Key == "base" )
+//				{Converter >> Base;}
+				if( Key == "scaleW" )
+				{Converter >> textureWidth;}
+				else if( Key == "scaleH" )
+				{Converter >> textureHeight;}
+//				else if( Key == "pages" )
+//				{Converter >> Pages;}
+//				else if( Key == "outline" )
+//				{Converter >> Outline;}
+			}
+		} else if (Read == "char") {
+//			std::cout << Line << std::endl;
+			int charID = 0;
+			glyph g;
+			while( !LineStream.eof() )
+			{
+				std::stringstream Converter;
+				LineStream >> Read;
+				i = Read.find( '=' );
+				Key = Read.substr( 0, i );
+				Value = Read.substr( i + 1 );
+				
+				//Assign the correct value
+				Converter << Value;
+				if( Key == "id" )
+				{Converter >> charID;}
+				else if( Key == "x" )
+				{	Converter >> g.x;}
+				else if( Key == "y" )
+				{	Converter >> g.y;}
+				else if( Key == "width" )
+				{	Converter >> g.width;}
+				else if( Key == "height" )
+				{	Converter >> g.height;}
+				else if( Key == "xoffset" )
+				{	Converter >> g.xOffset;}
+				else if( Key == "yoffset" )
+				{	Converter >> g.yOffset;}
+				else if( Key == "xadvance" )
+				{	Converter >> g.xAdvance;}
+			}
+			glyphs.insert(std::pair<int,glyph>(charID,g));
+		}
+	}
+	
+}
+
 FAFont::FAFont(std::string path, const int _fontSize) {
     this->fontSize = _fontSize * 10;
     this->windowWidth = 1024;
@@ -105,8 +181,15 @@ void FAFont::loadCharacters() {
     }
 }
 
+
+
 float FAFont::getFontSize() {
     return fontSize/10;
+}
+
+float FAFont::getWidthOfString(std::string s) {
+	
+	return face->glyph->metrics.width;
 }
 
 FAFont::~FAFont() {

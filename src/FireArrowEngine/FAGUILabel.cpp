@@ -1,6 +1,6 @@
-#include <FA/FAGUIText.h>
+#include <FA/FAGUILabel.h>
 
-FAGUIText::FAGUIText() {
+FAGUILabel::FAGUILabel() {
 	mesh = new FAMesh("square");
 	this->shader = new FAShader("FAText");
 	glUseProgram(this->shader->shaderProgram);
@@ -12,7 +12,7 @@ FAGUIText::FAGUIText() {
 	glUseProgram(0);
 }
 
-FAGUIText::FAGUIText(FAFont *font) {
+FAGUILabel::FAGUILabel(FAFont *font) {
 	mesh = new FAMesh("square");
 
 	this->shader = new FAShader("FAText");
@@ -27,19 +27,23 @@ FAGUIText::FAGUIText(FAFont *font) {
 	this->font = font;
 }
 
-void FAGUIText::setText(std::string text) {
+void FAGUILabel::setText(std::string text) {
 	this->text = text;
+	//load text from font
+	
+	
+	
 }
 
-std::string FAGUIText::getText() {
+std::string FAGUILabel::getText() {
 	return this->text;
 }
 
-void FAGUIText::onUpdate(float dt) {
+void FAGUILabel::onUpdate(float dt) {
 
 }
 
-void FAGUIText::renderCharacter(int character, float x, float y, float charWidth, float charHeigth) {
+void FAGUILabel::renderCharacter(int character, float x, float y, float charWidth, float charHeigth) {
     
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, font->texture[character]);
@@ -53,7 +57,7 @@ void FAGUIText::renderCharacter(int character, float x, float y, float charWidth
 	
 }
 
-void FAGUIText::onRender() {
+void FAGUILabel::onRender() {
 	glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // glDisable(GL_CULL_FACE);
@@ -74,11 +78,11 @@ void FAGUIText::onRender() {
     }
 }
 
-FAGUIText::~FAGUIText() {
+FAGUILabel::~FAGUILabel() {
 
 }
 
-void FAGUIText::updateShader() {
+void FAGUILabel::updateShader() {
 	delete shader;
 	this->shader = new FAShader("FAText");
 	glUseProgram(this->shader->shaderProgram);

@@ -8,7 +8,7 @@ FAMesh::FAMesh() {
 }
 
 FAMesh::FAMesh(std::string path) : FAMesh() {
-	int place = path.find_last_of(".");
+	size_t place = path.find_last_of(".");
     if (place != std::string::npos) {
         std::string filetype = path.substr(place+1, path.length());
         if (filetype == "fa"){

@@ -2,7 +2,7 @@
 
 void testScene::init() {
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
-    text = new FAGUIText(font);
+    text = new FAGUILabel(font);
     text->setText("fps: 0.0");
     text->setPosition(0.01,0.95);
     addChild(text);
@@ -15,6 +15,8 @@ void testScene::init() {
     // FAMesh *mesh = new FAMesh("barrel.fa");
     // FAModel *model = new FAModel(*mesh, *material);
     // this->addChild(model);
+	
+	FAFont *n = new FAFont("Arial");
 
 
     glm::vec4 color = glm::vec4(1,1,1,1);
@@ -52,8 +54,8 @@ void testScene::init() {
     // light->setAmbientComponent(ambient);
     addChild(light);
 
-//    FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
-//    addChild(alight);
+    FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
+    addChild(alight);
 
     FAPointLight *pLight = new FAPointLight();
 	glm::vec4 redColor = glm::vec4(1,0,0,1);
@@ -70,9 +72,22 @@ void testScene::init() {
     // texture = *pass->getShadowMap();
     // textMaterial->setTextureArray(light->getShadowMap(), 0);
     // textMaterial->addMaterialComponent(comp);
-
-
 	
+	FAFont *lightFont = new FAFont("helveticaneue-light-webfont.ttf", 20, this->windowWidth, this->windowHeigth);
+
+	FAGUIButton *b1 = new FAGUIButton(lightFont);
+	b1->setText("Add");
+	this->addChild(b1);
+	
+//	FAGUIPlane *p1 = new FAGUIPlane();
+//	p1->setHeight(0.1);
+//	p1->setWidth(0.18);
+//	addChild(p1);
+//	
+//	FAGUIText *t1 = new FAGUIText(lightFont);
+//	t1->setY(0.025);
+//	t1->setX(0.025);
+//	addChild(t1);
 
 }
 

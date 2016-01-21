@@ -7,7 +7,7 @@
 #include "FAMainRenderPass.h"
 #include "FACSMRenderPass.h"
 #include "FALight.h"
-#include "FAGUIText.h"
+#include "FAGUILabel.h"
 
 // class FARenderPass;
 class FAEngine;
