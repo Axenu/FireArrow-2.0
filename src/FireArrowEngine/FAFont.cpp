@@ -57,26 +57,31 @@ FAFont::FAFont(std::string path) {
 				
 				//Assign the correct value
 				Converter << Value;
-				if( Key == "id" )
-				{Converter >> charID;}
-				else if( Key == "x" )
-				{	Converter >> g.x;}
-				else if( Key == "y" )
-				{	Converter >> g.y;}
-				else if( Key == "width" )
-				{	Converter >> g.width;}
-				else if( Key == "height" )
-				{	Converter >> g.height;}
-				else if( Key == "xoffset" )
-				{	Converter >> g.xOffset;}
-				else if( Key == "yoffset" )
-				{	Converter >> g.yOffset;}
-				else if( Key == "xadvance" )
-				{	Converter >> g.xAdvance;}
+				if( Key == "id" ) {
+					Converter >> charID;
+				} else if( Key == "x" ) {
+					Converter >> g.x;
+				} else if( Key == "y" ) {
+					Converter >> g.y;
+				} else if( Key == "width" ) {
+					Converter >> g.width;
+				} else if( Key == "height" ) {
+					Converter >> g.height;
+				} else if( Key == "xoffset" ) {
+					Converter >> g.xOffset;
+				} else if( Key == "yoffset" ) {
+					Converter >> g.yOffset;
+				} else if( Key == "xadvance" ) {
+					Converter >> g.xAdvance;
+				}
 			}
+			g.width /= textureWidth;
+			g.height /= textureHeight;
 			glyphs.insert(std::pair<int,glyph>(charID,g));
 		}
 	}
+	
+	fontTexture = FATexture::createTexture(("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path + ".png").c_str());
 	
 }
 

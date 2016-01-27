@@ -1,8 +1,11 @@
 #include "testScene.h"
 
 void testScene::init() {
+	
+	FAFont *n = new FAFont("Arial");
+	
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
-    text = new FAGUILabel(font);
+    text = new FAGUILabel(n);
     text->setText("fps: 0.0");
     text->setPosition(0.01,0.95);
     addChild(text);
@@ -15,8 +18,6 @@ void testScene::init() {
     // FAMesh *mesh = new FAMesh("barrel.fa");
     // FAModel *model = new FAModel(*mesh, *material);
     // this->addChild(model);
-	
-	FAFont *n = new FAFont("Arial");
 
 
     glm::vec4 color = glm::vec4(1,1,1,1);

@@ -10,12 +10,13 @@
 #include <sstream>
 #include <map>
 #include <GLFW/glfw3.h>
+#include <FA/FATexture.h>
 
 struct glyph {
-	int x, y;
-	int width, height;
-	int xOffset, yOffset;
-	int xAdvance;
+	float x, y;
+	float width, height;
+	float xOffset, yOffset;
+	float xAdvance;
 };
 
 class FAFont {
@@ -24,10 +25,8 @@ private:
     float fontSize;
 	float fontHeight;
 	GLuint textureAtlas;
-	int textureWidth;
-	int textureHeight;
-	
-	std::map<int, glyph> glyphs;
+	float textureWidth;
+	float textureHeight;
 	
 public:
     uint windowWidth;
@@ -44,6 +43,9 @@ public:
 	
 	float getFontSize();
 	float getWidthOfString(std::string s);
+	
+	std::map<int, glyph> glyphs;
+	GLuint fontTexture;
 
 	// float getFontHeight();
 };

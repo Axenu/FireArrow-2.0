@@ -134,7 +134,7 @@ void FAMesh::loadFAModel(std::string path) {
                 for (int i = 0; i < count * 3; i++) {
                     indices.push_back(i);
                 }
-                float v1, v2, v3, n, uv1, uv2, uv3;
+                float v1, v2, v3, n = 0, uv1 = 0, uv2 = 0, uv3 = 0;
                 for (int i = 0; i < count; i++) {
                     file >> v1 >> v2 >> v3;
                     if (_hasNormal) {
