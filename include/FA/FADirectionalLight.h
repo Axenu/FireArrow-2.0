@@ -8,9 +8,11 @@
 class FADirectionalLight : public FALight {
 
 private:
-	glm::vec3 direction;
+//	glm::vec3 direction;
 	GLuint *shadowMap;
-	FACSMRenderPass *renderPass;
+	FADirectionalLightComponent *lightComponent;
+	FAShadowRenderPass *renderPass;
+	//change to any shadow pass
 
 public:
 	FADirectionalLight();
@@ -18,6 +20,7 @@ public:
 	virtual void onUpdate(float dt);
 
 	void setDirection(glm::vec3 direction);
+	void setShadowMap(FAShadowRenderPass &pass);
 
 	GLuint *getShadowMap();
 

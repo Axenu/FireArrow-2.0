@@ -20,6 +20,7 @@ public:
 	void render();
 	GLuint *getShadowMap();
 	glm::mat4 *getInverseShadowMatrix();
+//	std::vector<FAMaterialComponent *> getRequiredMaterialComponents();
 
 };
 

@@ -18,7 +18,10 @@ private:
     FAShader *shader;
 
     GLint positionLocation;
-    GLint sizeLocation;
+	
+	GLuint VBO = 0;
+	GLuint EBO = 0;
+	GLuint VAO = 0;
 
     std::string text = "Label";
 	
@@ -28,6 +31,8 @@ public:
     FAGUILabel(FAFont *font);
 
     void setText(std::string text);
+	
+	float getWidth();
 
     std::string getText();
 

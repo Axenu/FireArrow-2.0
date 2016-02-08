@@ -1,9 +1,9 @@
 #ifndef __First__FACSMRenderPass__
 #define __First__FACSMRenderPass__
 
-#include "FARenderPass.h"
+#include "FAShadowRenderPass.h"
 
-class FACSMRenderPass : public FARenderPass {
+class FACSMRenderPass : public FAShadowRenderPass {
 
 private:
 	GLuint shadowMap;
@@ -11,7 +11,7 @@ private:
     FAShader *shader;
     GLint modelMatrixLocation;
     GLint viewProjectionMatrixLocation;
-    glm::vec3 direction;
+//    glm::vec3 *direction;
 
 	int frustums = 4; //remove static definition
 	glm::mat4 *inverseShadowMatrix;
@@ -26,7 +26,8 @@ public:
 	GLuint *getShadowMap();
 	glm::mat4 *getInverseShadowMatrix();
 	int *getFrustums();
-	void setDirection(glm::vec3 &direction);
+	//	void setDirection(glm::vec3 *direction);
+//	std::vector<FAMaterialComponent *> getRequiredMaterialComponents();
 
 };
 

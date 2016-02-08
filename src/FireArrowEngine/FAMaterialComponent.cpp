@@ -181,7 +181,15 @@ void FADirectionalLightComponent::setAttribute(std::string name, float value) {
 void FADirectionalLightComponent::bind() {
 	// glUniform1f(ambientLocation, *ambient);
 	glUniform4fv(colorLocation, 1, &(*color)[0]);
-	glUniform3fv(directionLocation, 1, &(*direction)[0]);
+	glm::mat4 m = *this->modelMatrix;
+	m[3][0] = 0;
+	m[3][1] = 0;
+	m[3][2] = 0;
+	m[3][3] = 1;
+	
+	glm::vec4 v = m * glm::vec4(0,0,1,1);
+	glm::vec3 d = glm::vec3(v.x, v.y, v.z);
+	glUniform3fv(directionLocation, 1, &d[0]);
 }
 
 void FADirectionalLightComponent::setUpLocations(GLint shaderProgram) {
@@ -202,8 +210,8 @@ void FADirectionalLightComponent::setColor(glm::vec4 *color) {
 	this->color = color;
 }
 
-void FADirectionalLightComponent::setDirection(glm::vec3 *direction) {
-	this->direction = direction;
+void FADirectionalLightComponent::setModelMatrix(glm::mat4 *modelMatrix) {
+	this->modelMatrix = modelMatrix;
 }
 
 // void FADirectionalLightComponent::setAmbientComponent(float *ambientComponent) {

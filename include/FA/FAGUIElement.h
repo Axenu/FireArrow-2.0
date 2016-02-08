@@ -37,6 +37,12 @@ public:
     void setSize(float x, float y);
     void setWidth(float width);
     void setHeight(float height);
+	
+	float getX();
+	float getY();
+	glm::vec2 getSize();
+	float getWidth();
+	float getHeight();
 
     int getID();
 

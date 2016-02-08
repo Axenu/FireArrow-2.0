@@ -23,7 +23,8 @@ void testScene::init() {
     glm::vec4 color = glm::vec4(1,1,1,1);
     // float ambient = 0.5;
     FADirectionalLight *light;
-    glm::vec3 direction = glm::vec3(-1,0.5,0);
+	FACSMRenderPass *pass = new FACSMRenderPass();
+    glm::vec3 direction = glm::vec3(1,-1,0);
 
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
@@ -35,7 +36,7 @@ void testScene::init() {
 
     //testing actions
     FAActionSequence *group = new FAActionSequence();
-    group->addAction(new FAActionMoveTo(glm::vec3(10,1,-5), 3.0f));
+//    group->addAction(new FAActionMoveTo(glm::vec3(10,1,-5), 3.0f));
     group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
 //    m->runAction(group);
 	
@@ -51,19 +52,22 @@ void testScene::init() {
 
     light = new FADirectionalLight();
     light->setColor(color);
-    light->setDirection(direction);
+//	light->rotate(glm::vec3(0,0,1));
+	light->setDirection(direction);
+	light->setShadowMap(*pass);
     // light->setAmbientComponent(ambient);
     addChild(light);
+//	light->runAction(group);
 
     FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
     addChild(alight);
 
-    FAPointLight *pLight = new FAPointLight();
-	glm::vec4 redColor = glm::vec4(1,0,0,1);
-    pLight->setColor(redColor);
-    pLight->setPosition(0,1,0);
-    addChild(pLight);
-	pLight->runAction(group);
+//    FAPointLight *pLight = new FAPointLight();
+//	glm::vec4 redColor = glm::vec4(1,0,0,1);
+//    pLight->setColor(redColor);
+//    pLight->setPosition(0,1,0);
+//    addChild(pLight);
+//	pLight->runAction(group);
 
     // FAShadowMapRenderPass *pass = new FAShadowMapRenderPass();
     // addRenderPass(pass);
@@ -74,11 +78,21 @@ void testScene::init() {
     // textMaterial->setTextureArray(light->getShadowMap(), 0);
     // textMaterial->addMaterialComponent(comp);
 	
-	FAFont *lightFont = new FAFont("helveticaneue-light-webfont.ttf", 20, this->windowWidth, this->windowHeigth);
+//	FAFont *lightFont = new FAFont("helveticaneue-light-webfont.ttf", 20, this->windowWidth, this->windowHeigth);
 
-	FAGUIButton *b1 = new FAGUIButton(lightFont);
-	b1->setText("Add");
-	this->addChild(b1);
+	FAGUIMenu *menu = new FAGUIMenu(n);
+	menu->addLabel("test Label");
+	menu->addLabel("Hello gWorld!");
+	menu->addLabel("test Label");
+	menu->addLabel("Hello gWorld!");
+	menu->addLabel("test Label");
+	menu->addLabel("Hello gWorld!");
+	this->addChild(menu);
+	
+//	FAGUIButton *b1 = new FAGUIButton(n);
+//	b1->setText("Add");
+//	this->addChild(b1);
+//	std::cout << text->getWidth() << std::endl;
 	
 //	FAGUIPlane *p1 = new FAGUIPlane();
 //	p1->setHeight(0.1);

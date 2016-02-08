@@ -13,10 +13,9 @@
 #include <FA/FATexture.h>
 
 struct glyph {
-	float x, y;
-	float width, height;
-	float xOffset, yOffset;
 	float xAdvance;
+	float x1, x2, y1, y2;
+	float u1, u2, v1, v2;
 };
 
 class FAFont {
@@ -25,6 +24,7 @@ private:
     float fontSize;
 	float fontHeight;
 	GLuint textureAtlas;
+	float baseline;
 	float textureWidth;
 	float textureHeight;
 	
@@ -42,7 +42,8 @@ public:
     void loadCharacters();
 	
 	float getFontSize();
-	float getWidthOfString(std::string s);
+	float getHeight();
+//	float getWidthOfString(std::string s);
 	
 	std::map<int, glyph> glyphs;
 	GLuint fontTexture;

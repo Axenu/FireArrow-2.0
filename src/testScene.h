@@ -13,6 +13,7 @@
 #include <FA/FAGUITexturedPlane.h>
 #include <FA/FAGUIMaterialComponent.h>
 #include <FA/FAGUIButton.h>
+#include <FA/FAGUIMenu.h>
 
 class testScene : public FAScene {
     

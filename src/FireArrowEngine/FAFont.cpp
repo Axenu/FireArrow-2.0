@@ -9,6 +9,12 @@ FAFont::FAFont(std::string path) {
 	std::string Line;
 	std::string Read, Key, Value;
 	std::size_t i;
+	std::string textureFileName = "";
+	
+	float x = 0, y = 0;
+	float width = 0, height = 0;
+	float xOffset = 0, yOffset = 0;
+//	float lineHeight = 0;
 	
 	while( !Stream.eof() )
 	{
@@ -30,18 +36,34 @@ FAFont::FAFont(std::string path) {
 				
 				//assign the correct value
 				Converter << Value;
-//				if( Key == "lineHeight" )
-//				{Converter >> LineHeight;}
-//				else if( Key == "base" )
-//				{Converter >> Base;}
 				if( Key == "scaleW" )
 				{Converter >> textureWidth;}
 				else if( Key == "scaleH" )
-				{Converter >> textureHeight;}
-//				else if( Key == "pages" )
-//				{Converter >> Pages;}
-//				else if( Key == "outline" )
-//				{Converter >> Outline;}
+				{Converter >> textureHeight;
+					fontHeight /= textureHeight;
+				}
+				else if( Key == "base" )
+				{Converter >> baseline;}
+				else if( Key == "file" )
+				{Converter >> textureFileName;}
+				else if( Key == "lineHeight" ) {
+					Converter >> fontHeight;
+				}
+			}
+		} else if( Read == "info" ) {
+			//			std::cout << Line << std::endl;
+			while( !LineStream.eof() )
+			{
+				std::stringstream Converter;
+				LineStream >> Read;
+				i = Read.find( '=' );
+				Key = Read.substr( 0, i );
+				Value = Read.substr( i + 1 );
+				
+				//assign the correct value
+				Converter << Value;
+				if( Key == "size" )
+				{Converter >> fontSize;}
 			}
 		} else if (Read == "char") {
 //			std::cout << Line << std::endl;
@@ -60,27 +82,45 @@ FAFont::FAFont(std::string path) {
 				if( Key == "id" ) {
 					Converter >> charID;
 				} else if( Key == "x" ) {
-					Converter >> g.x;
+					Converter >> x;
 				} else if( Key == "y" ) {
-					Converter >> g.y;
+					Converter >> y;
 				} else if( Key == "width" ) {
-					Converter >> g.width;
+					Converter >> width;
 				} else if( Key == "height" ) {
-					Converter >> g.height;
+					Converter >> height;
 				} else if( Key == "xoffset" ) {
-					Converter >> g.xOffset;
+					Converter >> xOffset;
 				} else if( Key == "yoffset" ) {
-					Converter >> g.yOffset;
+					Converter >> yOffset;
 				} else if( Key == "xadvance" ) {
 					Converter >> g.xAdvance;
 				}
 			}
-			g.width /= textureWidth;
-			g.height /= textureHeight;
+			x /= textureWidth;
+			y /= textureHeight;
+			y = 1 - y;
+			xOffset /= textureWidth;
+			yOffset /= textureHeight;
+			g.xAdvance /= (textureWidth * 2);
+			width /= textureWidth;
+			height /= textureHeight;
+			yOffset = baseline/textureHeight - height - yOffset;
+//			fontHeight /= textureHeight;
+//			std::cout << fontHeight << std::endl;
+			g.x1 = xOffset/2 - 1;
+			g.x2 = (width + xOffset)/2 - 1;
+			g.y1 = yOffset/2.0 - 1.0;// + fontHeight/2.0;
+			g.y2 = (height + yOffset)/2.0 - 1.0;// + fontHeight/2.0;
+			g.u1 = x;
+			g.u2 = x + width;
+			g.v1 = y - height;
+			g.v2 = y;
 			glyphs.insert(std::pair<int,glyph>(charID,g));
 		}
 	}
-	
+//	fontHeight /= textureHeight;
+	fontSize /= textureHeight;
 	fontTexture = FATexture::createTexture(("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path + ".png").c_str());
 	
 }
@@ -189,13 +229,17 @@ void FAFont::loadCharacters() {
 
 
 float FAFont::getFontSize() {
-    return fontSize/10;
+    return fontSize;
 }
 
-float FAFont::getWidthOfString(std::string s) {
-	
-	return face->glyph->metrics.width;
+float FAFont::getHeight() {
+	return this->fontSize;
 }
+
+//float FAFont::getWidthOfString(std::string s) {
+//	
+//	return face->glyph->metrics.width;
+//}
 
 FAFont::~FAFont() {
     

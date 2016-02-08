@@ -129,3 +129,7 @@ GLuint *FAShadowMapRenderPass::getShadowMap() {
 glm::mat4 *FAShadowMapRenderPass::getInverseShadowMatrix() {
     return &this->inverseShadowMatrix;
 }
+
+//std::vector<FAMaterialComponent *> FAShadowMapRenderPass::getRequiredMaterialComponents() {
+//	return std::vector<FAMaterialComponent *>();
+//}

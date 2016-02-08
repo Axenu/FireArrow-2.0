@@ -80,6 +80,12 @@ FACSMRenderPass::FACSMRenderPass() {
         std::cout << "Error getting uniform viewProjectionMatrixLocation" << std::endl;
 
     inverseShadowMatrix = new glm::mat4[frustums];
+	
+	FACSMComponent *csmComponent = new FACSMComponent();
+	csmComponent->setTexture(&this->shadowMap);
+	csmComponent->setFrustums(&this->frustums);
+	csmComponent->setInverseShadowMatrix(this->inverseShadowMatrix);
+	this->requiredMaterialComponents.push_back(csmComponent);
 
 }
 
@@ -92,12 +98,19 @@ void FACSMRenderPass::render() {
     glEnable(GL_CULL_FACE);
     // glViewport(0,0,this->windowWidth,this->windowHeight);
     glViewport(0,0,shadowMapWidth,shadowMapHeight);
-    glm::vec3 lightInvDir = -direction;
+	glm::mat4 m = *this->modelmatrix;
+	m[3][0] = 0;
+	m[3][1] = 0;
+	m[3][2] = 0;
+	m[3][3] = 1;
+	
+	glm::vec4 v = m * glm::vec4(0,0,1,1);
+	glm::vec3 lightInvDir = glm::vec3(-v.x, -v.y, -v.z);//-*direction;
     glm::mat4 *shadowMatrix = new glm::mat4[frustums];
     glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
     glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
-    glm::mat4 depthModelMatrix = glm::mat4(1.0);
-    glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
+//    glm::mat4 depthModelMatrix = glm::mat4(1.0);
+	glm::mat4 depthMVP = depthProjectionMatrix * *this->modelmatrix;// * depthModelMatrix;
     shadowMatrix[0] = calculateShadowCamera(0, 4);
     shadowMatrix[1] = calculateShadowCamera(4, 12);
     shadowMatrix[2] = calculateShadowCamera(12, 30);
@@ -157,9 +170,13 @@ int *FACSMRenderPass::getFrustums() {
     return &this->frustums;
 }
 
-void FACSMRenderPass::setDirection(glm::vec3 &direction) {
-    this->direction = direction;
-}
+//void FACSMRenderPass::setDirection(glm::vec3 *direction) {
+//    this->direction = direction;
+//}
+
+//std::vector<FAMaterialComponent *> FACSMRenderPass::getRequiredMaterialComponents() {
+//	return std::vector<FAMaterialComponent *>();
+//}
 
 // -----------------(( private ))---------------------
 
@@ -172,7 +189,17 @@ glm::mat4 FACSMRenderPass::calculateShadowCamera(float near, float far) {
 	float aspectRatio = parent->getCamera()->getAspectRatio();
 	glm::vec3 camPosition = parent->getCamera()->getPosition();
 
-	glm::vec3 globalLightDirection = -direction;
+//	glm::vec3 globalLightDirection = -*direction;
+	
+	glm::mat4 m = *this->modelmatrix;
+	m[3][0] = 0;
+	m[3][1] = 0;
+	m[3][2] = 0;
+	m[3][3] = 1;
+	
+	glm::vec4 v = m * glm::vec4(0,0,1,0);
+	glm::vec3 globalLightDirection = glm::vec3(-v.x,-v.y,-v.z);
+	globalLightDirection = glm::normalize(globalLightDirection);
 
     glm::vec3 cameraPoints[8];
     glm::vec3 cameraDirection = glm::normalize(glm::vec3(-camViewMatrix[0][2],-camViewMatrix[1][2],-camViewMatrix[2][2]));

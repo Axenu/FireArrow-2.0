@@ -74,7 +74,25 @@ void FAGUIElement::setHeight(float height) {
 	this->size.y = height;
 }
 
+float FAGUIElement::getX() {
+	return this->position.x;
+}
 
+float FAGUIElement::getY() {
+	return this->position.y;
+}
+
+glm::vec2 FAGUIElement::getSize() {
+	return this->size;
+}
+
+float FAGUIElement::getWidth() {
+	return this->size.x;
+}
+
+float FAGUIElement::getHeight() {
+	return this->size.y;
+}
 
 int FAGUIElement::getID() {
 	return this->identity;

@@ -8,5 +8,5 @@ out vec4 Frag_Data;
 
 void main() {
     Frag_Data = vec4(1) * texture(fontTexture, pass_UV).r;
-    // Frag_Data = vec4(1);
+    // Frag_Data = vec4(pass_UV, 1, 1);
 }

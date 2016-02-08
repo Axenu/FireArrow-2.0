@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351945B61C5CCD5A0029B544 /* FAShadowRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 351945B41C5CCD5A0029B544 /* FAShadowRenderPass.cpp */; };
+		351945B91C5CEA160029B544 /* FAShadowRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 351945B81C5CEA160029B544 /* FAShadowRenderPass.h */; };
+		351FE8571C67A16C009CB0BA /* FAGUIMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */; };
+		351FE8591C67A17D009CB0BA /* FAGUIMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 351FE8581C67A17D009CB0BA /* FAGUIMenu.h */; };
 		358DF6561C199086006070D4 /* FAAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6371C199086006070D4 /* FAAction.cpp */; };
 		358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6381C199086006070D4 /* FAAmbientLight.cpp */; };
 		358DF6581C199086006070D4 /* FACamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6391C199086006070D4 /* FACamera.cpp */; };
@@ -99,6 +103,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		351945B41C5CCD5A0029B544 /* FAShadowRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAShadowRenderPass.cpp; sourceTree = "<group>"; };
+		351945B81C5CEA160029B544 /* FAShadowRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAShadowRenderPass.h; sourceTree = "<group>"; };
+		351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIMenu.cpp; sourceTree = "<group>"; };
+		351FE8581C67A17D009CB0BA /* FAGUIMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUIMenu.h; sourceTree = "<group>"; };
 		358DF5C21C198E56006070D4 /* FA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FA; sourceTree = BUILT_PRODUCTS_DIR; };
 		358DF6371C199086006070D4 /* FAAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAction.cpp; sourceTree = "<group>"; };
 		358DF6381C199086006070D4 /* FAAmbientLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAmbientLight.cpp; sourceTree = "<group>"; };
@@ -313,9 +321,11 @@
 				358DF6911C199095006070D4 /* FAScene.h */,
 				358DF6921C199095006070D4 /* FAShader.h */,
 				358DF6931C199095006070D4 /* FAShadowMapRenderPass.h */,
+				351945B81C5CEA160029B544 /* FAShadowRenderPass.h */,
 				358DF6941C199095006070D4 /* FATerrain.h */,
 				358DF6951C199095006070D4 /* FATexture.h */,
 				35B7557C1C19D6A300F09A1F /* FAGUIButton.h */,
+				351FE8581C67A17D009CB0BA /* FAGUIMenu.h */,
 			);
 			path = FA;
 			sourceTree = "<group>";
@@ -360,6 +370,7 @@
 				358DF6411C199086006070D4 /* FAGUILabel.cpp */,
 				358DF6421C199086006070D4 /* FAGUITexturedPlane.cpp */,
 				35B755781C19D65E00F09A1F /* FAGUIButton.cpp */,
+				351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -370,6 +381,7 @@
 				358DF63A1C199086006070D4 /* FACSMRenderPass.cpp */,
 				358DF6441C199086006070D4 /* FAMainRenderPass.cpp */,
 				358DF64B1C199086006070D4 /* FARenderPass.cpp */,
+				351945B41C5CCD5A0029B544 /* FAShadowRenderPass.cpp */,
 				358DF64E1C199086006070D4 /* FAShadowMapRenderPass.cpp */,
 			);
 			name = FARenderPass;
@@ -383,10 +395,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				358DF9681C199288006070D4 /* FAAction.h in Headers */,
+				351945B91C5CEA160029B544 /* FAShadowRenderPass.h in Headers */,
 				358DF9691C199288006070D4 /* FAAmbientLight.h in Headers */,
 				358DF96A1C199288006070D4 /* FACamera.h in Headers */,
 				358DF96B1C199288006070D4 /* FACSMRenderPass.h in Headers */,
 				358DF96C1C199288006070D4 /* FADirectionalLight.h in Headers */,
+				351FE8591C67A17D009CB0BA /* FAGUIMenu.h in Headers */,
 				358DF96D1C199288006070D4 /* FAEngine.h in Headers */,
 				358DF96E1C199288006070D4 /* FAFont.h in Headers */,
 				358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */,
@@ -501,6 +515,8 @@
 				358DF6581C199086006070D4 /* FACamera.cpp in Sources */,
 				358DF6631C199086006070D4 /* FAMainRenderPass.cpp in Sources */,
 				358DF6561C199086006070D4 /* FAAction.cpp in Sources */,
+				351FE8571C67A16C009CB0BA /* FAGUIMenu.cpp in Sources */,
+				351945B61C5CCD5A0029B544 /* FAShadowRenderPass.cpp in Sources */,
 				358DF6721C199086006070D4 /* testScene.cpp in Sources */,
 				358DF66A1C199086006070D4 /* FARenderPass.cpp in Sources */,
 				358DF65C1C199086006070D4 /* FAFont.cpp in Sources */,

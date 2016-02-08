@@ -83,8 +83,8 @@ public:
 
 class FADirectionalLightComponent : public FAMaterialComponent {
 private:
-	glm::vec3 *direction;
 	glm::vec4 *color;
+	glm::mat4 *modelMatrix;
 
 	// GLint ambientLocation;
 	GLint directionLocation;
@@ -99,7 +99,7 @@ public:
 	void setUpLocations(GLint shaderProgram);
 
 	void setColor(glm::vec4 *color);
-	void setDirection(glm::vec3 *direction);
+	void setModelMatrix(glm::mat4 *modelMatrix);
 	// void setAmbientComponent(float *ambientComponent);
 	void setShadow(bool shadow);
 };
