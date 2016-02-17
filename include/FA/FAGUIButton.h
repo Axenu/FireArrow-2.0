@@ -23,6 +23,11 @@ public:
 	FAGUIButton();
 	FAGUIButton(FAFont *font);
 	
+	void cursorPress();
+	void cursorRelease();
+	void cursorEnter();
+	void cursorLeave();
+	
 	void setText(std::string s);
 	
 	~FAGUIButton();

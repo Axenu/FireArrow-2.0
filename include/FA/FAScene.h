@@ -15,6 +15,8 @@ class FAEngine;
 class FAScene : FARenderPasscallbackInterface {
 
 private:
+	glm::vec2 lastCursorPosition;
+	FAGUIElement *currentElement = nullptr;
 
 public:
 

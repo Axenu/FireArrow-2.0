@@ -5,6 +5,9 @@ FAGUIElement::FAGUIElement() {
 }
 
 void FAGUIElement::addChild(FAGUIElement *child) {
+	if (child->isClickable) {
+		this->isClickable = true;
+	}
 	this->children.push_back(child);
 }
 
@@ -26,6 +29,38 @@ void FAGUIElement::render() {
 	onRender();
     for (FAGUIElement *child : children)
         child->render();
+}
+
+//intersection test
+FAGUIElement* FAGUIElement::testCursorCollition(glm::vec2 position) {
+	if (!isClickable) {return nullptr;}
+	if (position.x > this->globalTransformation.x && position.x < this->globalTransformation.x + this->size.x) {
+		if (position.y > this->globalTransformation.y && position.y < this->globalTransformation.y + this->size.y) {
+			for (FAGUIElement *e : this->children) {
+				if (e->testCursorCollition(position) != nullptr) {
+					return e;
+				}
+			}
+			return this;
+		}
+	}
+	return nullptr;
+}
+
+void FAGUIElement::cursorPress() {
+	
+}
+
+void FAGUIElement::cursorRelease() {
+	
+}
+
+void FAGUIElement::cursorEnter() {
+	
+}
+
+void FAGUIElement::cursorLeave() {
+	
 }
 
 //setters

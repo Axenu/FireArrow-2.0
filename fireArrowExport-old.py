@@ -95,6 +95,7 @@ def export(filepath):
             for face in mesh.tessfaces:
                 out_file.write('%f %f %f ' % (face.normal.x, face.normal.z, face.normal.y))
 
+        #colors
         if parameters.get("Colors"):
             out_file.write('c ')
             out_file.write('%i ' % (len(mesh.tessfaces)))

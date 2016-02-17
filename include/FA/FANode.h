@@ -4,6 +4,9 @@
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#define GLFW_INCLUDE_GLCOREARB
+
+#include <GLFW/glfw3.h>
 #include <vector>
 #include "FAAction.h"
 
@@ -64,9 +67,11 @@ public:
     void runAction(FAAction *action);
 
 	virtual ~FANode();
+	
+	
+	glm::vec3 position;
 
 protected:
-	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 scale;
     glm::mat4 modelMatrix;

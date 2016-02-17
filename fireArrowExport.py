@@ -2,7 +2,7 @@ bl_info = {
     "name":         "FireArrowExport",
     "author":       "Simon Nilsson",
     "blender":      (2,7,1),
-    "version":      (0,0,1),
+    "version":      (0,1,0),
     "location":     "File > Import-Export",
     "description":  "Export custom data format",
     "category":     "Import-Export"

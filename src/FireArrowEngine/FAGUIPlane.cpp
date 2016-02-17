@@ -6,6 +6,7 @@ FAGUIPlane::FAGUIPlane() {
 	this->color = glm::vec4(1,0,0,0.5);
 	this->mesh = new FAMesh("square");
 	this->shader = new FAShader("FAPlane");
+	this->isClickable = false;
 	glUseProgram(this->shader->shaderProgram);
 
 	//get uniforms
@@ -24,7 +25,7 @@ void FAGUIPlane::onUpdate(float dt) {
 }
 
 void FAGUIPlane::onRender() {
-	glm::vec2 pos = glm::vec2((this->globalTransformation.x*2-1),this->globalTransformation.y*2-1);
+	glm::vec2 pos = glm::vec2((this->globalTransformation.x*2-1),1-this->globalTransformation.y*2);
 	glm::vec2 size = glm::vec2(this->size.x*2,this->size.y*2);
     glUseProgram(shader->shaderProgram);
 	glUniform2fv(positionLocation, 1, &pos[0]);

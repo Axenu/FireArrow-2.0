@@ -33,6 +33,22 @@ FAGUIButton::FAGUIButton(FAFont *font) {
 	addChild(label);
 }
 
+void FAGUIButton::cursorPress() {
+	
+}
+
+void FAGUIButton::cursorRelease() {
+	
+}
+
+void FAGUIButton::cursorEnter() {
+	
+}
+
+void FAGUIButton::cursorLeave() {
+	
+}
+
 void FAGUIButton::setText(std::string s) {
 	this->label->setText(s);
 }

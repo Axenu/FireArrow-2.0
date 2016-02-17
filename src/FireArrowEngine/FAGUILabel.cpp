@@ -44,27 +44,27 @@ void FAGUILabel::setText(std::string text) {
 		//v0 |_
 		vertices.push_back(x + g.x1); //x1
 		vertices.push_back(g.y1); //y1
-							   //z?
+		
 		vertices.push_back(g.u1); //u1
 		vertices.push_back(g.v1); //v1
 		
 		//v1 |-
 		vertices.push_back(x + g.x1); //x1
 		vertices.push_back(g.y2); //y2
-							   //z?
+		
 		vertices.push_back(g.u1); //u
 		vertices.push_back(g.v2); //v2
 		//v2-|
 		vertices.push_back(x + g.x2); //x2
 		vertices.push_back(g.y2); //y2
-							   //z?
+		
 		vertices.push_back(g.u2); //u
 		vertices.push_back(g.v2); //v
 		
 		//v3 _|
 		vertices.push_back(x + g.x2); //x2
 		vertices.push_back(g.y1); //y1
-							   //z?
+		
 		vertices.push_back(g.u2); //u2
 		vertices.push_back(g.v1); //v
 		
@@ -149,7 +149,7 @@ void FAGUILabel::onRender() {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	
-	glUniform2f(positionLocation, this->globalTransformation.x, this->globalTransformation.y);
+	glUniform2f(positionLocation, this->globalTransformation.x, 1-this->globalTransformation.y);
 	
 	glDrawElements(GL_TRIANGLES, 6 * (int)text.length(), GL_UNSIGNED_INT, NULL);
 	

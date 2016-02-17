@@ -1,9 +1,6 @@
 #ifndef __First__FAGUILabel__
 #define __First__FAGUILabel__
 
-#define GLFW_INCLUDE_GLCOREARB
-
-#include <GLFW/glfw3.h>
 #include "FAFont.h"
 #include "FAGUIElement.h"
 #include "FAMesh.h"
@@ -12,10 +9,6 @@
 class FAGUILabel : public FAGUIElement {
     
 private:
-
-    FAMesh *mesh;
-    FAFont *font;
-    FAShader *shader;
 
     GLint positionLocation;
 	
@@ -45,6 +38,11 @@ public:
 
     //debug
     void updateShader();
+protected:
+
+    FAMesh *mesh;
+    FAFont *font;
+    FAShader *shader;
 };
 
 #endif

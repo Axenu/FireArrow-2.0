@@ -145,23 +145,53 @@ void FAScene::setCursorState(int state) {
 void FAScene::getMouseKeyInput(int button, int action) {
     //TODO
     // print(lastCursorPosition);
-    // if (true) {
-        // if (button == GLFW_MOUSE_BUTTON_1) {
-        //     if (action == GLFW_PRESS) {
-        //         for (FAHUDElement *node : HUDElements) {
-        //             if (node->handleClick(lastCursorPosition)) {
-        //                 buttonPressed(node);
-        //                 return;
-        //             }
-        //         }
-        //     }
-        // }
-    // }
-    mouseKeyInput(button, action);
+     if (getCursorState() == GLFW_CURSOR_NORMAL) {
+			 if (currentElement != nullptr) {
+				 if (button == GLFW_MOUSE_BUTTON_1) {
+					 if (action == GLFW_PRESS) {
+						 currentElement->cursorPress();
+                         return;
+					 } else {
+						 currentElement->cursorRelease();
+						 return;
+					 }
+                 }
+         }
+	 } else {
+		 mouseKeyInput(button, action);
+	 }
 }
 
 void FAScene::getCursorPosition(double x, double y) {
     // lastCursorPosition = glm::vec2(x/windowWidth,y/windowHeigth);
+	lastCursorPosition = glm::vec2(x/windowWidth,y/windowHeigth);
+	bool found = false;
+	if (getCursorState() == GLFW_CURSOR_NORMAL) {
+		for (FAGUIElement *node : GUIElements) {
+			FAGUIElement *e = node->testCursorCollition(lastCursorPosition);
+			if (e != nullptr) {
+				if (currentElement != nullptr) {
+					if (e != currentElement) {
+						currentElement->cursorLeave();
+						e->cursorEnter();
+						currentElement = e;
+					}
+				} else {
+					currentElement = e;
+					e->cursorEnter();
+				}
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			if (currentElement != nullptr) {
+				currentElement->cursorLeave();
+				currentElement = nullptr;
+			}
+		}
+	}
+//	std::cout << lastCursorPosition.x << " , " << lastCursorPosition.y << std::endl;
     cursorPosition(x, y);
 }
 

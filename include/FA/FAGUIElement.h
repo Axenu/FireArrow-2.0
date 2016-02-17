@@ -3,8 +3,12 @@
 
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#define GLFW_INCLUDE_GLCOREARB
+
+#include <GLFW/glfw3.h>
 #include "iostream"
-#include "FANode.h"
+#include <vector>
+// #include "FANode.h"
 
 // #define FAPOSITION_MODE_ABSOLUT 0
 // #define FAPOSITION_MODE_RELATIVE 1
@@ -22,6 +26,14 @@ public:
     void update(float dt);
     void update(float dt, glm::vec2 transformation);
     void render();
+	
+	//events
+	FAGUIElement* testCursorCollition(glm::vec2 position);
+	//virtual
+	virtual void cursorPress();
+	virtual void cursorRelease();
+	virtual void cursorEnter();
+	virtual void cursorLeave();
 
     void setID(int id);
     void setX(float x);

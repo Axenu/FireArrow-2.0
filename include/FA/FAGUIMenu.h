@@ -22,6 +22,7 @@ public:
 //	void setText(std::string s);
 	
 	void addLabel(std::string text);
+	void addUpdatedLabel(std::string prefix, float* value, float updateFrequencie);
 	
 	~FAGUIMenu();
 	

@@ -16,7 +16,7 @@ FAGUIMenu::FAGUIMenu(FAFont *font) {
 	this->size.x = 0.3;
 	this->size.y = 0.0;
 	this->position.x = 0.5;
-	this->position.y = 0.5;
+	this->position.y = 0.0;
 	this->font = font;
 	this->margin = glm::vec4(0.005);
 	
@@ -31,16 +31,27 @@ void FAGUIMenu::addLabel(std::string text) {
 	
 	FAGUILabel *label = new FAGUILabel(font);
 	label->setText(text);
-	label->setY(margin.y - this->getHeight());
+	label->setY(margin.y + this->getHeight());
 	label->setX(margin.x);
 	addChild(label);
 	
-	this->background->setY(-this->size.y);
-	this->size.y += label->getHeight()/4.0;
+//	this->background->setY(-this->size.y);
+	this->size.y += label->getHeight()/4.0 + margin.y + margin.w;
 	this->background->setSize(this->size);
 
 }
-//
+
+void FAGUIMenu::addUpdatedLabel(std::string prefix, float* value, float updateFrequencie) {
+	FAGUILabel *label = new FAGUILabel(font);
+	label->setText(prefix + std::to_string(*value));
+	label->setY(margin.y + this->getHeight());
+	label->setX(margin.x);
+	addChild(label);
+	
+	//	this->background->setY(-this->size.y);
+	this->size.y += label->getHeight()/4.0 + margin.y + margin.w;
+	this->background->setSize(this->size);
+}
 
 
 FAGUIMenu::~FAGUIMenu() {

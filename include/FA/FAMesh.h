@@ -27,6 +27,7 @@ private:
 	bool _hasPosition;
 
 	void loadFAModel(std::string path);
+	void loadNewFAModel(std::string path);
 
 public:
 	FAMesh();

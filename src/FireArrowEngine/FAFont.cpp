@@ -41,6 +41,7 @@ FAFont::FAFont(std::string path) {
 				else if( Key == "scaleH" )
 				{Converter >> textureHeight;
 					fontHeight /= textureHeight;
+					fontSize /= textureHeight;
 				}
 				else if( Key == "base" )
 				{Converter >> baseline;}
@@ -110,8 +111,8 @@ FAFont::FAFont(std::string path) {
 //			std::cout << fontHeight << std::endl;
 			g.x1 = xOffset/2 - 1;
 			g.x2 = (width + xOffset)/2 - 1;
-			g.y1 = yOffset/2.0 - 1.0;// + fontHeight/2.0;
-			g.y2 = (height + yOffset)/2.0 - 1.0;// + fontHeight/2.0;
+			g.y1 = yOffset/2.0 - 1.0 - fontHeight/3.0;// + fontHeight/2.0;
+			g.y2 = (height + yOffset)/2.0 - 1.0 - fontHeight/3.0;// + fontHeight/2.0;
 			g.u1 = x;
 			g.u2 = x + width;
 			g.v1 = y - height;
@@ -120,7 +121,6 @@ FAFont::FAFont(std::string path) {
 		}
 	}
 //	fontHeight /= textureHeight;
-	fontSize /= textureHeight;
 	fontTexture = FATexture::createTexture(("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path + ".png").c_str());
 	
 }

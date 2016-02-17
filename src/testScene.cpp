@@ -7,7 +7,7 @@ void testScene::init() {
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
     text = new FAGUILabel(n);
     text->setText("fps: 0.0");
-    text->setPosition(0.01,0.95);
+    text->setPosition(0,0);
     addChild(text);
 
     // FAGUIMaterialComponent *comp = new FAGUIMaterialComponent();
@@ -42,7 +42,7 @@ void testScene::init() {
 	
     addChild(m);
     m = new FAModel(*mesh, *material);
-    m->setPosition(10,0,1);
+    m->setPosition(10,0,0);
     addChild(m);
     m = new FAModel(*mesh, *material);
     addChild(m);
@@ -87,6 +87,7 @@ void testScene::init() {
 	menu->addLabel("Hello gWorld!");
 	menu->addLabel("test Label");
 	menu->addLabel("Hello gWorld!");
+	menu->addUpdatedLabel("camX", &(camera->position.x), 5);
 	this->addChild(menu);
 	
 //	FAGUIButton *b1 = new FAGUIButton(n);
@@ -94,11 +95,12 @@ void testScene::init() {
 //	this->addChild(b1);
 //	std::cout << text->getWidth() << std::endl;
 	
-//	FAGUIPlane *p1 = new FAGUIPlane();
-//	p1->setHeight(0.1);
-//	p1->setWidth(0.18);
-//	addChild(p1);
-//	
+	FAGUIPlane *p1 = new FAGUIPlane();
+	p1->setHeight(0.1);
+	p1->setWidth(0.18);
+	p1->setPosition(0, 0);
+	addChild(p1);
+//
 //	FAGUIText *t1 = new FAGUIText(lightFont);
 //	t1->setY(0.025);
 //	t1->setX(0.025);
@@ -166,10 +168,10 @@ void testScene::getKeyInput(int key, int action) {
         }
     } else if (key == GLFW_KEY_E) {
         if (action == GLFW_PRESS) {
-            camera->setPosition(camera->getPosition());
-            camera->setRX(camera->getRX());
-            camera->setRY(camera->getRY());
-            camera->setRZ(camera->getRZ());
+//            camera->setPosition(camera->getPosition());
+//            camera->setRX(camera->getRX());
+//            camera->setRY(camera->getRY());
+//            camera->setRZ(camera->getRZ());
         } else if (action == GLFW_RELEASE) {
         }
     } else if (key == GLFW_KEY_ESCAPE) {
