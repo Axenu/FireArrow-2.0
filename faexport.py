@@ -73,6 +73,13 @@ def printBone(bone, parent):
         string += printBone(b, bindex)
     return string
 
+class FABone:
+    def __init__(self, name, pos, parent, index):
+        self.name = name
+        self.pos = pos
+        self.parent = parent
+        self.index = index
+
 def export(filepath):
     global finalNormals
 
@@ -207,6 +214,19 @@ def export(filepath):
                         out_file.write('-1 ')
                     pos = bone.matrix_local.to_translation()
                     out_file.write('%f %f %f ' % (pos.x, pos.z, pos.y))
+
+                #animations
+                out_file.write('a ')
+                out_file.write('%i ' % len(arm.animation_data.nla_tracks))
+                for track in arm.animation_data.nla_tracks:
+                    #name?
+                    for strip in track.strips:
+                        out_file.write('%i ' % len(strip.action.fcurves[0].keyframe_points))
+                        for keyframe in strip.action.fcurves[0].keyframe_points:
+                            bpy.context.scene.frame_set(keyframe.co.x)
+                            for bone in arm.pose.bones:
+                                out_file.write('%f %f %f %f ' % (bone.rotation_quaternion.x, bone.rotation_quaternion.y, bone.rotation_quaternion.z, bone.rotation_quaternion.w))
+
 
 
     out_file.close()
