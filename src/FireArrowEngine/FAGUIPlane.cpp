@@ -3,7 +3,7 @@
 FAGUIPlane::FAGUIPlane() {
 	this->position = glm::vec2(0,0);
 	this->size = glm::vec2(0.5,0.5);
-	this->color = glm::vec4(1,0,0,0.5);
+	this->color = glm::vec4(0.2,0.2,0.2,0.8);
 	this->mesh = new FAMesh("square");
 	this->shader = new FAShader("FAPlane");
 	this->isClickable = false;

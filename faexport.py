@@ -11,6 +11,7 @@ bl_info = {
 import bpy
 import math
 from bpy_extras.io_utils import ExportHelper
+from math import sqrt 
 
 parameters = {}
 finalNormals = []
@@ -23,7 +24,7 @@ class ExportMyFormat(bpy.types.Operator, ExportHelper):
 
     vnormals = bpy.props.BoolProperty(name="Export Vertex Normals", default=True)
     vcolors  = bpy.props.BoolProperty(name="Export Vertex Colors", default=True)
-    armature  = bpy.props.BoolProperty(name="Export Armature", default=False)
+    armature  = bpy.props.BoolProperty(name="Export Armature", default=True)
     
     filename_ext    = ".fa";
     
@@ -116,11 +117,12 @@ def export(filepath):
                 for group in vert.groups:
                     weights.append(group.group)
                     weights.append(group.weight)
-                    length += group.weight
+                    length += (group.weight * group.weight)
 
                 for i in range(len(vert.groups), 4):
                     weights.append(0)
                     weights.append(0)
+                length = math.sqrt(length)
                 elements = len(weights) - 1
                 weights[elements] = weights[elements]/length
                 elements -= 2
@@ -133,7 +135,7 @@ def export(filepath):
         indiceCount = 0
         for face in mesh.tessfaces:
             for i in range(2,len(face.vertices)):
-                indiceCount += 3
+                indiceCount += 1
                 indices.append(face.vertices[0])
                 indices.append(face.vertices[i-1])
                 indices.append(face.vertices[i])
@@ -174,6 +176,12 @@ def export(filepath):
             for material in mesh.materials:
                 out_file.write('%f %f %f ' % (material.diffuse_color.r, material.diffuse_color.g, material.diffuse_color.b))
 
+        #weights
+        if parameters.get("Armature"):
+            out_file.write('w ')
+            out_file.write('%i ' % (len(weights)/8))
+            for i in range(0, int(len(weights)/2)):
+                out_file.write('%i %f ' % (weights[i*2], weights[i*2+1]))
 
 
         #indices
@@ -213,19 +221,20 @@ def export(filepath):
                     else:
                         out_file.write('-1 ')
                     pos = bone.matrix_local.to_translation()
-                    out_file.write('%f %f %f ' % (pos.x, pos.z, pos.y))
+                    out_file.write('%f %f %f ' % (pos.z, pos.y, pos.x))
 
                 #animations
-                out_file.write('a ')
-                out_file.write('%i ' % len(arm.animation_data.nla_tracks))
-                for track in arm.animation_data.nla_tracks:
-                    #name?
-                    for strip in track.strips:
-                        out_file.write('%i ' % len(strip.action.fcurves[0].keyframe_points))
-                        for keyframe in strip.action.fcurves[0].keyframe_points:
-                            bpy.context.scene.frame_set(keyframe.co.x)
-                            for bone in arm.pose.bones:
-                                out_file.write('%f %f %f %f ' % (bone.rotation_quaternion.x, bone.rotation_quaternion.y, bone.rotation_quaternion.z, bone.rotation_quaternion.w))
+                if hasattr(arm.animation_data, 'nla_tracks'):
+                    out_file.write('a ')
+                    out_file.write('%i ' % len(arm.animation_data.nla_tracks))
+                    for track in arm.animation_data.nla_tracks:
+                        #name?
+                        for strip in track.strips:
+                            out_file.write('%i ' % len(strip.action.fcurves[0].keyframe_points))
+                            for keyframe in strip.action.fcurves[0].keyframe_points:
+                                bpy.context.scene.frame_set(keyframe.co.x)
+                                for bone in arm.pose.bones:
+                                    out_file.write('%f %f %f %f ' % (bone.rotation_quaternion.x, bone.rotation_quaternion.y, bone.rotation_quaternion.z, bone.rotation_quaternion.w))
 
 
 

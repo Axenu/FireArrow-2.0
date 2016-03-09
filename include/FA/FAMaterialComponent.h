@@ -203,4 +203,28 @@ public:
 	void setInverseShadowMatrix(glm::mat4 *inverseTextureMatrix);
 };
 
+class FASkinningComponent : public FAMaterialComponent {
+private:
+	GLint bonesLocation;
+	const GLfloat *bones;
+	GLsizei bonesSize;
+public:
+	FASkinningComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+
+	void setBonesArray(GLsizei size, const GLfloat *value);
+};
+
+class FAOpacityComponent : public FAMaterialComponent {
+	float opacity;
+	
+public:
+	FAOpacityComponent();
+	void setAttribute(std::string name, float value);
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+};
+
 #endif

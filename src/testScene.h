@@ -24,6 +24,9 @@ private:
     glm::vec3 cameraMovement;
     FAFont *font;
     FAGUILabel *text;
+    float time;
+    float frames;
+	FAMesh *animated;
     
 public:
     void init();

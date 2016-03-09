@@ -508,6 +508,73 @@ void FACSMComponent::setInverseShadowMatrix(glm::mat4 *inverseShadowMatrix) {
 	// std::cout << "setting inverse matrix!" << std::endl;
 }
 
+// Skeletal animation
+
+FASkinningComponent::FASkinningComponent() {
+
+	//TODO dynamic allocation of bone matrices
+
+	vertexIO = "layout(location = 4) in vec4 in_Index;\nlayout(location = 5) in vec4 in_Weight;\nuniform mat4 bones[3];";
+	vertexMain = "int index = int(in_Index.x);"
+	"vec4 skintransform = (bones[index] * in_Weight.x) * vec4(in_Position.xyz, 1.0);"
+	"index = int(in_Index.y);"
+	"skintransform = skintransform + (bones[index] * in_Weight.y) * vec4(in_Position.xyz, 1.0);"
+	"index = int(in_Index.z);"
+	"skintransform = skintransform + (bones[index] * in_Weight.z) * vec4(in_Position.xyz, 1.0);"
+	"index = int(in_Index.w);"
+	"skintransform = skintransform + (bones[index] * in_Weight.w) * vec4(in_Position.xyz, 1.0);"
+	"gl_Position = MVPMatrix * skintransform;";
+	fragmentIO = "";
+	fragmentMain = "";
+	lightOutput = "";
+	name = "Skinning";
+	requirements.push_back(new FAVertexPositionComponent);
+	modelData = false;
+}
+
+void FASkinningComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FASkinningComponent::bind() {
+	glUniformMatrix4fv(bonesLocation, bonesSize, GL_FALSE, bones);
+}
+
+void FASkinningComponent::setUpLocations(GLint shaderProgram) {
+	this->bonesLocation = glGetUniformLocation(shaderProgram, "bones");
+	if (bonesLocation == -1)
+		std::cout << "Error getting bonesLocation in " << name << " component!" << std::endl;
+}
+
+void FASkinningComponent::setBonesArray(GLsizei size, const GLfloat *value) {
+	this->bonesSize = size;
+	this->bones = value;
+}
+
+FAOpacityComponent::FAOpacityComponent() {
+	vertexIO = "";
+	vertexMain = "";
+	fragmentIO = "";
+	fragmentMain = "";
+	// fragmentOutput = "(OTHER_OUT) * textureColor";
+	materialOutput = " * ";
+	name = "texture";
+	requirements.push_back(new FAVertexUVComponent);
+	modelData = false;
+
+}
+void FAOpacityComponent::setAttribute(std::string name, float value) {
+	
+}
+void FAOpacityComponent::bind() {
+	
+}
+void FAOpacityComponent::setUpLocations(GLint shaderProgram) {
+	
+}
+
+
+
 
 
 

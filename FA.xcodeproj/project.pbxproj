@@ -11,6 +11,10 @@
 		351945B91C5CEA160029B544 /* FAShadowRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 351945B81C5CEA160029B544 /* FAShadowRenderPass.h */; };
 		351FE8571C67A16C009CB0BA /* FAGUIMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */; };
 		351FE8591C67A17D009CB0BA /* FAGUIMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 351FE8581C67A17D009CB0BA /* FAGUIMenu.h */; };
+		35566FFA1C8996DA008932B2 /* FABone.h in Headers */ = {isa = PBXBuildFile; fileRef = 35566FF91C8996DA008932B2 /* FABone.h */; };
+		35566FFC1C8996ED008932B2 /* FABone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35566FFB1C8996ED008932B2 /* FABone.cpp */; };
+		35566FFE1C8B319E008932B2 /* FAAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 35566FFD1C8B319E008932B2 /* FAAnimation.h */; };
+		355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */; };
 		358DF6561C199086006070D4 /* FAAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6371C199086006070D4 /* FAAction.cpp */; };
 		358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6381C199086006070D4 /* FAAmbientLight.cpp */; };
 		358DF6581C199086006070D4 /* FACamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6391C199086006070D4 /* FACamera.cpp */; };
@@ -107,6 +111,10 @@
 		351945B81C5CEA160029B544 /* FAShadowRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAShadowRenderPass.h; sourceTree = "<group>"; };
 		351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIMenu.cpp; sourceTree = "<group>"; };
 		351FE8581C67A17D009CB0BA /* FAGUIMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGUIMenu.h; sourceTree = "<group>"; };
+		35566FF91C8996DA008932B2 /* FABone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FABone.h; sourceTree = "<group>"; };
+		35566FFB1C8996ED008932B2 /* FABone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FABone.cpp; sourceTree = "<group>"; };
+		35566FFD1C8B319E008932B2 /* FAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAAnimation.h; sourceTree = "<group>"; };
+		35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAnimation.cpp; sourceTree = "<group>"; };
 		358DF5C21C198E56006070D4 /* FA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FA; sourceTree = BUILT_PRODUCTS_DIR; };
 		358DF6371C199086006070D4 /* FAAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAction.cpp; sourceTree = "<group>"; };
 		358DF6381C199086006070D4 /* FAAmbientLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAmbientLight.cpp; sourceTree = "<group>"; };
@@ -266,6 +274,7 @@
 		358DF6361C199086006070D4 /* FireArrowEngine */ = {
 			isa = PBXGroup;
 			children = (
+				35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */,
 				358DF6371C199086006070D4 /* FAAction.cpp */,
 				35B755711C199BC200F09A1F /* FALight */,
 				358DF6391C199086006070D4 /* FACamera.cpp */,
@@ -298,9 +307,11 @@
 			children = (
 				358DF67B1C199095006070D4 /* FAAction.h */,
 				358DF67C1C199095006070D4 /* FAAmbientLight.h */,
+				35566FF91C8996DA008932B2 /* FABone.h */,
 				358DF67D1C199095006070D4 /* FACamera.h */,
 				358DF67E1C199095006070D4 /* FACSMRenderPass.h */,
 				358DF67F1C199095006070D4 /* FADirectionalLight.h */,
+				35566FFD1C8B319E008932B2 /* FAAnimation.h */,
 				358DF6801C199095006070D4 /* FAEngine.h */,
 				358DF6811C199095006070D4 /* FAFont.h */,
 				358DF6821C199095006070D4 /* FAGUIElement.h */,
@@ -371,6 +382,7 @@
 				358DF6421C199086006070D4 /* FAGUITexturedPlane.cpp */,
 				35B755781C19D65E00F09A1F /* FAGUIButton.cpp */,
 				351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */,
+				35566FFB1C8996ED008932B2 /* FABone.cpp */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -404,6 +416,7 @@
 				358DF96D1C199288006070D4 /* FAEngine.h in Headers */,
 				358DF96E1C199288006070D4 /* FAFont.h in Headers */,
 				358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */,
+				35566FFE1C8B319E008932B2 /* FAAnimation.h in Headers */,
 				358DF9701C199288006070D4 /* FAGUIMaterialComponent.h in Headers */,
 				358DF9711C199288006070D4 /* FAGUIPlane.h in Headers */,
 				358DF9721C199288006070D4 /* FAGUILabel.h in Headers */,
@@ -417,6 +430,7 @@
 				358DF9791C199288006070D4 /* FAModel.h in Headers */,
 				358DF97A1C199288006070D4 /* FANode.h in Headers */,
 				358DF97B1C199288006070D4 /* FAPointLight.h in Headers */,
+				35566FFA1C8996DA008932B2 /* FABone.h in Headers */,
 				358DF97C1C199288006070D4 /* FARenderPass.h in Headers */,
 				358DF97D1C199288006070D4 /* FARenderPasscallbackInterface.h in Headers */,
 				358DF97E1C199288006070D4 /* FAScene.h in Headers */,
@@ -526,12 +540,14 @@
 				358DF65B1C199086006070D4 /* FAEngine.cpp in Sources */,
 				35B755791C19D65E00F09A1F /* FAGUIButton.cpp in Sources */,
 				358DF6671C199086006070D4 /* FAModel.cpp in Sources */,
+				35566FFC1C8996ED008932B2 /* FABone.cpp in Sources */,
 				358DF6711C199086006070D4 /* main.cpp in Sources */,
 				358DF65A1C199086006070D4 /* FADirectionalLight.cpp in Sources */,
 				358DF66F1C199086006070D4 /* FATexture.cpp in Sources */,
 				358DF66C1C199086006070D4 /* FAShader.cpp in Sources */,
 				358DF65D1C199086006070D4 /* FAGUIElement.cpp in Sources */,
 				358DF7D41C199095006070D4 /* glm.cpp in Sources */,
+				355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */,
 				358DF65E1C199086006070D4 /* FAGUIMaterialComponent.cpp in Sources */,
 				358DF6621C199086006070D4 /* FALight.cpp in Sources */,
 				358DF6691C199086006070D4 /* FAPointLight.cpp in Sources */,

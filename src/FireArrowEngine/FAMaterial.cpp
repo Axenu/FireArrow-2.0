@@ -81,9 +81,11 @@ void FAMaterial::buildShader() {
 	}
 	fragmentShader += "Frag_Data = ";
 	fragmentShader += frag;
-	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
+	fragmentShader += ";\n\n}\n";
+	
+//	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
-	// std::cout << fragmentShader << std::endl;
+//	 std::cout << fragmentShader << std::endl;
 
 	this->shader = new FAShader(&vertexShader, &fragmentShader);
 

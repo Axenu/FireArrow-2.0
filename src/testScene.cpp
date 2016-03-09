@@ -45,10 +45,10 @@ void testScene::init() {
     m->setPosition(10,0,0);
     addChild(m);
     m = new FAModel(*mesh, *material);
-    addChild(m);
+//    addChild(m);
     FATerrain *t = new FATerrain();
     // t->setMaterial(material);
-    addChild(t);
+//    addChild(t);
 
     light = new FADirectionalLight();
     light->setColor(color);
@@ -61,6 +61,28 @@ void testScene::init() {
 
     FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
     addChild(alight);
+
+    FAMaterial *materialS = new FAMaterial();
+    animated = new FAMesh("animatedblend.fa");
+    FASkinningComponent *sc = new FASkinningComponent();
+	sc->setBonesArray((GLsizei) animated->animatedXForm.size(), &animated->animatedXForm[0][0][0]);
+    materialS->addMaterialComponent(sc);
+    std::cout << "material completed" << std::endl;
+    FAModel *anim = new FAModel(*animated, *materialS);
+	
+	
+	
+	
+	FAMesh *sphere = new FAMesh("sphere.fa");
+	FAModel *sp = new FAModel(*sphere, *material);
+	
+	for (FABone *b : animated->bones) {
+		sp = new FAModel(*sphere, *material);
+		sp->setPosition(b->getGlobalPosition());
+		addChild(sp);
+	}
+	
+    this->addChild(anim);
 
 //    FAPointLight *pLight = new FAPointLight();
 //	glm::vec4 redColor = glm::vec4(1,0,0,1);
@@ -120,8 +142,17 @@ void testScene::update(float dt) {
     camera->moveX(cameraMovement.x * dt * cos(camera->getRY()));
     camera->moveZ(cameraMovement.x * dt * sin(camera->getRY()));
     camera->moveY(cameraMovement.y * dt);
+	
+	animated->update(dt);
 
-    text->setText(("fps: " + std::to_string(1/dt)));
+    if (time < 0.2) {
+        time += dt;
+        frames++;
+    } else {
+        text->setText(("fps: " + std::to_string(frames/0.2)));
+        time -= 0.2;
+        frames = 0;
+    }
 }
 
 void testScene::buttonPressed(int index) {

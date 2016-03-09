@@ -55,7 +55,7 @@ void FAEngine::render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     activeScene->onRender();
     glfwPollEvents();
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
     glfwSwapBuffers(window);
 }
 
