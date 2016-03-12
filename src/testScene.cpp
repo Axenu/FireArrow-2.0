@@ -45,10 +45,10 @@ void testScene::init() {
     m->setPosition(10,0,0);
     addChild(m);
     m = new FAModel(*mesh, *material);
-//    addChild(m);
+    addChild(m);
     FATerrain *t = new FATerrain();
     // t->setMaterial(material);
-//    addChild(t);
+    addChild(t);
 
     light = new FADirectionalLight();
     light->setColor(color);
@@ -64,23 +64,24 @@ void testScene::init() {
 
     FAMaterial *materialS = new FAMaterial();
     animated = new FAMesh("animatedblend.fa");
-    FASkinningComponent *sc = new FASkinningComponent();
-	sc->setBonesArray((GLsizei) animated->animatedXForm.size(), &animated->animatedXForm[0][0][0]);
-    materialS->addMaterialComponent(sc);
+ //    FASkinningComponent *sc = new FASkinningComponent();
+	// sc->setBonesArray((GLsizei) animated->animatedXForm.size(), &animated->animatedXForm[0][0][0]);
+ //    materialS->addMaterialComponent(sc);
+    materialS->addMaterialComponent(new FASkinningComponent());
     std::cout << "material completed" << std::endl;
     FAModel *anim = new FAModel(*animated, *materialS);
 	
 	
 	
 	
-	FAMesh *sphere = new FAMesh("sphere.fa");
-	FAModel *sp = new FAModel(*sphere, *material);
+	// FAMesh *sphere = new FAMesh("sphere.fa");
+	// FAModel *sp = new FAModel(*sphere, *material);
 	
-	for (FABone *b : animated->bones) {
-		sp = new FAModel(*sphere, *material);
-		sp->setPosition(b->getGlobalPosition());
-		addChild(sp);
-	}
+	// for (FABone *b : animated->bones) {
+	// 	sp = new FAModel(*sphere, *material);
+	// 	sp->setPosition(b->getGlobalPosition());
+	// 	addChild(sp);
+	// }
 	
     this->addChild(anim);
 
@@ -142,8 +143,6 @@ void testScene::update(float dt) {
     camera->moveX(cameraMovement.x * dt * cos(camera->getRY()));
     camera->moveZ(cameraMovement.x * dt * sin(camera->getRY()));
     camera->moveY(cameraMovement.y * dt);
-	
-	animated->update(dt);
 
     if (time < 0.2) {
         time += dt;

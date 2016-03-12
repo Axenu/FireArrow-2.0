@@ -12,7 +12,8 @@
 #include <vector>
 #include <stdlib.h>
 #include <time.h> 
-#include "FABone.h"
+#include "FAArmature.h"
+#include "FAMAterialComponent.h"
 
 class FAMesh {
 
@@ -26,19 +27,23 @@ private:
 	bool _hasNormal;
 	bool _hasColor;
 	bool _hasUV;
+	bool _hasWeights;
 	bool _hasArmature;
-	bool _hasAnimations;
 
-	FABone *rootBone;
+	std::vector<FAMaterialComponent *> avaliableVertexComponents;
+
+	// FABone *rootBone;
 	
-	std::vector<glm::mat4> invBindPose;
+	// std::vector<glm::mat4> invBindPose;
+	// std::vector<FAAnimation *> animations;
+	FAArmature *armature;
 
 	void loadFAModel(std::string path);
 	void loadNewFAModel(std::string path);
 
-	void adjustPositions(FABone *b, glm::vec3 diff);
-	void setupBoneMatrices(FABone *b);
-	int calculateBoneMatrices(FABone *b, int i);
+	// void adjustPositions(FABone *b, glm::vec3 diff);
+	// void setupBoneMatrices(FABone *b);
+	// int calculateBoneMatrices(FABone *b, int i);
 
 	//list avaliable material thins
 
@@ -51,13 +56,15 @@ public:
 	void update(float dt);
 	
 	// bool hasVertexPosition();
-	bool hasVertexNormal();
-	bool hasVertexColor();
-	bool hasVertexUV();
+	// bool hasVertexNormal();
+	// bool hasVertexColor();
+	// bool hasVertexUV();
+
+	std::vector<FAMaterialComponent *>* getAvaliableComponents();
 
 	~FAMesh();
-	std::vector<glm::mat4> animatedXForm;
-	std::vector<FABone *> bones;
+	// std::vector<glm::mat4> animatedXForm;
+	// std::vector<FABone *> bones;
 	
 };
 

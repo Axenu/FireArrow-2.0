@@ -6,11 +6,14 @@ FAMesh::FAMesh() {
     this->_hasColor = false;
     this->_hasUV = false;
     this->_hasArmature = false;
-    this->animatedXForm = std::vector<glm::mat4>();
+	this->_hasWeights = false;
+	this->armature = nullptr;
+    // this->animatedXForm = std::vector<glm::mat4>();
 }
 
 FAMesh::FAMesh(std::string path) : FAMesh() {
 	size_t place = path.find_last_of(".");
+	this->armature = nullptr;
     if (place != std::string::npos) {
         std::string filetype = path.substr(place+1, path.length());
         if (filetype == "fa"){
@@ -21,10 +24,17 @@ FAMesh::FAMesh(std::string path) : FAMesh() {
     }
 }
 
-FAMesh::FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool hasNormal, bool hasColor) {
+FAMesh::FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool hasNormal, bool hasColor) : FAMesh() {
 
     this->_hasColor = hasColor;
     this->_hasNormal = hasNormal;
+
+    if (hasColor) {
+        avaliableVertexComponents.push_back(new FAVertexColorComponent());
+    }
+    if (hasNormal) {
+        avaliableVertexComponents.push_back(new FAVertexNormalComponent());
+    }
     // this->_hasPosition = true;
 
     // load model to graphicscard
@@ -91,6 +101,7 @@ void FAMesh::loadNewFAModel(std::string path) {
 //			std::cout << key << std::endl;
 //			key = "";
             if (key == "v") {
+                avaliableVertexComponents.push_back(new FAVertexPositionComponent());
                 file >> count;
                 // vertexArray = std::vector<glm::vec3>();
                 glm::vec3 vec;
@@ -99,6 +110,7 @@ void FAMesh::loadNewFAModel(std::string path) {
                     vertexArray.push_back(vec);
                 }
             } else if (key == "n") {
+                avaliableVertexComponents.push_back(new FAVertexNormalComponent());
                 _hasNormal  = true;
                 file >> count;
                 glm::vec3 normal;
@@ -108,6 +120,7 @@ void FAMesh::loadNewFAModel(std::string path) {
                 }
                 //add avaliable material component normals
             } else if (key == "c") {
+                avaliableVertexComponents.push_back(new FAVertexColorComponent());
                 _hasColor = true;
                 file >> count;
                 glm::vec3 color;
@@ -117,7 +130,7 @@ void FAMesh::loadNewFAModel(std::string path) {
                 }
                  //add avaliable material component colors
             } else if (key == "w") {
-                _hasArmature = true;
+                _hasWeights = true;
                 file >> count;
                 glm::vec4 index;
                 glm::vec4 weights;
@@ -160,7 +173,7 @@ void FAMesh::loadNewFAModel(std::string path) {
                         vertices.push_back(color.y);
                         vertices.push_back(color.z);
                     }
-                    if (_hasArmature) {
+                    if (_hasWeights) {
                         vertices.push_back(boneGroupArray[v0].x);
                         vertices.push_back(boneGroupArray[v0].y);
                         vertices.push_back(boneGroupArray[v0].z);
@@ -184,7 +197,7 @@ void FAMesh::loadNewFAModel(std::string path) {
                         vertices.push_back(color.y);
                         vertices.push_back(color.z);
                     }
-                    if (_hasArmature) {
+                    if (_hasWeights) {
                         vertices.push_back(boneGroupArray[v1].x);
                         vertices.push_back(boneGroupArray[v1].y);
                         vertices.push_back(boneGroupArray[v1].z);
@@ -208,7 +221,7 @@ void FAMesh::loadNewFAModel(std::string path) {
                         vertices.push_back(color.y);
                         vertices.push_back(color.z);
                     }
-                    if (_hasArmature) {
+                    if (_hasWeights) {
                         vertices.push_back(boneGroupArray[v2].x);
                         vertices.push_back(boneGroupArray[v2].y);
                         vertices.push_back(boneGroupArray[v2].z);
@@ -220,6 +233,8 @@ void FAMesh::loadNewFAModel(std::string path) {
                     }
                 }
             } else if (key == "b") {
+                this->_hasArmature = true;
+                this->armature = new FAArmature();
                 file >> count;
                 FABone *b = new FABone();
                 for (int i = 0; i < count; i++) {
@@ -234,28 +249,41 @@ void FAMesh::loadNewFAModel(std::string path) {
                     b->setName(name);
                     b->setGlobalPosition(position);
                     if (parent != -1) {
-						b->setParent(bones[parent]);
+						b->setParent(armature->getBone(parent));
                     } else {
-                        rootBone = b;
+                        // rootBone = b;
+                        armature->setRootBone(b);
                         b->setParent(NULL);
                     }
                     b->setScale(glm::vec3(1,1,1));
                     b->setRotation(glm::vec3(0,0,0));
-                    bones.push_back(b);
+                    armature->addBone(b);
+                    // bones.push_back(b);
                 }
-                adjustPositions(rootBone, glm::vec3());
-                setupBoneMatrices(rootBone);
+                armature->adjustPositions(armature->getRootBone(), glm::vec3());
+                armature->setupBoneMatrices(armature->getRootBone());
+                FASkinningVertexComponent *skinningComponent = new FASkinningVertexComponent();
+                skinningComponent->setBonesArray((GLsizei) armature->getNumberOfBones(), armature->getAnimatedXForm());
+                this->avaliableVertexComponents.push_back(skinningComponent);
             } else if (key == "a") {
                 file >> count;
                 glm::vec4 quat;
+                glm::quat q;
+                // this->animations = new std::vector<FAAnimation *>();
+                // FAAnimation *animation;
                 for (int i = 0; i < count; i++) {
                     int c;
                     file >> c;
+                    // animation = new FAAnimation(c, bones.size());
                     for (int j = 0; j < c; j++) {
-                        for (int k = 0; k < bones.size(); k++) {
+                        for (int k = 0; k < armature->getNumberOfBones(); k++) {
                             file >> quat.x >> quat.y >> quat.z >> quat.w;
+                            q = glm::quat(quat.x, quat.y, quat.z, quat.w);
+                            // animation->setQuaternion(j, k, q);
+
                         }
                     }
+                    // this->animations.push_back(animation);
                 }
 			} else {
 				std::cout << key << std::endl;
@@ -316,58 +344,6 @@ void FAMesh::loadNewFAModel(std::string path) {
          // std::cout << "FAModel finished loading: " << path << std::endl;
 }
 
-void FAMesh::adjustPositions(FABone *b, glm::vec3 diff) {
-    b->setPosition(b->getPosition() - diff);
-    glm::vec3 newDiff = diff + b->getPosition();
-    for (FABone *f : b->getChildren()) {
-        adjustPositions(f, newDiff);
-    }
-}
-
-void FAMesh::setupBoneMatrices(FABone *b) {
-    glm::mat4 S = glm::scale(glm::mat4(1), b->getScale());
-    glm::mat4 R = glm::rotate(glm::mat4(1), b->getRotation().x, glm::vec3(1,0,0));
-    R = glm::rotate(R, b->getRotation().y, glm::vec3(0,1,0));
-    R = glm::rotate(R, b->getRotation().z, glm::vec3(0,0,1));
-    glm::mat4 T = glm::translate(glm::mat4(1), b->getPosition());
-    b->setLocalMatrix(T*R*S);
-    
-    if (b->getParent() != nullptr) {
-        b->setCombinedMatrix(b->getParent()->getCombinedMatrix() * b->getLocalMatrix());
-    } else {
-        b->setCombinedMatrix(b->getLocalMatrix());
-    }
-    
-    invBindPose.push_back(glm::inverse(b->getCombinedMatrix()));
-    
-    animatedXForm.push_back(b->getCombinedMatrix());
-    
-    for (FABone *c : b->getChildren()) {
-        setupBoneMatrices(c);
-    }
-}
-
-int FAMesh::calculateBoneMatrices(FABone *b, int i) {
-    glm::mat4 S = glm::scale(glm::mat4(1), b->getScale());
-    glm::mat4 R = glm::rotate(glm::mat4(1), b->getRotation().x, glm::vec3(1,0,0));
-    R = glm::rotate(R, b->getRotation().y, glm::vec3(0,1,0));
-    R = glm::rotate(R, b->getRotation().z, glm::vec3(0,0,1));
-    glm::mat4 T = glm::translate(glm::mat4(1), b->getPosition());
-    b->setLocalMatrix(T*R*S);
-    
-    if (b->getParent() != nullptr) {
-        b->setCombinedMatrix(b->getParent()->getCombinedMatrix() * b->getLocalMatrix());
-    } else {
-        b->setCombinedMatrix(b->getLocalMatrix());
-    }
-    animatedXForm[i] = b->getCombinedMatrix() * invBindPose[i];
-    
-    for (FABone *c : b->getChildren()) {
-        i = calculateBoneMatrices(c, i + 1);
-    }
-    return i;
-}
-
 void FAMesh::loadFAModel(std::string path) {
     srand (time(NULL));
     std::ifstream file (path);
@@ -387,6 +363,7 @@ void FAMesh::loadFAModel(std::string path) {
             int count;
             file >> f;
             if (f == "v") {
+                avaliableVertexComponents.push_back(new FAVertexPositionComponent());
                 file >> count;
                 vertexArray = std::vector<glm::vec3>();
                 glm::vec3 vec;
@@ -395,6 +372,7 @@ void FAMesh::loadFAModel(std::string path) {
                     vertexArray.push_back(vec);
                 }
             } else if (f == "n") {
+                avaliableVertexComponents.push_back(new FAVertexNormalComponent());
                 _hasNormal  = true;
                 file >> count;
                 normalArray = std::vector<glm::vec3> ();
@@ -404,6 +382,7 @@ void FAMesh::loadFAModel(std::string path) {
                     normalArray.push_back(normal);
                 }
             } else if (f == "c") {
+                avaliableVertexComponents.push_back(new FAVertexColorComponent());
                 _hasColor = true;
                 file >> count;
                 int index;
@@ -577,21 +556,25 @@ void FAMesh::render() const {
 // }
 
 void FAMesh::update(float dt) {
-	
-	bones[2]->setRotation(glm::vec3(0,0,bones[2]->getRotation().z + dt));
-	calculateBoneMatrices(rootBone, 0);
+	if (this->_hasArmature) {
+		this->armature->update(dt);
+	}
 }
 
-bool FAMesh::hasVertexNormal() {
-    return this->_hasNormal;
-}
+// bool FAMesh::hasVertexNormal() {
+//     return this->_hasNormal;
+// }
 
-bool FAMesh::hasVertexColor() {
-    return this->_hasColor;
-}
+// bool FAMesh::hasVertexColor() {
+//     return this->_hasColor;
+// }
 
-bool FAMesh::hasVertexUV() {
-    return this->_hasUV;
+// bool FAMesh::hasVertexUV() {
+//     return this->_hasUV;
+// }
+
+std::vector<FAMaterialComponent *>* FAMesh::getAvaliableComponents() {
+    return &this->avaliableVertexComponents;
 }
 
 FAMesh::~FAMesh() {

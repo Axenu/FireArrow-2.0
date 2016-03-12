@@ -50,10 +50,11 @@ public:
 	void setTexture(GLuint *texture);
 	void setTextureArray(GLuint *texture, int layer);
 
-	void hasVertexPosition(bool value);
-	void hasVertexColor(bool value);
-	void hasVertexNormal(bool value);
-	void hasVertexUV(bool value);
+	// void hasVertexPosition(bool value);
+	// void hasVertexColor(bool value);
+	// void hasVertexNormal(bool value);
+	// void hasVertexUV(bool value);
+	void addVertexComponents(std::vector<FAMaterialComponent *> *components);
 
 	bool addMaterialComponent(FAMaterialComponent *component);
 	void setAttribute(std::string name, float value);

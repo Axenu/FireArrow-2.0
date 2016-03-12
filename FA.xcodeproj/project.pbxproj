@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3501DB1F1C949DFE007E14E8 /* FAArmature.h in Headers */ = {isa = PBXBuildFile; fileRef = 3501DB1E1C949DFE007E14E8 /* FAArmature.h */; };
+		3501DB211C949E09007E14E8 /* FAArmature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3501DB201C949E09007E14E8 /* FAArmature.cpp */; };
 		351945B61C5CCD5A0029B544 /* FAShadowRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 351945B41C5CCD5A0029B544 /* FAShadowRenderPass.cpp */; };
 		351945B91C5CEA160029B544 /* FAShadowRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 351945B81C5CEA160029B544 /* FAShadowRenderPass.h */; };
 		351FE8571C67A16C009CB0BA /* FAGUIMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */; };
@@ -107,6 +109,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3501DB1E1C949DFE007E14E8 /* FAArmature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAArmature.h; sourceTree = "<group>"; };
+		3501DB201C949E09007E14E8 /* FAArmature.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAArmature.cpp; sourceTree = "<group>"; };
 		351945B41C5CCD5A0029B544 /* FAShadowRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAShadowRenderPass.cpp; sourceTree = "<group>"; };
 		351945B81C5CEA160029B544 /* FAShadowRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAShadowRenderPass.h; sourceTree = "<group>"; };
 		351FE8561C67A16C009CB0BA /* FAGUIMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGUIMenu.cpp; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 			children = (
 				35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */,
 				358DF6371C199086006070D4 /* FAAction.cpp */,
+				3501DB201C949E09007E14E8 /* FAArmature.cpp */,
 				35B755711C199BC200F09A1F /* FALight */,
 				358DF6391C199086006070D4 /* FACamera.cpp */,
 				35B755731C199BD700F09A1F /* FARenderPass */,
@@ -337,6 +342,7 @@
 				358DF6951C199095006070D4 /* FATexture.h */,
 				35B7557C1C19D6A300F09A1F /* FAGUIButton.h */,
 				351FE8581C67A17D009CB0BA /* FAGUIMenu.h */,
+				3501DB1E1C949DFE007E14E8 /* FAArmature.h */,
 			);
 			path = FA;
 			sourceTree = "<group>";
@@ -432,6 +438,7 @@
 				358DF97B1C199288006070D4 /* FAPointLight.h in Headers */,
 				35566FFA1C8996DA008932B2 /* FABone.h in Headers */,
 				358DF97C1C199288006070D4 /* FARenderPass.h in Headers */,
+				3501DB1F1C949DFE007E14E8 /* FAArmature.h in Headers */,
 				358DF97D1C199288006070D4 /* FARenderPasscallbackInterface.h in Headers */,
 				358DF97E1C199288006070D4 /* FAScene.h in Headers */,
 				358DF97F1C199288006070D4 /* FAShader.h in Headers */,
@@ -553,6 +560,7 @@
 				358DF6691C199086006070D4 /* FAPointLight.cpp in Sources */,
 				358DF66E1C199086006070D4 /* FATerrain.cpp in Sources */,
 				358DF6641C199086006070D4 /* FAMaterial.cpp in Sources */,
+				3501DB211C949E09007E14E8 /* FAArmature.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

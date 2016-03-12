@@ -11,37 +11,25 @@ FAModel::FAModel(FAMesh &mesh) {
 FAModel::FAModel(FAMesh &mesh, FAMaterial &material) {
 	this->mesh = mesh;
 	this->material = material;
-	this->material.hasVertexPosition(true);
-	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
-	this->material.hasVertexColor(this->mesh.hasVertexColor());
-	this->material.hasVertexUV(this->mesh.hasVertexUV());
+	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
 	this->material.create();
 }
 
 void FAModel::setMaterial(FAMaterial &material) {
 	this->material = material;
-	this->material.hasVertexPosition(true);
-	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
-	this->material.hasVertexColor(this->mesh.hasVertexColor());
-	this->material.hasVertexUV(this->mesh.hasVertexUV());
+	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
 	this->material.create();
 }
 
 void FAModel::setMesh(FAMesh &mesh) {
 	this->mesh = mesh;
-	this->material.hasVertexPosition(true);
-	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
-	this->material.hasVertexColor(this->mesh.hasVertexColor());
-	this->material.hasVertexUV(this->mesh.hasVertexUV());
+	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
 	this->material.create();
 }
 
 void FAModel::setMesh(std::string path) {
 	this->mesh = FAMesh(path);
-	this->material.hasVertexPosition(true);
-	this->material.hasVertexNormal(this->mesh.hasVertexNormal());
-	this->material.hasVertexColor(this->mesh.hasVertexColor());
-	this->material.hasVertexUV(this->mesh.hasVertexUV());
+	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
 	this->material.create();
 }
 
@@ -63,6 +51,7 @@ glm::mat4 &FAModel::getModelMatrix() {
 
 void FAModel::onUpdate(float dt) {
 	this->material.setModelMatrix(this->modelMatrix);
+	this->mesh.update(dt);
 }
 
 FAModel::~FAModel() {

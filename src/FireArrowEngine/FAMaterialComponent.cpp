@@ -510,11 +510,42 @@ void FACSMComponent::setInverseShadowMatrix(glm::mat4 *inverseShadowMatrix) {
 
 // Skeletal animation
 
-FASkinningComponent::FASkinningComponent() {
+FASkinningVertexComponent::FASkinningVertexComponent() {
 
 	//TODO dynamic allocation of bone matrices
-
+	
 	vertexIO = "layout(location = 4) in vec4 in_Index;\nlayout(location = 5) in vec4 in_Weight;\nuniform mat4 bones[3];";
+	vertexMain = "";
+	fragmentIO = "";
+	fragmentMain = "";
+	lightOutput = "";
+	name = "SkinningVertex";
+	// requirements.push_back(new FAVertexPositionComponent);
+	modelData = true;
+}
+
+void FASkinningVertexComponent::setAttribute(std::string name, float value) {
+
+}
+
+void FASkinningVertexComponent::bind() {
+	glUniformMatrix4fv(bonesLocation, bonesSize, GL_FALSE, bones);
+}
+
+void FASkinningVertexComponent::setUpLocations(GLint shaderProgram) {
+	this->bonesLocation = glGetUniformLocation(shaderProgram, "bones");
+	if (bonesLocation == -1)
+		std::cout << "Error getting bonesLocation in " << name << " component!" << std::endl;
+}
+
+void FASkinningVertexComponent::setBonesArray(GLsizei size, const GLfloat *value) {
+	this->bonesSize = size;
+	this->bones = value;
+}
+
+FASkinningComponent::FASkinningComponent() {
+
+	vertexIO = "";
 	vertexMain = "int index = int(in_Index.x);"
 	"vec4 skintransform = (bones[index] * in_Weight.x) * vec4(in_Position.xyz, 1.0);"
 	"index = int(in_Index.y);"
@@ -528,7 +559,7 @@ FASkinningComponent::FASkinningComponent() {
 	fragmentMain = "";
 	lightOutput = "";
 	name = "Skinning";
-	requirements.push_back(new FAVertexPositionComponent);
+	requirements.push_back(new FASkinningVertexComponent);
 	modelData = false;
 }
 
@@ -537,18 +568,11 @@ void FASkinningComponent::setAttribute(std::string name, float value) {
 }
 
 void FASkinningComponent::bind() {
-	glUniformMatrix4fv(bonesLocation, bonesSize, GL_FALSE, bones);
+	
 }
 
 void FASkinningComponent::setUpLocations(GLint shaderProgram) {
-	this->bonesLocation = glGetUniformLocation(shaderProgram, "bones");
-	if (bonesLocation == -1)
-		std::cout << "Error getting bonesLocation in " << name << " component!" << std::endl;
-}
-
-void FASkinningComponent::setBonesArray(GLsizei size, const GLfloat *value) {
-	this->bonesSize = size;
-	this->bones = value;
+	
 }
 
 FAOpacityComponent::FAOpacityComponent() {

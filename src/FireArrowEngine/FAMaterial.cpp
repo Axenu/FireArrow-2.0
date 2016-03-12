@@ -81,9 +81,9 @@ void FAMaterial::buildShader() {
 	}
 	fragmentShader += "Frag_Data = ";
 	fragmentShader += frag;
-	fragmentShader += ";\n\n}\n";
+	// fragmentShader += ";\n\n}\n";
 	
-//	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
+	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
 //	 std::cout << fragmentShader << std::endl;
 
@@ -144,31 +144,37 @@ void FAMaterial::setTextureArray(GLuint *texture, int layer) {
 	addMaterialComponent(textureComponent);
 }
 
-void FAMaterial::hasVertexPosition(bool value) {
-	if (value) {
-		avaliableVertexComponents.push_back(new FAVertexPositionComponent());
-		// isBuilt = false;
-	}
-}
+// void FAMaterial::hasVertexPosition(bool value) {
+// 	if (value) {
+// 		avaliableVertexComponents.push_back(new FAVertexPositionComponent());
+// 		// isBuilt = false;
+// 	}
+// }
 
-void FAMaterial::hasVertexColor(bool value) {
-	if (value) {
-		avaliableVertexComponents.push_back(new FAVertexColorComponent());
-		// isBuilt = false;
-	}
-}
+// void FAMaterial::hasVertexColor(bool value) {
+// 	if (value) {
+// 		avaliableVertexComponents.push_back(new FAVertexColorComponent());
+// 		// isBuilt = false;
+// 	}
+// }
 
-void FAMaterial::hasVertexNormal(bool value) {
-	if (value) {
-		avaliableVertexComponents.push_back(new FAVertexNormalComponent());
-		// isBuilt = false;
-	}
-}
+// void FAMaterial::hasVertexNormal(bool value) {
+// 	if (value) {
+// 		avaliableVertexComponents.push_back(new FAVertexNormalComponent());
+// 		// isBuilt = false;
+// 	}
+// }
 
-void FAMaterial::hasVertexUV(bool value) {
-	if (value) {
-		avaliableVertexComponents.push_back(new FAVertexUVComponent());
-		// isBuilt = false;
+// void FAMaterial::hasVertexUV(bool value) {
+// 	if (value) {
+// 		avaliableVertexComponents.push_back(new FAVertexUVComponent());
+// 		// isBuilt = false;
+// 	}
+// }
+
+void FAMaterial::addVertexComponents(std::vector<FAMaterialComponent *> *components) {
+	for (FAMaterialComponent *c : *components) {
+		avaliableVertexComponents.push_back(c);
 	}
 }
 
