@@ -12,25 +12,25 @@ FAModel::FAModel(FAMesh &mesh, FAMaterial &material) {
 	this->mesh = mesh;
 	this->material = material;
 	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
-	this->material.create();
+	// this->material.create();
 }
 
 void FAModel::setMaterial(FAMaterial &material) {
 	this->material = material;
 	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
-	this->material.create();
+	// this->material.create();
 }
 
 void FAModel::setMesh(FAMesh &mesh) {
 	this->mesh = mesh;
 	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
-	this->material.create();
+	// this->material.create();
 }
 
 void FAModel::setMesh(std::string path) {
 	this->mesh = FAMesh(path);
 	this->material.addVertexComponents(this->mesh.getAvaliableComponents());
-	this->material.create();
+	// this->material.create();
 }
 
 void FAModel::addMaterialComponent(FAMaterialComponent *component) {

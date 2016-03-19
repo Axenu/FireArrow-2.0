@@ -14,6 +14,7 @@
 #include <FA/FAGUIMaterialComponent.h>
 #include <FA/FAGUIButton.h>
 #include <FA/FAGUIMenu.h>
+#include "Material.h"
 
 class testScene : public FAScene {
     

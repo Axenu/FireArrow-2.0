@@ -28,78 +28,78 @@ FAMaterialComponent* FAMaterial::getComponentByName(std::string name) {
 
 void FAMaterial::buildShader() {
 
-	isBuilt = true;
+	// isBuilt = true;
 
-	std::string vertexShader = "", fragmentShader = "";
+	// std::string vertexShader = "", fragmentShader = "";
 
-	vertexShader += this->vertexIO;
-	for (FAMaterialComponent *c : components)
-		vertexShader += c->getVertexIO();
-	vertexShader += "void main() {\n";
-	vertexShader += this->vertexMain;
-	for (FAMaterialComponent *c : components)
-		vertexShader += c->getVertexMain(); 
-	vertexShader += "}\n";
+	// vertexShader += this->vertexIO;
+	// for (FAMaterialComponent *c : components)
+	// 	vertexShader += c->getVertexIO();
+	// vertexShader += "void main() {\n";
+	// vertexShader += this->vertexMain;
+	// for (FAMaterialComponent *c : components)
+	// 	vertexShader += c->getVertexMain(); 
+	// vertexShader += "}\n";
 
-	fragmentShader += this->fragmentIO;
-	for (FAMaterialComponent *c : components)
-		fragmentShader += c->getFragmentIO(); 
-	fragmentShader += "void main() {\n";
-	// fragmentShader += this->fragmentMain;
-	for (FAMaterialComponent *c : components)
-		fragmentShader += c->getFragmentMain();
+	// fragmentShader += this->fragmentIO;
+	// for (FAMaterialComponent *c : components)
+	// 	fragmentShader += c->getFragmentIO(); 
+	// fragmentShader += "void main() {\n";
+	// // fragmentShader += this->fragmentMain;
+	// for (FAMaterialComponent *c : components)
+	// 	fragmentShader += c->getFragmentMain();
 
-	std::string output = "vec4(1,1,1,1)";
-	// std::cout << "Building shader: " << std::endl;
+	// std::string output = "vec4(1,1,1,1)";
+	// // std::cout << "Building shader: " << std::endl;
+	// // for (FAMaterialComponent *c : components) {
+	// // 	// std::cout << c->getName() << std::endl;
+	// // 	std::string cOut = c->getFragmentMainOutput();
+	// // 	size_t start_pos = cOut.find("OTHER_OUT");
+	// // 	if(start_pos != std::string::npos) {
+	// // 		cOut.replace(start_pos, 9, output);
+	// //   		// std::replace( cOut.begin(), cOut.end(), "OTHER_OUT", output);
+	// //   		output = cOut;
+	// //   	}
+	// // }
+
+	// //calculate material color
 	// for (FAMaterialComponent *c : components) {
-	// 	// std::cout << c->getName() << std::endl;
-	// 	std::string cOut = c->getFragmentMainOutput();
-	// 	size_t start_pos = cOut.find("OTHER_OUT");
-	// 	if(start_pos != std::string::npos) {
-	// 		cOut.replace(start_pos, 9, output);
-	//   		// std::replace( cOut.begin(), cOut.end(), "OTHER_OUT", output);
-	//   		output = cOut;
-	//   	}
+	// 	output += c->getMaterialOutput();
 	// }
-
-	//calculate material color
-	for (FAMaterialComponent *c : components) {
-		output += c->getMaterialOutput();
-	}
-	fragmentShader += "vec4 materialOutput = " + output + ";\n";
-	std::string frag = "";
-	for (FAMaterialComponent *c : components) {
-		if (c->getLightOutput() != "") {
-			if (frag != "") {
-				frag += " + ";
-			}
-			frag += "materialOutput * " + c->getLightOutput();
-		}
-	}
-	if (frag == "") {
-		frag = output;
-	}
-	fragmentShader += "Frag_Data = ";
-	fragmentShader += frag;
-	// fragmentShader += ";\n\n}\n";
+	// fragmentShader += "vec4 materialOutput = " + output + ";\n";
+	// std::string frag = "";
+	// for (FAMaterialComponent *c : components) {
+	// 	if (c->getLightOutput() != "") {
+	// 		if (frag != "") {
+	// 			frag += " + ";
+	// 		}
+	// 		frag += "materialOutput * " + c->getLightOutput();
+	// 	}
+	// }
+	// if (frag == "") {
+	// 	frag = output;
+	// }
+	// fragmentShader += "Frag_Data = ";
+	// fragmentShader += frag;
+	// // fragmentShader += ";\n\n}\n";
 	
-	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
+	// fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
-//	 std::cout << fragmentShader << std::endl;
+	//  std::cout << vertexShader << std::endl;
 
-	this->shader = new FAShader(&vertexShader, &fragmentShader);
+	// this->shader = new FAShader(&vertexShader, &fragmentShader);
 
-	MVPLocation = glGetUniformLocation(this->shader->shaderProgram, "MVPMatrix");
-	MLocation = glGetUniformLocation(this->shader->shaderProgram, "MMatrix");
-	if (MVPLocation == -1) {
-		std::cout << "MVPLocation failed!" << std::endl;
-	}
-	// if (MLocation == -1) {
-	// 	std::cout << "MLocation failed!" << std::endl;
+	// MVPLocation = glGetUniformLocation(this->shader->shaderProgram, "MVPMatrix");
+	// MLocation = glGetUniformLocation(this->shader->shaderProgram, "MMatrix");
+	// if (MVPLocation == -1) {
+	// 	std::cout << "MVPLocation failed!" << std::endl;
 	// }
+	// // if (MLocation == -1) {
+	// // 	std::cout << "MLocation failed!" << std::endl;
+	// // }
 
-	for (FAMaterialComponent *c : components)
-		c->setUpLocations(this->shader->shaderProgram);
+	// for (FAMaterialComponent *c : components)
+	// 	c->setUpLocations(this->shader->shaderProgram);
 
 }
 
@@ -233,27 +233,27 @@ bool FAMaterial::addMaterialComponent(FAMaterialComponent *component) {
 	}
 }
 
-void FAMaterial::bind() {
-	if (!isBuilt) {
-		buildShader();
-	}
+// void FAMaterial::bind() {
+// 	// if (!isBuilt) {
+// 	// 	buildShader();
+// 	// }
 
-	glm::mat4 MVPMatrix = viewProjectionMatrix * modelMatrix;
-	glUseProgram(shader->shaderProgram);
-	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &MVPMatrix[0][0]);
-	glUniformMatrix4fv(MLocation, 1, GL_FALSE, &modelMatrix[0][0]);
-	for (FAMaterialComponent *c : components)
-		c->bind();
+// 	// glm::mat4 MVPMatrix = viewProjectionMatrix * modelMatrix;
+// 	// glUseProgram(shader->shaderProgram);
+// 	// glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &MVPMatrix[0][0]);
+// 	// glUniformMatrix4fv(MLocation, 1, GL_FALSE, &modelMatrix[0][0]);
+// 	// for (FAMaterialComponent *c : components)
+// 	// 	c->bind();
 
-}
+// }
 
-void FAMaterial::setViewProjectionwMatrix(glm::mat4 *VPMatrix) {
-	this->viewProjectionMatrix = *VPMatrix;
-}
+// void FAMaterial::setViewProjectionwMatrix(glm::mat4 &VPMatrix) {
+// 	this->viewProjectionMatrix = VPMatrix;
+// }
 
-void FAMaterial::setModelMatrix(glm::mat4 &modelMatrix) {
-	this->modelMatrix = modelMatrix;
-}
+// void FAMaterial::setModelMatrix(glm::mat4 &modelMatrix) {
+// 	this->modelMatrix = modelMatrix;
+// }
 
 FAMaterial::~FAMaterial() {
 	

@@ -28,48 +28,49 @@ void testScene::init() {
 
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
-    FAMaterial *material = new FAMaterial();
-    material->addMaterialComponent(new FAVertexColorComponent());
+    // FAMaterial *material = new FAMaterial();
+    // material->addMaterialComponent(new FAVertexColorComponent());
+    Material *ma = new Material();
     // material->setDirectionalLight(direction, color, ambient);
-    FAModel *m = new FAModel(*mesh, *material);
+    FAModel *m = new FAModel(*mesh, *ma);
     m->setPosition(0,0,-5);
 
     //testing actions
-    FAActionSequence *group = new FAActionSequence();
+    // FAActionSequence *group = new FAActionSequence();
 //    group->addAction(new FAActionMoveTo(glm::vec3(10,1,-5), 3.0f));
-    group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
+    // group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
 //    m->runAction(group);
 	
     addChild(m);
-    m = new FAModel(*mesh, *material);
+    m = new FAModel(*mesh, *ma);
     m->setPosition(10,0,0);
     addChild(m);
-    m = new FAModel(*mesh, *material);
+    m = new FAModel(*mesh, *ma);
     addChild(m);
-    FATerrain *t = new FATerrain();
+    // FATerrain *t = new FATerrain();
     // t->setMaterial(material);
-    addChild(t);
+    // addChild(t);
 
-    light = new FADirectionalLight();
-    light->setColor(color);
-//	light->rotate(glm::vec3(0,0,1));
-	light->setDirection(direction);
-	light->setShadowMap(*pass);
-    // light->setAmbientComponent(ambient);
-    addChild(light);
+//     light = new FADirectionalLight();
+//     light->setColor(color);
+// //	light->rotate(glm::vec3(0,0,1));
+// 	light->setDirection(direction);
+// 	light->setShadowMap(*pass);
+//     // light->setAmbientComponent(ambient);
+//     addChild(light);
 //	light->runAction(group);
 
-    FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
-    addChild(alight);
+    // FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
+    // addChild(alight);
 
-    FAMaterial *materialS = new FAMaterial();
-    animated = new FAMesh("animatedblend.fa");
- //    FASkinningComponent *sc = new FASkinningComponent();
-	// sc->setBonesArray((GLsizei) animated->animatedXForm.size(), &animated->animatedXForm[0][0][0]);
- //    materialS->addMaterialComponent(sc);
-    materialS->addMaterialComponent(new FASkinningComponent());
-    std::cout << "material completed" << std::endl;
-    FAModel *anim = new FAModel(*animated, *materialS);
+ //    FAMaterial *materialS = new FAMaterial();
+ //    animated = new FAMesh("animatedblend.fa");
+ // //    FASkinningComponent *sc = new FASkinningComponent();
+	// // sc->setBonesArray((GLsizei) animated->animatedXForm.size(), &animated->animatedXForm[0][0][0]);
+ // //    materialS->addMaterialComponent(sc);
+ //    materialS->addMaterialComponent(new FASkinningComponent());
+ //    std::cout << "material completed" << std::endl;
+ //    FAModel *anim = new FAModel(*animated, *materialS);
 	
 	
 	
@@ -83,7 +84,7 @@ void testScene::init() {
 	// 	addChild(sp);
 	// }
 	
-    this->addChild(anim);
+    // this->addChild(anim);
 
 //    FAPointLight *pLight = new FAPointLight();
 //	glm::vec4 redColor = glm::vec4(1,0,0,1);

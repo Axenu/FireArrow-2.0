@@ -63,9 +63,9 @@ public:
 	//add new requirements
 	//addThis
 
-	void bind();
-	void setViewProjectionwMatrix(glm::mat4 *VPMatrix);
-	void setModelMatrix(glm::mat4 &modelMatrix);
+	virtual void bind() =0;
+	virtual void setViewProjectionwMatrix(glm::mat4 &VPMatrix) =0;
+	virtual void setModelMatrix(glm::mat4 &modelMatrix) =0;
 };
 
 #endif

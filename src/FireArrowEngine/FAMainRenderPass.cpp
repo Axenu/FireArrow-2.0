@@ -15,7 +15,7 @@ void FAMainRenderPass::render() {
 		// glm::mat4 &m = parent->getWindowWidth() << std::endl;
 		// std::cout << parent->getModels()->size() << std::endl;
 		for (FAModel *m : *parent->getModels()) {
-			m->getMaterial().setViewProjectionwMatrix(&(parent->getCamera()->VPMatrix));
+			m->getMaterial().setViewProjectionwMatrix(parent->getCamera()->VPMatrix);
 			// m->getMaterial().setModelMatrix(m->modelMatrix);
 			m->getMaterial().bind();
 			m->getMesh().render();

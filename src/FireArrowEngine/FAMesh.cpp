@@ -17,10 +17,10 @@ FAMesh::FAMesh(std::string path) : FAMesh() {
     if (place != std::string::npos) {
         std::string filetype = path.substr(place+1, path.length());
         if (filetype == "fa"){
-            loadNewFAModel("/Users/Axenu/Developer/FireArrow 2.0/resources/models/" + path);
+            loadNewFAModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
         }
     } else {
-        loadFAModel("/Users/Axenu/Developer/FireArrow 2.0/resources/models/" + path);
+        loadFAModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
     }
 }
 
@@ -309,30 +309,36 @@ void FAMesh::loadNewFAModel(std::string path) {
         if (_hasUV) attributes +=2 * sizeof(GLfloat);
         if (_hasArmature) attributes +=8 * sizeof(GLfloat);
 
+        int attribA = 1;
+
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) 0);
         int offset = 3 * sizeof(GLfloat);
         if (_hasNormal) {
-            glEnableVertexAttribArray(1);
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
+            glEnableVertexAttribArray(attribA);
+            glVertexAttribPointer(attribA, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
             offset += 3 * sizeof(GLfloat);
+            attribA++;
         }
         if (_hasColor) {
-            glEnableVertexAttribArray(2);
-            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
+            glEnableVertexAttribArray(attribA);
+            glVertexAttribPointer(attribA, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
             offset += 3 * sizeof(GLfloat);
+            attribA++;
         }
         if (_hasUV) {
-            glEnableVertexAttribArray(3);
-            glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
+            glEnableVertexAttribArray(attribA);
+            glVertexAttribPointer(attribA, 2, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
             offset += 2 * sizeof(GLfloat);
+            attribA++;
         }
         if (_hasArmature) {
-            glEnableVertexAttribArray(4);
-            glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
+            glEnableVertexAttribArray(attribA);
+            glVertexAttribPointer(attribA, 4, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
             offset += 4 * sizeof(GLfloat);
-            glEnableVertexAttribArray(5);
-            glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
+            attribA++;
+            glEnableVertexAttribArray(attribA);
+            glVertexAttribPointer(attribA, 4, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) offset);
             offset += 4 * sizeof(GLfloat);
         }
 
