@@ -32,7 +32,7 @@ void testScene::init() {
     // material->addMaterialComponent(new FAVertexColorComponent());
     Material *ma = new Material();
     // material->setDirectionalLight(direction, color, ambient);
-    FAModel *m = new FAModel(*mesh, *ma);
+    FAModel *m = new FAModel(mesh, ma);
     m->setPosition(0,0,-5);
 
     //testing actions
@@ -42,14 +42,14 @@ void testScene::init() {
 //    m->runAction(group);
 	
     addChild(m);
-    m = new FAModel(*mesh, *ma);
+    m = new FAModel(mesh, ma);
     m->setPosition(10,0,0);
     addChild(m);
-    m = new FAModel(*mesh, *ma);
+    m = new FAModel(mesh, ma);
     addChild(m);
-    // FATerrain *t = new FATerrain();
+    FATerrain *t = new FATerrain();
     // t->setMaterial(material);
-    // addChild(t);
+    addChild(t);
 
 //     light = new FADirectionalLight();
 //     light->setColor(color);

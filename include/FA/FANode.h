@@ -63,6 +63,7 @@ public:
 	glm::vec3 getScale();
     glm::vec3 getPosition();
     glm::vec3 getRotation();
+    glm::mat4 getModelMatrix();
 
     void runAction(FAAction *action);
 

@@ -191,6 +191,10 @@ glm::vec3 FANode::getRotation()  {
     return rotation;
 }
 
+glm::mat4 FANode::getModelMatrix() {
+    return this->modelMatrix;
+}
+
 void FANode::runAction(FAAction *action) {
     this->action = action;
     this->action->setNode(this);

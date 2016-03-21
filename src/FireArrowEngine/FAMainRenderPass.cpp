@@ -16,7 +16,7 @@ void FAMainRenderPass::render() {
 		// std::cout << parent->getModels()->size() << std::endl;
 		for (FAModel *m : *parent->getModels()) {
 			m->getMaterial().setViewProjectionwMatrix(parent->getCamera()->VPMatrix);
-			// m->getMaterial().setModelMatrix(m->modelMatrix);
+			m->getMaterial().setModelMatrix(m->getModelMatrix());
 			m->getMaterial().bind();
 			m->getMesh().render();
 		}
