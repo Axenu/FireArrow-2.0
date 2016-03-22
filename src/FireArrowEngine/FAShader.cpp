@@ -8,8 +8,8 @@ FAShader::FAShader(std::string file) : FAShader(file, file) {
 }
 
 FAShader::FAShader(std::string vert, std::string frag) {
-	GLint vertShader = createShader("/Users/Axenu/Developer/FireArrow 2.0/resources/shaders/" + vert + ".vert", GL_VERTEX_SHADER);
-	GLint fragShader = createShader("/Users/Axenu/Developer/FireArrow 2.0/resources/shaders/" + frag + ".frag", GL_FRAGMENT_SHADER);
+	GLint vertShader = createShader("/Users/Axenu/Developer/FireArrow-2.0/resources/shaders/" + vert + ".vert", GL_VERTEX_SHADER);
+	GLint fragShader = createShader("/Users/Axenu/Developer/FireArrow-2.0/resources/shaders/" + frag + ".frag", GL_FRAGMENT_SHADER);
 	name = vert;
 	
 	shaderProgram = glCreateProgram();

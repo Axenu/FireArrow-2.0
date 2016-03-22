@@ -147,6 +147,12 @@ void FAVertexUVComponent::setUpLocations(GLint shaderProgram) {
 
 }
 
+// ModelMatrix
+
+// ViewProjectionMatrix
+
+// ModelViewProjectionMatrix
+
 //Directional light material
 
 FADirectionalLightComponent::FADirectionalLightComponent() {

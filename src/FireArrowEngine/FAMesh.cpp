@@ -17,10 +17,10 @@ FAMesh::FAMesh(std::string path) : FAMesh() {
     if (place != std::string::npos) {
         std::string filetype = path.substr(place+1, path.length());
         if (filetype == "fa"){
-            loadNewFAModel("/Users/Axenu/Developer/FireArrow 2.0/resources/models/" + path);
+            loadNewFAModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
         }
     } else {
-        loadFAModel("/Users/Axenu/Developer/FireArrow 2.0/resources/models/" + path);
+        loadFAModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
     }
 }
 

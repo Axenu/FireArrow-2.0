@@ -19,7 +19,6 @@ void testScene::init() {
     // FAModel *model = new FAModel(*mesh, *material);
     // this->addChild(model);
 
-
     glm::vec4 color = glm::vec4(1,1,1,1);
     // float ambient = 0.5;
     FADirectionalLight *light;

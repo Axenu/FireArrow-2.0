@@ -5,7 +5,7 @@ FAFont::FAFont() {
 }
 
 FAFont::FAFont(std::string path) {
-	std::ifstream Stream(("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path + ".fnt").c_str());
+	std::ifstream Stream(("/Users/Axenu/Developer/FireArrow-2.0/resources/fonts/" + path + ".fnt").c_str());
 	std::string Line;
 	std::string Read, Key, Value;
 	std::size_t i;
@@ -121,7 +121,7 @@ FAFont::FAFont(std::string path) {
 		}
 	}
 //	fontHeight /= textureHeight;
-	fontTexture = FATexture::createTexture(("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path + ".png").c_str());
+	fontTexture = FATexture::createTexture(("/Users/Axenu/Developer/FireArrow-2.0/resources/fonts/" + path + ".png").c_str());
 	
 }
 
@@ -137,7 +137,7 @@ FAFont::FAFont(std::string path, const int _fontSize) {
         fprintf(stderr, "Could not init freetype library\n");
     }
     
-    if(FT_New_Face(library, ("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path).c_str(), 0, &face)) {
+    if(FT_New_Face(library, ("/Users/Axenu/Developer/FireArrow-2.0/resources/fonts/" + path).c_str(), 0, &face)) {
         fprintf(stderr, "Could not open font\n");
     }
     int error = FT_Set_Char_Size(face, 0, fontSize, windowWidth, windowHeight);
@@ -155,7 +155,7 @@ FAFont::FAFont(std::string path, const int _fontSize, uint _windowWidth, uint _w
     this->windowHeight = _windowHeight;
     this->fontHeight = fontSize/windowHeight;
     
-    std::ifstream ifile("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path);
+    std::ifstream ifile("/Users/Axenu/Developer/FireArrow-2.0/resources/fonts/" + path);
     if (!ifile) {
         std::cout << "File does not exists!" << std::endl;
     }
@@ -166,7 +166,7 @@ FAFont::FAFont(std::string path, const int _fontSize, uint _windowWidth, uint _w
         fprintf(stderr, "Could not init freetype library\n");
     }
 
-    int error = FT_New_Face(library, ("/Users/Axenu/Developer/FireArrow 2.0/resources/fonts/" + path).c_str(), 0, &face);
+    int error = FT_New_Face(library, ("/Users/Axenu/Developer/FireArrow-2.0/resources/fonts/" + path).c_str(), 0, &face);
     if(error != 0) {
         std::cout << error << std::endl;
         fprintf(stderr, "Could not open font\n");
