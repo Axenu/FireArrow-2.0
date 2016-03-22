@@ -45,9 +45,9 @@ void testScene::init() {
     addChild(m);
     m = new FAModel(*mesh, *material);
     addChild(m);
-    FATerrain *t = new FATerrain();
+//    FATerrain *t = new FATerrain();
     // t->setMaterial(material);
-    addChild(t);
+//    addChild(t);
 
     light = new FADirectionalLight();
     light->setColor(color);

@@ -55,6 +55,7 @@ public:
 	// void hasVertexNormal(bool value);
 	// void hasVertexUV(bool value);
 	void addVertexComponents(std::vector<FAMaterialComponent *> *components);
+	void addVertexComponent(FAMaterialComponent *component);
 
 	bool addMaterialComponent(FAMaterialComponent *component);
 	void setAttribute(std::string name, float value);

@@ -81,6 +81,18 @@ public:
 	void setUpLocations(GLint shaderProgram);
 };
 
+class FAModelMatrixComponent : public FAMaterialComponent {
+private:
+	GLint MatrixLocation;
+	glm::mat4 *modelMatrix = nullptr;
+public:
+	FAModelMatrixComponent();
+	FAModelMatrixComponent(glm::mat4 *matrix);
+	void setAttribute(std::string name, float value) {};
+	void bind();
+	void setUpLocations(GLint shaderProgram);
+};
+
 class FADirectionalLightComponent : public FAMaterialComponent {
 private:
 	glm::vec4 *color;

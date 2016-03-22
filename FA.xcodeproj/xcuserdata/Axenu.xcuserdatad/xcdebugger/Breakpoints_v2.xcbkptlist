@@ -170,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMaterialComponent.cpp"
-            timestampString = "478786853.269783"
+            timestampString = "480358527.979874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
-            landmarkName = "FASkinningComponent::setUpLocations(GLint shaderProgram)"
+            startingLineNumber = "545"
+            endingLineNumber = "545"
+            landmarkName = "FASkinningVertexComponent::FASkinningVertexComponent()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMaterialComponent.cpp"
-            timestampString = "478787222.443714"
+            timestampString = "480358527.979874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
-            landmarkName = "FASkinningComponent::setBonesArray(GLsizei size, const GLfloat *value)"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
+            landmarkName = "FASkinningVertexComponent::FASkinningVertexComponent()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -458,13 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMaterialComponent.cpp"
-            timestampString = "478789554.075393"
+            timestampString = "480358527.979874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
-            landmarkName = "FASkinningComponent::bind()"
-            landmarkType = "5">
+            startingLineNumber = "541"
+            endingLineNumber = "541">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -474,12 +472,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMaterialComponent.cpp"
-            timestampString = "478789635.693603"
+            timestampString = "480358527.979874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
-            landmarkName = "FASkinningComponent::setBonesArray(GLsizei size, const GLfloat *value)"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
+            landmarkName = "FASkinningVertexComponent::FASkinningVertexComponent()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -497,6 +495,54 @@
             endingLineNumber = "324"
             landmarkName = "FAMesh::loadNewFAModel(std::string path)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAMaterialComponent.cpp"
+            timestampString = "480358527.979874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "FAModelMatrixComponent::FAModelMatrixComponent(glm::mat4 *matrix)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FAModelMatrixComponent::FAModelMatrixComponent(glm::tmat4x4&lt;float, (glm::precision)0&gt;*)"
+                  moduleName = "FA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMaterialComponent.cpp"
+                  timestampString = "480358027.848528"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FAModelMatrixComponent::FAModelMatrixComponent(glm::tmat4x4&lt;float, (glm::precision)0&gt;*)"
+                  moduleName = "FA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMaterialComponent.cpp"
+                  timestampString = "480358027.848766"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

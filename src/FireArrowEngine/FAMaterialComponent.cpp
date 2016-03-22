@@ -56,11 +56,12 @@ bool FAMaterialComponent::requiresModelData() {
 
 FAVertexPositionComponent::FAVertexPositionComponent() {
 	vertexIO = "out vec4 pass_Position;\n";
-	vertexMain = "pass_Position = MMatrix * vec4(in_Position.xyz, 1.0);\n";
+	vertexMain = "pass_Position = ModelMatrix * vec4(in_Position.xyz, 1.0);\n";
 	fragmentIO = "in vec4 pass_Position;\n";
 	fragmentMain = "";
 	name = "vertexPosition";
 	modelData = true;
+	requirements.push_back(new FAModelMatrixComponent());
 }
 
 void FAVertexPositionComponent::setAttribute(std::string name, float value) {
@@ -79,7 +80,7 @@ void FAVertexPositionComponent::setUpLocations(GLint shaderProgram) {
 
 FAVertexNormalComponent::FAVertexNormalComponent() {
 	vertexIO = "layout(location = 1) in vec3 in_Normal;\nout vec4 pass_Normal;\n";
-	vertexMain = "pass_Normal = transpose(inverse(MMatrix)) * vec4(in_Normal, 0.0);\n";
+	vertexMain = "pass_Normal = transpose(inverse(ModelMatrix)) * vec4(in_Normal, 0.0);\n";
 	fragmentIO = "in vec4 pass_Normal;\n";
 	fragmentMain = "";
 	name = "vertexNormal";
@@ -140,7 +141,6 @@ void FAVertexUVComponent::setAttribute(std::string name, float value) {
 }
 
 void FAVertexUVComponent::bind() {
-
 }
 
 void FAVertexUVComponent::setUpLocations(GLint shaderProgram) {
@@ -148,6 +148,31 @@ void FAVertexUVComponent::setUpLocations(GLint shaderProgram) {
 }
 
 // ModelMatrix
+
+FAModelMatrixComponent::FAModelMatrixComponent() {
+	vertexIO = "uniform mat4 ModelMatrix;\n";
+	vertexMain = "";
+	fragmentIO = "";
+	fragmentMain = "";
+	name = "ModelMatrix";
+	modelData = false;
+	this->modelMatrix = new glm::mat4();
+}
+	
+FAModelMatrixComponent::FAModelMatrixComponent(glm::mat4 *matrix) : FAModelMatrixComponent() {
+	this->modelMatrix = matrix;
+}
+
+void FAModelMatrixComponent::bind() {
+	glUniformMatrix4fv(MatrixLocation, 1, GL_FALSE, &(*modelMatrix)[0][0]);
+}
+
+void FAModelMatrixComponent::setUpLocations(GLint shaderProgram) {
+	MatrixLocation = glGetUniformLocation(shaderProgram, "ModelMatrix");
+	if (MatrixLocation == -1) {
+		std::cout << "Error getting MatrixLocation in " << name << " component!" << std::endl;
+	}
+}
 
 // ViewProjectionMatrix
 

@@ -4,11 +4,13 @@ FAMaterial::FAMaterial() {
 
 	// components.push_back(new FADirectionalLightComponent);
 
-	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;\n uniform mat4 MMatrix;"
+	this->vertexIO = "#version 400 core \n uniform mat4 MVPMatrix;"
 		"layout(location = 0) in vec3 in_Position;\n";
 	this->vertexMain = "gl_Position = MVPMatrix * vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);\n";
 
 	this->fragmentIO = "#version 400 core \nout vec4 Frag_Data;\n";
+
+	// this->addMaterialComponent();
 	// this->fragmentMain = "";
 	// this->fragmentOutput = "Frag_Data = pass_Color;\n";
 
@@ -85,12 +87,12 @@ void FAMaterial::buildShader() {
 	
 	fragmentShader += ";\nFrag_Data.w = 1.0;\n}\n";
 
-//	 std::cout << fragmentShader << std::endl;
+	 std::cout << vertexShader << std::endl;
 
 	this->shader = new FAShader(&vertexShader, &fragmentShader);
 
 	MVPLocation = glGetUniformLocation(this->shader->shaderProgram, "MVPMatrix");
-	MLocation = glGetUniformLocation(this->shader->shaderProgram, "MMatrix");
+	// MLocation = glGetUniformLocation(this->shader->shaderProgram, "MMatrix");
 	if (MVPLocation == -1) {
 		std::cout << "MVPLocation failed!" << std::endl;
 	}
@@ -178,6 +180,10 @@ void FAMaterial::addVertexComponents(std::vector<FAMaterialComponent *> *compone
 	}
 }
 
+void FAMaterial::addVertexComponent(FAMaterialComponent *component) {
+	avaliableVertexComponents.push_back(component);
+}
+
 void FAMaterial::setAttribute(std::string name, float value) {
 	std::size_t place = name.find(".");
 	std::string compName = name.substr(0,place);
@@ -205,6 +211,11 @@ bool FAMaterial::addMaterialComponent(FAMaterialComponent *component) {
 			if (component->requiresModelData()) {
 				for (FAMaterialComponent *requiredComponent : avaliableVertexComponents) {
 					if (requiredComponent->getName() == component->getName()) {
+						for (FAMaterialComponent *reqQ : *requiredComponent->getRequirements()) {
+							if (!addMaterialComponent(reqQ)) {
+								return false;
+							}
+						}
 						components.push_back(requiredComponent);
 						isBuilt = false;
 						return true;
@@ -252,7 +263,7 @@ void FAMaterial::setViewProjectionwMatrix(glm::mat4 *VPMatrix) {
 }
 
 void FAMaterial::setModelMatrix(glm::mat4 &modelMatrix) {
-	this->modelMatrix = modelMatrix;
+	// this->modelMatrix = &modelMatrix;
 }
 
 FAMaterial::~FAMaterial() {
