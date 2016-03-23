@@ -5,6 +5,7 @@ FACSMRenderPass::FACSMRenderPass() {
     int shadowMapHeight = 1440;
     this->priority = -3;
     this->name = "CSM";
+	this->direction = new glm::vec3(0,1,0);
     
     glGenTextures(1, &shadowMap);
     glBindTexture(GL_TEXTURE_2D_ARRAY, shadowMap);
@@ -91,26 +92,26 @@ FACSMRenderPass::FACSMRenderPass() {
 
 
 void FACSMRenderPass::render() {
-    int shadowMapWidth = 2560;
-    int shadowMapHeight = 1440;
+//    int shadowMapWidth = 2560;
+//    int shadowMapHeight = 1440;
 	// std::cout << "renderCSM" << std::endl;
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
     glEnable(GL_CULL_FACE);
-    // glViewport(0,0,this->windowWidth,this->windowHeight);
-    glViewport(0,0,shadowMapWidth,shadowMapHeight);
-	glm::mat4 m = *this->modelmatrix;
-	m[3][0] = 0;
-	m[3][1] = 0;
-	m[3][2] = 0;
-	m[3][3] = 1;
+     glViewport(0,0,this->windowWidth,this->windowHeight);
+    // glViewport(0,0,shadowMapWidth,shadowMapHeight);
+	// glm::mat4 m = *this->modelmatrix;
+	// m[3][0] = 0;
+	// m[3][1] = 0;
+	// m[3][2] = 0;
+	// m[3][3] = 1;
 	
-	glm::vec4 v = m * glm::vec4(0,0,1,1);
-	glm::vec3 lightInvDir = glm::vec3(-v.x, -v.y, -v.z);//-*direction;
+	// glm::vec4 v = m * glm::vec4(0,0,1,1);
+//	glm::vec3 lightInvDir = glm::vec3(-this->direction->x, -this->direction->y, -this->direction->z);//-*direction;
     glm::mat4 *shadowMatrix = new glm::mat4[frustums];
-    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
-    glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
+//    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10,10,-10,10,-10,20);
+//    glm::mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0,0,0), glm::vec3(0,1,0));
 //    glm::mat4 depthModelMatrix = glm::mat4(1.0);
-	glm::mat4 depthMVP = depthProjectionMatrix * *this->modelmatrix;// * depthModelMatrix;
+//	glm::mat4 depthMVP = depthProjectionMatrix;// * depthModelMatrix;
     shadowMatrix[0] = calculateShadowCamera(0, 4);
     shadowMatrix[1] = calculateShadowCamera(4, 12);
     shadowMatrix[2] = calculateShadowCamera(12, 30);
@@ -141,15 +142,15 @@ void FACSMRenderPass::render() {
 			glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &m->getModelMatrix()[0][0]);
 			m->getMesh().render();
 		}
-//        for(FANode *node : children)
+//        for(FANode *node : children)a
 //            node->renderShadow();
         // children->renderShadow(shadowMatrix[i]);
     }
     
     
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-//    glViewport(0, 0, windowWidth*2, windowHeigth*2);
-    glViewport(0,0,1280 * 2,720 * 2);
+    glViewport(0, 0, this->windowWidth, this->windowHeight);
+    // glViewport(0,0,1280 * 2,720 * 2);
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         
        glEnable(GL_POLYGON_OFFSET_FILL);
@@ -191,14 +192,14 @@ glm::mat4 FACSMRenderPass::calculateShadowCamera(float near, float far) {
 
 //	glm::vec3 globalLightDirection = -*direction;
 	
-	glm::mat4 m = *this->modelmatrix;
-	m[3][0] = 0;
-	m[3][1] = 0;
-	m[3][2] = 0;
-	m[3][3] = 1;
+	// glm::mat4 m = *this->modelmatrix;
+	// m[3][0] = 0;
+	// m[3][1] = 0;
+	// m[3][2] = 0;
+	// m[3][3] = 1;
 	
-	glm::vec4 v = m * glm::vec4(0,0,1,0);
-	glm::vec3 globalLightDirection = glm::vec3(-v.x,-v.y,-v.z);
+	// glm::vec4 v = m * glm::vec4(0,0,1,0);
+	glm::vec3 globalLightDirection = glm::vec3(-this->direction->x,-this->direction->y,-this->direction->z);
 	globalLightDirection = glm::normalize(globalLightDirection);
 
     glm::vec3 cameraPoints[8];

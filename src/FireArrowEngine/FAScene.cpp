@@ -115,6 +115,8 @@ void FAScene::addRenderPass(FARenderPass *renderPass) {
     std::cout << "adding renderPass!" << std::endl;
 	this->numberOfPasses++;
     renderPass->setCB(this);
+	renderPass->setWindowHeight(this->windowHeigth);
+	renderPass->setWindowWidth(this->windowWidth);
 	FARenderPass **temp = new FARenderPass*[this->numberOfPasses];
 	for (int i = 0; i < this->numberOfPasses-1; i++) {
 		if (renderPass->getPriority() < renderPasses[i]->getPriority()) {

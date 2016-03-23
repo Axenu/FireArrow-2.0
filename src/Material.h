@@ -19,11 +19,18 @@ private:
 	FAShader *shader;
 	glm::mat4 viewProjectionMatrix;
 	glm::mat4 modelMatrix;
+	glm::vec3 lightDirection;
+	GLuint *texture;
+	glm::mat4 *inverseShadowMatrix;
 	// std::vector<FAMaterialComponent *> components;
 	// std::vector<FAMaterialComponent *> pendingComponents;
 	// std::vector<FAMaterialComponent *> avaliableVertexComponents;
 
 	GLint MVPLocation;
+	GLint modelMatrixLocation;
+	GLint LightDirectionLocation;
+	GLint shadowMapLocation;
+	GLint inverseShadowMatrixLocation;
 	// GLint MLocation;
 
 	//dynamic materials:
@@ -67,6 +74,8 @@ public:
 	void bind();
 	void setViewProjectionwMatrix(glm::mat4 &VPMatrix);
 	void setModelMatrix(glm::mat4 &modelMatrix);
+	void setTexture(GLuint *texture);
+	void setInverseShadowMatrix(glm::mat4 *inverseTextureMatrix);
 };
 
 #endif

@@ -26,6 +26,9 @@ public:
 	// void setParent(FAScene *parent);
 
 	virtual void render() = 0;
+	
+	void setWindowHeight(int height);
+	void setWindowWidth(int width);
 
 	//test callback
 	void setCB(FARenderPasscallbackInterface *cb);

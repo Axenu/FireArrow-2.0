@@ -13,7 +13,7 @@ FAScene* Game::setInitialScene() {
 }
 
 void Game::setWindowAttributes() {
-    this->setWindowsSize(1280, 720);
+    this->setWindowsSize(1920, 1080);
     this->setSamples(4);
     this->setDecorated(false);
     this->setWindowColor(glm::vec3(95.0/255.0,95.0/255.0,95.0/255.0));

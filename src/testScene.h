@@ -28,7 +28,8 @@ private:
     float time;
     float frames;
 	FAMesh *animated;
-    
+	glm::vec3 direction;
+	
 public:
     void init();
     void render();

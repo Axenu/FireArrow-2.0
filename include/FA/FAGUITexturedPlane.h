@@ -13,6 +13,7 @@ private:
     FAShader *shader;
 
     GLuint texture;
+    GLuint *textureP;
     GLint textureLocation;
     GLint positionLocation;
     GLint sizeLocation;
@@ -21,9 +22,10 @@ public:
     
     FAGUITexturedPlane();
     FAGUITexturedPlane(GLuint texture);
+    FAGUITexturedPlane(GLuint *texture);
 
-    void update(float dt);
-    void render();
+    virtual void onUpdate(float dt);
+    virtual void onRender();
 
     ~FAGUITexturedPlane();
 

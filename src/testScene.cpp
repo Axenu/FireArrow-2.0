@@ -23,14 +23,22 @@ void testScene::init() {
     glm::vec4 color = glm::vec4(1,1,1,1);
     // float ambient = 0.5;
     FADirectionalLight *light;
-	FACSMRenderPass *pass = new FACSMRenderPass();
-    glm::vec3 direction = glm::vec3(1,-1,0);
+	// FACSMRenderPass *pass = new FACSMRenderPass();
+	direction = glm::vec3(0,1,1);
 
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
     // FAMaterial *material = new FAMaterial();
     // material->addMaterialComponent(new FAVertexColorComponent());
+    FACSMRenderPass *pass = new FACSMRenderPass();
+    pass->setDirection(&direction);
+    // glm::mat4 matrix = glm::lookAt(glm::vec3(0,0,0), direction, glm::vec3(0,1,0));
+    // pass->setModelMatrix(&matrix);
+    this->addRenderPass(pass);
+
     Material *ma = new Material();
+    ma->setTexture(pass->getShadowMap());
+    ma->setInverseShadowMatrix(pass->getInverseShadowMatrix());
     // material->setDirectionalLight(direction, color, ambient);
     FAModel *m = new FAModel(mesh, ma);
     m->setPosition(0,0,-5);
@@ -41,6 +49,7 @@ void testScene::init() {
     // group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
 //    m->runAction(group);
 	
+
     addChild(m);
     m = new FAModel(mesh, ma);
     m->setPosition(10,0,0);
@@ -50,6 +59,13 @@ void testScene::init() {
     FATerrain *t = new FATerrain();
     // t->setMaterial(material);
     addChild(t);
+
+
+    FAGUITexturedPlane *plane = new FAGUITexturedPlane(pass->getShadowMap());
+    plane->setHeight(0.5);
+    plane->setWidth(0.5);
+    plane->setPosition(0, 0);
+    addChild(plane);
 
 //     light = new FADirectionalLight();
 //     light->setColor(color);
@@ -104,26 +120,26 @@ void testScene::init() {
 	
 //	FAFont *lightFont = new FAFont("helveticaneue-light-webfont.ttf", 20, this->windowWidth, this->windowHeigth);
 
-	FAGUIMenu *menu = new FAGUIMenu(n);
-	menu->addLabel("test Label");
-	menu->addLabel("Hello gWorld!");
-	menu->addLabel("test Label");
-	menu->addLabel("Hello gWorld!");
-	menu->addLabel("test Label");
-	menu->addLabel("Hello gWorld!");
-	menu->addUpdatedLabel("camX", &(camera->position.x), 5);
-	this->addChild(menu);
+	// FAGUIMenu *menu = new FAGUIMenu(n);
+	// menu->addLabel("test Label");
+	// menu->addLabel("Hello gWorld!");
+	// menu->addLabel("test Label");
+	// menu->addLabel("Hello gWorld!");
+	// menu->addLabel("test Label");
+	// menu->addLabel("Hello gWorld!");
+	// menu->addUpdatedLabel("camX", &(camera->position.x), 5);
+	// this->addChild(menu);
 	
 //	FAGUIButton *b1 = new FAGUIButton(n);
 //	b1->setText("Add");
 //	this->addChild(b1);
 //	std::cout << text->getWidth() << std::endl;
 	
-	FAGUIPlane *p1 = new FAGUIPlane();
-	p1->setHeight(0.1);
-	p1->setWidth(0.18);
-	p1->setPosition(0, 0);
-	addChild(p1);
+	// FAGUIPlane *p1 = new FAGUIPlane();
+	// p1->setHeight(0.1);
+	// p1->setWidth(0.18);
+	// p1->setPosition(0, 0);
+	// addChild(p1);
 //
 //	FAGUIText *t1 = new FAGUIText(lightFont);
 //	t1->setY(0.025);

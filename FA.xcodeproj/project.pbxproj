@@ -17,6 +17,8 @@
 		35566FFC1C8996ED008932B2 /* FABone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35566FFB1C8996ED008932B2 /* FABone.cpp */; };
 		35566FFE1C8B319E008932B2 /* FAAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 35566FFD1C8B319E008932B2 /* FAAnimation.h */; };
 		355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */; };
+		35774F0A1CA28CE800B56764 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35774F081CA28CE800B56764 /* Material.cpp */; };
+		35774F0B1CA28CE800B56764 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 35774F091CA28CE800B56764 /* Material.h */; };
 		358DF6561C199086006070D4 /* FAAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6371C199086006070D4 /* FAAction.cpp */; };
 		358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6381C199086006070D4 /* FAAmbientLight.cpp */; };
 		358DF6581C199086006070D4 /* FACamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6391C199086006070D4 /* FACamera.cpp */; };
@@ -119,6 +121,8 @@
 		35566FFB1C8996ED008932B2 /* FABone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FABone.cpp; sourceTree = "<group>"; };
 		35566FFD1C8B319E008932B2 /* FAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAAnimation.h; sourceTree = "<group>"; };
 		35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAnimation.cpp; sourceTree = "<group>"; };
+		35774F081CA28CE800B56764 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		35774F091CA28CE800B56764 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		358DF5C21C198E56006070D4 /* FA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FA; sourceTree = BUILT_PRODUCTS_DIR; };
 		358DF6371C199086006070D4 /* FAAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAction.cpp; sourceTree = "<group>"; };
 		358DF6381C199086006070D4 /* FAAmbientLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAmbientLight.cpp; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				358DF6531C199086006070D4 /* main.cpp */,
 				358DF6541C199086006070D4 /* testScene.cpp */,
 				358DF6551C199086006070D4 /* testScene.h */,
+				35774F081CA28CE800B56764 /* Material.cpp */,
+				35774F091CA28CE800B56764 /* Material.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -427,6 +433,7 @@
 				358DF9711C199288006070D4 /* FAGUIPlane.h in Headers */,
 				358DF9721C199288006070D4 /* FAGUILabel.h in Headers */,
 				358DF9731C199288006070D4 /* FAGUITexturedPlane.h in Headers */,
+				35774F0B1CA28CE800B56764 /* Material.h in Headers */,
 				358DF9741C199288006070D4 /* FALight.h in Headers */,
 				358DF9751C199288006070D4 /* FAMainRenderPass.h in Headers */,
 				358DF9761C199288006070D4 /* FAMaterial.h in Headers */,
@@ -539,6 +546,7 @@
 				351FE8571C67A16C009CB0BA /* FAGUIMenu.cpp in Sources */,
 				351945B61C5CCD5A0029B544 /* FAShadowRenderPass.cpp in Sources */,
 				358DF6721C199086006070D4 /* testScene.cpp in Sources */,
+				35774F0A1CA28CE800B56764 /* Material.cpp in Sources */,
 				358DF66A1C199086006070D4 /* FARenderPass.cpp in Sources */,
 				358DF65C1C199086006070D4 /* FAFont.cpp in Sources */,
 				358DF66D1C199086006070D4 /* FAShadowMapRenderPass.cpp in Sources */,

@@ -23,6 +23,14 @@ std::string &FARenderPass::getName() {
 	return this->name;
 }
 
+void FARenderPass::setWindowHeight(int height) {
+	this->windowHeight = height;
+}
+
+void FARenderPass::setWindowWidth(int width) {
+	this->windowWidth = width;
+}
+
 void FARenderPass::setCB(FARenderPasscallbackInterface *cb) {
 	this->parent = cb;
 }

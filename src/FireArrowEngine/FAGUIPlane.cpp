@@ -31,8 +31,7 @@ void FAGUIPlane::onRender() {
 	glUniform2fv(positionLocation, 1, &pos[0]);
 	glUniform2fv(sizeLocation, 1, &size[0]);
 	glUniform4fv(colorLocation, 1, &color[0]);
-
-    this->mesh->render();
+	    this->mesh->render();
 }
 
 FAGUIPlane::~FAGUIPlane() {
