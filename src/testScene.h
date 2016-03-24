@@ -16,6 +16,7 @@
 #include <FA/FAGUIMenu.h>
 #include "Material.h"
 #include "SkinningMaterial.h"
+#include <FA/FAGaussianRenderPass.h>
 
 class testScene : public FAScene {
     

@@ -3,7 +3,7 @@
 
 FAScene::FAScene() {
 	//Default stuff
-	FARenderPass *defaultPass = new FAMainRenderPass();
+	defaultPass = new FAMainRenderPass();
     // FARenderPass *shadow = new FACSMRenderPass();
 	renderPasses = new FARenderPass*[1];
 	renderPasses[0] = defaultPass;
@@ -117,6 +117,7 @@ void FAScene::addRenderPass(FARenderPass *renderPass) {
     renderPass->setCB(this);
 	renderPass->setWindowHeight(this->windowHeigth);
 	renderPass->setWindowWidth(this->windowWidth);
+	renderPass->finalize();
 	FARenderPass **temp = new FARenderPass*[this->numberOfPasses];
 	for (int i = 0; i < this->numberOfPasses-1; i++) {
 		if (renderPass->getPriority() < renderPasses[i]->getPriority()) {
@@ -137,7 +138,9 @@ void FAScene::setCallback(FAEngine *_callback) {
 
 void FAScene::setWindowSize(int width, int height) {
     this->windowWidth = width;
-    this->windowHeigth = height;
+	this->windowHeigth = height;
+	defaultPass->setWindowWidth(this->windowWidth);
+	defaultPass->setWindowHeight(this->windowHeigth);
 }
 
 void FAScene::setCursorState(int state) {

@@ -21,6 +21,8 @@
 		35774F0B1CA28CE800B56764 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 35774F091CA28CE800B56764 /* Material.h */; };
 		358CB3581CA3FA450010E02D /* SkinningMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */; };
 		358CB3591CA3FA450010E02D /* SkinningMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 358CB3571CA3FA450010E02D /* SkinningMaterial.h */; };
+		358CB35B1CA42A240010E02D /* FAGaussianRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358CB35A1CA42A240010E02D /* FAGaussianRenderPass.cpp */; };
+		358CB35D1CA42A390010E02D /* FAGaussianRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 358CB35C1CA42A390010E02D /* FAGaussianRenderPass.h */; };
 		358DF6561C199086006070D4 /* FAAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6371C199086006070D4 /* FAAction.cpp */; };
 		358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6381C199086006070D4 /* FAAmbientLight.cpp */; };
 		358DF6581C199086006070D4 /* FACamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6391C199086006070D4 /* FACamera.cpp */; };
@@ -127,6 +129,8 @@
 		35774F091CA28CE800B56764 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkinningMaterial.cpp; sourceTree = "<group>"; };
 		358CB3571CA3FA450010E02D /* SkinningMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinningMaterial.h; sourceTree = "<group>"; };
+		358CB35A1CA42A240010E02D /* FAGaussianRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGaussianRenderPass.cpp; sourceTree = "<group>"; };
+		358CB35C1CA42A390010E02D /* FAGaussianRenderPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAGaussianRenderPass.h; sourceTree = "<group>"; };
 		358DF5C21C198E56006070D4 /* FA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FA; sourceTree = BUILT_PRODUCTS_DIR; };
 		358DF6371C199086006070D4 /* FAAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAction.cpp; sourceTree = "<group>"; };
 		358DF6381C199086006070D4 /* FAAmbientLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAmbientLight.cpp; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				358DF6861C199095006070D4 /* FAGUITexturedPlane.h */,
 				358DF6871C199095006070D4 /* FALight.h */,
 				358DF6881C199095006070D4 /* FAMainRenderPass.h */,
+				358CB35C1CA42A390010E02D /* FAGaussianRenderPass.h */,
 				358DF6891C199095006070D4 /* FAMaterial.h */,
 				358DF68A1C199095006070D4 /* FAMaterialComponent.h */,
 				358DF68B1C199095006070D4 /* FAMesh.h */,
@@ -410,6 +415,7 @@
 			children = (
 				358DF63A1C199086006070D4 /* FACSMRenderPass.cpp */,
 				358DF6441C199086006070D4 /* FAMainRenderPass.cpp */,
+				358CB35A1CA42A240010E02D /* FAGaussianRenderPass.cpp */,
 				358DF64B1C199086006070D4 /* FARenderPass.cpp */,
 				351945B41C5CCD5A0029B544 /* FAShadowRenderPass.cpp */,
 				358DF64E1C199086006070D4 /* FAShadowMapRenderPass.cpp */,
@@ -425,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				358DF9681C199288006070D4 /* FAAction.h in Headers */,
+				358CB35D1CA42A390010E02D /* FAGaussianRenderPass.h in Headers */,
 				351945B91C5CEA160029B544 /* FAShadowRenderPass.h in Headers */,
 				358DF9691C199288006070D4 /* FAAmbientLight.h in Headers */,
 				358DF96A1C199288006070D4 /* FACamera.h in Headers */,
@@ -553,6 +560,7 @@
 				351FE8571C67A16C009CB0BA /* FAGUIMenu.cpp in Sources */,
 				351945B61C5CCD5A0029B544 /* FAShadowRenderPass.cpp in Sources */,
 				358DF6721C199086006070D4 /* testScene.cpp in Sources */,
+				358CB35B1CA42A240010E02D /* FAGaussianRenderPass.cpp in Sources */,
 				35774F0A1CA28CE800B56764 /* Material.cpp in Sources */,
 				358DF66A1C199086006070D4 /* FARenderPass.cpp in Sources */,
 				358DF65C1C199086006070D4 /* FAFont.cpp in Sources */,

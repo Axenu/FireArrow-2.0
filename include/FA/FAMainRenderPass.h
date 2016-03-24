@@ -7,11 +7,21 @@ class FAMainRenderPass : public FARenderPass {
 
 private:
 
+	GLuint fbo;
+	GLuint fboTexture;
+	
+	bool _hasFBO;
+	
 public:
 	FAMainRenderPass();
 	~FAMainRenderPass();
 
 	void render();
+	
+	void enablePostProcessing();
+	void disablePostProsessing();
+	
+	GLint getFBOTexture();
 	
 };
 

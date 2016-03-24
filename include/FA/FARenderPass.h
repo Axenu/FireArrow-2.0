@@ -27,6 +27,8 @@ public:
 
 	virtual void render() = 0;
 	
+	virtual void finalize() {}
+	
 	void setWindowHeight(int height);
 	void setWindowWidth(int width);
 

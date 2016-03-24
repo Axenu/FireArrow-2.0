@@ -66,6 +66,13 @@ void testScene::init() {
 	FAModel *anim = new FAModel(animated, materialS);
 	this->addChild(anim);
 	
+	this->getMainPass()->enablePostProcessing();
+	
+	FAGaussianRenderPass *gp = new FAGaussianRenderPass();
+	gp->setRenderdTexture(this->getMainPass()->getFBOTexture());
+	
+	this->addRenderPass(gp);
+	
 	
 	// FAMesh *sphere = new FAMesh("sphere.fa");
 	// FAModel *sp = new FAModel(*sphere, *material);

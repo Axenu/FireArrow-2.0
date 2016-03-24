@@ -17,6 +17,7 @@ class FAScene : FARenderPasscallbackInterface {
 private:
 	glm::vec2 lastCursorPosition;
 	FAGUIElement *currentElement = nullptr;
+	FAMainRenderPass *defaultPass;
 
 public:
 
@@ -50,6 +51,7 @@ public:
     virtual void getKeyInput(int key, int action){}
     virtual void mouseKeyInput(int button, int action){}
     virtual void cursorPosition(double x, double y){}
+	FAMainRenderPass *getMainPass() {return defaultPass;}
     // virtual void buttonPressed(FAHUDElement *node){}
 
 protected:
