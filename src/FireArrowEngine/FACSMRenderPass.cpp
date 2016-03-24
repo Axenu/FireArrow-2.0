@@ -6,6 +6,7 @@ FACSMRenderPass::FACSMRenderPass() {
     this->priority = -3;
     this->name = "CSM";
 	this->direction = new glm::vec3(0,1,0);
+	this->frustums = 4;
     
     glGenTextures(1, &shadowMap);
     glBindTexture(GL_TEXTURE_2D_ARRAY, shadowMap);
@@ -67,18 +68,18 @@ FACSMRenderPass::FACSMRenderPass() {
     
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
-    shader = new FAShader("shadow");
-
-    glUseProgram(shader->shaderProgram);
-
-    modelMatrixLocation = glGetUniformLocation(shader->shaderProgram, "modelMatrix");
-    viewProjectionMatrixLocation = glGetUniformLocation(shader->shaderProgram, "viewProjectionMatrix");
-    glUseProgram(0);
-
-    if (modelMatrixLocation == -1) 
-        std::cout << "Error getting uniform modelMatrixLocation" << std::endl;
-    if (viewProjectionMatrixLocation == -1) 
-        std::cout << "Error getting uniform viewProjectionMatrixLocation" << std::endl;
+//    shader = new FAShader("shadow");
+//
+//    glUseProgram(shader->shaderProgram);
+//
+//    modelMatrixLocation = glGetUniformLocation(shader->shaderProgram, "modelMatrix");
+//    viewProjectionMatrixLocation = glGetUniformLocation(shader->shaderProgram, "viewProjectionMatrix");
+//    glUseProgram(0);
+//
+//    if (modelMatrixLocation == -1) 
+//        std::cout << "Error getting uniform modelMatrixLocation" << std::endl;
+//    if (viewProjectionMatrixLocation == -1) 
+//        std::cout << "Error getting uniform viewProjectionMatrixLocation" << std::endl;
 
     inverseShadowMatrix = new glm::mat4[frustums];
 	
@@ -97,7 +98,7 @@ void FACSMRenderPass::render() {
 	// std::cout << "renderCSM" << std::endl;
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
     glEnable(GL_CULL_FACE);
-     glViewport(0,0,this->windowWidth,this->windowHeight);
+     glViewport(0,0,2560,1440);
     // glViewport(0,0,shadowMapWidth,shadowMapHeight);
 	// glm::mat4 m = *this->modelmatrix;
 	// m[3][0] = 0;
@@ -131,15 +132,18 @@ void FACSMRenderPass::render() {
         
         // glCullFace(GL_FRONT);
 
-        glUseProgram(shader->shaderProgram);
+//        glUseProgram(shader->shaderProgram);
 		
 
         for (FAModel *m : *parent->getModels()) {
 			// m->getMaterial().setViewProjectionwMatrix(&(parent->getCamera()->VPMatrix));
 			// m->getMaterial().setModelMatrix(m->modelMatrix);
 			// m->getMaterial().bind();
-            glUniformMatrix4fv(viewProjectionMatrixLocation, 1, GL_FALSE, &shadowMatrix[i][0][0]);
-			glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &m->getModelMatrix()[0][0]);
+//            glUniformMatrix4fv(viewProjectionMatrixLocation, 1, GL_FALSE, &shadowMatrix[i][0][0]);
+//			glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &m->getModelMatrix()[0][0]);
+			m->getMaterial().setViewProjectionwMatrix(shadowMatrix[i]);
+			m->getMaterial().setModelMatrix(m->getModelMatrix());
+			m->getMaterial().bindShadow();
 			m->getMesh().render();
 		}
 //        for(FANode *node : children)a

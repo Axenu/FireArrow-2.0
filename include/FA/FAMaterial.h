@@ -64,6 +64,7 @@ public:
 	//addThis
 
 	virtual void bind() {};
+	virtual void bindShadow() {};
 	virtual void setViewProjectionwMatrix(glm::mat4 &VPMatrix) {};
 	virtual void setModelMatrix(glm::mat4 &modelMatrix) {};
 };

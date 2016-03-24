@@ -24,7 +24,7 @@ FABone* FAArmature::getRootBone() {
 }
 
 int FAArmature::getNumberOfBones() {
-	return this->bones.size();
+	return (int) this->bones.size();
 }
 
 float* FAArmature::getAnimatedXForm() {

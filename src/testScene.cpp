@@ -22,32 +22,22 @@ void testScene::init() {
 
     glm::vec4 color = glm::vec4(1,1,1,1);
     // float ambient = 0.5;
-    FADirectionalLight *light;
+//    FADirectionalLight *light;
 	// FACSMRenderPass *pass = new FACSMRenderPass();
-	direction = glm::vec3(0,1,1);
+	direction = glm::vec3(1,1,1);
 
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
     FAMesh *mesh = new FAMesh("tree.fa");
-    // FAMaterial *material = new FAMaterial();
-    // material->addMaterialComponent(new FAVertexColorComponent());
     FACSMRenderPass *pass = new FACSMRenderPass();
     pass->setDirection(&direction);
-    // glm::mat4 matrix = glm::lookAt(glm::vec3(0,0,0), direction, glm::vec3(0,1,0));
-    // pass->setModelMatrix(&matrix);
     this->addRenderPass(pass);
 
     Material *ma = new Material();
+	ma->setLightDirection(direction);
     ma->setTexture(pass->getShadowMap());
     ma->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-    // material->setDirectionalLight(direction, color, ambient);
     FAModel *m = new FAModel(mesh, ma);
     m->setPosition(0,0,-5);
-
-    //testing actions
-    // FAActionSequence *group = new FAActionSequence();
-//    group->addAction(new FAActionMoveTo(glm::vec3(10,1,-5), 3.0f));
-    // group->addAction(new FAActionRotateBy(glm::vec3(0,31.4,0), 20.0f));
-//    m->runAction(group);
 	
 
     addChild(m);
@@ -61,34 +51,20 @@ void testScene::init() {
     addChild(t);
 
 
-    FAGUITexturedPlane *plane = new FAGUITexturedPlane(pass->getShadowMap());
-    plane->setHeight(0.5);
-    plane->setWidth(0.5);
-    plane->setPosition(0, 0);
-    addChild(plane);
+//    FAGUITexturedPlane *plane = new FAGUITexturedPlane(pass->getShadowMap());
+//    plane->setHeight(0.5);
+//    plane->setWidth(0.5);
+//    plane->setPosition(0,0);
+//    addChild(plane);
 
-//     light = new FADirectionalLight();
-//     light->setColor(color);
-// //	light->rotate(glm::vec3(0,0,1));
-// 	light->setDirection(direction);
-// 	light->setShadowMap(*pass);
-//     // light->setAmbientComponent(ambient);
-//     addChild(light);
-//	light->runAction(group);
-
-    // FAAmbientLight *alight = new FAAmbientLight(color, 0.3f);
-    // addChild(alight);
-
- //    FAMaterial *materialS = new FAMaterial();
- //    animated = new FAMesh("animatedblend.fa");
- // //    FASkinningComponent *sc = new FASkinningComponent();
-	// // sc->setBonesArray((GLsizei) animated->animatedXForm.size(), &animated->animatedXForm[0][0][0]);
- // //    materialS->addMaterialComponent(sc);
- //    materialS->addMaterialComponent(new FASkinningComponent());
- //    std::cout << "material completed" << std::endl;
- //    FAModel *anim = new FAModel(*animated, *materialS);
-	
-	
+	SkinningMaterial *materialS = new SkinningMaterial();
+	materialS->setLightDirection(direction);
+	materialS->setTexture(pass->getShadowMap());
+	materialS->setInverseShadowMatrix(pass->getInverseShadowMatrix());
+	animated = new FAMesh("animatedblend.fa");
+	materialS->setArmature(animated->getArmature());
+	FAModel *anim = new FAModel(animated, materialS);
+	this->addChild(anim);
 	
 	
 	// FAMesh *sphere = new FAMesh("sphere.fa");
@@ -99,8 +75,6 @@ void testScene::init() {
 	// 	sp->setPosition(b->getGlobalPosition());
 	// 	addChild(sp);
 	// }
-	
-    // this->addChild(anim);
 
 //    FAPointLight *pLight = new FAPointLight();
 //	glm::vec4 redColor = glm::vec4(1,0,0,1);

@@ -583,6 +583,10 @@ std::vector<FAMaterialComponent *>* FAMesh::getAvaliableComponents() {
     return &this->avaliableVertexComponents;
 }
 
+FAArmature *FAMesh::getArmature() {
+	return this->armature;
+}
+
 FAMesh::~FAMesh() {
 
 }

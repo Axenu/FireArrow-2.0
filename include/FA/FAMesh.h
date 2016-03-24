@@ -61,6 +61,7 @@ public:
 	// bool hasVertexUV();
 
 	std::vector<FAMaterialComponent *>* getAvaliableComponents();
+	FAArmature *getArmature();
 
 	~FAMesh();
 	// std::vector<glm::mat4> animatedXForm;

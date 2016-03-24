@@ -19,6 +19,8 @@
 		355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */; };
 		35774F0A1CA28CE800B56764 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35774F081CA28CE800B56764 /* Material.cpp */; };
 		35774F0B1CA28CE800B56764 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 35774F091CA28CE800B56764 /* Material.h */; };
+		358CB3581CA3FA450010E02D /* SkinningMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */; };
+		358CB3591CA3FA450010E02D /* SkinningMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 358CB3571CA3FA450010E02D /* SkinningMaterial.h */; };
 		358DF6561C199086006070D4 /* FAAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6371C199086006070D4 /* FAAction.cpp */; };
 		358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6381C199086006070D4 /* FAAmbientLight.cpp */; };
 		358DF6581C199086006070D4 /* FACamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358DF6391C199086006070D4 /* FACamera.cpp */; };
@@ -123,6 +125,8 @@
 		35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAnimation.cpp; sourceTree = "<group>"; };
 		35774F081CA28CE800B56764 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		35774F091CA28CE800B56764 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkinningMaterial.cpp; sourceTree = "<group>"; };
+		358CB3571CA3FA450010E02D /* SkinningMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinningMaterial.h; sourceTree = "<group>"; };
 		358DF5C21C198E56006070D4 /* FA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FA; sourceTree = BUILT_PRODUCTS_DIR; };
 		358DF6371C199086006070D4 /* FAAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAction.cpp; sourceTree = "<group>"; };
 		358DF6381C199086006070D4 /* FAAmbientLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAmbientLight.cpp; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				358DF6551C199086006070D4 /* testScene.h */,
 				35774F081CA28CE800B56764 /* Material.cpp */,
 				35774F091CA28CE800B56764 /* Material.h */,
+				358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */,
+				358CB3571CA3FA450010E02D /* SkinningMaterial.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -435,6 +441,7 @@
 				358DF9731C199288006070D4 /* FAGUITexturedPlane.h in Headers */,
 				35774F0B1CA28CE800B56764 /* Material.h in Headers */,
 				358DF9741C199288006070D4 /* FALight.h in Headers */,
+				358CB3591CA3FA450010E02D /* SkinningMaterial.h in Headers */,
 				358DF9751C199288006070D4 /* FAMainRenderPass.h in Headers */,
 				358DF9761C199288006070D4 /* FAMaterial.h in Headers */,
 				35B7557D1C19D6A300F09A1F /* FAGUIButton.h in Headers */,
@@ -561,6 +568,7 @@
 				358DF66F1C199086006070D4 /* FATexture.cpp in Sources */,
 				358DF66C1C199086006070D4 /* FAShader.cpp in Sources */,
 				358DF65D1C199086006070D4 /* FAGUIElement.cpp in Sources */,
+				358CB3581CA3FA450010E02D /* SkinningMaterial.cpp in Sources */,
 				358DF7D41C199095006070D4 /* glm.cpp in Sources */,
 				355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */,
 				358DF65E1C199086006070D4 /* FAGUIMaterialComponent.cpp in Sources */,

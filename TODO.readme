@@ -1,10 +1,11 @@
 specular
 texture
-skeletal
+normals
+//skeletal
 parse obj
 heightmap walking
 normal mapping
-cascade shadow mapping
+//cascade shadow mapping
 backface culling using geometry shader
 view frustum culling against quadtree
 particle system

@@ -15,6 +15,7 @@
 #include <FA/FAGUIButton.h>
 #include <FA/FAGUIMenu.h>
 #include "Material.h"
+#include "SkinningMaterial.h"
 
 class testScene : public FAScene {
     
