@@ -1,10 +1,10 @@
-specular
-texture
-normals
+specular 1
+texture 1
+//normals
 //skeletal
-parse obj
+parse obj 1
 heightmap walking
-normal mapping
+normal mapping 1
 //cascade shadow mapping
 backface culling using geometry shader
 view frustum culling against quadtree

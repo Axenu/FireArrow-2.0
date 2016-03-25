@@ -29,6 +29,7 @@ private:
 	
 	GLint MVPLocation;
 	GLint modelMatrixLocation;
+	GLint normalMatrixLocation;
 	GLint LightDirectionLocation;
 	GLint shadowMapLocation;
 	GLint inverseShadowMatrixLocation;

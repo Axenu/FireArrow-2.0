@@ -43,5 +43,6 @@ void main() {
 	Frag_Data = pass_Color * (light * shadow + ambient);
 	// Frag_Data = pass_Position;
 	// Frag_Data = dist * vec4(1.0);
+    // Frag_Data = pass_Normal;
 	Frag_Data.w = 1;
 }

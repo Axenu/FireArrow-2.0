@@ -13,21 +13,18 @@ out vec4 pass_Color;
 
 uniform mat4 MVPMatrix;
 uniform mat4 ModelMatrix;
+uniform mat4 NormalMatrix;
 uniform mat4 bones[4];
 
 void main() {
 	//skinning
-	int index = int(in_Index.x);
-	vec4 skintransform = (bones[index] * in_Weight.x) * vec4(in_Position.xyz, 1.0);
-	index = int(in_Index.y);
-	skintransform = skintransform + (bones[index] * in_Weight.y) * vec4(in_Position.xyz, 1.0);
-	index = int(in_Index.z);
-	skintransform = skintransform + (bones[index] * in_Weight.z) * vec4(in_Position.xyz, 1.0);
-	index = int(in_Index.w);
-	skintransform = skintransform + (bones[index] * in_Weight.w) * vec4(in_Position.xyz, 1.0);
+	mat4 skintransform = (bones[int(in_Index.x)] * in_Weight.x);
+	skintransform = skintransform + (bones[int(in_Index.y)] * in_Weight.y);
+	skintransform = skintransform + (bones[int(in_Index.z)] * in_Weight.z);
+	skintransform = skintransform + (bones[int(in_Index.w)] * in_Weight.w);
 
-	pass_Position = ModelMatrix * skintransform;
-	pass_Normal = vec4(in_Normal, 0.0);
+	pass_Position = ModelMatrix * (skintransform * vec4(in_Position.xyz, 1.0));
+	pass_Normal = NormalMatrix * skintransform * vec4(in_Normal, 0.0);
 	pass_Color = vec4(in_Color, 1.0);
-	gl_Position = MVPMatrix * skintransform;
+	gl_Position = MVPMatrix * (skintransform * vec4(in_Position.xyz, 1.0));
 }
