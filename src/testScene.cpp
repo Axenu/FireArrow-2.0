@@ -2,6 +2,8 @@
 
 void testScene::init() {
 	
+	glEnable(GL_TEXTURE_2D);
+	
 	FAFont *n = new FAFont("Arial");
 	
     font = new FAFont("Helvetica.ttf", 20, 640, 480);
@@ -14,8 +16,7 @@ void testScene::init() {
     // comp->setPosition(0.5,0.5);
     // addChild(comp);
     // FAMaterial *material = new FAMaterial();
-    // material->addMaterialComponent(new FAVertexColorComponent());
-    // FAMesh *mesh = new FAMesh("barrel.fa");
+    // material->addMaterialComponent(new FAVertexColorComponent());w    // FAMesh *mesh = new FAMesh("barrel.fa");
     // FAModel *model = new FAModel(*mesh, *material);
     // this->addChild(model);
 
@@ -46,9 +47,10 @@ void testScene::init() {
     addChild(m);
     m = new FAModel(mesh, ma);
     addChild(m);
-    FATerrain *t = new FATerrain();
-    // t->setMaterial(material);
-    addChild(t);
+//    FATerrain *t = new FATerrain();
+//	t->setMaterial(ma);
+//    // t->setMaterial(material);
+//    addChild(t);
 
 
 //    FAGUITexturedPlane *plane = new FAGUITexturedPlane(pass->getShadowMap());
@@ -65,6 +67,28 @@ void testScene::init() {
 	materialS->setArmature(animated->getArmature());
 	FAModel *anim = new FAModel(animated, materialS);
 	this->addChild(anim);
+	
+	FAMesh *wallMesh = new FAMesh("Normalmapped wall.obj");
+	NormalMaterial *normalMat = new NormalMaterial();
+	normalMat->setLightDirection(direction);
+	normalMat->setShadowMap(pass->getShadowMap());
+	normalMat->setInverseShadowMatrix(pass->getInverseShadowMatrix());
+	normalMat->setOBJMaterial(wallMesh->getOBJMaterialLib(), wallMesh->getOBJMaterial());
+	FAModel *wall = new FAModel(wallMesh, normalMat);
+	wall->setPosition(9, 1, -2);
+	wall->rotateY(-glm::half_pi<float>());
+	addChild(wall);
+	
+	FAActionRotateBy *a = new FAActionRotateBy(glm::vec3(0,50,0), 100);
+//	wall->runAction(a);
+	
+	
+	ch = new FATerrainChunk();
+	ch->loadChunk();
+	FAModel *terrain = new FAModel(ch, ma);
+	addChild(terrain);
+	
+	
 	
 	//------------(( Gaussian ))-------------//
 	
@@ -142,7 +166,8 @@ void testScene::update(float dt) {
     
     camera->moveX(cameraMovement.x * dt * cos(camera->getRY()));
     camera->moveZ(cameraMovement.x * dt * sin(camera->getRY()));
-    camera->moveY(cameraMovement.y * dt);
+//    camera->moveY(cameraMovement.y * dt);
+	camera->setY(ch->getHeight(camera->getX(), camera->getZ()) + 2);
 
     if (time < 0.2) {
         time += dt;

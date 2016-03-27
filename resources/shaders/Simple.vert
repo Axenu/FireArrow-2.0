@@ -15,7 +15,7 @@ uniform mat4 NormalMatrix;
 
 void main() {
 	pass_Position = ModelMatrix * vec4(in_Position.xyz, 1.0);
-	pass_Normal = NormalMatrix * vec4(in_Normal, 0.0);
+	pass_Normal = NormalMatrix * vec4(in_Normal, 1.0);
 	pass_Color = vec4(in_Color, 1.0);
 	gl_Position = MVPMatrix * vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);
 }

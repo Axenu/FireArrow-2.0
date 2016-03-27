@@ -18,7 +18,9 @@ FAMesh::FAMesh(std::string path) : FAMesh() {
         std::string filetype = path.substr(place+1, path.length());
         if (filetype == "fa"){
             loadNewFAModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
-        }
+		} else if (filetype == "obj") {
+			loadOBJModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
+		}
     } else {
         loadFAModel("/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + path);
     }
@@ -38,7 +40,7 @@ FAMesh::FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool 
     // this->_hasPosition = true;
 
     // load model to graphicscard
-    this->numberOfVertices = indices.size();
+    this->numberOfVertices = (GLint) indices.size();
 
     //test
     // GLfloat vertA[] = {0,0,0, 1,0,0, 1,0,0, 1,0,0, 1,0,0, 1,0,0, 1,1,0, 1,0,0, 1,0,0, 0,1,0, 1,0,0, 1,0,0};
@@ -79,6 +81,184 @@ FAMesh::FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool 
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+}
+
+void FAMesh::loadOBJModel(std::string path) {
+	std::ifstream file (path);
+	std::vector<glm::vec3> vertexArray = std::vector<glm::vec3>();
+	std::vector<glm::vec2> uvArray = std::vector<glm::vec2>();
+	std::vector<glm::vec3> normalArray = std::vector<glm::vec3>();
+	std::vector<glm::vec3> indicesArray;
+	std::vector<glm::vec3> tengentArray;
+	std::vector<glm::vec3> biTangentArray;
+	
+	std::vector<GLfloat> vertices;
+	std::vector<GLuint> indices;
+	
+	if (!file.is_open()) {
+		std::cout << "File " << path << "not found!" << std::endl;
+		return;
+	}
+	int count = 0;
+	std::string line;
+	std::string option;
+	while (!file.eof()) {
+		option = "#";
+		getline(file, line);
+		std::stringstream ss(line);
+		ss >> option;
+		if (option == "#") {
+//			std::cout << "comment: " << line << std::endl;
+		} else if (option == "v") {
+			glm::vec3 v;
+			ss >> v.x >> v.y >> v.z;
+//			std::cout << "vertex: " << line << std::endl;
+			vertexArray.push_back(v);
+		} else if (option == "vt") {
+			glm::vec2 v;
+			ss >> v.x >> v.y;
+//			std::cout << "vertexUV: " << line << std::endl;
+			uvArray.push_back(v);
+		} else if (option == "vn") {
+			glm::vec3 v;
+			ss >> v.x >> v.y >> v.z;
+//			std::cout << "normal: " << line << std::endl;
+			normalArray.push_back(v);
+		} else if (option == "f") {
+			std::string index;
+			//calculate tangent
+			
+			glm::vec3 v[3];
+			glm::vec2 uv[3];
+			
+			for (int i = 0; i < 3; i++) {
+				ss >> index;
+//				std::cout << "index: " << index << std::endl;
+				std::size_t d = index.find("/");
+				int i1, i2, i3;
+				i1 = atoi(index.substr(0, d).c_str()) - 1;
+				index = index.substr(d+1);
+				d = index.find("/");
+				i2 = atoi(index.substr(0,d).c_str()) - 1;
+				i3 = atoi(index.substr(d+1).c_str()) - 1;
+				
+				indicesArray.push_back((glm::vec3(i1,i2,i3)));
+				
+//				std::cout << index.substr(d+1) << std::endl;
+				
+			}
+		} else if (option == "mtllib") {
+			
+			objMaterailLib = "/Users/Axenu/Developer/FireArrow-2.0/resources/models/" + line.substr(7);
+			
+		} else if (option == "usemtl") {
+			objMaterial = line.substr(7);
+		} else {
+//			std::cout << line << std::endl;
+		}
+		
+		//calculate vertices
+		for (int i = 0; i < indicesArray.size(); i+=3) {
+			
+			//calculate tangent
+			glm::vec3 index0 = indicesArray[i];
+			glm::vec3 index1 = indicesArray[i + 1];
+			glm::vec3 index2 = indicesArray[i + 2];
+			
+			glm::vec3 dv1 = vertexArray[index1.x] - vertexArray[index0.x];
+			glm::vec3 dv2 = vertexArray[index2.x] - vertexArray[index0.x];
+			
+			glm::vec2 duv1 = uvArray[index1.y] - uvArray[index0.y];
+			glm::vec2 duv2 = uvArray[index2.y] - uvArray[index0.y];
+			
+			float r = 1.0/(duv1.x * duv2.y - duv1.y * duv2.x);
+			glm::vec3 tangent = (dv1 * duv2.y - dv2 * duv1.y) * r;
+			glm::vec3 bitangent = (dv2 * duv1.x - dv1 * duv2.x) * r;
+			
+			vertices.push_back(vertexArray[index0.x].x);
+			vertices.push_back(vertexArray[index0.x].y);
+			vertices.push_back(vertexArray[index0.x].z);
+			vertices.push_back(uvArray[index0.y].x);
+			vertices.push_back(uvArray[index0.y].y);
+			vertices.push_back(normalArray[index0.z].x);
+			vertices.push_back(normalArray[index0.z].y);
+			vertices.push_back(normalArray[index0.z].z);
+			vertices.push_back(tangent.x);
+			vertices.push_back(tangent.y);
+			vertices.push_back(tangent.z);
+			vertices.push_back(bitangent.x);
+			vertices.push_back(bitangent.y);
+			vertices.push_back(bitangent.z);
+			indices.push_back(count);
+			count++;
+			
+			vertices.push_back(vertexArray[index1.x].x);
+			vertices.push_back(vertexArray[index1.x].y);
+			vertices.push_back(vertexArray[index1.x].z);
+			vertices.push_back(uvArray[index1.y].x);
+			vertices.push_back(uvArray[index1.y].y);
+			vertices.push_back(normalArray[index1.z].x);
+			vertices.push_back(normalArray[index1.z].y);
+			vertices.push_back(normalArray[index1.z].z);
+			vertices.push_back(tangent.x);
+			vertices.push_back(tangent.y);
+			vertices.push_back(tangent.z);
+			vertices.push_back(bitangent.x);
+			vertices.push_back(bitangent.y);
+			vertices.push_back(bitangent.z);
+			indices.push_back(count);
+			count++;
+			
+			vertices.push_back(vertexArray[index2.x].x);
+			vertices.push_back(vertexArray[index2.x].y);
+			vertices.push_back(vertexArray[index2.x].z);
+			vertices.push_back(uvArray[index2.y].x);
+			vertices.push_back(uvArray[index2.y].y);
+			vertices.push_back(normalArray[index2.z].x);
+			vertices.push_back(normalArray[index2.z].y);
+			vertices.push_back(normalArray[index2.z].z);
+			vertices.push_back(tangent.x);
+			vertices.push_back(tangent.y);
+			vertices.push_back(tangent.z);
+			vertices.push_back(bitangent.x);
+			vertices.push_back(bitangent.y);
+			vertices.push_back(bitangent.z);
+			indices.push_back(count);
+			count++;
+		}
+		
+	}
+	
+	this->numberOfVertices = count;
+	
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), &vertices[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	
+	int attributes = 14 * sizeof(GLfloat);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) (3 *sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) (5 *sizeof(GLfloat)));
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) (8 *sizeof(GLfloat)));
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, attributes, (GLvoid *) (11 *sizeof(GLfloat)));
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void FAMesh::loadNewFAModel(std::string path) {
@@ -578,6 +758,14 @@ void FAMesh::update(float dt) {
 // bool FAMesh::hasVertexUV() {
 //     return this->_hasUV;
 // }
+
+std::string FAMesh::getOBJMaterialLib() {
+	return this->objMaterailLib;
+}
+
+std::string FAMesh::getOBJMaterial() {
+	return this->objMaterial;
+}
 
 std::vector<FAMaterialComponent *>* FAMesh::getAvaliableComponents() {
     return &this->avaliableVertexComponents;

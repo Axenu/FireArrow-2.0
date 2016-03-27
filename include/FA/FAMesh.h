@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <stdlib.h>
 #include <time.h> 
@@ -18,17 +19,15 @@
 class FAMesh {
 
 private:
-	GLint numberOfVertices;
-
-	GLuint VBO;
-	GLuint EBO;
-	GLuint VAO;
 
 	bool _hasNormal;
 	bool _hasColor;
 	bool _hasUV;
 	bool _hasWeights;
 	bool _hasArmature;
+	
+	std::string objMaterailLib;
+	std::string objMaterial;
 
 	std::vector<FAMaterialComponent *> avaliableVertexComponents;
 
@@ -37,7 +36,8 @@ private:
 	// std::vector<glm::mat4> invBindPose;
 	// std::vector<FAAnimation *> animations;
 	FAArmature *armature;
-
+	
+	void loadOBJModel(std::string path);
 	void loadFAModel(std::string path);
 	void loadNewFAModel(std::string path);
 
@@ -55,6 +55,9 @@ public:
 	void render() const;
 	void update(float dt);
 	
+	std::string getOBJMaterialLib();
+	std::string getOBJMaterial();
+	
 	// bool hasVertexPosition();
 	// bool hasVertexNormal();
 	// bool hasVertexColor();
@@ -66,6 +69,13 @@ public:
 	~FAMesh();
 	// std::vector<glm::mat4> animatedXForm;
 	// std::vector<FABone *> bones;
+protected:
+	GLint numberOfVertices;
+	
+	GLuint VBO;
+	GLuint EBO;
+	GLuint VAO;
+
 	
 };
 

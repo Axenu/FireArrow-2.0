@@ -94,6 +94,7 @@ void FAScene::addChild(FANode *child) {
         for (FAMaterialComponent *component : requiredComponents) {
             model->addMaterialComponent(component);
         }
+		model->getMaterial().setCamera(this->camera);
 		models.push_back(model);
 	} else if (FALight *light = dynamic_cast<FALight *>(child)) {
         lights.push_back(light);

@@ -1,16 +1,20 @@
 #ifndef __FireArrow__FATerrain__
 #define __FireArrow__FATerrain__
 
-#include <FA/FAModel.h>
+#include <FA/FATerrainChunk.h>
 #include <iostream>
 #include <stdlib.h>
 #include <time.h> 
 
-class FATerrain : public FAModel {
+class FATerrain : public FAMesh {
 
 private:
 
 	void generateHeightMap();
+	int chunkSize;
+	int tileSize;
+	float heightMapSize;
+	float **heightMap;
 
 public:
 	FATerrain();

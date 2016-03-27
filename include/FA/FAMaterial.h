@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <algorithm>
+#include "FACamera.h"
 #include "FAShader.h"
 #include "FAMaterialComponent.h"
 
@@ -31,6 +32,7 @@ private:
 	std::string fragmentIO;
 	std::string fragmentMain;
 	std::string fragmentOutput;
+	
 
 	bool hasColor = false; //TODO remove
 	
@@ -59,6 +61,7 @@ public:
 	bool addMaterialComponent(FAMaterialComponent *component);
 	void setAttribute(std::string name, float value);
 	void create();
+	void setCamera(FACamera *camera);
 	//check requirements
 	//add new requirements
 	//addThis
@@ -67,6 +70,9 @@ public:
 	virtual void bindShadow() {};
 	virtual void setViewProjectionwMatrix(glm::mat4 &VPMatrix) {};
 	virtual void setModelMatrix(glm::mat4 &modelMatrix) {};
+	
+protected:
+	FACamera *camera;
 };
 
 #endif

@@ -16,6 +16,7 @@
 #include <FA/FAGUIMenu.h>
 #include "Material.h"
 #include "SkinningMaterial.h"
+#include "NormalMaterial.h"
 #include <FA/FAGaussianRenderPass.h>
 
 class testScene : public FAScene {
@@ -31,6 +32,7 @@ private:
     float frames;
 	FAMesh *animated;
 	glm::vec3 direction;
+	FATerrainChunk *ch;
 	
 public:
     void init();

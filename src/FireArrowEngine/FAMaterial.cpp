@@ -199,6 +199,10 @@ void FAMaterial::create() {
 	buildShader();
 }
 
+void FAMaterial::setCamera(FACamera *camera) {
+	this->camera = camera;
+}
+
 bool FAMaterial::addMaterialComponent(FAMaterialComponent *component) {
 	if (isCreated) {
 		if (getComponentByName(component->getName()) == nullptr) {

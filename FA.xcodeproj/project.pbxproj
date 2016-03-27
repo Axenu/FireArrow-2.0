@@ -92,6 +92,10 @@
 		358DF9801C199288006070D4 /* FAShadowMapRenderPass.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6931C199095006070D4 /* FAShadowMapRenderPass.h */; };
 		358DF9811C199288006070D4 /* FATerrain.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6941C199095006070D4 /* FATerrain.h */; };
 		358DF9821C199288006070D4 /* FATexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 358DF6951C199095006070D4 /* FATexture.h */; };
+		35B6EC701CA5B4C9000BF5C2 /* NormalMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35B6EC6E1CA5B4C9000BF5C2 /* NormalMaterial.cpp */; };
+		35B6EC711CA5B4C9000BF5C2 /* NormalMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B6EC6F1CA5B4C9000BF5C2 /* NormalMaterial.h */; };
+		35B6EC731CA7C35A000BF5C2 /* FATerrainChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35B6EC721CA7C35A000BF5C2 /* FATerrainChunk.cpp */; };
+		35B6EC761CA7C522000BF5C2 /* FATerrainChunk.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B6EC751CA7C522000BF5C2 /* FATerrainChunk.h */; };
 		35B755661C199A7F00F09A1F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755651C199A7F00F09A1F /* CoreFoundation.framework */; };
 		35B755681C199AA200F09A1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755671C199AA200F09A1F /* CoreGraphics.framework */; };
 		35B7556A1C199ABA00F09A1F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755691C199ABA00F09A1F /* OpenGL.framework */; };
@@ -203,6 +207,10 @@
 		358DF7DF1C1990A4006070D4 /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpng16.a; sourceTree = "<group>"; };
 		358DF7E01C1990A4006070D4 /* libtiff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtiff.a; sourceTree = "<group>"; };
 		358DF7E11C1990A4006070D4 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libz.a; sourceTree = "<group>"; };
+		35B6EC6E1CA5B4C9000BF5C2 /* NormalMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NormalMaterial.cpp; sourceTree = "<group>"; };
+		35B6EC6F1CA5B4C9000BF5C2 /* NormalMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalMaterial.h; sourceTree = "<group>"; };
+		35B6EC721CA7C35A000BF5C2 /* FATerrainChunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FATerrainChunk.cpp; sourceTree = "<group>"; };
+		35B6EC751CA7C522000BF5C2 /* FATerrainChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATerrainChunk.h; sourceTree = "<group>"; };
 		35B755651C199A7F00F09A1F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		35B755671C199AA200F09A1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		35B755691C199ABA00F09A1F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -287,6 +295,8 @@
 				35774F091CA28CE800B56764 /* Material.h */,
 				358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */,
 				358CB3571CA3FA450010E02D /* SkinningMaterial.h */,
+				35B6EC6E1CA5B4C9000BF5C2 /* NormalMaterial.cpp */,
+				35B6EC6F1CA5B4C9000BF5C2 /* NormalMaterial.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -310,6 +320,7 @@
 				358DF64C1C199086006070D4 /* FAScene.cpp */,
 				358DF64D1C199086006070D4 /* FAShader.cpp */,
 				358DF64F1C199086006070D4 /* FATerrain.cpp */,
+				35B6EC721CA7C35A000BF5C2 /* FATerrainChunk.cpp */,
 				358DF6501C199086006070D4 /* FATexture.cpp */,
 			);
 			path = FireArrowEngine;
@@ -356,6 +367,7 @@
 				358DF6931C199095006070D4 /* FAShadowMapRenderPass.h */,
 				351945B81C5CEA160029B544 /* FAShadowRenderPass.h */,
 				358DF6941C199095006070D4 /* FATerrain.h */,
+				35B6EC751CA7C522000BF5C2 /* FATerrainChunk.h */,
 				358DF6951C199095006070D4 /* FATexture.h */,
 				35B7557C1C19D6A300F09A1F /* FAGUIButton.h */,
 				351FE8581C67A17D009CB0BA /* FAGUIMenu.h */,
@@ -439,12 +451,14 @@
 				358DF96C1C199288006070D4 /* FADirectionalLight.h in Headers */,
 				351FE8591C67A17D009CB0BA /* FAGUIMenu.h in Headers */,
 				358DF96D1C199288006070D4 /* FAEngine.h in Headers */,
+				35B6EC761CA7C522000BF5C2 /* FATerrainChunk.h in Headers */,
 				358DF96E1C199288006070D4 /* FAFont.h in Headers */,
 				358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */,
 				35566FFE1C8B319E008932B2 /* FAAnimation.h in Headers */,
 				358DF9701C199288006070D4 /* FAGUIMaterialComponent.h in Headers */,
 				358DF9711C199288006070D4 /* FAGUIPlane.h in Headers */,
 				358DF9721C199288006070D4 /* FAGUILabel.h in Headers */,
+				35B6EC711CA5B4C9000BF5C2 /* NormalMaterial.h in Headers */,
 				358DF9731C199288006070D4 /* FAGUITexturedPlane.h in Headers */,
 				35774F0B1CA28CE800B56764 /* Material.h in Headers */,
 				358DF9741C199288006070D4 /* FALight.h in Headers */,
@@ -581,7 +595,9 @@
 				355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */,
 				358DF65E1C199086006070D4 /* FAGUIMaterialComponent.cpp in Sources */,
 				358DF6621C199086006070D4 /* FALight.cpp in Sources */,
+				35B6EC701CA5B4C9000BF5C2 /* NormalMaterial.cpp in Sources */,
 				358DF6691C199086006070D4 /* FAPointLight.cpp in Sources */,
+				35B6EC731CA7C35A000BF5C2 /* FATerrainChunk.cpp in Sources */,
 				358DF66E1C199086006070D4 /* FATerrain.cpp in Sources */,
 				358DF6641C199086006070D4 /* FAMaterial.cpp in Sources */,
 				3501DB211C949E09007E14E8 /* FAArmature.cpp in Sources */,
