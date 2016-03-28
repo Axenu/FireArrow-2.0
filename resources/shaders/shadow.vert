@@ -1,5 +1,6 @@
 #version 400 core
 uniform mat4 MVPMatrix;
+
 layout(location = 0) in vec3 in_Position;
 
 void main() {

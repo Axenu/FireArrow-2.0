@@ -96,6 +96,8 @@
 		35B6EC711CA5B4C9000BF5C2 /* NormalMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B6EC6F1CA5B4C9000BF5C2 /* NormalMaterial.h */; };
 		35B6EC731CA7C35A000BF5C2 /* FATerrainChunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35B6EC721CA7C35A000BF5C2 /* FATerrainChunk.cpp */; };
 		35B6EC761CA7C522000BF5C2 /* FATerrainChunk.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B6EC751CA7C522000BF5C2 /* FATerrainChunk.h */; };
+		35B6EC781CA91942000BF5C2 /* FAParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35B6EC771CA91942000BF5C2 /* FAParticleSystem.cpp */; };
+		35B6EC7B1CA91AA7000BF5C2 /* FAParticleSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B6EC7A1CA91AA7000BF5C2 /* FAParticleSystem.h */; };
 		35B755661C199A7F00F09A1F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755651C199A7F00F09A1F /* CoreFoundation.framework */; };
 		35B755681C199AA200F09A1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755671C199AA200F09A1F /* CoreGraphics.framework */; };
 		35B7556A1C199ABA00F09A1F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B755691C199ABA00F09A1F /* OpenGL.framework */; };
@@ -211,6 +213,8 @@
 		35B6EC6F1CA5B4C9000BF5C2 /* NormalMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalMaterial.h; sourceTree = "<group>"; };
 		35B6EC721CA7C35A000BF5C2 /* FATerrainChunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FATerrainChunk.cpp; sourceTree = "<group>"; };
 		35B6EC751CA7C522000BF5C2 /* FATerrainChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATerrainChunk.h; sourceTree = "<group>"; };
+		35B6EC771CA91942000BF5C2 /* FAParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAParticleSystem.cpp; sourceTree = "<group>"; };
+		35B6EC7A1CA91AA7000BF5C2 /* FAParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAParticleSystem.h; sourceTree = "<group>"; };
 		35B755651C199A7F00F09A1F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		35B755671C199AA200F09A1F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		35B755691C199ABA00F09A1F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -322,6 +326,7 @@
 				358DF64F1C199086006070D4 /* FATerrain.cpp */,
 				35B6EC721CA7C35A000BF5C2 /* FATerrainChunk.cpp */,
 				358DF6501C199086006070D4 /* FATexture.cpp */,
+				35B6EC771CA91942000BF5C2 /* FAParticleSystem.cpp */,
 			);
 			path = FireArrowEngine;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				35B7557C1C19D6A300F09A1F /* FAGUIButton.h */,
 				351FE8581C67A17D009CB0BA /* FAGUIMenu.h */,
 				3501DB1E1C949DFE007E14E8 /* FAArmature.h */,
+				35B6EC7A1CA91AA7000BF5C2 /* FAParticleSystem.h */,
 			);
 			path = FA;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				358DF96C1C199288006070D4 /* FADirectionalLight.h in Headers */,
 				351FE8591C67A17D009CB0BA /* FAGUIMenu.h in Headers */,
 				358DF96D1C199288006070D4 /* FAEngine.h in Headers */,
+				35B6EC7B1CA91AA7000BF5C2 /* FAParticleSystem.h in Headers */,
 				35B6EC761CA7C522000BF5C2 /* FATerrainChunk.h in Headers */,
 				358DF96E1C199288006070D4 /* FAFont.h in Headers */,
 				358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */,
@@ -565,6 +572,7 @@
 				358DF6651C199086006070D4 /* FAMaterialComponent.cpp in Sources */,
 				358DF6571C199086006070D4 /* FAAmbientLight.cpp in Sources */,
 				358DF6661C199086006070D4 /* FAMesh.cpp in Sources */,
+				35B6EC781CA91942000BF5C2 /* FAParticleSystem.cpp in Sources */,
 				358DF6591C199086006070D4 /* FACSMRenderPass.cpp in Sources */,
 				358DF66B1C199086006070D4 /* FAScene.cpp in Sources */,
 				358DF6681C199086006070D4 /* FANode.cpp in Sources */,

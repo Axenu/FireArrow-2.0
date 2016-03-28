@@ -37,6 +37,39 @@ FAShader::FAShader(std::string vert, std::string frag) {
 	}
 }
 
+FAShader::FAShader(std::string vert, std::string geom, std::string frag) {
+	GLint vertShader = createShader("/Users/Axenu/Developer/FireArrow-2.0/resources/shaders/" + vert + ".vert", GL_VERTEX_SHADER);
+	GLint fragShader = createShader("/Users/Axenu/Developer/FireArrow-2.0/resources/shaders/" + frag + ".frag", GL_FRAGMENT_SHADER);
+	GLint geomShader = createShader("/Users/Axenu/Developer/FireArrow-2.0/resources/shaders/" + geom + ".geom", GL_GEOMETRY_SHADER);
+	name = vert;
+	
+	shaderProgram = glCreateProgram();
+	
+	glAttachShader(shaderProgram, vertShader);
+	if (geomShader != -1) {glAttachShader(shaderProgram, geomShader);}
+	glAttachShader(shaderProgram, fragShader);
+	
+	glBindFragDataLocation(shaderProgram, 0, "Frag_Data");
+	
+	glLinkProgram(shaderProgram);
+	glDeleteShader(vertShader);
+	if (geomShader != -1) {glDeleteShader(geomShader);}
+	glDeleteShader(fragShader);
+	
+	GLint linkStatus;
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkStatus);
+	if (linkStatus != GL_TRUE) {
+		std::cout << "Shader program failed to link!" << std::endl;
+		
+		GLint infoLogLength;
+		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
+		GLchar *infoLog = new GLchar[infoLogLength + 1];
+		glGetProgramInfoLog(shaderProgram, infoLogLength, NULL, infoLog);
+		std::cout << infoLog << std::endl;
+		delete[] infoLog;
+	}
+}
+
 FAShader::FAShader(std::string *vertexShader, std::string *fragmentShader) {
 	GLint vertShader = createShaderFromString(vertexShader, GL_VERTEX_SHADER);
 	GLint fragShader = createShaderFromString(fragmentShader, GL_FRAGMENT_SHADER);

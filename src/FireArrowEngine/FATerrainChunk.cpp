@@ -211,7 +211,7 @@ float FATerrainChunk::getHeight(float x, float z) {
 //	height = low - lastm * (z - lowz);
 	
 //	return interpolateheight(locations[lowx][lowz].y, locations[highx][lowz].y, locations[highx][highz].y, locations[lowx][highz].y, x, z);
-	std::cout << low - lastm * (diffz - lowz) << std::endl;
+//	std::cout << low - lastm * (diffz - lowz) << std::endl;
 	return low - lastm * (diffz - lowz);
 }
 

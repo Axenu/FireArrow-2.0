@@ -20,6 +20,7 @@ public:
 	FAShader();
 	FAShader(std::string file);
 	FAShader(std::string vert, std::string frag);
+	FAShader(std::string vert, std::string geom, std::string frag);
 	FAShader(std::string *vertexShader, std::string *fragmentShader);
 	~FAShader();
 

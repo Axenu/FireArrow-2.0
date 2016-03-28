@@ -1,7 +1,7 @@
 #include "Material.h"
 
 Material::Material() {
-	this->shader = new FAShader("Simple");
+	this->shader = new FAShader("Simple", "Simple", "Simple");
 	this->lightDirection = glm::vec3(0,1,1);
 
 	MVPLocation = glGetUniformLocation(this->shader->shaderProgram, "MVPMatrix");
@@ -53,7 +53,7 @@ void Material::bind() {
 
 void Material::bindShadow() {
 	glm::mat4 m = this->viewProjectionMatrix * this->modelMatrix;
-	glUseProgram(shader->shaderProgram);
+	glUseProgram(shadowShader->shaderProgram);
 	glUniformMatrix4fv(shadowMVPMatrixLocation, 1, GL_FALSE, &m[0][0]);
 }
 
