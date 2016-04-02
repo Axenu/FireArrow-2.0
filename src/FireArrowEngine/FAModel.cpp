@@ -10,6 +10,7 @@ FAModel::FAModel(FAMesh *mesh) {
 
 FAModel::FAModel(FAMesh *mesh, FAMaterial *material) {
 	this->mesh = mesh;
+	this->bounds = mesh->getBounds();
 	this->material = material;
 	// this->material.addVertexComponents(this->mesh.getAvaliableComponents());
 	// this->material.create();
@@ -23,6 +24,7 @@ void FAModel::setMaterial(FAMaterial *material) {
 
 void FAModel::setMesh(FAMesh *mesh) {
 	this->mesh = mesh;
+	this->bounds = mesh->getBounds();
 	// this->material.addVertexComponents(this->mesh.getAvaliableComponents());
 	// this->material.create();
 }

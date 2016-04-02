@@ -12,6 +12,7 @@ FAScene::FAScene() {
     // shadow->setCB(this);
 	this->numberOfPasses = 1;
 	this->isActive = true;
+	this->childTree = new FAQuadTree(0, FAAABB(glm::vec3(0,0,0), glm::vec3(50,0,50)));
 	// this->models = new std::vector<FAModel *>();
 	//User stuff
 }
@@ -95,6 +96,7 @@ void FAScene::addChild(FANode *child) {
             model->addMaterialComponent(component);
         }
 		model->getMaterial().setCamera(this->camera);
+		childTree->insert(model);
 		models.push_back(model);
 	} else if (FALight *light = dynamic_cast<FALight *>(child)) {
         lights.push_back(light);
@@ -197,7 +199,6 @@ void FAScene::getCursorPosition(double x, double y) {
 			}
 		}
 	}
-//	std::cout << lastCursorPosition.x << " , " << lastCursorPosition.y << std::endl;
     cursorPosition(x, y);
 }
 
@@ -205,12 +206,23 @@ int FAScene::getCursorState() {
     return callback->getCursorState();
 }
 
+void FAScene::cullModels(FACamera *cam) {
+	culledModels = childTree->cull(cam);
+}
+
 std::vector<FAModel *> *FAScene::getModels() {
-	return &this->models;
+//	return &this->models;
+	//for culling
+	return &this->culledModels;
 }
 
 FACamera *FAScene::getCamera() {
 	return (this->camera);
+}
+
+//for culling debugging
+FACamera *FAScene::getCullCamera() {
+	return this->cullCamera;
 }
 
 float FAScene::getWindowWidths() {

@@ -8,5 +8,11 @@
 //cascade shadow mapping
 //backface culling using geometry shader
 view frustum culling against quadtree
-particle system
+//particle system
 //gaussian blur
+
+skeletal animation poses
+particle billboarding
+
+if time:
+normalmapping imporvements

@@ -126,10 +126,6 @@ void FAMesh::loadOBJModel(std::string path) {
 			normalArray.push_back(v);
 		} else if (option == "f") {
 			std::string index;
-			//calculate tangent
-			
-			glm::vec3 v[3];
-			glm::vec2 uv[3];
 			
 			for (int i = 0; i < 3; i++) {
 				ss >> index;
@@ -524,6 +520,41 @@ void FAMesh::loadNewFAModel(std::string path) {
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
+		
+		//calculate AABB
+		glm::vec3 min = glm::vec3(0);
+		glm::vec3 max = glm::vec3(0);
+		
+		for (int i = 0; i < vertexArray.size(); i++) {
+			glm::vec3 v = vertexArray[i];
+			if (v.x < min.x) {
+				min.x = v.x;
+			}
+			if (v.x > max.x) {
+				max.x = v.x;
+			}
+			if (v.y < min.y) {
+				min.y = v.y;
+			}
+			if (v.y > max.y) {
+				max.y = v.y;
+			}
+			if (v.z < min.z) {
+				min.z = v.z;
+			}
+			if (v.z > max.z) {
+				max.z = v.z;
+			}
+		}
+		
+//		this->center = (min+max)*0.5f;
+//		this->globalCenter = this->center;
+//		this->half = max - this->center;
+		boundingBox.center = (min+max)*0.5f;
+		boundingBox.half = max - boundingBox.center;
+		std::cout << boundingBox.center.x << std::endl;
+//		boundingBox = FAAABB((min+max)*0.5f, max - (min+max)*0.5f);
+		
     } else {
          std::cout << "FAModel failed to load model: " << path << std::endl;
     }
@@ -734,7 +765,7 @@ void FAMesh::render() const {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-	glDrawElements(GL_TRIANGLES, numberOfVertices, GL_UNSIGNED_INT, NULL);
+	glDrawElements(renderMode, numberOfVertices, GL_UNSIGNED_INT, NULL);
 }
 
 // bool FAMesh::hasVertexPosition() {
@@ -765,6 +796,10 @@ std::string FAMesh::getOBJMaterialLib() {
 
 std::string FAMesh::getOBJMaterial() {
 	return this->objMaterial;
+}
+
+FAAABB FAMesh::getBounds() {
+	return this->boundingBox;
 }
 
 std::vector<FAMaterialComponent *>* FAMesh::getAvaliableComponents() {

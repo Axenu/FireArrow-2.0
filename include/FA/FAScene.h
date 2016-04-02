@@ -8,6 +8,7 @@
 #include "FACSMRenderPass.h"
 #include "FALight.h"
 #include "FAGUILabel.h"
+#include "FAQuadTree.h"
 
 // class FARenderPass;
 class FAEngine;
@@ -39,8 +40,11 @@ public:
 	void getCursorPosition(double x, double y);
 	int getCursorState();
 
+	void cullModels(FACamera *cam);
+	
 	std::vector<FAModel *> *getModels();
 	FACamera *getCamera();
+	FACamera *getCullCamera();
 	float getWindowWidths();
 
 	~FAScene();
@@ -59,6 +63,7 @@ protected:
 	int numberOfPasses;
 	FARenderPass **renderPasses;
 	std::vector<FAModel *> models;
+	std::vector<FAModel *> culledModels;
 	std::vector<FALight *> lights;
 	std::vector<FAGUIElement *> GUIElements;
 	std::vector<FAMaterialComponent *> requiredComponents;
@@ -67,7 +72,9 @@ protected:
     int windowWidth;
     int windowHeigth;
 	std::vector<FANode *> children;
+	FAQuadTree *childTree;
 	FACamera *camera;
+	FACamera *cullCamera;
 
 };
 

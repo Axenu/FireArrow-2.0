@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "FANode.h"
+#include "FAFrustumBB.h"
 
 class FACamera : public FANode {
 
@@ -19,10 +20,12 @@ private:
 
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
+//	FAFrustumBB *boundingVolume;
 
 public:
 
 	glm::mat4 VPMatrix;
+	FAFrustumBB *boundingVolume;
 	
 	FACamera();
 	FACamera(float fov, float aspect, float near, float far);

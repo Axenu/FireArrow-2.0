@@ -28,25 +28,16 @@ void testScene::init() {
 	direction = glm::vec3(1,1,1);
 
     camera = new FACamera(40.0f, 640, 480, 0.1, 400);
-    FAMesh *mesh = new FAMesh("tree.fa");
+	cullCamera = new FACamera(40.0f, 640, 480, 0.1, 50);
+    treeMesh = new FAMesh("rock.fa");
     FACSMRenderPass *pass = new FACSMRenderPass();
     pass->setDirection(&direction);
     this->addRenderPass(pass);
 
-    Material *ma = new Material();
-	ma->setLightDirection(direction);
-    ma->setTexture(pass->getShadowMap());
-    ma->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-    FAModel *m = new FAModel(mesh, ma);
-    m->setPosition(0,0,-5);
-	
-
-    addChild(m);
-    m = new FAModel(mesh, ma);
-    m->setPosition(10,0,0);
-    addChild(m);
-    m = new FAModel(mesh, ma);
-    addChild(m);
+    material = new Material();
+	material->setLightDirection(direction);
+    material->setTexture(pass->getShadowMap());
+    material->setInverseShadowMatrix(pass->getInverseShadowMatrix());
 //    FATerrain *t = new FATerrain();
 //	t->setMaterial(ma);
 //    // t->setMaterial(material);
@@ -59,34 +50,78 @@ void testScene::init() {
 //    plane->setPosition(0,0);
 //    addChild(plane);
 
-	SkinningMaterial *materialS = new SkinningMaterial();
-	materialS->setLightDirection(direction);
-	materialS->setTexture(pass->getShadowMap());
-	materialS->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-	animated = new FAMesh("animatedblend.fa");
-	materialS->setArmature(animated->getArmature());
-	FAModel *anim = new FAModel(animated, materialS);
-	this->addChild(anim);
+//	SkinningMaterial *materialS = new SkinningMaterial();
+//	materialS->setLightDirection(direction);
+//	materialS->setTexture(pass->getShadowMap());
+//	materialS->setInverseShadowMatrix(pass->getInverseShadowMatrix());
+//	animated = new FAMesh("animatedblend.fa");
+//	materialS->setArmature(animated->getArmature());
+//	FAModel *anim = new FAModel(animated, materialS);
+//	this->addChild(anim);
 	
-	FAMesh *wallMesh = new FAMesh("Normalmapped wall.obj");
-	NormalMaterial *normalMat = new NormalMaterial();
-	normalMat->setLightDirection(direction);
-	normalMat->setShadowMap(pass->getShadowMap());
-	normalMat->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-	normalMat->setOBJMaterial(wallMesh->getOBJMaterialLib(), wallMesh->getOBJMaterial());
-	FAModel *wall = new FAModel(wallMesh, normalMat);
-	wall->setPosition(9, 1, -2);
-	wall->rotateY(-glm::half_pi<float>());
-	addChild(wall);
+//	FAMesh *wallMesh = new FAMesh("Normalmapped wall.obj");
+//	NormalMaterial *normalMat = new NormalMaterial();
+//	normalMat->setLightDirection(direction);
+//	normalMat->setShadowMap(pass->getShadowMap());
+//	normalMat->setInverseShadowMatrix(pass->getInverseShadowMatrix());
+//	normalMat->setOBJMaterial(wallMesh->getOBJMaterialLib(), wallMesh->getOBJMaterial());
+//	FAModel *wall = new FAModel(wallMesh, normalMat);
+//	wall->setPosition(9, 1, -2);
+//	wall->rotateY(-glm::half_pi<float>());
+//	addChild(wall);
 	
-	FAActionRotateBy *a = new FAActionRotateBy(glm::vec3(0,50,0), 100);
+//	FAActionRotateBy *a = new FAActionRotateBy(glm::vec3(0,50,0), 100);
 //	wall->runAction(a);
 	
 	
 	ch = new FATerrainChunk();
 	ch->loadChunk();
-	FAModel *terrain = new FAModel(ch, ma);
-	addChild(terrain);
+//	FAModel *terrain = new FAModel(ch, ma);
+//	addChild(terrain);
+	
+	FAModel *m;
+	FAMesh *wireMesh;
+	WireMaterial *wireMaterial = new WireMaterial();
+	FAModel *wire;
+	for (int i = 0; i < 10000; i++) {
+		m = new FAModel(treeMesh, material);
+		m->setPosition((float)(rand()%10000)/100.0 - 50.0,0,(float)(rand()%10000)/100.0 - 50.0);
+//		m->setPosition(3, 0, 5);
+		m->setY(ch->getHeight(m->getX(), m->getZ()));
+		addChild(m);
+		
+		m->getBounds().calculateMesh();
+		
+		wireMesh = new FAMesh(m->getBounds().getVertices(), m->getBounds().getIndices(), false, false);
+		wireMesh->renderMode = GL_LINES;
+		wire = new FAModel(wireMesh, wireMaterial);
+//		wire->setPosition(m->getPosition());
+//		addChild(wire);
+		m->addChild(wire);
+	}
+	
+	//add cullCamrea frame
+	cullCamera->useView();
+	cullCamera->boundingVolume->calculateMesh();
+	wireMesh = new FAMesh(cullCamera->boundingVolume->getVertices(), cullCamera->boundingVolume->getIndices(), false, false);
+	wireMesh->renderMode = GL_LINES;
+	wireMaterial = new WireMaterial();
+	glm::vec4 wireColor = glm::vec4(1,0,0,1);
+	wireMaterial->setColor(wireColor);
+	wire = new FAModel(wireMesh, wireMaterial);
+	addChild(wire);
+	
+	std::vector<FAModel *> quadmodels = this->childTree->getWireMeshes();
+	for (FAModel *wm : quadmodels) {
+		addChild(wm);
+	}
+	
+//	FAParticleSystem *sys = new FAParticleSystem();
+//	sys->setEyePosition(&this->camera->position);
+//	ParticlesMaterial *pm = new ParticlesMaterial();
+//	
+//	FAModel *particles = new FAModel(sys, pm);
+//	addChild(particles);
 	
 	
 	
@@ -153,6 +188,11 @@ void testScene::init() {
 //	t1->setX(0.025);
 //	addChild(t1);
 
+	//create quadtree
+	
+	
+	
+	
 }
 
 void testScene::render() {
@@ -166,8 +206,8 @@ void testScene::update(float dt) {
     
     camera->moveX(cameraMovement.x * dt * cos(camera->getRY()));
     camera->moveZ(cameraMovement.x * dt * sin(camera->getRY()));
-//    camera->moveY(cameraMovement.y * dt);
-	camera->setY(ch->getHeight(camera->getX(), camera->getZ()) + 2);
+    camera->moveY(cameraMovement.y * dt);
+//	camera->setY(ch->getHeight(camera->getX(), camera->getZ()) + 2);
 
     if (time < 0.2) {
         time += dt;
@@ -237,7 +277,27 @@ void testScene::getKeyInput(int key, int action) {
                 setCursorState(GLFW_CURSOR_DISABLED);
             }
         }
-    } else {
+	} else if (key == GLFW_KEY_G) {
+		if (action == GLFW_PRESS) {
+			FAModel *m;
+			FAMesh *wireMesh;
+			WireMaterial *wireMaterial = new WireMaterial();
+			FAModel *wire;
+			m = new FAModel(treeMesh, material);
+			m->setPosition((float)(rand()%10000)/100.0 - 50.0,0,(float)(rand()%10000)/100.0 - 50.0);
+			m->setY(ch->getHeight(m->getX(), m->getZ()));
+			addChild(m);
+			
+			m->getBounds().calculateMesh();
+			
+			wireMesh = new FAMesh(m->getBounds().getVertices(), m->getBounds().getIndices(), false, false);
+			wireMesh->renderMode = GL_LINES;
+			wire = new FAModel(wireMesh, wireMaterial);
+			//		wire->setPosition(m->getPosition());
+//			addChild(wire);
+			m->addChild(wire);
+		}
+	} else {
         std::cout << "Key: " << key << " action: " << action << std::endl;
     }
 }

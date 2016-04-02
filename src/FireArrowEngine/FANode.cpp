@@ -69,39 +69,48 @@ void FANode::update(float dt) {
 }
 
 void FANode::setX(float x) {
-    position.x = x;
+	position.x = x;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::setY(float y) {
-    position.y = y;
+	position.y = y;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::setZ(float z) {
-    position.z = z;
+	position.z = z;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::setPosition(float x, float y, float z) {
 	this->position = glm::vec3(x, y, z);
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::setPosition(glm::vec3 pos) {
-    position = pos;
+	position = pos;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::moveX(float x) {
-    position.x += x;
+	position.x += x;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::moveY(float y) {
-    position.y += y;
+	position.y += y;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::moveZ(float z) {
-    position.z += z;
+	position.z += z;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::move(glm::vec3 p) {
-    position += p;
+	position += p;
+	this->bounds.globalCenter = this->bounds.center + this->position;
 }
 
 void FANode::setScale(float p) {
@@ -193,6 +202,10 @@ glm::vec3 FANode::getRotation()  {
 
 glm::mat4 FANode::getModelMatrix() {
     return this->modelMatrix;
+}
+
+FAAABB &FANode::getBounds() {
+	return this->bounds;
 }
 
 void FANode::runAction(FAAction *action) {

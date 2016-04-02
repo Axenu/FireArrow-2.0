@@ -12,7 +12,8 @@ FACamera::FACamera(float fov, float aspect, float near, float far) {
     this->perspective = true;
     this->position = glm::vec3(0,1,1);
     // this->rotation.x = 1.0;
-    initProjection();
+	initProjection();
+	boundingVolume = new FAFrustumBB(fov, this->aspectRatio, near, far);
 }
 
 FACamera::FACamera(float fov, int _width, int _height, float near, float far) {
@@ -26,6 +27,7 @@ FACamera::FACamera(float fov, int _width, int _height, float near, float far) {
     this->position = glm::vec3(0,0,3);
     // this->rotation.x = 1.0;
     initProjection();
+	boundingVolume = new FAFrustumBB(fov, this->aspectRatio, near, far);
 }
 
 void FACamera::useView() {
@@ -34,6 +36,7 @@ void FACamera::useView() {
     viewMatrix = glm::rotate(viewMatrix, rotation.z, glm::vec3(0, 0, 1));
     viewMatrix = glm::translate(viewMatrix, -position);
     VPMatrix = projectionMatrix * viewMatrix;
+	boundingVolume->calculateFrustumPlanes(this->viewMatrix, this->position);
 }
 
 void FACamera::initProjection() {

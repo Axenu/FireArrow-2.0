@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include "FAAction.h"
+#include "FAAABB.h"
 
 #ifndef M_PI
 #define M_PI 3.1415926536
@@ -64,6 +65,7 @@ public:
     glm::vec3 getPosition();
     glm::vec3 getRotation();
     glm::mat4 getModelMatrix();
+	FAAABB &getBounds();
 
     void runAction(FAAction *action);
 
@@ -79,6 +81,7 @@ protected:
     std::vector<FANode *> children;
     FANode *parent = nullptr;
     FAAction *action = nullptr;
+	FAAABB bounds;
 
     virtual void onUpdate(float dt){}
     virtual void onRender(){}

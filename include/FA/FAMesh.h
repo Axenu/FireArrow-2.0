@@ -15,6 +15,7 @@
 #include <time.h> 
 #include "FAArmature.h"
 #include "FAMAterialComponent.h"
+#include "FAAABB.h"
 
 class FAMesh {
 
@@ -36,6 +37,7 @@ private:
 	// std::vector<glm::mat4> invBindPose;
 	// std::vector<FAAnimation *> animations;
 	FAArmature *armature;
+	FAAABB boundingBox;
 	
 	void loadOBJModel(std::string path);
 	void loadFAModel(std::string path);
@@ -52,11 +54,12 @@ public:
 	FAMesh(std::string path);
 	FAMesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, bool hasNormal, bool hasColor);
 
-	void render() const;
-	void update(float dt);
+	virtual void render() const;
+	virtual void update(float dt);
 	
 	std::string getOBJMaterialLib();
 	std::string getOBJMaterial();
+	FAAABB getBounds();
 	
 	// bool hasVertexPosition();
 	// bool hasVertexNormal();
@@ -67,6 +70,7 @@ public:
 	FAArmature *getArmature();
 
 	~FAMesh();
+	GLenum renderMode = GL_TRIANGLES;
 	// std::vector<glm::mat4> animatedXForm;
 	// std::vector<FABone *> bones;
 protected:

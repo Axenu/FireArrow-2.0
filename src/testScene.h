@@ -18,6 +18,9 @@
 #include "SkinningMaterial.h"
 #include "NormalMaterial.h"
 #include <FA/FAGaussianRenderPass.h>
+#include <FA/FAParticleSystem.h>
+#include "ParticlesMaterial.h"
+#include "WireMaterial.h"
 
 class testScene : public FAScene {
     
@@ -33,6 +36,8 @@ private:
 	FAMesh *animated;
 	glm::vec3 direction;
 	FATerrainChunk *ch;
+	Material *material;
+	FAMesh *treeMesh;
 	
 public:
     void init();

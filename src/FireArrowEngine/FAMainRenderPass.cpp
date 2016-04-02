@@ -20,6 +20,7 @@ void FAMainRenderPass::render() {
 		// std::vector<FAModel *> *mo = parent->getModels();
 		// glm::mat4 &m = parent->getWindowWidth() << std::endl;
 		// std::cout << parent->getModels()->size() << std::endl;
+		parent->cullModels(parent->getCullCamera());
 		for (FAModel *m : *parent->getModels()) {
 			m->getMaterial().setViewProjectionwMatrix(parent->getCamera()->VPMatrix);
 			m->getMaterial().setModelMatrix(m->getModelMatrix());
