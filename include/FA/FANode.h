@@ -22,6 +22,7 @@ class FAAction;
 
 class FANode {
     bool isActive;
+	bool isUpdated;
 
 public:
 	FANode();
@@ -85,6 +86,7 @@ protected:
 
     virtual void onUpdate(float dt){}
     virtual void onRender(){}
+	void needsUpdate();
 };
 
 

@@ -38,6 +38,7 @@ private:
 	FATerrainChunk *ch;
 	Material *material;
 	FAMesh *treeMesh;
+	FAModel *wire;
 	
 public:
     void init();

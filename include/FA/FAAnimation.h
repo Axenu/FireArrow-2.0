@@ -6,6 +6,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <vector>
+#include "FAFrame.h"
 
 class FAAnimation {
 
@@ -13,9 +14,12 @@ private:
 
 	// std::vector<std::vector<glm::vec4>*> *keyframes;
 
-	glm::quat ***keyframes;
+//	glm::quat ***keyframes;
+	FAFrame **frames;
 	int numberOfFrames;
-	int numberOfBones;
+	int index;
+	float timePerFrame;
+//	int numberOfBones;
 	// int numberOfAnimations;
 	
 	//animations:
@@ -26,9 +30,11 @@ private:
 public:
 	FAAnimation();
 
-	FAAnimation(int numberOfFrames, int numberOfBones);
+	FAAnimation(int numberOfFrames);
 	
-	void setQuaternion(int frame, int bone, glm::quat q);
+	void addFrame(FAFrame *frame);
+	void getDiffAndFrame(float time, float &diff, int &frame);
+	glm::quat getQuatAtTime(float diff, int frame, int bone);
 
 	void update(float dt);
 

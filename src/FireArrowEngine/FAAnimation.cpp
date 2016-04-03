@@ -4,17 +4,34 @@ FAAnimation::FAAnimation() {
 
 }
 
-FAAnimation::FAAnimation(int numberOfFrames, int numberOfBones) {
+FAAnimation::FAAnimation(int numberOfFrames) {
 	this->numberOfFrames = numberOfFrames;
-	this->numberOfBones = numberOfBones;
-	this->keyframes = new glm::quat**[numberOfFrames];
-	for (int i = 0; i < numberOfFrames; i++) {
-		this->keyframes[i] = new glm::quat*[numberOfBones];
+	this->frames = new FAFrame*[numberOfFrames];
+	this->index = 0;
+	this->timePerFrame = 1.5;
+}
+
+void FAAnimation::addFrame(FAFrame *frame) {
+	this->frames[index++] = frame;
+}
+
+void FAAnimation::getDiffAndFrame(float time, float &diff, int &frame) {
+	diff = fmod(time, timePerFrame);
+	frame = (int) ((time - diff)/timePerFrame);
+	diff /= timePerFrame;
+	if (frame >= numberOfFrames - 1) {
+		frame = -1;
 	}
 }
 
-void FAAnimation::setQuaternion(int frame, int bone, glm::quat q) {
-	this->keyframes[frame][bone] = &q;
+glm::quat FAAnimation::getQuatAtTime(float diff, int frame, int bone) {
+	
+	glm::quat f = frames[frame]->getQuaternionOfBone(bone);
+	glm::quat l = frames[frame+1]->getQuaternionOfBone(bone);
+	
+	glm::quat q = glm::mix(f, l, diff);
+	
+	return q;
 }
 
 FAAnimation::~FAAnimation() {

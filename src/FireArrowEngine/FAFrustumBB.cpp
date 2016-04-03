@@ -10,7 +10,7 @@ FAFrustumBB::FAFrustumBB(float fov, float ratio, float near, float far) {
 	this->nearPlane = near;
 	this->farPlane = far;
 	
-	float tanAngle = tanf(this->fieldOfView * 0.5f * (glm::pi<float>() / 360.0f));
+	float tanAngle = tanf(this->fieldOfView * (glm::pi<float>() / 360.0f));
 	this->nearHeight = nearPlane * tanAngle;
 	this->nearWidth = this->nearHeight * this->aspectRation;
 	this->farHeight = farPlane * tanAngle;
@@ -76,7 +76,7 @@ bool FAFrustumBB::collideWith(const FAAABB &other) {
 //	bool intersects = false;
 	
 	for (int i = 2; i < 6; i++) {
-		glm::vec3 pp = other.getPositive(planes[i].normal);
+//		glm::vec3 pp = other.getPositive(planes[i].normal);
 		float d = planes[i].distance(other.getPositive(planes[i].normal));
 		if (d < 0) {
 			return false;

@@ -445,24 +445,26 @@ void FAMesh::loadNewFAModel(std::string path) {
                 file >> count;
                 glm::vec4 quat;
                 glm::quat q;
-                // this->animations = new std::vector<FAAnimation *>();
-                // FAAnimation *animation;
+				FAAnimation *animation;
+				FAFrame *frame;
+				int c;
                 for (int i = 0; i < count; i++) {
-                    int c;
-                    file >> c;
-                    // animation = new FAAnimation(c, bones.size());
+					file >> c;
+					animation = new FAAnimation(c);
                     for (int j = 0; j < c; j++) {
+						frame = new FAFrame(armature->getNumberOfBones());
                         for (int k = 0; k < armature->getNumberOfBones(); k++) {
-                            file >> quat.x >> quat.y >> quat.z >> quat.w;
-                            q = glm::quat(quat.x, quat.y, quat.z, quat.w);
-                            // animation->setQuaternion(j, k, q);
-
+                            file >> q.y >> q.z >> q.x >> q.w;
+//							q.z *= -1;
+//                            q = glm::quat(quat.x, quat.z, quat.y, quat.w);
+							frame->addQuaternion(q);
                         }
+						animation->addFrame(frame);
                     }
-                    // this->animations.push_back(animation);
+					armature->addAnimation(animation);
                 }
 			} else {
-				std::cout << key << std::endl;
+//				std::cout << key << std::endl;
 			}
         }
         glGenBuffers(1, &VBO);

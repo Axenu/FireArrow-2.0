@@ -98,7 +98,7 @@ std::vector<FAModel *> FAQuadTree::cull(FACamera *cam) {
 	//improve test A LOT
 	if (cam->boundingVolume->collideWith(this->bounds)) {
 //	if (level < 2) {
-		this->ma->setColor(glm::vec4(1,0,0,1));
+//		this->ma->setColor(glm::vec4(1,0,0,1));
 		if (nodes[0] != nullptr) {
 			for (int i = 0; i < 4; i++) {
 				std::vector<FAModel *> temp = nodes[i]->cull(cam);
@@ -111,7 +111,7 @@ std::vector<FAModel *> FAQuadTree::cull(FACamera *cam) {
 			models.push_back(subNodes[i]);
 		}
 	} else {
-		this->ma->setColor(glm::vec4(0,0,0,0));
+//		this->ma->setColor(glm::vec4(0,0,0,0));
 	}
 	
 	return models;

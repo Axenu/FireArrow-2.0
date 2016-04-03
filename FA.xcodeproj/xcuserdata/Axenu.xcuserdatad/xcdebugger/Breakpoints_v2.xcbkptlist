@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMesh.cpp"
-            timestampString = "481105828.580331"
+            timestampString = "481378584.866867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
             landmarkName = "FAMesh::loadNewFAModel(std::string path)"
             landmarkType = "5">
          </BreakpointContent>
@@ -632,11 +632,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAArmature.cpp"
-            timestampString = "480509405.344502"
+            timestampString = "481376755.010568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "FAArmature::update(float dt)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1481,11 +1481,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMesh.cpp"
-            timestampString = "481145673.245607"
+            timestampString = "481378584.866867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "554"
-            endingLineNumber = "554"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "FAMesh::loadNewFAModel(std::string path)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1497,11 +1497,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMesh.cpp"
-            timestampString = "481145673.245607"
+            timestampString = "481378584.866867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "561"
-            endingLineNumber = "561"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "FAMesh::loadNewFAModel(std::string path)"
             landmarkType = "5">
             <Locations>
@@ -1513,11 +1513,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.25461"
+                  timestampString = "481379818.762173"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "4420">
                </Location>
                <Location
@@ -1528,11 +1528,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.254913"
+                  timestampString = "481379818.762426"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "4440">
                </Location>
                <Location
@@ -1543,11 +1543,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.255125"
+                  timestampString = "481379818.762603"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "4460">
                </Location>
                <Location
@@ -1558,11 +1558,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.25526"
+                  timestampString = "481379818.762774"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "5734">
                </Location>
                <Location
@@ -1573,11 +1573,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.255396"
+                  timestampString = "481379818.762954"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "7008">
                </Location>
                <Location
@@ -1588,11 +1588,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.255529"
+                  timestampString = "481379818.763079"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "8274">
                </Location>
                <Location
@@ -1603,11 +1603,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.255664"
+                  timestampString = "481379818.763188"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "8301">
                </Location>
                <Location
@@ -1618,11 +1618,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.255796"
+                  timestampString = "481379818.76329"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "37117">
                </Location>
                <Location
@@ -1633,11 +1633,11 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.255923"
+                  timestampString = "481379818.763396"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
                   offsetFromSymbolStart = "37181">
                </Location>
                <Location
@@ -1648,12 +1648,42 @@
                   moduleName = "FA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
-                  timestampString = "481285564.256055"
+                  timestampString = "481379818.763503"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "562"
-                  endingLineNumber = "562"
-                  offsetFromSymbolStart = "38985">
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
+                  offsetFromSymbolStart = "39103">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FAMesh::loadNewFAModel(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  moduleName = "FA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
+                  timestampString = "481379818.763608"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
+                  offsetFromSymbolStart = "39123">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FAMesh::loadNewFAModel(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  moduleName = "FA"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Axenu/Developer/FireArrow-2.0/src/FireArrowEngine/FAMesh.cpp"
+                  timestampString = "481379818.763708"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "564"
+                  endingLineNumber = "564"
+                  offsetFromSymbolStart = "39155">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1841,22 +1871,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/testScene.cpp"
-            timestampString = "481275728.69531"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "testScene::init()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAFrustumBB.cpp"
             timestampString = "481285479.084081"
             startingColumnNumber = "9223372036854775807"
@@ -1938,11 +1952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMainRenderPass.cpp"
-            timestampString = "481271613.497757"
+            timestampString = "481362200.354158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "FAMainRenderPass::render()"
             landmarkType = "5">
             <Locations>
@@ -2146,11 +2160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/FireArrowEngine/FAMesh.cpp"
-            timestampString = "481276077.066795"
+            timestampString = "481378584.866867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "FAMesh::loadNewFAModel(std::string path)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2360,6 +2374,182 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "FAFrustumBB::collideWith(const FAAABB &amp;other)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAFrame.cpp"
+            timestampString = "481377053.052597"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "FAFrame::addQuaternion(glm::quat &amp;quat)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAFrame.cpp"
+            timestampString = "481377056.196684"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "FAFrame::getQuaternionOfBone(int bone)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAAnimation.cpp"
+            timestampString = "481379617.847343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "FAAnimation::getQuatAtTime(float diff, int frame, int bone)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAMesh.cpp"
+            timestampString = "481378584.866867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
+            landmarkName = "FAMesh::loadNewFAModel(std::string path)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAAnimation.cpp"
+            timestampString = "481379617.847343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "FAAnimation::getQuatAtTime(float diff, int frame, int bone)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAArmature.cpp"
+            timestampString = "481377552.746559"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "FAArmature::update(float dt)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAAnimation.cpp"
+            timestampString = "481379617.847343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "FAAnimation::getDiffAndFrame(float time, float &amp;diff, int &amp;frame)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAArmature.cpp"
+            timestampString = "481377788.33871"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "FAArmature::update(float dt)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAArmature.cpp"
+            timestampString = "481379617.847343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "FAArmature::update(float dt)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAArmature.cpp"
+            timestampString = "481379617.847343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "FAArmature::update(float dt)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/FireArrowEngine/FAArmature.cpp"
+            timestampString = "481378099.520574"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "FAArmature::update(float dt)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

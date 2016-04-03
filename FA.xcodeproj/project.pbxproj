@@ -19,6 +19,8 @@
 		355670001C8B31A8008932B2 /* FAAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */; };
 		35774F0A1CA28CE800B56764 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 35774F081CA28CE800B56764 /* Material.cpp */; };
 		35774F0B1CA28CE800B56764 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 35774F091CA28CE800B56764 /* Material.h */; };
+		3579D46B1CB1082F00B1CBE3 /* FAFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 3579D46A1CB1082F00B1CBE3 /* FAFrame.h */; };
+		3579D46D1CB1083F00B1CBE3 /* FAFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3579D46C1CB1083F00B1CBE3 /* FAFrame.cpp */; };
 		358CB3581CA3FA450010E02D /* SkinningMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */; };
 		358CB3591CA3FA450010E02D /* SkinningMaterial.h in Headers */ = {isa = PBXBuildFile; fileRef = 358CB3571CA3FA450010E02D /* SkinningMaterial.h */; };
 		358CB35B1CA42A240010E02D /* FAGaussianRenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 358CB35A1CA42A240010E02D /* FAGaussianRenderPass.cpp */; };
@@ -149,6 +151,8 @@
 		35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAAnimation.cpp; sourceTree = "<group>"; };
 		35774F081CA28CE800B56764 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		35774F091CA28CE800B56764 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		3579D46A1CB1082F00B1CBE3 /* FAFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAFrame.h; sourceTree = "<group>"; };
+		3579D46C1CB1083F00B1CBE3 /* FAFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAFrame.cpp; sourceTree = "<group>"; };
 		358CB3561CA3FA450010E02D /* SkinningMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkinningMaterial.cpp; sourceTree = "<group>"; };
 		358CB3571CA3FA450010E02D /* SkinningMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinningMaterial.h; sourceTree = "<group>"; };
 		358CB35A1CA42A240010E02D /* FAGaussianRenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FAGaussianRenderPass.cpp; sourceTree = "<group>"; };
@@ -347,6 +351,7 @@
 				35B6EC941CAE62DF000BF5C2 /* BB */,
 				358DF6371C199086006070D4 /* FAAction.cpp */,
 				35566FFF1C8B31A8008932B2 /* FAAnimation.cpp */,
+				3579D46C1CB1083F00B1CBE3 /* FAFrame.cpp */,
 				3501DB201C949E09007E14E8 /* FAArmature.cpp */,
 				358DF6391C199086006070D4 /* FACamera.cpp */,
 				358DF63C1C199086006070D4 /* FAEngine.cpp */,
@@ -422,6 +427,7 @@
 				35B6EC8D1CAE5C9F000BF5C2 /* FASphereBB.h */,
 				35B6EC921CAE62D3000BF5C2 /* FAPlaneBB.h */,
 				35B6EC971CAE630B000BF5C2 /* FAFrustumBB.h */,
+				3579D46A1CB1082F00B1CBE3 /* FAFrame.h */,
 			);
 			path = FA;
 			sourceTree = "<group>";
@@ -521,6 +527,7 @@
 				358DF96F1C199288006070D4 /* FAGUIElement.h in Headers */,
 				35566FFE1C8B319E008932B2 /* FAAnimation.h in Headers */,
 				35B6EC931CAE62D3000BF5C2 /* FAPlaneBB.h in Headers */,
+				3579D46B1CB1082F00B1CBE3 /* FAFrame.h in Headers */,
 				358DF9701C199288006070D4 /* FAGUIMaterialComponent.h in Headers */,
 				358DF9711C199288006070D4 /* FAGUIPlane.h in Headers */,
 				35B6EC8E1CAE5CCE000BF5C2 /* FASphereBB.h in Headers */,
@@ -662,6 +669,7 @@
 				358DF6671C199086006070D4 /* FAModel.cpp in Sources */,
 				35566FFC1C8996ED008932B2 /* FABone.cpp in Sources */,
 				358DF6711C199086006070D4 /* main.cpp in Sources */,
+				3579D46D1CB1083F00B1CBE3 /* FAFrame.cpp in Sources */,
 				358DF65A1C199086006070D4 /* FADirectionalLight.cpp in Sources */,
 				35B6EC8B1CAE5C8C000BF5C2 /* FASphereBB.cpp in Sources */,
 				358DF66F1C199086006070D4 /* FATexture.cpp in Sources */,

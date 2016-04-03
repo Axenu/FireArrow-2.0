@@ -2,6 +2,7 @@
 
 FAArmature::FAArmature() {
 	this->rootBone = nullptr;
+	this->activeAnimation = nullptr;
 }
 
 void FAArmature::setRootBone(FABone *bone) {
@@ -29,6 +30,16 @@ int FAArmature::getNumberOfBones() {
 
 float* FAArmature::getAnimatedXForm() {
 	return &this->animatedXForm[0][0][0];
+}
+
+void FAArmature::addAnimation(FAAnimation *animation) {
+	this->animations.push_back(animation);
+}
+
+void FAArmature::runAnimation(int index) {
+	if (index >= animations.size() || index < 0) return;
+	this->activeAnimation = animations[index];
+	this->animationDuration = 0;
 }
 
 void FAArmature::adjustPositions(FABone *b, glm::vec3 diff) {
@@ -83,13 +94,48 @@ int FAArmature::calculateBoneMatrices(FABone *b, int i) {
     return i;
 }
 
+int FAArmature::calculateBoneMatricesFromQuaternions(FABone *b, int i) {
+	if (b->getParent() != nullptr) {
+		b->setCombinedMatrix(b->getParent()->getCombinedMatrix() * b->getLocalMatrix());
+	} else {
+		b->setCombinedMatrix(b->getLocalMatrix());
+	}
+	animatedXForm[i] = b->getCombinedMatrix() * invBindPose[i];
+	
+	for (FABone *c : b->getChildren()) {
+		i = calculateBoneMatricesFromQuaternions(c, i + 1);
+	}
+	return i;
+}
+
 void FAArmature::update(float dt) {
-	bones[2]->setRotation(glm::vec3(0,0,bones[2]->getRotation().z + dt));
+//	bones[2]->setRotation(glm::vec3(0,0,bones[2]->getRotation().z + dt));
 
     // update bones from animation
-
-
-	calculateBoneMatrices(rootBone, 0);
+	if (activeAnimation != nullptr) {
+		glm::quat q = glm::quat();
+		float diff;
+		int frame;
+		activeAnimation->getDiffAndFrame(animationDuration, diff, frame);
+		if (frame != -1) {
+			for (int i = 0; i < this->bones.size(); i++) {
+				q = activeAnimation->getQuatAtTime(diff, frame, i);
+				
+				glm::mat4 S = glm::scale(glm::mat4(1), this->bones[i]->getScale());
+				glm::mat4 R = glm::toMat4(q);
+				glm::mat4 T = glm::translate(glm::mat4(1), this->bones[i]->getPosition());
+				this->bones[i]->setLocalMatrix(T*R*S);
+//				std::cout << q.x << ", "<< q.y << ", "<< q.z << ", "<< q.w << std::endl;
+			}
+			animationDuration+=0.01;
+		} else {
+			//stop animation
+			activeAnimation = nullptr;
+		}
+		calculateBoneMatricesFromQuaternions(rootBone, 0);
+	} else {
+		calculateBoneMatrices(rootBone, 0);
+	}
 }
 
 FAArmature::~FAArmature() {

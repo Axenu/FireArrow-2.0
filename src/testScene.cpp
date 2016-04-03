@@ -27,7 +27,7 @@ void testScene::init() {
 	// FACSMRenderPass *pass = new FACSMRenderPass();
 	direction = glm::vec3(1,1,1);
 
-    camera = new FACamera(40.0f, 640, 480, 0.1, 400);
+    camera = new FACamera(40.0f, 640, 480, 0.1, 50);
 	cullCamera = new FACamera(40.0f, 640, 480, 0.1, 50);
     treeMesh = new FAMesh("rock.fa");
     FACSMRenderPass *pass = new FACSMRenderPass();
@@ -38,10 +38,6 @@ void testScene::init() {
 	material->setLightDirection(direction);
     material->setTexture(pass->getShadowMap());
     material->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-//    FATerrain *t = new FATerrain();
-//	t->setMaterial(ma);
-//    // t->setMaterial(material);
-//    addChild(t);
 
 
 //    FAGUITexturedPlane *plane = new FAGUITexturedPlane(pass->getShadowMap());
@@ -50,39 +46,38 @@ void testScene::init() {
 //    plane->setPosition(0,0);
 //    addChild(plane);
 
-//	SkinningMaterial *materialS = new SkinningMaterial();
-//	materialS->setLightDirection(direction);
-//	materialS->setTexture(pass->getShadowMap());
-//	materialS->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-//	animated = new FAMesh("animatedblend.fa");
-//	materialS->setArmature(animated->getArmature());
-//	FAModel *anim = new FAModel(animated, materialS);
-//	this->addChild(anim);
+	SkinningMaterial *materialS = new SkinningMaterial();
+	materialS->setLightDirection(direction);
+	materialS->setTexture(pass->getShadowMap());
+	materialS->setInverseShadowMatrix(pass->getInverseShadowMatrix());
+	animated = new FAMesh("animatedblend.fa");
+	materialS->setArmature(animated->getArmature());
+	FAModel *anim = new FAModel(animated, materialS);
+	this->addChild(anim);
 	
-//	FAMesh *wallMesh = new FAMesh("Normalmapped wall.obj");
-//	NormalMaterial *normalMat = new NormalMaterial();
-//	normalMat->setLightDirection(direction);
-//	normalMat->setShadowMap(pass->getShadowMap());
-//	normalMat->setInverseShadowMatrix(pass->getInverseShadowMatrix());
-//	normalMat->setOBJMaterial(wallMesh->getOBJMaterialLib(), wallMesh->getOBJMaterial());
-//	FAModel *wall = new FAModel(wallMesh, normalMat);
-//	wall->setPosition(9, 1, -2);
-//	wall->rotateY(-glm::half_pi<float>());
-//	addChild(wall);
+	FAMesh *wallMesh = new FAMesh("Normalmapped wall.obj");
+	NormalMaterial *normalMat = new NormalMaterial();
+	normalMat->setLightDirection(direction);
+	normalMat->setShadowMap(pass->getShadowMap());
+	normalMat->setInverseShadowMatrix(pass->getInverseShadowMatrix());
+	normalMat->setOBJMaterial(wallMesh->getOBJMaterialLib(), wallMesh->getOBJMaterial());
+	FAModel *wall = new FAModel(wallMesh, normalMat);
+	wall->setPosition(9, 1, -2);
+	wall->rotateY(-glm::half_pi<float>());
+	addChild(wall);
 	
-//	FAActionRotateBy *a = new FAActionRotateBy(glm::vec3(0,50,0), 100);
-//	wall->runAction(a);
+	FAActionRotateBy *a = new FAActionRotateBy(glm::vec3(0,50,0), 100);
+	wall->runAction(a);
 	
 	
 	ch = new FATerrainChunk();
 	ch->loadChunk();
-//	FAModel *terrain = new FAModel(ch, ma);
-//	addChild(terrain);
+	FAModel *terrain = new FAModel(ch, material);
+	addChild(terrain);
 	
 	FAModel *m;
 	FAMesh *wireMesh;
 	WireMaterial *wireMaterial = new WireMaterial();
-	FAModel *wire;
 	for (int i = 0; i < 10000; i++) {
 		m = new FAModel(treeMesh, material);
 		m->setPosition((float)(rand()%10000)/100.0 - 50.0,0,(float)(rand()%10000)/100.0 - 50.0);
@@ -90,14 +85,14 @@ void testScene::init() {
 		m->setY(ch->getHeight(m->getX(), m->getZ()));
 		addChild(m);
 		
-		m->getBounds().calculateMesh();
-		
-		wireMesh = new FAMesh(m->getBounds().getVertices(), m->getBounds().getIndices(), false, false);
-		wireMesh->renderMode = GL_LINES;
-		wire = new FAModel(wireMesh, wireMaterial);
-//		wire->setPosition(m->getPosition());
-//		addChild(wire);
-		m->addChild(wire);
+//		m->getBounds().calculateMesh();
+//		
+//		wireMesh = new FAMesh(m->getBounds().getVertices(), m->getBounds().getIndices(), false, false);
+//		wireMesh->renderMode = GL_LINES;
+//		wire = new FAModel(wireMesh, wireMaterial);
+////		wire->setPosition(m->getPosition());
+////		addChild(wire);
+//		m->addChild(wire);
 	}
 	
 	//add cullCamrea frame
@@ -110,11 +105,11 @@ void testScene::init() {
 	wireMaterial->setColor(wireColor);
 	wire = new FAModel(wireMesh, wireMaterial);
 	addChild(wire);
-	
-	std::vector<FAModel *> quadmodels = this->childTree->getWireMeshes();
-	for (FAModel *wm : quadmodels) {
-		addChild(wm);
-	}
+//	
+//	std::vector<FAModel *> quadmodels = this->childTree->getWireMeshes();
+//	for (FAModel *wm : quadmodels) {
+//		addChild(wm);
+//	}
 	
 //	FAParticleSystem *sys = new FAParticleSystem();
 //	sys->setEyePosition(&this->camera->position);
@@ -279,25 +274,19 @@ void testScene::getKeyInput(int key, int action) {
         }
 	} else if (key == GLFW_KEY_G) {
 		if (action == GLFW_PRESS) {
-			FAModel *m;
-			FAMesh *wireMesh;
-			WireMaterial *wireMaterial = new WireMaterial();
-			FAModel *wire;
-			m = new FAModel(treeMesh, material);
-			m->setPosition((float)(rand()%10000)/100.0 - 50.0,0,(float)(rand()%10000)/100.0 - 50.0);
-			m->setY(ch->getHeight(m->getX(), m->getZ()));
-			addChild(m);
-			
-			m->getBounds().calculateMesh();
-			
-			wireMesh = new FAMesh(m->getBounds().getVertices(), m->getBounds().getIndices(), false, false);
-			wireMesh->renderMode = GL_LINES;
-			wire = new FAModel(wireMesh, wireMaterial);
-			//		wire->setPosition(m->getPosition());
-//			addChild(wire);
-			m->addChild(wire);
+			//update cull camera
+			this->cullCamera->setPosition(this->camera->getPosition());
+			this->cullCamera->setRX(this->camera->getRX());
+			this->cullCamera->setRY(this->camera->getRY());
+			this->cullCamera->setRZ(this->camera->getRZ());
+			this->wire->setPosition(this->camera->getPosition());
+			this->wire->setRX(-this->camera->getRX());
+			this->wire->setRY(-this->camera->getRY());
+			this->wire->setRZ(-this->camera->getRZ());
 		}
-	} else {
+	} else if (key == GLFW_KEY_R) {
+		this->animated->getArmature()->runAnimation(1);
+	}else {
         std::cout << "Key: " << key << " action: " << action << std::endl;
     }
 }
