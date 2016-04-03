@@ -85,3 +85,9 @@ glm::mat4 FABone::getLocalMatrix() {
 glm::mat4 FABone::getCombinedMatrix() {
 	return this->combinedMatrix;
 }
+
+FABone::~FABone() {
+	for (FABone *b : children) {
+		delete b;
+	}
+}

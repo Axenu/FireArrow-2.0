@@ -35,19 +35,27 @@ void FAFrustumBB::calculateFrustumPlanes(const glm::mat4 &viewMatrix, const glm:
 	glm::vec3 line, normal;
 	line = glm::normalize((nearCenter + up*nearHeight));
 	normal = glm::cross(line, right);
-	planes[0] = FAPlaneBB(nearCenter+up*nearHeight + cameraPosition, normal);
+	planes[0].center = nearCenter+up*nearHeight + cameraPosition;
+	planes[0].normal = normal;
+//	planes[0] = FAPlaneBB(nearCenter+up*nearHeight + cameraPosition, normal);
 	
 	line = glm::normalize((nearCenter -up*nearHeight));
 	normal = glm::cross(right, line);
-	planes[1] = FAPlaneBB(nearCenter - up * nearHeight + cameraPosition, normal);
+	planes[1].center = nearCenter - up * nearHeight + cameraPosition;
+	planes[1].normal = normal;
+//	planes[1] = FAPlaneBB(nearCenter - up * nearHeight + cameraPosition, normal);
 	
 	line = glm::normalize((nearCenter + right * nearWidth));
 	normal = glm::cross(line, up);
-	planes[2] = FAPlaneBB(nearCenter + right * nearWidth + cameraPosition, normal);
+	planes[2].center = nearCenter + right * nearWidth + cameraPosition;
+	planes[2].normal = normal;
+//	planes[2] = FAPlaneBB(nearCenter + right * nearWidth + cameraPosition, normal);
 	
 	line = glm::normalize((nearCenter - right * nearWidth));
 	normal = glm::cross(up, line);
-	planes[3] = FAPlaneBB(nearCenter - right * nearWidth + cameraPosition, normal);
+	planes[3].center = nearCenter - right * nearWidth + cameraPosition;
+	planes[3].normal = normal;
+//	planes[3] = FAPlaneBB(nearCenter - right * nearWidth + cameraPosition, normal);
 	
 	nearCenter += cameraPosition;
 	farCenter += cameraPosition;

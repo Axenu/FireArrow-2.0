@@ -42,6 +42,8 @@ public:
 	std::string getName();
 	glm::mat4 getLocalMatrix();
 	glm::mat4 getCombinedMatrix();
+	
+	~FABone();
 };
 
 #endif /* defined(__FireArrow__FABone__) */

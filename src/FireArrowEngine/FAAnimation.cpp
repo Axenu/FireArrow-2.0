@@ -35,5 +35,8 @@ glm::quat FAAnimation::getQuatAtTime(float diff, int frame, int bone) {
 }
 
 FAAnimation::~FAAnimation() {
-
+	for (int i = 0; i < numberOfFrames; i++) {
+		delete frames[i];
+	}
+	delete[]frames;
 }

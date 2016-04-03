@@ -91,6 +91,12 @@ FACSMRenderPass::FACSMRenderPass() {
 
 }
 
+FACSMRenderPass::~FACSMRenderPass() {
+	delete[]inverseShadowMatrix;
+	glDeleteTextures(1, &shadowMap);
+	glDeleteFramebuffers(1, &shadowFbo);
+}
+
 
 void FACSMRenderPass::render() {
 //    int shadowMapWidth = 2560;
@@ -150,6 +156,7 @@ void FACSMRenderPass::render() {
 //            node->renderShadow();
         // children->renderShadow(shadowMatrix[i]);
     }
+	delete[]shadowMatrix;
     
     
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
@@ -323,7 +330,7 @@ glm::mat4 FACSMRenderPass::calculateShadowCamera(float near, float far) {
     //     corners[7] = intersectionBetweenThreePlanes(planes[1], planes[3], planes[5]);
     //     shadowWireFrame->SetModel(corners);
     // }
-
+	
     return projectionMatrix * viewMatrix;
 }
 

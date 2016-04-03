@@ -15,6 +15,9 @@ private:
 	GLuint VBO = 0;
 	GLuint EBO = 0;
 	GLuint VAO = 0;
+	
+	long verticesSize;
+	long indicesSize;
 
     std::string text = "Label";
 	

@@ -161,11 +161,11 @@ void FAMesh::loadOBJModel(std::string path) {
 			glm::vec3 index1 = indicesArray[i + 1];
 			glm::vec3 index2 = indicesArray[i + 2];
 			
-			glm::vec3 dv1 = vertexArray[index1.x] - vertexArray[index0.x];
-			glm::vec3 dv2 = vertexArray[index2.x] - vertexArray[index0.x];
+			glm::vec3 dv1 = vertexArray[index1.x] - vertexArray[index0.x];//d
+			glm::vec3 dv2 = vertexArray[index2.x] - vertexArray[index0.x];//e
 			
-			glm::vec2 duv1 = uvArray[index1.y] - uvArray[index0.y];
-			glm::vec2 duv2 = uvArray[index2.y] - uvArray[index0.y];
+			glm::vec2 duv1 = uvArray[index1.y] - uvArray[index0.y];//f
+			glm::vec2 duv2 = uvArray[index2.y] - uvArray[index0.y];//g
 			
 			float r = 1.0/(duv1.x * duv2.y - duv1.y * duv2.x);
 			glm::vec3 tangent = (dv1 * duv2.y - dv2 * duv1.y) * r;
@@ -813,7 +813,11 @@ FAArmature *FAMesh::getArmature() {
 }
 
 FAMesh::~FAMesh() {
-
+	delete armature;
+	//delete gl resourcs
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glDeleteVertexArrays(1, &VAO);
 }
 
 

@@ -242,5 +242,8 @@ void FANode::needsUpdate() {
 }
 
 FANode::~FANode() {
-	
+	for (FANode *n : children) {
+		delete n;
+	}
+	delete action;
 }

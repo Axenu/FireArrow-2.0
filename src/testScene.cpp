@@ -53,6 +53,7 @@ void testScene::init() {
 	animated = new FAMesh("animatedblend.fa");
 	materialS->setArmature(animated->getArmature());
 	FAModel *anim = new FAModel(animated, materialS);
+	anim->setPosition(5, 0, 3);
 	this->addChild(anim);
 	
 	FAMesh *wallMesh = new FAMesh("Normalmapped wall.obj");
@@ -62,7 +63,7 @@ void testScene::init() {
 	normalMat->setInverseShadowMatrix(pass->getInverseShadowMatrix());
 	normalMat->setOBJMaterial(wallMesh->getOBJMaterialLib(), wallMesh->getOBJMaterial());
 	FAModel *wall = new FAModel(wallMesh, normalMat);
-	wall->setPosition(9, 1, -2);
+	wall->setPosition(0, 0, -1);
 	wall->rotateY(-glm::half_pi<float>());
 	addChild(wall);
 	
@@ -111,12 +112,11 @@ void testScene::init() {
 //		addChild(wm);
 //	}
 	
-//	FAParticleSystem *sys = new FAParticleSystem();
-//	sys->setEyePosition(&this->camera->position);
-//	ParticlesMaterial *pm = new ParticlesMaterial();
-//	
-//	FAModel *particles = new FAModel(sys, pm);
-//	addChild(particles);
+	FAParticleSystem *sys = new FAParticleSystem();
+	sys->setEyePosition(&this->camera->position);
+	ParticlesMaterial *pm = new ParticlesMaterial();
+	FAModel *particles = new FAModel(sys, pm);
+	addChild(particles);
 	
 	
 	

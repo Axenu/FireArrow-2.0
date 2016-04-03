@@ -20,8 +20,10 @@ void FATerrainChunk::loadChunk() {
 			heightMap[i][x] = 0;
 		}
 	}
-	
+//	
 	heightMap[1][1] = 10;
+//	heightMap[1][2] = 10;
+
 	
 	locations = new glm::vec3*[size + 1];
 	for (int i = 0; i < size + 1; ++i) {
@@ -217,5 +219,14 @@ float FATerrainChunk::getHeight(float x, float z) {
 
 
 FATerrainChunk::~FATerrainChunk() {
-	
+	for (int i = 0; i < heightMapSize; i++) {
+		delete[]heightMap[i];
+	}
+	delete[]heightMap;
+	for (int i = 0; i < size + 1; ++i) {
+		delete [] locations;
+	}
+	delete [] locations;
+	delete [] indices;
+	delete [] vertices;
 }

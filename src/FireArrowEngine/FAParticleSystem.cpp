@@ -28,7 +28,6 @@ FAParticleSystem::FAParticleSystem() {
 	
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, quadBuffer);
@@ -47,6 +46,12 @@ FAParticleSystem::FAParticleSystem() {
 
 FAParticleSystem::~FAParticleSystem() {
 	delete particles;
+	delete centers;
+	delete cameraPosition;
+	
+	glDeleteBuffers(1, &quadBuffer);
+	glDeleteBuffers(1, &particleCenterBuffer);
+	glDeleteVertexArrays(1, &VAO);
 }
 
 bool compare(FAParticle const&lhs, FAParticle const&rhs) {

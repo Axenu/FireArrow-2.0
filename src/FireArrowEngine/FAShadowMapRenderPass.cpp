@@ -87,6 +87,9 @@ FAShadowMapRenderPass::FAShadowMapRenderPass() {
 
 }
 
+FAShadowMapRenderPass::~FAShadowMapRenderPass() {
+	
+}
 
 void FAShadowMapRenderPass::render() {
 	// std::cout << "renderCSM" << std::endl;

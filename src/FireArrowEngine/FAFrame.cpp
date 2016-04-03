@@ -19,5 +19,5 @@ glm::quat &FAFrame::getQuaternionOfBone(int bone) {
 }
 
 FAFrame::~FAFrame() {
-	
+	delete[]boneRotations;
 }

@@ -4,6 +4,8 @@ FAGUILabel::FAGUILabel() {
 	mesh = new FAMesh("square");
 	this->shader = new FAShader("FAText");
 	glUseProgram(this->shader->shaderProgram);
+	this->verticesSize = 0;
+	this->indicesSize = 0;
 
 	//get uniforms
 	this->positionLocation = glGetUniformLocation(this->shader->shaderProgram, "position");
@@ -17,7 +19,8 @@ FAGUILabel::FAGUILabel(FAFont *font) {
 
 	this->shader = new FAShader("FAText");
 	glUseProgram(this->shader->shaderProgram);
-
+	this->verticesSize = 0;
+	this->indicesSize = 0;
 	//get uniforms
 	this->positionLocation = glGetUniformLocation(this->shader->shaderProgram, "position");
 //	this->sizeLocation = glGetUniformLocation(this->shader->shaderProgram, "size");
@@ -79,18 +82,26 @@ void FAGUILabel::setText(std::string text) {
 		x += g.xAdvance;
 		g = font->glyphs[(int)text[i+1]];
 	}
-	
-	
-	glGenBuffers(1, &VBO);
+
+	if (verticesSize < vertices.size()) {
+		glDeleteBuffers(1, &VBO);
+		glGenBuffers(1, &VBO);
+		this->verticesSize = vertices.size();
+	}
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), &vertices[0], GL_STREAM_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	
-	glGenBuffers(1, &EBO);
+	if (indicesSize < indices.size()) {
+		glDeleteBuffers(1, &EBO);
+		glGenBuffers(1, &EBO);
+		this->indicesSize = indices.size();
+	}
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STREAM_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
+	glDeleteVertexArrays(1, &VAO);
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);

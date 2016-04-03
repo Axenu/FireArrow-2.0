@@ -60,7 +60,7 @@ glm::vec3 &FACamera::getPosition() {
 }
 	
 FACamera::~FACamera() {
-
+	delete boundingVolume;
 }
 
 float FACamera::degreesToRadians(float degrees) {

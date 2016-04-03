@@ -230,5 +230,12 @@ float FAScene::getWindowWidths() {
 }
 
 FAScene::~FAScene() {
-
+	delete defaultPass;
+//	for (int i = 0; i < numberOfPasses; i++) {
+//		delete renderPasses[i];
+//	}
+	delete[]renderPasses;
+	delete camera;
+	delete childTree;
+	delete cullCamera;
 }

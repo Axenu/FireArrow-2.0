@@ -23,7 +23,6 @@ bool FAAABB::contains(const FAAABB &other) {
 			}
 		}
 	}
-	
 	return false;
 }
 
@@ -41,10 +40,6 @@ glm::vec3 FAAABB::getPositive(const glm::vec3 &normal) const {
 	} else {p.z -= half.z;}
 	
 	return p;
-}
-
-glm::vec3 FAAABB::getNegative(const glm::vec3 &normal) const {
-	return center - half;
 }
 
 

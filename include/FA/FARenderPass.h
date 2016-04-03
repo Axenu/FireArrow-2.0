@@ -19,7 +19,7 @@ private:
 
 public:
 	FARenderPass();
-	~FARenderPass();
+	virtual ~FARenderPass();
 
 	int getPriority();
 	std::string &getName();

@@ -57,5 +57,4 @@ void FAModel::onUpdate(float dt) {
 }
 
 FAModel::~FAModel() {
-
 }

@@ -139,5 +139,5 @@ void FAArmature::update(float dt) {
 }
 
 FAArmature::~FAArmature() {
-
+	delete rootBone;
 }

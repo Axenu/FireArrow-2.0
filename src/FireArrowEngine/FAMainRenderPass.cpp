@@ -7,6 +7,11 @@ FAMainRenderPass::FAMainRenderPass() {
 	this->_hasFBO = false;
 }
 
+FAMainRenderPass::~FAMainRenderPass() {
+	glDeleteTextures(1, &fboTexture);
+	glDeleteFramebuffers(1, &fbo);
+}
+
 
 void FAMainRenderPass::render() {
 	// std::cout << "renderMain" << std::endl;

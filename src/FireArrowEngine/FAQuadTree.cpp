@@ -152,5 +152,10 @@ std::vector<FAModel *> FAQuadTree::getWireMeshes() {
 }
 
 FAQuadTree::~FAQuadTree() {
-	
+	if (nodes[0] != nullptr) {
+		for (int i = 0; i < 4; i++) {
+			delete nodes[i];
+		}
+		delete[]nodes;
+	}
 }

@@ -9,7 +9,7 @@ FATexture::FATexture(const GLchar *path) {
 }
 
 FATexture::~FATexture() {
-
+	
 }
 
 GLuint FATexture::createTexture(const GLchar *path) {

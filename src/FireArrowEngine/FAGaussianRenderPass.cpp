@@ -21,7 +21,11 @@ FAGaussianRenderPass::FAGaussianRenderPass() {
 }
 
 FAGaussianRenderPass::~FAGaussianRenderPass() {
-	
+	delete horizontalPass;
+	delete verticalPass;
+	delete squareMesh;
+	glDeleteTextures(1, &fboTexture);
+	glDeleteFramebuffers(1, &fbo);
 }
 
 void FAGaussianRenderPass::render() {

@@ -9,5 +9,5 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /Users/Axenu/Downloads/50-free-textures-4+normalmaps/154.JPG
-map_Bump /Users/Axenu/Downloads/50-free-textures-4+normalmaps/154_norm.JPG
+map_Kd /Users/Axenu/Developer/FireArrow-2.0/resources/textures/BubbleGrip-ColorMap.png
+map_Bump /Users/Axenu/Developer/FireArrow-2.0/resources/textures/BubbleGrip-NormalMap.png

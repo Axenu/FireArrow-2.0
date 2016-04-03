@@ -20,11 +20,11 @@ uniform vec3 cameraPosition;
  	// up = vec3(0,1,0);
  	// right = vec3(1,0,0);
 
-    gl_Position = VPMatrix * vec4(right * gl_in[0].gl_Position.x + up * gl_in[0].gl_Position.y + look * gl_in[0].gl_Position.z, 1.0);
+    gl_Position = VPMatrix * vec4(right * gl_in[0].gl_Position.x + up * gl_in[0].gl_Position.y + look * gl_in[0].gl_Position.z + pass_Offset[0], 1.0);
     EmitVertex();
-    gl_Position = VPMatrix * vec4(right * gl_in[1].gl_Position.x + up * gl_in[1].gl_Position.y + look * gl_in[1].gl_Position.z, 1.0);
+    gl_Position = VPMatrix * vec4(right * gl_in[1].gl_Position.x + up * gl_in[1].gl_Position.y + look * gl_in[1].gl_Position.z + pass_Offset[1], 1.0);
     EmitVertex();
-    gl_Position = VPMatrix * vec4(right * gl_in[2].gl_Position.x + up * gl_in[2].gl_Position.y + look * gl_in[2].gl_Position.z, 1.0);
+    gl_Position = VPMatrix * vec4(right * gl_in[2].gl_Position.x + up * gl_in[2].gl_Position.y + look * gl_in[2].gl_Position.z + pass_Offset[2], 1.0);
     EmitVertex();
     // gl_Position = VPMatrix * gl_in[0].gl_Position;
     // EmitVertex();

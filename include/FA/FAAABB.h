@@ -20,11 +20,9 @@ public:
 	
 	FAAABB();
 	FAAABB(glm::vec3 center, glm::vec3 half);
-//	FAAABB(glm::vec3 &min, glm::vec3 &max);
 	
 	bool contains(const FAAABB &other);
 	glm::vec3 getPositive(const glm::vec3 &normal) const;
-	glm::vec3 getNegative(const glm::vec3 &normal) const;
 	
 	void calculateMesh();
 	std::vector<GLfloat> &getVertices();

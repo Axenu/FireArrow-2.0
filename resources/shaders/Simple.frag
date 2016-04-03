@@ -47,14 +47,13 @@ void main() {
     vec4 shadowCoordinateWdivide;
     float dist;
     if (index != -1) {
-    	if (VertexIn.pass_Position.w > 0.0) {
-    	shadowCoordinateWdivide = (inverseShadowMatrix[index] * VertexIn.pass_Position) / VertexIn.pass_Position.w;
-        	dist = texture(shadowMap,vec3(shadowCoordinateWdivide.st, index)).r;
-           if (dist > 0) {
-           	if (dist < shadowCoordinateWdivide.z - 0.0001)
+    	shadowCoordinateWdivide = (inverseShadowMatrix[index] * VertexIn.pass_Position);
+        dist = texture(shadowMap,vec3(shadowCoordinateWdivide.st, index)).r;
+        if (dist > 0) {
+           	if (dist < shadowCoordinateWdivide.z - 0.0001) {
                	shadow =  0.0;
             }
-    	}
+        }
     }
 
 	Frag_Data = VertexIn.pass_Color * (light * shadow + (pointLightBrightness + specular) * attenuation + ambient) ;

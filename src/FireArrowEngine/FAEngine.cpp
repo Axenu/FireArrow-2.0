@@ -199,6 +199,6 @@ FAEngine::~FAEngine() {
     //dealloc objects
 //    delete camera;
 //    camera = nullptr;
-//    delete activeScene;
-//    activeScene = nullptr;
+    delete activeScene;
+    activeScene = nullptr;
 }
